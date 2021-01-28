@@ -24,14 +24,20 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
-import debounce from "lodash.debounce";
-import { componentI18n } from "../define";
+import {
+  onBeforeUnmount,
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+} from "vue";
 import {
   useRouteLocale,
   usePageFrontmatter,
-  useThemeLocaleData,
+  useThemeData,
 } from "@vuepress/client";
+import debounce from "lodash.debounce";
+import { componentI18n } from "../define";
 
 export default defineComponent({
   name: "BackToTop",
@@ -42,21 +48,21 @@ export default defineComponent({
 
   setup(props) {
     const pageFrontmatter = usePageFrontmatter();
-    const themeLocaleData = useThemeLocaleData();
+    const themeData = useThemeData();
     const routeLocale = useRouteLocale();
 
     /** Scroll distance */
     const scrollTop = ref(0);
 
     const thresholdDistance = computed<number>(() => {
-      return typeof themeLocaleData.value.backToTop === "number"
-        ? themeLocaleData.value.backToTop
-        : props.threshold;
+      const { backToTop } = themeData.value;
+
+      return typeof backToTop === "number" ? backToTop : props.threshold;
     });
 
     /** Whether to display button */
     const show = computed<boolean>(() => {
-      const globalEnable = themeLocaleData.value.backToTop !== false;
+      const globalEnable = themeData.value.backToTop !== false;
       const pageEnable = pageFrontmatter.value.backToTop as boolean;
 
       return (
@@ -82,14 +88,17 @@ export default defineComponent({
       scrollTop.value = 0;
     };
 
+    const scrollHandler = debounce(() => {
+      scrollTop.value = getScrollTop();
+    }, 100);
+
     onMounted(() => {
       scrollTop.value = getScrollTop();
-      window.addEventListener(
-        "scroll",
-        debounce(() => {
-          scrollTop.value = getScrollTop();
-        }, 100)
-      );
+      window.addEventListener("scroll", scrollHandler);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener("scroll", scrollHandler);
     });
 
     return {
@@ -101,32 +110,40 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-.back-to-top
-  position fixed !important
-  right 1rem
-  bottom 4rem
-  z-index 10
-  width 3rem
-  height 3rem
-  padding 8px
-  outline none
+<style lang="scss">
+@use "~@mr-hope/vuepress-shared/styles/reset";
 
-  &:hover
-    color var(--accent-color-l25, lighten($accentColor, 25%))
-    cursor pointer
+.back-to-top {
+  @include reset.button;
+  position: fixed !important;
+  right: 1rem;
+  bottom: 4rem;
+  z-index: 10;
+  width: 3rem;
+  height: 3rem;
+  padding: 8px;
 
-  svg
-    width 100%
-    border-radius 50%
-    background var(--bgcolor, #fff)
-    color var(--accent-color, $accentColor)
-    overflow hidden
-    fill currentcolor
+  &:hover {
+    color: var(--accent-color-l25);
+  }
 
-.fade-enter-active, .fade-leave-active
-  transition opacity 0.3s
+  svg {
+    width: 100%;
+    border-radius: 50%;
+    background: var(--bg-color);
+    color: var(--accent-color);
+    overflow: hidden;
+    fill: currentcolor;
+  }
+}
 
-.fade-enter, .fade-leave-to
-  opacity 0
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

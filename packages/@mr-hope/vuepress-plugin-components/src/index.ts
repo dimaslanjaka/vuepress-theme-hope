@@ -23,11 +23,11 @@ const componentPlugin: Plugin<ComponentOptions> = (options, app) => {
       COMPONENT_I18N: componentConfig,
     }),
 
-    clientAppEnhanceFiles: path.resolve(__dirname, "./clientAppEnhance.ts"),
+    clientAppEnhanceFiles: path.resolve(__dirname, "./clientAppEnhance.js"),
 
     clientAppRootComponentFiles: path.resolve(
       __dirname,
-      "./components/BackToTop.vue"
+      "./components/BackToTop.js"
     ),
   };
 };

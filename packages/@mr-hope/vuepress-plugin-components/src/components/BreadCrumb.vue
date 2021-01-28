@@ -23,7 +23,7 @@ import { computed, defineComponent } from "vue";
 import {
   usePageFrontmatter,
   usePagesData,
-  useThemeLocaleData,
+  useThemeData,
 } from "@vuepress/client";
 import { getLinks } from "../composables";
 import { useRoute } from "vue-router";
@@ -39,7 +39,7 @@ export default defineComponent({
 
   setup() {
     const pageFrontmatter = usePageFrontmatter();
-    const themeLocaleData = useThemeLocaleData();
+    const themeData = useThemeData();
     const pagesData = usePagesData();
     const route = useRoute();
 
@@ -67,7 +67,7 @@ export default defineComponent({
     });
 
     const enable = computed<boolean>(() => {
-      const globalEnable = themeLocaleData.value.breadcrumb !== false;
+      const globalEnable = themeData.value.breadcrumb !== false;
       const pageEnable = pageFrontmatter.value.breadcrumb;
 
       return (
@@ -77,7 +77,7 @@ export default defineComponent({
     });
 
     const iconEnable = computed<boolean>(() => {
-      const globalEnable = themeLocaleData.value.breadcrumbIcon !== false;
+      const globalEnable = themeData.value.breadcrumbIcon !== false;
       const pageEnable = pageFrontmatter.value.breadcrumbIcon;
 
       return (
@@ -87,7 +87,7 @@ export default defineComponent({
     });
 
     const iconPrefix = computed<string>(() => {
-      const { iconPrefix } = themeLocaleData.value;
+      const { iconPrefix } = themeData.value;
 
       return iconPrefix === "" ? "" : iconPrefix || "icon-";
     });
@@ -102,83 +102,104 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-@require '~@mr-hope/vuepress-shared/styles/wrapper.styl'
-
-$navbarMobileHeight ?= 3.2rem
+<style lang="scss">
+@use '~@mr-hope/vuepress-shared/styles/wrapper';
 
 // Fix top boarder of heading1
-.theme-default-content:not(.custom)
-  > *:first-child
-    margin-top 0
+.theme-default-content:not(.custom) {
+  > *:first-child {
+    margin-top: 0;
+  }
+}
 
-h1, h2, h3, h4, h5, h6
-  .theme-default-content:not(.custom) &:first-child
-    margin-top 0.5rem - $navbarHeight !important
-    padding-top $navbarHeight + 1rem !important
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  .theme-default-content:not(.custom) &:first-child {
+    margin-top: 0.5rem - var(--navbar-height) !important;
+    padding-top: var(--navbar-height) + 1rem !important;
 
-    @media (max-width $MQMobile)
-      margin-top 0.5rem - $navbarMobileHeight !important
-      padding-top $navbarMobileHeight + 1rem !important
+    @media (max-width: var(--screen-m)) {
+      margin-top: 0.5rem - var(--navbar-mobile-height) !important;
+      padding-top: var(--navbar-mobile-height) + 1rem !important;
+    }
+  }
+}
 
-.breadcrumb
-  @extend $wrapper
-  position relative
-  margin-top $navbarHeight
-  margin-bottom (- $navbarHeight)
-  padding-top 0.2rem
-  padding-bottom 0.2rem
-  font-size 15px
-  z-index 2
+.breadcrumb {
+  @include wrapper;
+  position: relative;
+  margin-top: var(--navbar-height);
+  margin-bottom: (-var(--navbar-height));
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  font-size: 15px;
+  z-index: 2;
 
-  @media (max-width $MQNarrow)
-    margin-top $navbarMobileHeight
-    margin-bottom (- $navbarMobileHeight)
-    font-size 14px
+  @media (max-width: var(--screen-l)) {
+    margin-top: var(--navbar-mobile-height);
+    margin-bottom: (-var(--navbar-mobile-height));
+    font-size: 14px;
+  }
 
-  @media (max-width $MQMobileNarrow)
-    font-size 12.8px
+  @media (max-width: var(--screen-s)) {
+    font-size: 12.8px;
+  }
 
-  // breadcrumb is disabled
-  &.disable
-    padding-bottom 1.3em
+  &.disable {
+    padding-bottom: 1.3em;
+  }
 
-  ul
-    margin 0.5rem 0
-    padding-left 0px
-    list-style none
+  ul {
+    margin: 0.5rem 0;
+    padding-left: 0px;
+    list-style: none;
+  }
 
-  li
-    display inline-block
+  li {
+    display: inline-block;
 
-    &:first-child a
-      padding-left 0
+    &:first-child a {
+      padding-left: 0;
+    }
 
-    &:last-child a
-      padding-right 0
+    &:last-child a {
+      padding-right: 0;
+    }
 
-    &.is-active a
-      color var(--light-grey, #999)
-      cursor default
-      pointer-events none
+    &.is-active a {
+      color: var(--light-grey);
+      cursor: default;
+      pointer-events: none;
+    }
+  }
 
-  li + li::before
-    color var(--light-grey, #999)
-    content '\0002f'
+  li + li::before {
+    color: var(--light-grey);
+    content: "\0002f";
+  }
 
-  a
-    display inline-block
-    padding 0 0.5em
-    line-height 2
+  a {
+    display: inline-block;
+    padding: 0 0.5em;
+    line-height: 2;
 
-    &:before
-      position relative
-      bottom 0.125rem
-      margin-right 0.25em
+    &:before {
+      position: relative;
+      bottom: 0.125rem;
+      margin-right: 0.25em;
+    }
 
-    &:hover
-      color var(--accent-color-l10, lighten($accentColor, 10%))
+    &:hover {
+      color: var(--accent-color-l10);
 
-      .theme-dark &
-        color var(--accent-color-d10, darken($accentColor, 10%))
+      .theme-dark & {
+        color: var(--accent-color-d10);
+      }
+    }
+  }
+}
 </style>

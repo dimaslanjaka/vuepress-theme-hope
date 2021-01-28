@@ -52,22 +52,30 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-.full-screen, .cancel-full-screen
-  width 1.8rem
-  height 1.8rem
-  padding 4px
-  color #aaa
-  outline none
+<style lang="scss">
+@use '~@mr-hope/vuepress-shared/styles/button';
 
-  & svg
-    width 100%
-    height 100%
-    fill currentcolor
+.full-screen,
+.cancel-full-screen {
+  @include button;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 4px;
+  color: #aaa;
 
-.full-screen:hover, .cancel-full-screen
-  color var(--accent-color, $accentColor)
+  & svg {
+    width: 100%;
+    height: 100%;
+    fill: currentcolor;
+  }
+}
 
-.cancel-full-screen:hover
-  color #aaa
+.full-screen:hover,
+.cancel-full-screen {
+  color: var(--accent-color);
+}
+
+.cancel-full-screen:hover {
+  color: #aaa;
+}
 </style>

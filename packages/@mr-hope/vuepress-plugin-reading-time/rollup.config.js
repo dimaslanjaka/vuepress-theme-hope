@@ -1,5 +1,4 @@
 import pkg from "./package.json";
-import json from "@rollup/plugin-json";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 
@@ -9,7 +8,7 @@ export default [
     output: [
       { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
     ],
-    plugins: [json(), typescript()],
+    plugins: [typescript()],
   },
   {
     input: "./src/index.ts",

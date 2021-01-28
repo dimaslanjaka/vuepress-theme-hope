@@ -24,9 +24,9 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc -b tsconfig.build.json",
-    "clean": "rimraf lib *.tsbuildinfo",
-    "copy": "cpx \"src/**/*.{d.ts,vue,styl}\" lib"
+    "build": "rollup -c",
+    "clean": "rimraf lib",
+    "dev": "rollup -c -w"
   },
   "dependencies": {
     "@mr-hope/vuepress-shared": "2.0.0-alpha.0",
@@ -35,8 +35,8 @@
     "screenfull": "^5.1.0",
     "vue-router": "^4.0.2"
   },
-  "peerDependencies": {
-    "vuepress": "^2.0.0-alpha.15"
+  "devDependencies": {
+    "rollup": "2.38.0"
   },
   "publishConfig": {
     "access": "public"
