@@ -4,10 +4,7 @@
   "description": "A light vuepress theme",
   "workspaces": [
     "demo/",
-    "packages/@mr-hope/*",
-    "packages/vuepress-plugin-config-scss/",
-    "packages/vuepress-plugin-md-enhance/",
-    "packages/vuepress-theme-hope/"
+    "packages/*"
   ],
   "scripts": {
     "build": "tsc --build",

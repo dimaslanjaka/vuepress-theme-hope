@@ -87,44 +87,48 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-@require '../../styles/palette'
-
-.code-group-nav
-  margin-top 0.85rem
+<style lang="scss">
+.code-group-nav {
+  margin-top: 0.85rem;
   // 2 * margin + border-radius of <pre> tag
-  margin-bottom calc(-1.7rem - 6px)
-  padding-bottom calc(1.7rem - 6px)
-  padding-left 10px
-  padding-top 10px
-  border-top-left-radius 6px
-  border-top-right-radius 6px
-  background-color var(--code-bgcolor)
+  margin-bottom: calc(-1.7rem - 6px);
+  padding-bottom: calc(1.7rem - 6px);
+  padding-left: 10px;
+  padding-top: 10px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: var(--code-bgcolor);
 
-  @media (max-width $MQMobileNarrow)
-    margin-left -1.5rem
-    margin-right -1.5rem
-    border-radius 0
+  @media (max-width: $MQMobileNarrow) {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    border-radius: 0;
+  }
+}
 
-.code-group-ul
-  display inline-flex
-  margin auto 0
-  padding-left 0
-  list-style none
+.code-group-ul {
+  display: inline-flex;
+  margin: auto 0;
+  padding-left: 0;
+  list-style: none;
+}
 
-.code-group-nav-tab
-  border 0
-  padding 5px
-  cursor pointer
-  background-color transparent
-  font-size 0.85em
-  line-height 1.4
-  color rgba(255, 255, 255, 0.9)
-  font-weight 600
+.code-group-nav-tab {
+  border: 0;
+  padding: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 0.85em;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
 
-  &:focus
-    outline none
+  &:focus {
+    outline: none;
+  }
 
-  &.active
-    border-bottom var(--accent-color) 1px solid
+  &.active {
+    border-bottom: var(--accent-color) 1px solid;
+  }
+}
 </style>

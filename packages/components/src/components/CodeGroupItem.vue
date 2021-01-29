@@ -25,12 +25,12 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-@require '../../styles/palette'
+<style lang="scss">
+.code-group-item {
+  display: none;
 
-.code-group-item
-  display none
-
-  &.active
-    display block
+  &.active {
+    display: block;
+  }
+}
 </style>
