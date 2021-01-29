@@ -18,10 +18,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
-import { Screenfull } from "screenfull";
-import * as screenfull from "screenfull";
 import { useThemeLocaleData } from "@vuepress/client";
+import { defineComponent, onMounted, ref } from "vue";
+import * as screenfull from "screenfull";
+import type { Screenfull } from "screenfull";
 
 export default defineComponent({
   name: "ScreenFull",
@@ -53,11 +53,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@use '~@mr-hope/vuepress-shared/styles/button';
+@use '~@mr-hope/vuepress-shared/styles/reset';
 
 .full-screen,
 .cancel-full-screen {
-  @include button;
+  @include reset.button;
   width: 1.8rem;
   height: 1.8rem;
   padding: 4px;

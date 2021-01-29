@@ -19,14 +19,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
 import {
   usePageFrontmatter,
   usePagesData,
   useThemeData,
 } from "@vuepress/client";
-import { getLinks } from "../composables";
+import { computed, defineComponent, onMounted, watch, ref } from "vue";
 import { useRoute } from "vue-router";
+import { getLinks } from "../composables";
 
 interface BreadCrumbConfig {
   title: string;
@@ -42,29 +42,7 @@ export default defineComponent({
     const themeData = useThemeData();
     const pagesData = usePagesData();
     const route = useRoute();
-
-    const config = computed<BreadCrumbConfig[]>(() => {
-      const breadcrumbConfig: BreadCrumbConfig[] = [];
-      const pages = pagesData.value;
-      const links = getLinks(route);
-
-      // generate breadcrumb config
-      for (let index = 1; index < links.length; index++)
-        for (let index2 = 0; index2 < pages.length; index2++) {
-          const element = pages[index2];
-
-          if (element.path === links[index]) {
-            breadcrumbConfig.push({
-              title: element.title,
-              icon: element.frontmatter.icon,
-              url: element.path,
-            });
-            break;
-          }
-        }
-
-      return breadcrumbConfig;
-    });
+    const config = ref<BreadCrumbConfig[]>([]);
 
     const enable = computed<boolean>(() => {
       const globalEnable = themeData.value.breadcrumb !== false;
@@ -90,6 +68,31 @@ export default defineComponent({
       const { iconPrefix } = themeData.value;
 
       return iconPrefix === "" ? "" : iconPrefix || "icon-";
+    });
+
+    const updateConfig = async (): Promise<void> => {
+      const breadcrumbConfig: BreadCrumbConfig[] = [];
+      const pages = pagesData.value;
+      const links = getLinks(route);
+
+      // generate breadcrumb config
+      for (let index = 1; index < links.length; index++) {
+        const page = await pages[links[index]]();
+
+        breadcrumbConfig.push({
+          title: page.title,
+          icon: page.frontmatter.icon as string,
+          url: page.path,
+        });
+      }
+
+      config.value = breadcrumbConfig;
+    };
+
+    watch(route, updateConfig);
+
+    onMounted(() => {
+      updateConfig();
     });
 
     return {
@@ -130,7 +133,7 @@ h6 {
 }
 
 .breadcrumb {
-  @include wrapper;
+  @include wrapper.wrapper;
   position: relative;
   margin-top: var(--navbar-height);
   margin-bottom: (-var(--navbar-height));

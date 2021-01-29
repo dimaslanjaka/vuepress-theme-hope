@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
 import { OutboundLink } from "@vuepress/client";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "OutboundLink",

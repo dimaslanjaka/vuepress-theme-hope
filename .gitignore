@@ -7,6 +7,12 @@ lib/
 # VuePress Output
 dist/
 
+# Vuepress Cache
+.cache/
+
+# Vuepress Temp
+.temp/
+
 # VS Code Config file
 .vscode/
 

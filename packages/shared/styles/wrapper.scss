@@ -1,4 +1,4 @@
-@mixin wrapper($contentWidth, $MQNarrow, $MQMobileNarrow) {
+@mixin wrapper($contentWidth: 740px, $MQNarrow: 719px, $MQMobileNarrow: 419px) {
   max-width: $contentWidth;
   margin: 0 auto;
   padding: 2rem 2.5rem;

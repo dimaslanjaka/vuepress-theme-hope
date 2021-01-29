@@ -1,5 +1,6 @@
 <script lang="ts">
-import { VNode, defineComponent, h } from "vue";
+import { defineComponent, h } from "vue";
+import type { VNode } from "vue";
 
 export default defineComponent({
   name: "CodeGroupItem",

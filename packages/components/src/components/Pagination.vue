@@ -1,10 +1,10 @@
 <template>
-  <div v-if="enable" class="pagination-wrapper">
-    <div class="pagination-list">
+  <div class="pagination-wrapper">
+    <div v-if="enable" class="pagination-list">
       <div class="btn-group">
         <div
           v-if="currentPage > 1"
-          class="btn"
+          class="prev"
           role="navigation"
           unselectable="on"
           @click="navigate(currentPage - 1)"
@@ -24,14 +24,9 @@
         >
           {{ num }}
         </div>
+        <div v-if="displayRightEllipsis" class="ellipsis">...</div>
         <div
-          v-if="displayRightEllipsis && currentPage < totalPages - 3"
-          class="ellipsis"
-        >
-          ...
-        </div>
-        <div
-          v-if="displayRightEllipsis && currentPage < totalPages - 3"
+          v-if="displayRightEllipsis"
           role="navigation"
           @click="navigate(totalPages)"
         >
@@ -39,7 +34,7 @@
         </div>
         <div
           v-if="currentPage < totalPages"
-          class="btn"
+          class="next"
           role="navigation"
           @click="navigate(currentPage + 1)"
         >
@@ -58,10 +53,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
-import { componentI18n } from "../define";
 import { useRouteLocale } from "@vuepress/client";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { componentI18n } from "../define";
 
 export default defineComponent({
   name: "Pagination",
@@ -91,29 +86,34 @@ export default defineComponent({
     const enable = computed(
       () => Boolean(totalPages.value) && totalPages.value !== 1
     );
-    const displayLeftEllipsis = computed(
-      () => totalPages.value > 5 && props.currentPage > 4
-    );
-    const displayRightEllipsis = computed(
-      () => totalPages.value > 5 && props.currentPage < totalPages.value - 3
-    );
+    const displayLeftEllipsis = computed(() => {
+      if (totalPages.value < 7) return false;
+
+      return props.currentPage > 4;
+    });
+    const displayRightEllipsis = computed(() => {
+      if (totalPages.value < 7) return false;
+
+      return props.currentPage < totalPages.value - 3;
+    });
 
     /** Page indexs */
     const indexs = computed(() => {
+      const { currentPage } = props;
       let min = 1;
       let max = totalPages.value;
       const arr = [];
 
       if (totalPages.value >= 7)
-        if (props.currentPage > 4 && props.currentPage < totalPages.value - 3) {
-          min = Number(props.currentPage) - 2;
-          max = Number(props.currentPage) + 2;
-        } else if (props.currentPage <= 4) {
+        if (currentPage <= 4 && currentPage < totalPages.value - 3) {
           min = 1;
           max = 5;
-        } else {
+        } else if (currentPage > 4 && currentPage >= totalPages.value - 3) {
           max = totalPages.value;
           min = totalPages.value - 4;
+        } else if (totalPages.value > 7) {
+          min = currentPage - 2;
+          max = currentPage + 2;
         }
 
       // Generate page index
@@ -229,6 +229,12 @@ export default defineComponent({
           &::before {
             background: var(--accent-color);
           }
+        }
+
+        &.prev,
+        &.next {
+          font-size: 13px;
+          line-height: 30px;
         }
 
         &.active,

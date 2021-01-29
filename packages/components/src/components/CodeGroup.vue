@@ -90,7 +90,7 @@ export default defineComponent({
 <style lang="scss">
 .code-group-nav {
   margin-top: 0.85rem;
-  // 2 * margin + border-radius of <pre> tag
+  /* 2 * margin + border-radius of <pre> tag */
   margin-bottom: calc(-1.7rem - 6px);
   padding-bottom: calc(1.7rem - 6px);
   padding-left: 10px;
@@ -99,7 +99,7 @@ export default defineComponent({
   border-top-right-radius: 6px;
   background-color: var(--code-bgcolor);
 
-  @media (max-width: $MQMobileNarrow) {
+  @media (max-width: var(--mobile-narrow-break-point)) {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
     border-radius: 0;

@@ -1,11 +1,9 @@
 {
-  "extends": "../../../tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "module": "ESNext",
     "rootDir": "./src",
-    "outDir": "./lib",
-    "declaration": false,
-    "declarationMap": false
+    "outDir": "./lib"
   },
   "include": ["./src", "./src/**/*.vue"]
 }
