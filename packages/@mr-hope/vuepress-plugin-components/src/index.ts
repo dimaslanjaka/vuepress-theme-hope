@@ -3,7 +3,7 @@ import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
 import type { Plugin } from "@vuepress/core";
 import { path } from "@vuepress/utils";
 import { i18n } from "./i18n";
-import { ComponentOptions, ComponentI18NConfig } from "./types";
+import { ComponentOptions, ComponentI18nConfig } from "./types";
 
 export * from "./types";
 
@@ -12,7 +12,7 @@ const componentPlugin: Plugin<ComponentOptions> = (options, app) => {
   const baseLang =
     options.baseLang || (themeConfig.baseLang as string | undefined) || "en-US";
   const baseLangPath = lang2Path(baseLang);
-  const componentConfig = i18n as PluginI18nConvert<ComponentI18NConfig>;
+  const componentConfig = i18n as PluginI18nConvert<ComponentI18nConfig>;
 
   componentConfig["/"] = componentConfig[baseLangPath];
 
