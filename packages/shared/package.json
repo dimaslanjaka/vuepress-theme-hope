@@ -30,9 +30,9 @@
     "styles"
   ],
   "scripts": {
-    "build": "rollup -c",
     "clean": "rimraf lib",
-    "dev": "rollup -c -w"
+    "rollup:build": "rollup -c",
+    "rollup:watch": "rollup -c -w"
   },
   "devDependencies": {
     "rollup": "2.38.1"

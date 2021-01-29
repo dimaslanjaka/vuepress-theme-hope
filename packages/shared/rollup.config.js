@@ -8,11 +8,13 @@ export default [
     input: "./src/index.ts",
     output: [{ file: pkg.main, format: "cjs", sourcemap: true }],
     plugins: [json(), typescript()],
+    external: ["@vuepress/client", "vue"],
   },
   {
     input: "./src/index.ts",
     output: [{ file: pkg.module, format: "esm", sourcemap: true }],
     plugins: [json(), typescript()],
+    external: ["@vuepress/client", "vue"],
   },
   {
     input: "./src/index.ts",

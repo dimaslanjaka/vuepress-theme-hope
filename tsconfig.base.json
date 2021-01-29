@@ -17,7 +17,7 @@
     "inlineSourceMap": false,
     "inlineSources": false,
     "lib": ["DOM", "ES2020"],
-    "listEmittedFiles": true,
+    "listEmittedFiles": false,
     "moduleResolution": "node",
     "newLine": "lf",
     "noEmitOnError": true,

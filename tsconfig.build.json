@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.base.json",
   "references": [
-    { "path": "./packages/md-enhance/tsconfig.build.json" },
     {
       "path": "./packages/reading-time/tsconfig.json"
     },

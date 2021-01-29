@@ -24,9 +24,9 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "rollup -c",
     "clean": "rimraf lib",
-    "dev": "rollup -c -w"
+    "rollup:build": "rollup -c",
+    "rollup:watch": "rollup -c -w"
   },
   "dependencies": {
     "@mr-hope/vuepress-shared": "2.0.0-alpha.0",
