@@ -51,9 +51,6 @@ const config: UserConfig<DefaultThemeOptions> = {
     /** 网站的logo */
     logo: "/logo.svg",
 
-    /** 头部导航栏的配置 */
-    nav: [{ text: "主页", link: "/" }],
-
     /** 侧边栏标题显示深度，0-2 */
     sidebarDepth: 2,
 
@@ -61,6 +58,8 @@ const config: UserConfig<DefaultThemeOptions> = {
     locales: {
       /** 默认语言 */
       "/": {
+        /** 头部导航栏的配置 */
+        nav: [{ text: "主页", link: "/" }],
         lang: "zh-CN",
         selectText: "选择语言",
         lastUpdatedText: "上次编辑于",

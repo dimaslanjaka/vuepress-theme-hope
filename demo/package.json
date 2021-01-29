@@ -12,9 +12,9 @@
     "serve": "vuepress dev src"
   },
   "devDependencies": {
-    "@vuepress/plugin-pwa": "2.0.0-alpha.15",
-    "@vuepress/plugin-pwa-popup": "2.0.0-alpha.15",
-    "vuepress": "2.0.0-alpha.15",
+    "@vuepress/plugin-pwa": "2.0.0-alpha.19",
+    "@vuepress/plugin-pwa-popup": "2.0.0-alpha.19",
+    "vuepress": "2.0.0-alpha.19",
     "vuepress-theme-hope": "2.0.0-alpha.0"
   }
 }

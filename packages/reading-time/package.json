@@ -34,7 +34,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@vuepress/core": "^2.0.0-alpha.15"
+    "@vuepress/core": "^2.0.0-alpha.19"
   },
   "devDependencies": {
     "@types/jest": "26.0.20",

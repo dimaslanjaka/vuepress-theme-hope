@@ -34,6 +34,7 @@
     "dev": "rollup -c -w"
   },
   "devDependencies": {
-    "rollup": "2.38.1"
+    "rollup": "2.38.1",
+    "vuepress": "2.0.0-alpha.19"
   }
 }
