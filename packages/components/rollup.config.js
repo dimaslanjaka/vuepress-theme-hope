@@ -8,10 +8,10 @@ import { terser } from "rollup-plugin-terser";
 
 export default [
   {
-    input: "./src/components/BackToTop.vue",
+    input: "./src/root-components/BackToTop.vue",
     output: [
       {
-        file: "./lib/components/BackToTop.js",
+        file: "./lib/root-components/BackToTop.js",
         format: "esm",
         sourcemap: true,
       },

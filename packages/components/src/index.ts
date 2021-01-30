@@ -27,7 +27,7 @@ const componentPlugin: Plugin<ComponentOptions> = (options, app) => {
 
     clientAppRootComponentFiles: path.resolve(
       __dirname,
-      "./components/BackToTop.js"
+      "./root-components/BackToTop.js"
     ),
   };
 };
