@@ -1,6 +1,7 @@
 import pkg from "./package.json";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
+import { terser } from "rollup-plugin-terser";
 
 export default [
   {
@@ -8,7 +9,7 @@ export default [
     output: [
       { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
     ],
-    plugins: [typescript()],
+    plugins: [typescript(), terser()],
   },
   {
     input: "./src/index.ts",

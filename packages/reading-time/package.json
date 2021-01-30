@@ -28,10 +28,9 @@
     "lib"
   ],
   "scripts": {
-    "build": "rollup -c",
     "clean": "rimraf lib",
-    "dev": "rollup -c -w",
-    "test": "jest"
+    "rollup:build": "rollup -c",
+    "rollup:watch": "rollup -c -w"
   },
   "dependencies": {
     "@vuepress/core": "^2.0.0-alpha.19"
