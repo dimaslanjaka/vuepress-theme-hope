@@ -20,6 +20,7 @@
     "lint:eslint": "eslint . --ext .js,.ts,.vue --fix",
     "packages:check-update": "ncu --deep --timeout 600000",
     "packages:update": "ncu -u --deep --timeout 600000 && yarn install && yarn upgrade",
+    "rollup:watch": "lerna run rollup:watch --parallel",
     "test": "jest -i"
   },
   "husky": {

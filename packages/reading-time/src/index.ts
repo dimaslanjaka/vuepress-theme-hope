@@ -6,6 +6,7 @@ import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
 import type { Plugin } from "@vuepress/core";
 import type { ReadingTime, ReadingTimeOptions } from "./types";
 
+export * from "./composables";
 export * from "./types";
 
 const readingTimePlugin: Plugin<ReadingTimeOptions> = (options, app) => {

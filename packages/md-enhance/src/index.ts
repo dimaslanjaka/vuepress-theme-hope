@@ -1,10 +1,10 @@
 import { path } from "@vuepress/utils";
 import { codeDemoDefaultSetting } from "./markdown-it/code-demo";
-import flowchart from "./markdown-it/flowchart";
+// import flowchart from "./markdown-it/flowchart";
 import footnote from "./markdown-it/footnote";
 import katex from "./markdown-it/katex";
 import mark from "./markdown-it/mark";
-import presentation from "./markdown-it/presentation";
+// import presentation from "./markdown-it/presentation";
 import sub from "./markdown-it/sub";
 import sup from "./markdown-it/sup";
 import { resolvePlugin } from "./resolvePlugin";

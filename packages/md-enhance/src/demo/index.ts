@@ -37,7 +37,9 @@ export const initDemo = (): void => {
           const vueCode = getVueCode(codeType, config);
 
           if (vueCode.script) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
+            // eslint-disable-next-line
             const app = new Vue.createApp(vueCode.script).mount();
 
             appElement.appendChild(app.$el);

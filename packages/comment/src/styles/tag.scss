@@ -1,0 +1,36 @@
+@use 'sass:color';
+@use 'sass:list';
+@use '~@mr-hope/vuepress-shared/styles/colors';
+
+.tags-wrapper {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+
+  @each $color in colors.$colors {
+    $index: list.index(colors.$colors, $color);
+
+    .tag#{$index} {
+      &,
+      .theme-light & {
+        color: color.scale($color, $lightness: 10%);
+        border-color: color.scale($color, $lightness: 10%);
+
+        &.clickable:hover {
+          color: $color;
+          border-color: $color;
+        }
+      }
+
+      .theme-dark & {
+        color: color.scale($color, $lightness: -10%);
+        border-color: color.scale($color, $lightness: - 10%);
+
+        &.clickable:hover {
+          color: $color;
+          border-color: $color;
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { capitalize } from "@mr-hope/vuepress-shared";
 import { usePageFrontmatter, PageFrontmatter } from "@vuepress/client";
 import { computed } from "vue";
 import type { ComputedRef } from "vue";
@@ -38,10 +39,10 @@ export interface BasePageFrontMatter extends PageFrontmatter {
 
 export type AuthorRef = ComputedRef<string[]>;
 
-export const useAuthor = (fallback?: string): AuthorRef => {
-  const { author } = usePageFrontmatter<BasePageFrontMatter>().value;
+export const useAuthor = (fallback?: string): AuthorRef =>
+  computed<string[]>(() => {
+    const { author } = usePageFrontmatter<BasePageFrontMatter>().value;
 
-  return computed<string[]>(() => {
     if (author) {
       if (Array.isArray(author)) return author;
       if (typeof author === "string") return [author];
@@ -66,35 +67,61 @@ export const useAuthor = (fallback?: string): AuthorRef => {
 
     return [];
   });
-};
 
 export type CategoryRef = ComputedRef<string[]>;
 
-export const useCategory = (fallback?: string): CategoryRef => {
-  const { category } = usePageFrontmatter<BasePageFrontMatter>().value;
-
-  return computed<string[]>(() => {
-    if (category) {
-      if (Array.isArray(category)) return category;
-      if (typeof category === "string") return [category];
-
-      console.error(
-        `Expect 'category' to be \`string[] | string | undefined\`, but got`,
-        category
-      );
-
-      return [];
-    }
-
-    if (!fallback) return [];
-    if (Array.isArray(fallback)) return fallback;
-    if (typeof fallback === "string") return [fallback];
+export const getCategory = (
+  category: string[] | string | undefined
+): string[] => {
+  if (category) {
+    if (Array.isArray(category)) return category.map(capitalize);
+    if (typeof category === "string") return [capitalize(category)];
 
     console.error(
-      "Expect category fallback to be `string[] | string | undefined`, but got",
-      fallback
+      `Expect 'category' to be \`string[] | string | undefined\`, but got`,
+      category
     );
+  }
+
+  return [];
+};
+
+export const useCategory = (): CategoryRef =>
+  computed<string[]>(() => {
+    const {
+      categories,
+      category = categories,
+    } = usePageFrontmatter<BasePageFrontMatter>().value;
+
+    if (category) return getCategory(category);
 
     return [];
   });
+
+export type TagRef = ComputedRef<string[]>;
+
+export const getTag = (tag: string[] | string | undefined): string[] => {
+  if (tag) {
+    if (Array.isArray(tag)) return tag;
+    if (typeof tag === "string") return [tag];
+
+    console.error(
+      `Expect 'tag' to be \`string[] | string | undefined\`, but got`,
+      tag
+    );
+  }
+
+  return [];
 };
+
+export const useTag = (): TagRef =>
+  computed<string[]>(() => {
+    const {
+      tags,
+      tag = tags,
+    } = usePageFrontmatter<BasePageFrontMatter>().value;
+
+    if (tag) return getTag(tag);
+
+    return [];
+  });

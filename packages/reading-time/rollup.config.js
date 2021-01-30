@@ -10,6 +10,7 @@ export default [
       { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
     ],
     plugins: [typescript(), terser()],
+    external: ["@mr-hope/vuepress-shared", "@vuepress/client", "vue"],
   },
   {
     input: "./src/index.ts",

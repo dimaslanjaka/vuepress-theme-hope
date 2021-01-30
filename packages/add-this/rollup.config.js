@@ -10,6 +10,7 @@ export default [
       { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
     ],
     plugins: [typescript(), terser()],
+    external: ["@vuepress/utils", "vue"],
   },
   {
     input: "./src/index.ts",
@@ -22,6 +23,7 @@ export default [
       { file: "./lib/clientAppEnhance.js", format: "esm", sourcemap: true },
     ],
     plugins: [typescript(), terser()],
+    external: ["vue"],
   },
   {
     input: "./src/clientAppEnhance.ts",

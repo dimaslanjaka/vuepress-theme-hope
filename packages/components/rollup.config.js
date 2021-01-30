@@ -1,9 +1,9 @@
 import dts from "rollup-plugin-dts";
-import typescript from "@rollup/plugin-typescript";
 import pkg from "./package.json";
+import styles from "rollup-plugin-styles";
+import typescript from "@rollup/plugin-typescript";
 import typescript2 from "rollup-plugin-typescript2";
 import vue from "rollup-plugin-vue";
-import styles from "rollup-plugin-styles";
 import { terser } from "rollup-plugin-terser";
 
 export default [
