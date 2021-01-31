@@ -1,23 +1,19 @@
 {
-  "name": "@mr-hope/vuepress-plugin-comment",
+  "name": "@mr-hope/vuepress-plugin-sitemap",
   "version": "2.0.0-alpha.0",
-  "description": "A simple Comment plugin for vuepress",
+  "description": "Sitemap plugin for vuepress",
   "keywords": [
     "vuepress-plugin",
-    "vuepress-blog",
-    "comment",
-    "valine",
-    "vssue",
-    "page-info"
+    "sitemap"
   ],
-  "homepage": "https://vuepress-theme-hope.github.io/comment/",
+  "homepage": "https://vuepress-theme-hope.github.io/sitemap/",
   "bugs": {
     "url": "https://github.com/vuepress-theme-hope/vuepress-theme-hope/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuepress-theme-hope/vuepress-theme-hope.git",
-    "directory": "packages/comment"
+    "directory": "packages/sitemap"
   },
   "license": "MIT",
   "author": {
@@ -32,21 +28,14 @@
   ],
   "scripts": {
     "clean": "rimraf lib",
-    "demo:build": "vuepress build __tests__/demo",
-    "demo:clean-serve": "vuepress dev __tests__/demo --no-cache",
-    "demo:serve": "vuepress dev __tests__/demo",
     "rollup:build": "rollup -c",
     "rollup:watch": "rollup -c -w"
   },
   "dependencies": {
-    "@mr-hope/vuepress-plugin-reading-time": "2.0.0-alpha.0",
-    "@mr-hope/vuepress-shared": "2.0.0-alpha.0",
-    "balloon-css": "^1.2.0",
-    "valine": "^1.4.14"
-  },
-  "devDependencies": {
-    "rollup": "2.38.1",
-    "vuepress": "2.0.0-alpha.19"
+    "@types/fs-extra": "^9.0.6",
+    "chalk": "^4.1.0",
+    "fs-extra": "^9.1.0",
+    "sitemap": "^6.3.5"
   },
   "publishConfig": {
     "access": "public"
