@@ -7,6 +7,7 @@ import type { Plugin } from "@vuepress/core";
 import type { ReadingTime, ReadingTimeOptions } from "./types";
 
 export * from "./composables";
+export * from "./reading-time";
 export * from "./types";
 
 const readingTimePlugin: Plugin<ReadingTimeOptions> = (options, app) => {
