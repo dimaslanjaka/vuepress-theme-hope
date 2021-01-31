@@ -33,7 +33,7 @@ interface BaseCommentOptions {
    * @see https://vuepress-theme-hope.github.io/comment/zh/config/#pageinfo (zh)
    * @see https://vuepress-theme-hope.github.io/comment/config/#pageinfo (en)
    *
-   * @default ['Author', 'Visitor', 'Time', 'Category', 'Tag', 'ReadTime']
+   * @default ['Author', 'PageView', 'Date', 'Category', 'Tag', 'ReadTime']
    */
   pageInfo?: PageInfoType[] | false;
   /**

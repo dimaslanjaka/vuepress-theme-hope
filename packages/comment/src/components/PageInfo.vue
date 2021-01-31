@@ -25,10 +25,10 @@ import { usePageFrontmatter } from "@vuepress/client";
 import { computed, defineComponent } from "vue";
 import AuthorInfo from "./AuthorInfo.vue";
 import CategoryInfo from "./CategoryInfo.vue";
+import DateInfo from "./DateInfo.vue";
+import PageViewInfo from "./PageViewInfo.vue";
 import ReadTimeInfo from "./ReadTimeInfo.vue";
 import TagInfo from "./TagInfo.vue";
-import TimeInfo from "./TimeInfo.vue";
-import VisitorInfo from "./VisitorInfo.vue";
 import WordInfo from "./WordInfo.vue";
 import { usePageInfoI18n } from "../composables";
 import { commentOptions } from "../utils";
@@ -47,10 +47,10 @@ export default defineComponent({
   components: {
     AuthorInfo,
     CategoryInfo,
+    DateInfo,
     ReadTimeInfo,
+    PageViewInfo,
     TagInfo,
-    TimeInfo,
-    VisitorInfo,
     WordInfo,
   },
 
@@ -75,7 +75,7 @@ export default defineComponent({
         ? false
         : Array.isArray(themeConfig)
         ? themeConfig
-        : ["Author", "Visitor", "Time", "Category", "Tag", "ReadTime"];
+        : ["Author", "PageView", "Date", "Category", "Tag", "ReadTime"];
     });
 
     const isOriginal = computed(() => frontmatter.value.original);

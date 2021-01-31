@@ -25,7 +25,7 @@ import { usePageInfoI18n, useEnablePageViews } from "../composables";
 import type { RouteLocation } from "vue-router";
 
 export default defineComponent({
-  name: "VisitorInfo",
+  name: "PageViewInfo",
 
   components: { EyeIcon, FireIcon },
 

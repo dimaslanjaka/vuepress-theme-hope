@@ -24,9 +24,9 @@ export interface PageInfoI18nConfig {
  */
 export type PageInfoType =
   | "Author"
-  | "Time"
   | "Category"
+  | "Date"
+  | "PageView"
   | "Tag"
   | "ReadTime"
-  | "Word"
-  | "Visitor";
+  | "Word";

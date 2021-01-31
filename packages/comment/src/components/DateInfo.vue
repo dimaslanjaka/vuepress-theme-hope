@@ -1,12 +1,12 @@
 <template>
   <span
-    v-if="time"
-    class="time-info"
+    v-if="date"
+    class="date-info"
     :aria-label="hint"
     data-balloon-pos="down"
   >
     <CalendarIcon />
-    <span v-text="time" />
+    <span v-text="date" />
   </span>
 </template>
 
@@ -19,25 +19,27 @@ import { usePageInfoI18n } from "../composables";
 import type { CommentPluginFrontmatter } from "../types";
 
 export default defineComponent({
-  name: "TimeInfo",
+  name: "DateInfo",
 
   components: { CalendarIcon },
 
   setup() {
     const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
 
-    const time = computed(() => {
-      const { time } = frontmatter.value;
+    const date = computed(() => {
+      let { date } = frontmatter.value;
 
-      if (typeof time === "string") {
-        if (time.indexOf("T") !== -1) {
-          const [date, temp] = time.split("T");
+      if (date instanceof Date) date = date.toISOString();
+
+      if (typeof date === "string") {
+        if (date.indexOf("T") !== -1) {
+          const [day, temp] = date.split("T");
           const [moment] = temp.split(".");
 
-          return `${date} ${moment === "00:00:00" ? "" : moment}`;
+          return `${day} ${moment === "00:00:00" ? "" : moment}`;
         }
 
-        return time;
+        return date;
       }
 
       return "";
@@ -46,8 +48,8 @@ export default defineComponent({
     const hint = usePageInfoI18n("time");
 
     return {
+      date,
       hint,
-      time,
     };
   },
 });
