@@ -1,6 +1,5 @@
 import { black, blue, cyan } from "chalk";
 import { createWriteStream, readFile, existsSync, writeFile } from "fs-extra";
-import { resolve } from "path";
 import { SitemapStream } from "sitemap";
 
 import type { App, Page, PageData } from "@vuepress/core";
@@ -12,7 +11,7 @@ import type {
   SitemapOptions,
 } from "./types";
 
-interface SitemapOption {
+interface SitemapPageInfo {
   lastmod: string;
   changefreq?: string;
   priority?: number;
@@ -36,7 +35,7 @@ const stripLocalePrefix = (
 const generatePageMap = (
   options: SitemapOptions,
   app: App
-): Map<string, SitemapOption> => {
+): Map<string, SitemapPageInfo> => {
   const {
     changefreq = "daily",
     exclude = [],
@@ -61,7 +60,7 @@ const generatePageMap = (
     new Map()
   );
 
-  const pagesMap = new Map<string, SitemapOption>();
+  const pagesMap = new Map<string, SitemapPageInfo>();
 
   pages.forEach((page) => {
     const frontmatterOptions: SitemapFrontmatterOption =
@@ -103,7 +102,7 @@ const generatePageMap = (
   return pagesMap;
 };
 
-export const genSiteMap = async (
+export const generateSiteMap = async (
   options: SitemapOptions,
   app: App
 ): Promise<void> => {
@@ -119,7 +118,8 @@ export const genSiteMap = async (
     ? options.outFile.replace(/^\//u, "")
     : "sitemap.xml";
   const {
-    options: { base, dest },
+    dir,
+    options: { base },
   } = app;
 
   const sitemap = new SitemapStream({
@@ -127,27 +127,27 @@ export const genSiteMap = async (
     xslUrl,
     xmlns,
   });
-  const sitemapXMLPath = resolve(dest, outFile);
+  const pagesMap = generatePageMap(options, app);
+  const sitemapXMLPath = dir.dest(outFile);
   const writeStream = createWriteStream(sitemapXMLPath);
 
   sitemap.pipe(writeStream);
 
-  const pagesMap = generatePageMap(options, app);
-
   pagesMap.forEach((page, path) => {
     if (!exclude.includes(path))
-      sitemap.write({ url: `${base}${path}`, ...page });
+      sitemap.write({ url: `${base}${path.replace(/^\//u, "")}`, ...page });
   });
 
   urls.forEach((item) => sitemap.write(item));
   sitemap.end();
+
   console.log(
     blue("Sitemap:"),
     black.bgGreen("Success"),
     `Sitemap generated and saved to ${cyan(outFile)}`
   );
 
-  const robotTxtPath = resolve(dest, "robots.txt");
+  const robotTxtPath = dir.dest("robots.txt");
   const robotsTxt = existsSync(robotTxtPath)
     ? await readFile(robotTxtPath, { encoding: "utf8" })
     : "";

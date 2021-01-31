@@ -1,5 +1,5 @@
 import { black, blue } from "chalk";
-import { genSiteMap } from "./sitemap";
+import { generateSiteMap } from "./sitemap";
 
 import type { Plugin } from "@vuepress/core";
 import type { SitemapOptions } from "./types";
@@ -21,7 +21,7 @@ const sitemapPlugin: Plugin<SitemapOptions> = (options, app) => {
             ? { ...options, hostname }
             : { ...((themeConfig.sitemap as SitemapOptions) || {}), hostname };
 
-        await genSiteMap(option, app);
+        await generateSiteMap(option, app);
       } else
         console.log(
           blue("Sitemap"),
