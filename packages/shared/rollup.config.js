@@ -5,19 +5,33 @@ import dts from "rollup-plugin-dts";
 import { terser } from "rollup-plugin-terser";
 export default [
   {
-    input: "./src/index.ts",
+    input: "./src/node.ts",
     output: [{ file: pkg.main, format: "cjs", sourcemap: true }],
     plugins: [json(), typescript(), terser()],
-    external: ["@vuepress/client", "vue"],
+    external: [
+      "dayjs",
+      "dayjs/plugin/localizedFormat",
+      "dayjs/plugin/objectSupport",
+      "dayjs/plugin/timezone",
+      "dayjs/plugin/utc",
+    ],
   },
   {
-    input: "./src/index.ts",
+    input: "./src/client.ts",
     output: [{ file: pkg.module, format: "esm", sourcemap: true }],
     plugins: [json(), typescript(), terser()],
-    external: ["@vuepress/client", "vue"],
+    external: [
+      "@vuepress/client",
+      "dayjs",
+      "dayjs/plugin/localizedFormat",
+      "dayjs/plugin/objectSupport",
+      "dayjs/plugin/timezone",
+      "dayjs/plugin/utc",
+      "vue",
+    ],
   },
   {
-    input: "./src/index.ts",
+    input: "./src/client.ts",
     output: [{ file: pkg.types, format: "esm", sourcemap: true }],
     plugins: [dts()],
   },

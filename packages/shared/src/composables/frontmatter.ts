@@ -1,10 +1,12 @@
-import { capitalize } from "@mr-hope/vuepress-shared";
-import { usePageFrontmatter, PageFrontmatter } from "@vuepress/client";
+import { usePageFrontmatter } from "@vuepress/client";
 import { computed } from "vue";
-import { getDate } from "./date";
+import { getDate } from "../utils/date";
+import { getAuthor, getCategory, getTag } from "../utils/info";
+import { useThemeAuthor } from "./themeConfig";
 
+import type { PageFrontmatter } from "@vuepress/client";
 import type { ComputedRef } from "vue";
-import type { DateInfo, DateOptions } from "./date";
+import type { DateInfo, DateOptions } from "../utils/date";
 
 export interface BasePageFrontMatter extends PageFrontmatter {
   // Basic Info
@@ -46,52 +48,17 @@ export interface BasePageFrontMatter extends PageFrontmatter {
 
 export type AuthorRef = ComputedRef<string[]>;
 
-export const useAuthor = (fallback?: string): AuthorRef =>
+export const useAuthor = (): AuthorRef =>
   computed<string[]>(() => {
     const { author } = usePageFrontmatter<BasePageFrontMatter>().value;
 
-    if (author) {
-      if (Array.isArray(author)) return author;
-      if (typeof author === "string") return [author];
+    if (author) return getAuthor(author);
+    if (author === false) return [];
 
-      console.error(
-        `Expect 'author' to be \`string[] | string | false | undefined\`, but got`,
-        author
-      );
-
-      return [];
-    }
-
-    if (author === false || !fallback) return [];
-
-    if (Array.isArray(fallback)) return fallback;
-    if (typeof fallback === "string") return [fallback];
-
-    console.error(
-      "Expect author fallback to be `string[] | string | undefined`, but got",
-      fallback
-    );
-
-    return [];
+    return useThemeAuthor().value;
   });
 
 export type CategoryRef = ComputedRef<string[]>;
-
-export const getCategory = (
-  category: string[] | string | undefined
-): string[] => {
-  if (category) {
-    if (Array.isArray(category)) return category.map(capitalize);
-    if (typeof category === "string") return [capitalize(category)];
-
-    console.error(
-      `Expect 'category' to be \`string[] | string | undefined\`, but got`,
-      category
-    );
-  }
-
-  return [];
-};
 
 export const useCategory = (): CategoryRef =>
   computed<string[]>(() => {
@@ -106,20 +73,6 @@ export const useCategory = (): CategoryRef =>
   });
 
 export type TagRef = ComputedRef<string[]>;
-
-export const getTag = (tag: string[] | string | undefined): string[] => {
-  if (tag) {
-    if (Array.isArray(tag)) return tag;
-    if (typeof tag === "string") return [tag];
-
-    console.error(
-      `Expect 'tag' to be \`string[] | string | undefined\`, but got`,
-      tag
-    );
-  }
-
-  return [];
-};
 
 export const useTag = (): TagRef =>
   computed<string[]>(() => {

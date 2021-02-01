@@ -22,8 +22,8 @@
     "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
+  "main": "lib/node.js",
+  "module": "lib/client.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib",

@@ -1,10 +1,15 @@
 import { useThemeData } from "@vuepress/client";
 import { computed } from "vue";
+import { getAuthor } from "../utils/info";
 
 import type { ThemeConfig } from "@vuepress/core";
 import type { ComputedRef } from "vue";
 
 export interface BaseThemeConfig extends ThemeConfig {
+  /**
+   * 作者
+   */
+  author?: string[] | string;
   /**
    * Font class 图标前缀
    *
@@ -18,6 +23,13 @@ export interface BaseThemeConfig extends ThemeConfig {
    */
   blog: unknown | false;
 }
+
+export const useThemeAuthor = (): ComputedRef<string[]> =>
+  computed(() => {
+    const { author } = useThemeData<BaseThemeConfig>().value;
+
+    return getAuthor(author, true);
+  });
 
 export const useIconPrefix = (): ComputedRef<string> =>
   computed(() => {
