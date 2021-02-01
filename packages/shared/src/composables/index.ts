@@ -1,3 +1,4 @@
+export * from "./date";
 export * from "./frontmatter";
 export * from "./page";
 export * from "./pluginConfig";

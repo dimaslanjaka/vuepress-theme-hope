@@ -1,7 +1,10 @@
 import { capitalize } from "@mr-hope/vuepress-shared";
 import { usePageFrontmatter, PageFrontmatter } from "@vuepress/client";
 import { computed } from "vue";
+import { getDate } from "./date";
+
 import type { ComputedRef } from "vue";
+import type { DateInfo, DateOptions } from "./date";
 
 export interface BasePageFrontMatter extends PageFrontmatter {
   // Basic Info
@@ -15,6 +18,10 @@ export interface BasePageFrontMatter extends PageFrontmatter {
    * Page Category(ies)
    */
   category?: string | string[];
+  /**
+   * @deprecated use `date` instead
+   */
+  time?: Date | string;
   /**
    * @deprecated use `category` instead
    */
@@ -124,4 +131,18 @@ export const useTag = (): TagRef =>
     if (tag) return getTag(tag);
 
     return [];
+  });
+
+export type DateRef = ComputedRef<DateInfo | null>;
+
+export const useDate = (options: DateOptions): DateRef =>
+  computed<DateInfo | null>(() => {
+    const {
+      time,
+      date = time,
+    } = usePageFrontmatter<BasePageFrontMatter>().value;
+
+    if (date) return getDate(date, options);
+
+    return null;
   });

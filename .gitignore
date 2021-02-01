@@ -21,3 +21,6 @@ dist/
 
 # Typescript build info
 *.tsbuildinfo
+
+# Coverage Files
+coverage/
