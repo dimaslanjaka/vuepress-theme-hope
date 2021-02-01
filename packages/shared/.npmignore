@@ -1,8 +1,11 @@
-# Source Files
+# Source Code
 src/
 
-# Jest Tests
+# Test Files
 __tests__/
 
-# Typescript config
-tsconfig.*
+# Rollup Config files
+rollup.config.js
+
+# Typescript Config files
+tsconfig.json
