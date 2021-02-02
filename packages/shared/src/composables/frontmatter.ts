@@ -41,6 +41,10 @@ export interface BasePageFrontMatter extends PageFrontmatter {
    */
   article?: boolean;
   /**
+   * Page Cover
+   */
+  cover?: string;
+  /**
    * Page Banner
    */
   banner?: string;
