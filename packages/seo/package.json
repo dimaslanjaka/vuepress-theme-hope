@@ -1,0 +1,44 @@
+{
+  "name": "@mr-hope/vuepress-plugin-seo",
+  "version": "2.0.0-alpha.0",
+  "description": "SEO plugin for vuepress",
+  "keywords": [
+    "vuepress-plugin",
+    "seo",
+    "search",
+    "share"
+  ],
+  "homepage": "https://vuepress-theme-hope.github.io/seo/",
+  "bugs": {
+    "url": "https://github.com/vuepress-theme-hope/vuepress-theme-hope/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuepress-theme-hope/vuepress-theme-hope.git",
+    "directory": "packages/seo"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Mr.Hope",
+    "email": "zhangbowang1998@gmail.com",
+    "url": "https://mrhope.site"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "clean": "rimraf lib",
+    "rollup:build": "rollup -c",
+    "rollup:watch": "rollup -c -w"
+  },
+  "dependencies": {
+    "@types/fs-extra": "^9.0.6",
+    "chalk": "^4.1.0",
+    "fs-extra": "^9.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
