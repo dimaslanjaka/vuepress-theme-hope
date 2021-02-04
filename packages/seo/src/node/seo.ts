@@ -11,7 +11,7 @@ import type { PageSeoInfo, SeoContent, SeoOptions } from "./types";
 export const generateSeo = (
   options: SeoOptions,
   base: string,
-  { page, app, lang, siteLocale, permalink }: PageSeoInfo
+  { page, app, permalink }: PageSeoInfo
 ): SeoContent => {
   const {
     frontmatter: {
@@ -24,7 +24,8 @@ export const generateSeo = (
     },
     lastUpdatedTime,
   } = page;
-  const locales = getLocales(app.options.locales);
+  const { siteData } = app;
+  const locales = getLocales(siteData.locales);
 
   const type = ["article", "category", "tag", "timeline"].some(
     (folder) =>
@@ -60,7 +61,7 @@ export const generateSeo = (
 
   return {
     "og:url": resolveUrl(base, permalink || page.path),
-    "og:site_name": siteLocale.title,
+    "og:site_name": siteData.title,
     "og:title": page.title,
     "og:description": page.frontmatter.description || "",
     "og:type": type,
@@ -70,11 +71,11 @@ export const generateSeo = (
       ? resolveUrl(base, banner)
       : "",
     "og:updated_time": modifiedTime,
-    "og:locale": lang,
+    "og:locale": page.lang,
     "og:locale:alternate": locales,
 
     "twitter:card": "summary_large_image",
-    "twitter:image:alt": siteLocale.title,
+    "twitter:image:alt": siteData.title,
 
     "article:author": author,
     "article:tag": articleTags,

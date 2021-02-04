@@ -10,16 +10,9 @@ export type ExtendPage<ExtendObject = Record<string, unknown>> = Page & {
   lastUpdatedTime?: number;
 } & ExtendObject;
 
-export interface PageSeoInfo<
-  PageExtends = Record<string, unknown>,
-  ThemeConfig = Record<string, unknown>
-> {
+export interface PageSeoInfo<PageExtends = Record<string, unknown>> {
   page: ExtendPage<PageExtends>;
   app: App;
-  /** Current page lang */
-  lang: string;
-  /** Current site locale */
-  siteLocale: SiteLocaleData<ThemeConfig>;
   /**
    * Current page link
    *
@@ -53,19 +46,13 @@ export interface SeoOptions {
   restrictions?: string;
 
   /** Function to generate seo */
-  seo?: <
-    PageExtends = Record<string, unknown>,
-    ThemeConfig = Record<string, unknown>
-  >(
-    info: PageSeoInfo<PageExtends, ThemeConfig>
+  seo?: <PageExtends = Record<string, unknown>>(
+    info: PageSeoInfo<PageExtends>
   ) => Partial<SeoContent>;
 
   /** Function to custom head */
-  customHead?: <
-    PageExtends = Record<string, unknown>,
-    ThemeConfig = Record<string, unknown>
-  >(
+  customHead?: <PageExtends = Record<string, unknown>>(
     head: HeadConfig[],
-    info: PageSeoInfo<PageExtends, ThemeConfig>
+    info: PageSeoInfo<PageExtends>
   ) => void;
 }

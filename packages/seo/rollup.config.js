@@ -5,7 +5,7 @@ import { terser } from "rollup-plugin-terser";
 
 export default [
   {
-    input: "./src/index.ts",
+    input: "./src/node/index.ts",
     output: [
       { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
     ],
@@ -21,7 +21,7 @@ export default [
     ],
   },
   {
-    input: "./src/index.ts",
+    input: "./src/node/index.ts",
     output: [{ file: pkg.types, format: "esm", sourcemap: true }],
     plugins: [dts()],
   },

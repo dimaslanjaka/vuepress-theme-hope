@@ -1,21 +1,20 @@
 {
-  "name": "@mr-hope/vuepress-plugin-seo",
+  "name": "@mr-hope/vuepress-plugin-feed",
   "version": "2.0.0-alpha.0",
-  "description": "SEO plugin for vuepress",
+  "description": "Feed plugin for vuepress-theme-hope",
   "keywords": [
     "vuepress-plugin",
-    "seo",
-    "search",
-    "share"
+    "vuepress",
+    "feed"
   ],
-  "homepage": "https://vuepress-theme-hope.github.io/seo/",
+  "homepage": "https://vuepress-theme-hope.github.io/feed/",
   "bugs": {
     "url": "https://github.com/vuepress-theme-hope/vuepress-theme-hope/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuepress-theme-hope/vuepress-theme-hope.git",
-    "directory": "packages/seo"
+    "directory": "packages/feed"
   },
   "license": "MIT",
   "author": {
@@ -34,9 +33,11 @@
     "rollup:watch": "rollup -c -w"
   },
   "dependencies": {
-    "@types/fs-extra": "^9.0.6",
     "chalk": "^4.1.0",
-    "fs-extra": "^9.1.0"
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "rollup": "2.38.1"
   },
   "publishConfig": {
     "access": "public"

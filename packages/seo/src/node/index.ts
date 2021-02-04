@@ -1,5 +1,4 @@
 import { resolvePagePermalink } from "@vuepress/core";
-import { resolveSiteLocaleData } from "@vuepress/client";
 import { generateRobotsTxt, generateSeo } from "./seo";
 import { appendMeta } from "./meta";
 // import { getLocales } from "./utils";
@@ -22,15 +21,12 @@ export const seoPlugin: Plugin<SeoOptions> = (options, app) => {
 
     extendsPageData(page): void {
       const meta = page.frontmatter.head || [];
-      const siteLocale = resolveSiteLocaleData(app.options, page.pathLocale);
       const pageSeoInfo: PageSeoInfo = {
         page: page as Page & { lastUpdatedTime?: number } & Record<
             string,
             unknown
           >,
         app,
-        lang: siteLocale.lang,
-        siteLocale,
         permalink: resolvePagePermalink({
           ...page,
           options: {},
