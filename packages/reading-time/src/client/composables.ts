@@ -1,6 +1,6 @@
 import { useRouteLocale } from "@vuepress/client";
 import { ComputedRef, computed } from "vue";
-import { ReadingTimeI18nConfig } from "./types";
+import { ReadingTimeI18nConfig } from "../common";
 
 export const useReadingTimeI18n = (
   key: keyof ReadingTimeI18nConfig

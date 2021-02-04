@@ -1,5 +1,5 @@
 import type { LangPaths } from "@mr-hope/vuepress-shared";
-import type { ReadingTimeI18nConfig } from "./types";
+import type { ReadingTimeI18nConfig } from "../common";
 
 /** Muti language config for reading time plugin */
 export const i18n: Record<LangPaths, ReadingTimeI18nConfig> = {

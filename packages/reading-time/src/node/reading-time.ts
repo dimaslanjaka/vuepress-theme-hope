@@ -1,4 +1,4 @@
-import type { ReadingTime } from "./types";
+import type { ReadingTime } from "../common/types";
 
 export const getWords = (data: string): RegExpMatchArray =>
   data.match(/[\w\d\s,.\u00C0-\u024F]+/giu) || [];

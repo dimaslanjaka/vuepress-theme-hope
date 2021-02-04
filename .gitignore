@@ -2,8 +2,8 @@
 node_modules/
 
 # Dist files
-client/
-node/
+packages/*/client/
+packages/*/node/
 
 # Dist files
 lib/
