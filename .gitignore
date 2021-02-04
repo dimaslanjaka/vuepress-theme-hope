@@ -2,6 +2,10 @@
 node_modules/
 
 # Dist files
+client/
+node/
+
+# Dist files
 lib/
 
 # VuePress Output

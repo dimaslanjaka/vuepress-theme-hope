@@ -1,54 +1,10 @@
 import { usePageFrontmatter } from "@vuepress/client";
 import { computed } from "vue";
-import { getDate } from "../utils/date";
-import { getAuthor, getCategory, getTag } from "../utils/info";
+import { getAuthor, getCategory, getDate, getTag } from "../../common";
 import { useThemeAuthor } from "./themeConfig";
 
-import type { PageFrontmatter } from "@vuepress/client";
 import type { ComputedRef } from "vue";
-import type { DateInfo, DateOptions } from "../utils/date";
-
-export interface BasePageFrontMatter extends PageFrontmatter {
-  // Basic Info
-  /** Page icon */
-  icon?: string;
-  /** Page Author(s) */
-  author?: string[] | string | false;
-  /** Whether the content is original */
-  original?: boolean;
-  /**
-   * Page Category(ies)
-   */
-  category?: string | string[];
-  /**
-   * @deprecated use `date` instead
-   */
-  time?: Date | string;
-  /**
-   * @deprecated use `category` instead
-   */
-  categories?: string[];
-  /**
-   * Page Tag(s)
-   */
-  tag?: string[] | string;
-  /**
-   * @deprecated use `tag` instead
-   */
-  tags?: string[];
-  /**
-   * Whether the page is an article
-   */
-  article?: boolean;
-  /**
-   * Page Cover
-   */
-  cover?: string;
-  /**
-   * Page Banner
-   */
-  banner?: string;
-}
+import type { BasePageFrontMatter, DateInfo, DateOptions } from "../../common";
 
 export type AuthorRef = ComputedRef<string[]>;
 

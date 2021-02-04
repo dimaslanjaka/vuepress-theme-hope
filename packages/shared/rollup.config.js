@@ -1,13 +1,11 @@
-import pkg from "./package.json";
-import json from "@rollup/plugin-json";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import { terser } from "rollup-plugin-terser";
 export default [
   {
-    input: "./src/node.ts",
-    output: [{ file: pkg.main, format: "cjs", sourcemap: true }],
-    plugins: [json(), typescript(), terser()],
+    input: "./src/node/index.ts",
+    output: [{ file: "./node/index.js", format: "cjs", sourcemap: true }],
+    plugins: [typescript(), terser()],
     external: [
       "dayjs",
       "dayjs/plugin/localizedFormat",
@@ -17,9 +15,14 @@ export default [
     ],
   },
   {
-    input: "./src/client.ts",
-    output: [{ file: pkg.module, format: "esm", sourcemap: true }],
-    plugins: [json(), typescript(), terser()],
+    input: "./src/node/index.ts",
+    output: [{ file: "./node/index.d.ts", format: "cjs", sourcemap: true }],
+    plugins: [dts()],
+  },
+  {
+    input: "./src/client/index.ts",
+    output: [{ file: "./client/index.js", format: "esm", sourcemap: true }],
+    plugins: [typescript(), terser()],
     external: [
       "@vuepress/client",
       "dayjs",
@@ -31,8 +34,8 @@ export default [
     ],
   },
   {
-    input: "./src/client.ts",
-    output: [{ file: pkg.types, format: "esm", sourcemap: true }],
+    input: "./src/client/index.ts",
+    output: [{ file: "./client/index.d.ts", format: "esm", sourcemap: true }],
     plugins: [dts()],
   },
 ];

@@ -22,11 +22,11 @@
     "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "main": "lib/node.js",
-  "module": "lib/client.js",
-  "types": "lib/index.d.ts",
+  "main": "node/index.js",
+  "module": "client/index.js",
   "files": [
-    "lib",
+    "client",
+    "node",
     "styles"
   ],
   "scripts": {

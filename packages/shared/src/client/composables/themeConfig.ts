@@ -1,6 +1,6 @@
 import { useThemeData } from "@vuepress/client";
 import { computed } from "vue";
-import { getAuthor } from "../utils/info";
+import { getAuthor } from "../../common";
 
 import type { ThemeConfig } from "@vuepress/core";
 import type { ComputedRef } from "vue";
