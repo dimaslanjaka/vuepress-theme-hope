@@ -7,7 +7,7 @@
   "author": "Mr.Hope",
   "scripts": {
     "build": "vuepress build src",
-    "clean-serve": "vuepress dev src --no-cache",
+    "clean-serve": "vuepress dev src --clean-cache",
     "eject": "vuepress eject-hope src",
     "serve": "vuepress dev src"
   },

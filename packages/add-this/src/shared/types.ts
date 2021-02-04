@@ -7,7 +7,3 @@ export interface AddThisOptions {
    */
   pubid: string;
 }
-
-declare global {
-  const PUB_ID: string;
-}

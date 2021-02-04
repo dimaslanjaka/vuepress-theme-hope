@@ -1,12 +1,13 @@
 import { defineComponent, h, onMounted } from "vue";
+import { pubID } from "../define";
 
 export default defineComponent({
   name: "AddThis",
 
   setup() {
     onMounted(() => {
-      if (PUB_ID) {
-        const link = `//s7.addthis.com/js/300/addthis_widget.js#pubid=${PUB_ID}`;
+      if (pubID) {
+        const link = `//s7.addthis.com/js/300/addthis_widget.js#pubid=${pubID}`;
         const script = document.createElement("script");
 
         script.src = link;

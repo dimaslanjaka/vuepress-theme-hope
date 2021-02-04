@@ -18,17 +18,25 @@ export default [
     plugins: [dts()],
   },
   {
-    input: "./src/client/appEnhance.ts",
+    input: "./src/client/root-components/AddThis.ts",
     output: [
-      { file: "./client/appEnhance.js", format: "esm", sourcemap: true },
+      {
+        file: "./client/root-components/AddThis.js",
+        format: "esm",
+        sourcemap: true,
+      },
     ],
     plugins: [typescript(), terser()],
     external: ["vue"],
   },
   {
-    input: "./src/client/appEnhance.ts",
+    input: "./src/client/root-components/AddThis.ts",
     output: [
-      { file: "./client/appEnhance.d.ts", format: "esm", sourcemap: true },
+      {
+        file: "./client/root-components/AddThis.d.ts",
+        format: "esm",
+        sourcemap: true,
+      },
     ],
     plugins: [dts()],
   },
