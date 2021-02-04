@@ -1,15 +1,12 @@
 import { useRouteLocale } from "@vuepress/client";
 import { onMounted, onUpdated } from "vue";
+import { i18n, options } from "./define";
 import Message from "./message";
 
 import type { ClientAppSetup } from "@vuepress/client";
 
-import "../common";
 import "./styles/code.scss";
 import "balloon-css";
-
-const i18n = CODE_COPY_I18N;
-const options = CODE_COPY_OPIONS;
 
 const isMobile = (): boolean =>
   navigator

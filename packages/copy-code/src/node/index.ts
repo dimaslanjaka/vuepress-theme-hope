@@ -4,9 +4,9 @@ import { i18n } from "./i18n";
 
 import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
 import type { Plugin } from "@vuepress/core";
-import type { CopyCodeI18nConfig, CopyCodeOptions } from "../common";
+import type { CopyCodeI18nConfig, CopyCodeOptions } from "../shared";
 
-export * from "../common";
+export * from "../shared";
 
 const copyCodePlugin: Plugin<CopyCodeOptions> = (options, app) => {
   const { themeConfig } = app.options;

@@ -5,30 +5,30 @@ import { terser } from "rollup-plugin-terser";
 
 export default [
   {
-    input: "./src/index.ts",
+    input: "./src/node/index.ts",
     output: [
       { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
     ],
     plugins: [typescript(), terser()],
-    external: ["@vuepress/utils", "vue"],
+    external: ["@vuepress/utils"],
   },
   {
-    input: "./src/index.ts",
+    input: "./src/node/index.ts",
     output: [{ file: pkg.types, format: "esm", sourcemap: true }],
     plugins: [dts()],
   },
   {
-    input: "./src/clientAppEnhance.ts",
+    input: "./src/client/appEnhance.ts",
     output: [
-      { file: "./lib/clientAppEnhance.js", format: "esm", sourcemap: true },
+      { file: "./client/appEnhance.js", format: "esm", sourcemap: true },
     ],
     plugins: [typescript(), terser()],
     external: ["vue"],
   },
   {
-    input: "./src/clientAppEnhance.ts",
+    input: "./src/client/appEnhance.ts",
     output: [
-      { file: "./lib/clientAppEnhance.d.ts", format: "esm", sourcemap: true },
+      { file: "./client/appEnhance.d.ts", format: "esm", sourcemap: true },
     ],
     plugins: [dts()],
   },

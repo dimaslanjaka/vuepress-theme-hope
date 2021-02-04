@@ -8,10 +8,10 @@ import { terser } from "rollup-plugin-terser";
 
 export default [
   {
-    input: "./src/root-components/BackToTop.vue",
+    input: "./src/client/root-components/BackToTop.vue",
     output: [
       {
-        file: "./lib/root-components/BackToTop.js",
+        file: "./client/root-components/BackToTop.js",
         format: "esm",
         sourcemap: true,
       },
@@ -32,9 +32,9 @@ export default [
     external: ["@vuepress/client", "lodash.debounce", "vue"],
   },
   {
-    input: "./src/clientAppEnhance.ts",
+    input: "./src/client/appEnhance.ts",
     output: [
-      { file: "./lib/clientAppEnhance.js", format: "esm", sourcemap: true },
+      { file: "./client/appEnhance.js", format: "esm", sourcemap: true },
     ],
     plugins: [
       vue(),
@@ -58,7 +58,21 @@ export default [
     ],
   },
   {
-    input: "./src/index.ts",
+    input: "./src/client/appEnhance.ts",
+    output: [
+      { file: "./client/appEnhance.d.ts", format: "esm", sourcemap: true },
+    ],
+    plugins: [vue(), dts()],
+    external: [
+      "@mr-hope/vuepress-shared/styles/config/index.scss",
+      "@vuepress/client",
+      "vue",
+      "vue-router",
+      "screenfull",
+    ],
+  },
+  {
+    input: "./src/node/index.ts",
     output: [
       { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
     ],
@@ -71,7 +85,7 @@ export default [
     ],
   },
   {
-    input: "./src/index.ts",
+    input: "./src/node/index.ts",
     output: [{ file: pkg.types, format: "esm", sourcemap: true }],
     plugins: [dts()],
   },

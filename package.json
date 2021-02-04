@@ -21,6 +21,7 @@
     "markdownlint": "markdownlint **/*.md --ignore **/node_modules/** --fix",
     "packages:check-update": "ncu --deep --timeout 600000",
     "packages:update": "ncu -u --deep --timeout 600000 && yarn install && yarn upgrade",
+    "rollup:build": "lerna run rollup:build --parallel",
     "rollup:watch": "lerna run rollup:watch --parallel",
     "test": "jest -i"
   },

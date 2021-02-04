@@ -1,8 +1,8 @@
 import { useRouteLocale } from "@vuepress/client";
 import { ComputedRef, computed } from "vue";
-import { ReadingTimeI18nConfig } from "../common";
+import { i18n } from "./define";
+import { ReadingTimeI18nConfig } from "../shared";
 
 export const useReadingTimeI18n = (
   key: keyof ReadingTimeI18nConfig
-): ComputedRef<string> =>
-  computed(() => READING_TIME_I18N[useRouteLocale().value][key]);
+): ComputedRef<string> => computed(() => i18n[useRouteLocale().value][key]);

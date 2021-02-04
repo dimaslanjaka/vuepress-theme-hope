@@ -1,19 +1,21 @@
 import { usePageFrontmatter } from "@vuepress/client";
 import { computed } from "vue";
-import { getAuthor, getCategory, getDate, getTag } from "../../common";
+import { getAuthor, getCategory, getDate, getTag } from "../../shared";
 import { useThemeAuthor } from "./themeConfig";
 
 import type { ComputedRef } from "vue";
-import type { BasePageFrontMatter, DateInfo, DateOptions } from "../../common";
+import type { BasePageFrontMatter, DateInfo, DateOptions } from "../../shared";
 
 export type AuthorRef = ComputedRef<string[]>;
 
-export const useAuthor = (): AuthorRef =>
+export const useAuthor = (fallback?: string | string[]): AuthorRef =>
   computed<string[]>(() => {
     const { author } = usePageFrontmatter<BasePageFrontMatter>().value;
 
     if (author) return getAuthor(author);
     if (author === false) return [];
+
+    if (fallback) return getAuthor(fallback, false);
 
     return useThemeAuthor().value;
   });

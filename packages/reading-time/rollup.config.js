@@ -14,7 +14,7 @@ export default [
       },
     ],
     plugins: [typescript(), terser()],
-    external: ["@mr-hope/vuepress-shared", "@vuepress/client", "vue"],
+    external: ["@mr-hope/vuepress-shared"],
   },
   {
     input: "./src/node/index.ts",

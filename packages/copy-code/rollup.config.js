@@ -40,7 +40,7 @@ export default [
     output: [
       { file: "./client/appSetup.d.ts", format: "esm", sourcemap: true },
     ],
-    plugins: [dts(), styles()],
-    external: ["balloon-css"],
+    plugins: [dts()],
+    external: ["balloon-css", /\.scss$/],
   },
 ];

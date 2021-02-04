@@ -1,4 +1,4 @@
-// import dts from "rollup-plugin-dts";
+import dts from "rollup-plugin-dts";
 import pkg from "./package.json";
 import styles from "rollup-plugin-styles";
 import typescript from "@rollup/plugin-typescript";
@@ -8,7 +8,7 @@ import { terser } from "rollup-plugin-terser";
 
 export default [
   {
-    input: "./src/index.ts",
+    input: "./src/node/index.ts",
     output: [
       { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
     ],
@@ -19,17 +19,17 @@ export default [
       }),
       terser(),
     ],
-    external: ["@mr-hope/vuepress-shared", "@vuepress/utils", "vue"],
+    external: ["@mr-hope/vuepress-shared", "@vuepress/utils"],
   },
-  // {
-  //   input: "./src/index.ts",
-  //   output: [{ file: pkg.types, format: "esm", sourcemap: true }],
-  //   plugins: [dts()],
-  // },
   {
-    input: "./src/clientAppEnhance.ts",
+    input: "./src/node/index.ts",
+    output: [{ file: pkg.types, format: "esm", sourcemap: true }],
+    plugins: [dts()],
+  },
+  {
+    input: "./src/client/appEnhance.ts",
     output: [
-      { file: "./lib/clientAppEnhance.js", format: "esm", sourcemap: true },
+      { file: "./client/appEnhance.js", format: "esm", sourcemap: true },
     ],
     plugins: [
       vue(),
@@ -45,13 +45,21 @@ export default [
       terser(),
     ],
     external: [
-      "@mr-hope/vuepress-plugin-reading-time",
-      "@mr-hope/vuepress-shared",
+      "@mr-hope/vuepress-plugin-reading-time/client",
+      "@mr-hope/vuepress-shared/client",
       "@vuepress/client",
       "balloon-css",
       "valine",
       "vue",
       "vue-router",
     ],
+  },
+  {
+    input: "./src/client/appEnhance.ts",
+    output: [
+      { file: "./client/appEnhance.d.ts", format: "esm", sourcemap: true },
+    ],
+    plugins: [dts()],
+    external: ["balloon-css", /\.scss$/],
   },
 ];

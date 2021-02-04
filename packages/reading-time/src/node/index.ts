@@ -4,10 +4,10 @@ import { readingTime } from "./reading-time";
 
 import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
 import type { Plugin } from "@vuepress/core";
-import type { ReadingTime, ReadingTimeOptions } from "../common";
+import type { ReadingTime, ReadingTimeOptions } from "../shared";
 
 export * from "./reading-time";
-export * from "../common";
+export * from "../shared";
 
 const readingTimePlugin: Plugin<ReadingTimeOptions> = (options, app) => {
   const baseLang =

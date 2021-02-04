@@ -21,10 +21,11 @@
     "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "node/index.js",
+  "types": "node/index.d.ts",
   "files": [
-    "lib"
+    "client",
+    "node"
   ],
   "scripts": {
     "clean": "rimraf lib",
