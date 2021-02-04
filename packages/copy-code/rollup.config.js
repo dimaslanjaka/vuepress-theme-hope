@@ -6,23 +6,28 @@ import { terser } from "rollup-plugin-terser";
 
 export default [
   {
-    input: "./src/index.ts",
+    input: "./src/node/index.ts",
     output: [
-      { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
+      {
+        file: pkg.main,
+        format: "cjs",
+        sourcemap: true,
+        exports: "named",
+      },
     ],
     plugins: [typescript(), terser()],
     external: ["@mr-hope/vuepress-shared", "@vuepress/utils", "vue"],
   },
   {
-    input: "./src/index.ts",
+    input: "./src/node/index.ts",
     output: [{ file: pkg.types, format: "esm", sourcemap: true }],
     plugins: [dts()],
   },
   {
-    input: "./src/clientAppSetup.ts",
+    input: "./src/client/appSetup.ts",
     output: [
       {
-        file: "./lib/clientAppSetup.js",
+        file: "./client/appSetup.js",
         format: "esm",
         sourcemap: true,
       },
@@ -31,9 +36,9 @@ export default [
     external: ["@vuepress/client", "balloon-css", "vue"],
   },
   {
-    input: "./src/clientAppSetup.ts",
+    input: "./src/client/appSetup.ts",
     output: [
-      { file: "./lib/clientAppSetup.d.ts", format: "esm", sourcemap: true },
+      { file: "./client/appSetup.d.ts", format: "esm", sourcemap: true },
     ],
     plugins: [dts(), styles()],
     external: ["balloon-css"],

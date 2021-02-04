@@ -4,9 +4,9 @@ import { i18n } from "./i18n";
 
 import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
 import type { Plugin } from "@vuepress/core";
-import type { CopyCodeI18nConfig, CopyCodeOptions } from "./types";
+import type { CopyCodeI18nConfig, CopyCodeOptions } from "../common";
 
-export * from "./types";
+export * from "../common";
 
 const copyCodePlugin: Plugin<CopyCodeOptions> = (options, app) => {
   const { themeConfig } = app.options;
@@ -26,7 +26,7 @@ const copyCodePlugin: Plugin<CopyCodeOptions> = (options, app) => {
       CODE_COPY_I18N: copyCodeI18nConfig,
     }),
 
-    clientAppSetupFiles: path.resolve(__dirname, "./clientAppSetup.js"),
+    clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
   };
 };
 

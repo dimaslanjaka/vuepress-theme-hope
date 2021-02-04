@@ -7,6 +7,8 @@ import { appendMeta } from "./meta";
 import type { Page, Plugin } from "@vuepress/core";
 import type { PageSeoInfo, SeoContent, SeoOptions } from "./types";
 
+export * from "./types";
+
 export const seoPlugin: Plugin<SeoOptions> = (options, app) => {
   const { base, themeConfig } = app.options;
 

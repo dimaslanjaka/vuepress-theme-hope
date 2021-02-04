@@ -4,7 +4,7 @@ import Message from "./message";
 
 import type { ClientAppSetup } from "@vuepress/client";
 
-import "./types";
+import "../common";
 import "./styles/code.scss";
 import "balloon-css";
 

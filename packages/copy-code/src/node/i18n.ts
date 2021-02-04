@@ -1,5 +1,5 @@
 import type { LangPaths } from "@mr-hope/vuepress-shared";
-import type { CopyCodeI18nConfig } from "./types";
+import type { CopyCodeI18nConfig } from "../common";
 
 /** Muti language config for copy code */
 export const i18n: Record<LangPaths, CopyCodeI18nConfig> = {

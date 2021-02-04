@@ -23,7 +23,7 @@
     "url": "https://mrhope.site"
   },
   "main": "node/index.js",
-  "module": "client/index.js",
+  "types": "node/index.d.ts",
   "files": [
     "client",
     "node",
