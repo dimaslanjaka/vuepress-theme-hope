@@ -29,7 +29,7 @@
     "node"
   ],
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "rimraf ./client ./node",
     "rollup:build": "rollup -c",
     "rollup:watch": "rollup -c -w"
   },
