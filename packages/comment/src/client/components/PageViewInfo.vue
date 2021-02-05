@@ -22,8 +22,6 @@ import EyeIcon from "./icons/EyeIcon.vue";
 import FireIcon from "./icons/FireIcon.vue";
 import { usePageInfoI18n, useEnablePageViews } from "../composables";
 
-import type { RouteLocation } from "vue-router";
-
 export default defineComponent({
   name: "PageViewInfo",
 
@@ -67,9 +65,12 @@ export default defineComponent({
       setTimeout(() => getCount(), 1500);
     });
 
-    watch(route, (newValue: RouteLocation, oldValue: RouteLocation) => {
-      if (newValue.path !== oldValue.path) setTimeout(() => getCount(), 500);
-    });
+    watch(
+      () => route.path,
+      (newValue: string, oldValue: string) => {
+        if (newValue !== oldValue) setTimeout(() => getCount(), 500);
+      }
+    );
 
     return {
       enablePageViews,

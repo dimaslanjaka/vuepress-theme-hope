@@ -1,17 +1,4 @@
-import * as dayjs from "dayjs";
-import * as localizedFormat from "dayjs/plugin/localizedFormat";
-import * as objectSupport from "dayjs/plugin/objectSupport";
-import * as timezone from "dayjs/plugin/timezone";
-import * as utc from "dayjs/plugin/utc"; // dependent on utc plugin
-
-import "dayjs/locale/en";
-import "dayjs/locale/zh";
-import "dayjs/locale/zh-cn";
-
-dayjs.extend(localizedFormat);
-dayjs.extend(objectSupport);
-dayjs.extend(utc);
-dayjs.extend(timezone);
+import { dayjs } from "./dayjs";
 
 export interface DateOptions {
   /**
@@ -43,7 +30,14 @@ export interface DateInfo {
 const getLang = (lang = "en"): string => {
   const langcode = lang.toLowerCase();
 
-  return langcode === "en-us" || langcode === "en-uk" ? "en" : langcode;
+  if (langcode === "zh" || langcode === "zh-cn") return "zh";
+
+  if (langcode === "en-us" || langcode === "en-uk" || langcode === "en")
+    return "en";
+
+  console.warn(`${lang} locale missing in config`);
+
+  return "en";
 };
 
 export const timeTransformer = (

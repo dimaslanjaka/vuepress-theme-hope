@@ -30,7 +30,7 @@ import AuthorInfo from "./AuthorInfo.vue";
 import CategoryInfo from "./CategoryInfo.vue";
 import DateInfo from "./DateInfo.vue";
 import PageViewInfo from "./PageViewInfo.vue";
-import ReadTimeInfo from "./ReadTimeInfo.vue";
+import ReadingTimeInfo from "./ReadingTimeInfo.vue";
 import TagInfo from "./TagInfo.vue";
 import WordInfo from "./WordInfo.vue";
 import { usePageInfoI18n } from "../composables";
@@ -51,8 +51,8 @@ export default defineComponent({
     AuthorInfo,
     CategoryInfo,
     DateInfo,
-    ReadTimeInfo,
     PageViewInfo,
+    ReadingTimeInfo,
     TagInfo,
     WordInfo,
   },

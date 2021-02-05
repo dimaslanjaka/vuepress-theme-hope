@@ -8,7 +8,7 @@
   padding-left: 0;
 
   @each $color in colors.$colors {
-    $index: list.index(colors.$colors, $color);
+    $index: list.index(colors.$colors, $color) - 1;
 
     .tag#{$index} {
       &,

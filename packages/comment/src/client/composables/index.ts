@@ -17,10 +17,18 @@ import type {
 export const usePageInfoI18n = (
   key: keyof PageInfoI18nConfig
 ): ComputedRef<string> =>
-  computed(() => pageInfoI18n[useRouteLocale().value][key]);
+  computed(() => {
+    const routeLocale = useRouteLocale();
+
+    return pageInfoI18n[routeLocale.value][key];
+  });
 
 export const useValineI18n = (): ComputedRef<string> =>
-  computed(() => valineI18n[useRouteLocale().value]);
+  computed(() => {
+    const routeLocale = useRouteLocale();
+
+    return valineI18n[routeLocale.value];
+  });
 
 export const useEnablePageViews = (): ComputedRef<boolean> =>
   computed(() => {

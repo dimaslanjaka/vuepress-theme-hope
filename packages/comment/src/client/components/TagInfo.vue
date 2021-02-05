@@ -1,9 +1,9 @@
 <template>
-  <span v-if="$tags.length" :aria-label="hint" data-balloon-pos="down">
+  <span v-if="items.length" :aria-label="hint" data-balloon-pos="down">
     <TagIcon />
     <ul class="tags-wrapper">
       <li
-        v-for="(tag, index) in $tags"
+        v-for="(tag, index) in items"
         :key="tag"
         class="tag"
         :class="{ clickable, [`tag${index % 9}`]: true }"
@@ -36,7 +36,7 @@ export default defineComponent({
   setup(props) {
     const route = useRoute();
     const router = useRouter();
-    const $tags = props.tags.length ? props.tags : useTag();
+    const items = props.tags.length ? props.tags : useTag();
 
     const clickable = computed(() => useBlogConfig().value !== false);
 
@@ -46,7 +46,7 @@ export default defineComponent({
     };
 
     return {
-      $tags,
+      items,
       clickable,
       hint: usePageInfoI18n("tag"),
       navigate,
@@ -68,6 +68,8 @@ export default defineComponent({
     min-width: 1.5em;
     margin: 0 0.2em;
     padding: 0 0.2em;
+    border-width: 0.5px;
+    border-style: solid;
     border-radius: 0.75em;
     background: #f8f8f8;
     font-size: 0.75em;

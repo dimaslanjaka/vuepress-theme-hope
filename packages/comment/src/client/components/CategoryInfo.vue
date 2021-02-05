@@ -1,9 +1,9 @@
 <template>
-  <span v-if="$categories.length" :aria-label="hint" data-balloon-pos="down">
+  <span v-if="items.length" :aria-label="hint" data-balloon-pos="down">
     <CategoryIcon />
     <ul class="categories-wrapper">
       <li
-        v-for="category in $categories"
+        v-for="category in items"
         :key="category"
         class="category"
         :class="{ clickable }"
@@ -40,10 +40,7 @@ export default defineComponent({
     const route = useRoute();
     const router = useRouter();
 
-    const $categories = props.categories.length
-      ? props.categories
-      : useCategory();
-
+    const items = props.categories.length ? props.categories : useCategory();
     const clickable = computed(() => useBlogConfig().value !== false);
 
     const navigate = (categoryName: string): void => {
@@ -53,7 +50,7 @@ export default defineComponent({
     };
 
     return {
-      $categories,
+      items,
       clickable,
       hint: usePageInfoI18n("category"),
       navigate,
@@ -77,7 +74,7 @@ export default defineComponent({
       }
 
       &:last-child:after {
-        content: ", ";
+        content: "";
       }
     }
 

@@ -1,3 +1,4 @@
+import { resolve } from "path";
 import type { UserConfig } from "@vuepress/cli";
 import type { DefaultThemeOptions } from "@vuepress/theme-default";
 
@@ -10,29 +11,19 @@ const config: UserConfig<DefaultThemeOptions> = {
 
   dest: "./dist",
 
+  theme: resolve(__dirname, "./theme"),
+
   themeConfig: {
     logo: "/logo.svg",
 
-    nav: [
+    navbar: [
       { text: "Home", link: "/" },
       {
         text: "Test",
-        items: [{ text: "Test", link: "/test/" }],
+        children: [{ text: "Test", link: "/test/" }],
       },
     ],
   },
-
-  plugins: [
-    [
-      "@mr-hope/comment",
-      {
-        type: "valine",
-        author: "Mr.Hope",
-        appId: "GG2VSnGiz09Rx18y2OUzdaHS-gzGzoHsz",
-        appKey: "fBf2dptTBHxNqALKrzUlBXeB",
-      },
-    ],
-  ],
 };
 
 export default config;

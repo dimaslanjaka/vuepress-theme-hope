@@ -3,31 +3,30 @@
     <slot name="top" />
 
     <PageInfo />
-    <Content class="theme-default-content" />
-    <PageEdit />
+    <div class="theme-default-content">
+      <Content />
+    </div>
 
-    <PageNav v-bind="{ sidebarItems }" />
+    <PageMeta />
+    <PageNav />
+
     <Comment />
+
     <slot name="bottom" />
   </main>
 </template>
 
 <script>
-import Comment from "@mr-hope/vuepress-plugin-comment/Comment.vue";
-import PageEdit from "@parent-theme/components/PageEdit.vue";
-import PageInfo from "@mr-hope/vuepress-plugin-comment/PageInfo.vue";
-import PageNav from "@parent-theme/components/PageNav.vue";
+import { defineComponent } from "vue";
+import PageMeta from "@vuepress/theme-default/lib/components/PageMeta.vue";
+import PageNav from "@vuepress/theme-default/lib/components/PageNav.vue";
 
-export default {
-  components: { Comment, PageEdit, PageInfo, PageNav },
-  props: ["sidebarItems"],
-};
+export default defineComponent({
+  name: "Page",
+
+  components: {
+    PageMeta,
+    PageNav,
+  },
+});
 </script>
-
-<style lang="stylus">
-@require '~@parent-theme/styles/wrapper.styl'
-
-.page
-  padding-bottom 2rem
-  display block
-</style>
