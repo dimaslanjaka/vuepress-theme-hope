@@ -1,21 +1,9 @@
-<template>
-  <span
-    v-if="date"
-    class="date-info"
-    :aria-label="hint"
-    data-balloon-pos="down"
-  >
-    <CalendarIcon />
-    <span v-text="date" />
-  </span>
-</template>
-
-<script lang="ts">
 import { usePageFrontmatter } from "@vuepress/client";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, h } from "vue";
 import CalendarIcon from "./icons/CalendarIcon.vue";
 import { usePageInfoI18n } from "../composables";
 
+import type { VNode } from "vue";
 import type { CommentPluginFrontmatter } from "../../shared";
 
 export default defineComponent({
@@ -47,10 +35,17 @@ export default defineComponent({
 
     const hint = usePageInfoI18n("time");
 
-    return {
-      date,
-      hint,
-    };
+    return (): VNode | null =>
+      date.value
+        ? h(
+            "span",
+            {
+              class: "date-info",
+              ariaLabel: hint.value,
+              dataBalloonPos: "down",
+            },
+            [h(CalendarIcon), h("span", date.value)]
+          )
+        : null;
   },
 });
-</script>

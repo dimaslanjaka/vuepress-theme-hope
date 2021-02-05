@@ -26,9 +26,9 @@ import {
 } from "@mr-hope/vuepress-shared/client";
 import { usePageFrontmatter } from "@vuepress/client";
 import { computed, defineComponent } from "vue";
-import AuthorInfo from "./AuthorInfo.vue";
+import AuthorInfo from "./AuthorInfo";
 import CategoryInfo from "./CategoryInfo.vue";
-import DateInfo from "./DateInfo.vue";
+import DateInfo from "./DateInfo";
 import PageViewInfo from "./PageViewInfo.vue";
 import ReadingTimeInfo from "./ReadingTimeInfo.vue";
 import TagInfo from "./TagInfo.vue";

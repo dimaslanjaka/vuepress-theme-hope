@@ -1,8 +1,6 @@
 <template>
-  <div v-show="enable" class="comments-wrapper">
-    <Valine v-if="type === 'valine'" />
-    <!-- <Vssue v-else-if="options.type === 'vssue'" :title="title" /> -->
-  </div>
+  <Valine v-if="type === 'valine'" v-show="enable" />
+  <!-- <Vssue v-else-if="options.type === 'vssue'" v-show="enable" :title="title" /> -->
 </template>
 
 <script lang="ts">
