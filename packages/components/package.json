@@ -40,7 +40,7 @@
     "vue-router": "^4.0.2"
   },
   "devDependencies": {
-    "rollup": "2.38.1"
+    "rollup": "2.40.0"
   },
   "publishConfig": {
     "access": "public"

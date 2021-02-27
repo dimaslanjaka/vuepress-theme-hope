@@ -4,6 +4,9 @@ dist/
 # Node modules
 node_modules/
 
+# Test Coverage
+coverage/
+
 # Dist files
 lib/
 

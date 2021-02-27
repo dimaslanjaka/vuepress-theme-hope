@@ -32,10 +32,10 @@
     "rollup:watch": "rollup -c -w"
   },
   "dependencies": {
-    "@types/fs-extra": "^9.0.6",
+    "@types/fs-extra": "^9.0.7",
     "chalk": "^4.1.0",
     "fs-extra": "^9.1.0",
-    "sitemap": "^6.3.5"
+    "sitemap": "^6.4.0"
   },
   "publishConfig": {
     "access": "public"

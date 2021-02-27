@@ -69,9 +69,10 @@ export default defineComponent({
                 h(
                   "button",
                   {
-                    class: `code-group-nav-tab${
-                      index === activeIndex.value ? " active" : ""
-                    }`,
+                    class: {
+                      "code-group-nav-tab": true,
+                      active: index === activeIndex.value,
+                    },
                     onClick: () => (activeIndex.value = index),
                   },
                   vnode.props.title

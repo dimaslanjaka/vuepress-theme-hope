@@ -38,7 +38,7 @@
     "rollup:watch": "rollup -c -w"
   },
   "devDependencies": {
-    "rollup": "2.38.1",
-    "vuepress": "2.0.0-alpha.20"
+    "rollup": "2.40.0",
+    "vuepress": "2.0.0-alpha.25"
   }
 }
