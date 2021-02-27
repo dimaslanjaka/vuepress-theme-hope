@@ -15,6 +15,6 @@
     "docs:serve": "vuepress dev src"
   },
   "devDependencies": {
-    "vuepress": "2.0.0-alpha.25"
+    "vuepress": "2.0.0-alpha.26"
   }
 }

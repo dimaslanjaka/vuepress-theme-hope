@@ -25,6 +25,7 @@ export default [
     plugins: [typescript(), terser()],
     external: [
       "@vuepress/client",
+      "@vuepress/plugin-theme-data/lib/composables",
       "dayjs",
       "dayjs/plugin/localizedFormat",
       "dayjs/plugin/objectSupport",

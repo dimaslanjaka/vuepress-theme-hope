@@ -1,4 +1,4 @@
-import { useThemeData } from "@vuepress/client";
+import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
 import { computed } from "vue";
 import type { ComputedRef } from "vue";
 

@@ -1,6 +1,7 @@
 import { defineComponent, h } from "vue";
 import type { VNode } from "vue";
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const IconBase = defineComponent({
   name: "IconBase",
 
