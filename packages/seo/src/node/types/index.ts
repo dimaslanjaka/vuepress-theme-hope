@@ -1,6 +1,5 @@
 import type { BasePageFrontMatter } from "@mr-hope/vuepress-shared";
 import type { App, HeadConfig, Page, PageFrontmatter } from "@vuepress/core";
-import type { SiteLocaleData } from "@vuepress/client";
 import type { SeoContent } from "./seo";
 
 export * from "./seo";

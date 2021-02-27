@@ -1,66 +1,9 @@
-import type { LocaleData, ThemeConfig } from "@vuepress/core";
+import type { LocaleData } from "@vuepress/core";
+import type { ThemeData } from "@vuepress/plugin-theme-data";
 import type { DocsearchPluginOptions } from "@vuepress/plugin-docsearch";
 import type { NavbarConfig, SidebarConfig } from "./nav";
 
 export type DarkmodeOption = "auto-switch" | "auto" | "switch" | "disable";
-
-export interface ThemeHopeOptions extends ThemeConfig<DefaultThemeLocaleData> {
-  /**
-   * Options for docsearch / algolia
-   */
-  docsearch?: DocsearchPluginOptions;
-
-  /**
-   * To avoid confusion with the root `plugins` option,
-   * we use `themePlugins`
-   */
-  themePlugins?: {
-    /**
-     * Enable @vuepress/plugin-active-header-links or not
-     */
-    activeHeaderLinks?: boolean;
-
-    /**
-     * Enable @vuepress/plugin-back-to-top or not
-     */
-    backToTop?: boolean;
-
-    /**
-     * Enable @vuepress/plugin-debug or not
-     */
-    debug?: boolean;
-
-    /**
-     * Enable @vuepress/plugin-docsearch or not
-     */
-    docsearch?: boolean;
-
-    /**
-     * Enable @vuepress/plugin-container or not
-     */
-    container?: {
-      tip?: boolean;
-      warning?: boolean;
-      danger?: boolean;
-      details?: boolean;
-    };
-
-    /**
-     * Enable @vuepress/plugin-git or not
-     */
-    git?: boolean;
-
-    /**
-     * Enable @vuepress/plugin-medium-zoom or not
-     */
-    mediumZoom?: boolean;
-
-    /**
-     * Enable @vuepress/plugin-nprogress or not
-     */
-    nprogress?: boolean;
-  };
-}
 
 export interface DefaultThemeLocaleData extends LocaleData {
   /**
@@ -246,4 +189,62 @@ export interface DefaultThemeLocaleData extends LocaleData {
    * sr-only message in `<OutboundLink>`
    */
   openInNewWindow?: string;
+}
+
+export interface ThemeHopeOptions extends ThemeData<DefaultThemeLocaleData> {
+  /**
+   * Options for docsearch / algolia
+   */
+  docsearch?: DocsearchPluginOptions;
+
+  /**
+   * To avoid confusion with the root `plugins` option,
+   * we use `themePlugins`
+   */
+  themePlugins?: {
+    /**
+     * Enable @vuepress/plugin-active-header-links or not
+     */
+    activeHeaderLinks?: boolean;
+
+    /**
+     * Enable @vuepress/plugin-back-to-top or not
+     */
+    backToTop?: boolean;
+
+    /**
+     * Enable @vuepress/plugin-debug or not
+     */
+    debug?: boolean;
+
+    /**
+     * Enable @vuepress/plugin-docsearch or not
+     */
+    docsearch?: boolean;
+
+    /**
+     * Enable @vuepress/plugin-container or not
+     */
+    container?: {
+      tip?: boolean;
+      warning?: boolean;
+      danger?: boolean;
+      details?: boolean;
+    };
+
+    /**
+     * Enable @vuepress/plugin-git or not
+     */
+    git?: boolean;
+
+    /**
+     * Enable @vuepress/plugin-medium-zoom or not
+     */
+    mediumZoom?: boolean;
+
+    /**
+     * Enable @vuepress/plugin-nprogress or not
+     */
+    nprogress?: boolean;
+  };
 }

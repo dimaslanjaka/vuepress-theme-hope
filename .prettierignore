@@ -12,3 +12,9 @@ lib/
 
 # Rollup cache
 .rollup.cache/
+
+# Vuepress Cache
+.vuepress/.cache/
+
+# Vuepress Temp
+.vuepress/.temp/
