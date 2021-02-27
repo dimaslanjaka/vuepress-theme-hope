@@ -1,7 +1,7 @@
-import { usePageFrontmatter } from "@vuepress/client";
+import { usePageFrontmatter, useRouteLocale } from "@vuepress/client";
 import { computed, defineComponent, h } from "vue";
 import { CalendarIcon } from "./icons";
-import { usePageInfoI18n } from "../composables";
+import { pageInfoI18n } from "../define";
 
 import type { VNode } from "vue";
 import type { CommentPluginFrontmatter } from "../../shared";
@@ -13,6 +13,7 @@ export default defineComponent({
 
   setup() {
     const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
+    const routeLocale = useRouteLocale();
 
     const date = computed(() => {
       let { date } = frontmatter.value;
@@ -33,7 +34,7 @@ export default defineComponent({
       return "";
     });
 
-    const hint = usePageInfoI18n("time");
+    const hint = computed(() => pageInfoI18n[routeLocale.value].time);
 
     return (): VNode | null =>
       date.value

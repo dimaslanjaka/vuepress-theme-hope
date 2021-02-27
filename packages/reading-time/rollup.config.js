@@ -22,21 +22,22 @@ export default [
     plugins: [dts()],
   },
   {
-    input: "./src/client/index.ts",
+    input: "./src/client/appSetup.ts",
     output: [
       {
-        file: "./client/index.js",
-        format: "cjs",
+        file: "./client/appSetup.js",
+        format: "esm",
         sourcemap: true,
-        exports: "named",
       },
     ],
     plugins: [typescript(), terser()],
-    external: ["@mr-hope/vuepress-shared", "@vuepress/client", "vue"],
+    external: ["vue"],
   },
   {
-    input: "./src/client/index.ts",
-    output: [{ file: "./client/index.d.ts", format: "esm", sourcemap: true }],
+    input: "./src/client/appSetup.ts",
+    output: [
+      { file: "./client/appSetup.d.ts", format: "esm", sourcemap: true },
+    ],
     plugins: [dts()],
   },
 ];

@@ -16,13 +16,18 @@
 </template>
 
 <script lang="ts">
-import { useBlogConfig, useCategory } from "@mr-hope/vuepress-shared/client";
+import {
+  resolveCategory,
+  useBlogConfig,
+} from "@mr-hope/vuepress-shared/client";
+import { usePageFrontmatter, useRouteLocale } from "@vuepress/client";
 import { computed, defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { CategoryIcon } from "./icons";
-import { usePageInfoI18n } from "../composables";
+import { pageInfoI18n } from "../define";
 
 import type { PropType } from "vue";
+import { CommentPluginFrontmatter } from "../../shared";
 
 export default defineComponent({
   name: "CategoryInfo",
@@ -37,10 +42,15 @@ export default defineComponent({
   },
 
   setup(props) {
+    const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
     const route = useRoute();
     const router = useRouter();
+    const routeLocale = useRouteLocale();
 
-    const items = props.categories.length ? props.categories : useCategory();
+    const items = props.categories.length
+      ? props.categories
+      : computed(() => resolveCategory(frontmatter.value));
+    const hint = computed(() => pageInfoI18n[routeLocale.value].category);
     const clickable = computed(() => useBlogConfig().value !== false);
 
     const navigate = (categoryName: string): void => {
@@ -52,7 +62,7 @@ export default defineComponent({
     return {
       items,
       clickable,
-      hint: usePageInfoI18n("category"),
+      hint,
       navigate,
     };
   },

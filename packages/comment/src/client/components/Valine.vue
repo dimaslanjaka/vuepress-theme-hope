@@ -1,16 +1,20 @@
 <template>
-  <div v-show="commentDisplay" class="valine-wrapper">
+  <div v-show="enableComment" class="valine-wrapper">
     <div id="valine" />
   </div>
 </template>
 
 <script lang="ts">
 import { useThemePluginConfig } from "@mr-hope/vuepress-shared/client";
-import { usePageFrontmatter, usePageLang } from "@vuepress/client";
+import {
+  usePageFrontmatter,
+  usePageLang,
+  useRouteLocale,
+} from "@vuepress/client";
 import { computed, defineComponent, nextTick, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useEnablePageViews, useValineI18n } from "../composables";
-import { enableValine, valineOption } from "../define";
+import { resolveEnablePageViews } from "../composables";
+import { enableValine, valineI18n, valineOption } from "../define";
 
 import type { RouteLocation } from "vue-router";
 import type { CommentPluginFrontmatter, ValineOptions } from "../../shared";
@@ -27,6 +31,7 @@ export default defineComponent({
     const lang = usePageLang();
     const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
     const route = useRoute();
+    const routeLocale = useRouteLocale();
     const themePluginConfig = useThemePluginConfig<ValineOptions>("comment");
 
     const enableComment = computed(() => {
@@ -46,7 +51,10 @@ export default defineComponent({
           pageConfig !== false)
       );
     });
-    const enablePageViews = useEnablePageViews();
+
+    const enablePageViews = computed(() =>
+      resolveEnablePageViews(frontmatter.value)
+    );
 
     const initValine = (path: string): void => {
       void import(/* webpackChunkName: "valine" */ "valine").then(
@@ -57,7 +65,8 @@ export default defineComponent({
             el: "#valine",
             appId: valineOption.appId,
             appKey: valineOption.appKey,
-            placeholder: valineOption.placeholder || useValineI18n().value,
+            placeholder:
+              valineOption.placeholder || valineI18n[routeLocale.value],
             meta: valineOption.meta || ["nick", "mail", "link"],
             requiredFields: valineOption.requiredFields || ["nick"],
             avatar: valineOption.avatar || "retro",
@@ -80,16 +89,16 @@ export default defineComponent({
       if (enableValine) setTimeout(() => initValine(route.path), 500);
     });
 
-    watch(route, (newValue: RouteLocation, oldValue: RouteLocation) => {
-      if (newValue.path !== oldValue.path)
-        // Refresh comment when navigating to a new page
-        nextTick(() => initValine(newValue.path));
-    });
+    watch(
+      () => route,
+      (newValue: RouteLocation, oldValue: RouteLocation) => {
+        if (newValue.path !== oldValue.path)
+          // Refresh comment when navigating to a new page
+          nextTick(() => initValine(newValue.path));
+      }
+    );
 
-    return {
-      enableComment,
-      enableValine,
-    };
+    return { enableComment };
   },
 });
 </script>

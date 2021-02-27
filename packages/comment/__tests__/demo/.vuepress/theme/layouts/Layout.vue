@@ -27,21 +27,31 @@
 
     <Home v-if="$frontmatter.home" />
 
-    <Page v-else>
-      <template #top>
-        <slot name="page-top" />
-      </template>
-      <template #bottom>
-        <slot name="page-bottom" />
-      </template>
-    </Page>
+    <Transition v-else name="fade-slide-y" mode="out-in">
+      <Page :key="$page.path">
+        <template #top>
+          <slot name="page-top" />
+        </template>
+        <template #bottom>
+          <slot name="page-bottom" />
+        </template>
+      </Page>
+    </Transition>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  ref,
+  Transition,
+} from "vue";
 import { useRouter } from "vue-router";
-import { usePageFrontmatter, useThemeLocaleData } from "@vuepress/client";
+import { usePageFrontmatter } from "@vuepress/client";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 import Home from "@vuepress/theme-default/lib/components/Home.vue";
 import Page from "../components/Page.vue";
 import Navbar from "@vuepress/theme-default/lib/components/Navbar.vue";
@@ -57,6 +67,7 @@ export default defineComponent({
     Page,
     Navbar,
     Sidebar,
+    Transition,
   },
 
   setup() {

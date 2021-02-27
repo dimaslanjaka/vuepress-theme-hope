@@ -1,4 +1,5 @@
 import { lang2Path } from "@mr-hope/vuepress-shared";
+import { path } from "@vuepress/utils";
 import { i18n } from "./i18n";
 import { readingTime } from "./reading-time";
 
@@ -30,6 +31,8 @@ const readingTimePlugin: Plugin<ReadingTimeOptions> = (options, app) => {
         options.wordPerminute || app.options.themeConfig.wordPerminute || 300
       ),
     }),
+
+    clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
   };
 };
 

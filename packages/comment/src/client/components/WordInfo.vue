@@ -11,13 +11,15 @@
 </template>
 
 <script lang="ts">
-import { useReadingTimeI18n } from "@mr-hope/vuepress-plugin-reading-time/client";
-import { usePageData } from "@vuepress/client";
-import { computed, defineComponent } from "vue";
+import { usePageData, useRouteLocale } from "@vuepress/client";
+import { computed, defineComponent, inject } from "vue";
 import { WordIcon } from "./icons";
-import { usePageInfoI18n } from "../composables";
+import { pageInfoI18n } from "../define";
 
-import type { ReadingTime } from "@mr-hope/vuepress-plugin-reading-time";
+import type {
+  ReadingTime,
+  ReadingTimeI18nConfig,
+} from "@mr-hope/vuepress-plugin-reading-time";
 
 export default defineComponent({
   name: "ReadTimeInfo",
@@ -26,13 +28,16 @@ export default defineComponent({
 
   setup() {
     const page = usePageData<{ readingTime: ReadingTime }>();
-    const word = useReadingTimeI18n("word");
+    const routeLocale = useRouteLocale();
+    const word = inject<Record<string, ReadingTimeI18nConfig>>(
+      "reading-time-i18n"
+    )![routeLocale.value].word;
 
     const words = computed(() =>
-      word.value.replace("$word", page.value.readingTime.words.toString())
+      word.replace("$word", page.value.readingTime.words.toString())
     );
 
-    const hint = usePageInfoI18n("words");
+    const hint = computed(() => pageInfoI18n[routeLocale.value].words);
 
     return {
       hint,

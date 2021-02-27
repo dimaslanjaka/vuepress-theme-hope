@@ -3,11 +3,13 @@
     <slot name="top" />
 
     <PageInfo />
+
     <div class="theme-default-content">
       <Content />
     </div>
 
     <PageMeta />
+
     <PageNav />
 
     <Comment />

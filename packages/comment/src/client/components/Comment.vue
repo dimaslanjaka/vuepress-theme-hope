@@ -1,5 +1,6 @@
 <template>
   <Valine v-if="type === 'valine'" v-show="enable" />
+  <span v-else class="vssue" />
   <!-- <Vssue v-else-if="options.type === 'vssue'" v-show="enable" :title="title" /> -->
 </template>
 

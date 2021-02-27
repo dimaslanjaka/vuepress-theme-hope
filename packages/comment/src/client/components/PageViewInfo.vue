@@ -15,11 +15,18 @@
 
 <script lang="ts">
 import { usePageTitle } from "@mr-hope/vuepress-shared/client";
-import { useSiteData } from "@vuepress/client";
+import {
+  usePageFrontmatter,
+  useRouteLocale,
+  useSiteData,
+} from "@vuepress/client";
 import { computed, defineComponent, onMounted, watch, ref } from "vue";
 import { useRoute } from "vue-router";
 import { EyeIcon, FireIcon } from "./icons";
-import { usePageInfoI18n, useEnablePageViews } from "../composables";
+import { resolveEnablePageViews } from "../composables";
+import { pageInfoI18n } from "../define";
+
+import type { CommentPluginFrontmatter } from "../../shared";
 
 export default defineComponent({
   name: "PageViewInfo",
@@ -29,12 +36,16 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     const site = useSiteData();
-
     const title = usePageTitle();
-    const hint = usePageInfoI18n("views");
+    const routeLocale = useRouteLocale();
+    const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
+
+    const hint = computed(() => pageInfoI18n[routeLocale.value].views);
 
     const pageViews = ref(0);
-    const enablePageViews = useEnablePageViews();
+    const enablePageViews = computed(() =>
+      resolveEnablePageViews(frontmatter.value)
+    );
 
     /** visitorID, use current path */
     const visitorID = computed(() => {

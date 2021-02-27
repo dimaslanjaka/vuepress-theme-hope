@@ -24,7 +24,7 @@ import {
   useIconPrefix,
   useThemePluginConfig,
 } from "@mr-hope/vuepress-shared/client";
-import { usePageFrontmatter } from "@vuepress/client";
+import { usePageFrontmatter, useRouteLocale } from "@vuepress/client";
 import { computed, defineComponent } from "vue";
 import AuthorInfo from "./AuthorInfo";
 import CategoryInfo from "./CategoryInfo.vue";
@@ -33,8 +33,7 @@ import PageViewInfo from "./PageViewInfo.vue";
 import ReadingTimeInfo from "./ReadingTimeInfo.vue";
 import TagInfo from "./TagInfo.vue";
 import WordInfo from "./WordInfo.vue";
-import { usePageInfoI18n } from "../composables";
-import { commentOptions } from "../define";
+import { commentOptions, pageInfoI18n } from "../define";
 
 import type {
   CommentOptions,
@@ -59,6 +58,7 @@ export default defineComponent({
 
   setup() {
     const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
+    const routeLocale = useRouteLocale();
     const themePluginConfig = useThemePluginConfig<CommentOptions>("comment");
 
     const config = computed<PageInfoType[] | false>(() => {
@@ -78,16 +78,24 @@ export default defineComponent({
         ? false
         : Array.isArray(themeConfig)
         ? themeConfig
-        : ["Author", "PageView", "Date", "Category", "Tag", "ReadTime"];
+        : ([
+            "Author",
+            "PageView",
+            "Date",
+            "Category",
+            "Tag",
+            "ReadTime",
+          ] as PageInfoType[]);
     });
 
     const isOriginal = computed(() => frontmatter.value.original);
+    const originText = computed(() => pageInfoI18n[routeLocale.value].origin);
 
     return {
       config,
       iconPrefix: useIconPrefix(),
       isOriginal,
-      originText: usePageInfoI18n("origin"),
+      originText,
     };
   },
 });

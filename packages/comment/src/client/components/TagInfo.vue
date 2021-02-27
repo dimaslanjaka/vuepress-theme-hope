@@ -16,13 +16,15 @@
 </template>
 
 <script lang="ts">
-import { useBlogConfig, useTag } from "@mr-hope/vuepress-shared/client";
+import { useBlogConfig, resolveTag } from "@mr-hope/vuepress-shared/client";
+import { usePageFrontmatter, useRouteLocale } from "@vuepress/client";
 import { computed, defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { TagIcon } from "./icons";
-import { usePageInfoI18n } from "../composables";
+import { pageInfoI18n } from "../define";
 
 import type { PropType } from "vue";
+import type { CommentPluginFrontmatter } from "../../shared";
 
 export default defineComponent({
   name: "TagInfo",
@@ -34,9 +36,16 @@ export default defineComponent({
   },
 
   setup(props) {
+    const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
     const route = useRoute();
     const router = useRouter();
-    const items = props.tags.length ? props.tags : useTag();
+    const routeLocale = useRouteLocale();
+
+    const hint = computed(() => pageInfoI18n[routeLocale.value].tag);
+
+    const items = props.tags.length
+      ? props.tags
+      : computed(() => resolveTag(frontmatter.value));
 
     const clickable = computed(() => useBlogConfig().value !== false);
 
@@ -48,7 +57,7 @@ export default defineComponent({
     return {
       items,
       clickable,
-      hint: usePageInfoI18n("tag"),
+      hint,
       navigate,
     };
   },
