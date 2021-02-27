@@ -28,5 +28,5 @@ export type PageInfoType =
   | "Date"
   | "PageView"
   | "Tag"
-  | "ReadTime"
+  | "ReadingTime"
   | "Word";

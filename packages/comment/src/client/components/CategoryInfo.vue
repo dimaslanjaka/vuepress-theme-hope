@@ -19,7 +19,7 @@
 import { useBlogConfig, useCategory } from "@mr-hope/vuepress-shared/client";
 import { computed, defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import CategoryIcon from "./icons/CategoryIcon.vue";
+import { CategoryIcon } from "./icons";
 import { usePageInfoI18n } from "../composables";
 
 import type { PropType } from "vue";

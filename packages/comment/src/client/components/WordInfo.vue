@@ -14,7 +14,7 @@
 import { useReadingTimeI18n } from "@mr-hope/vuepress-plugin-reading-time/client";
 import { usePageData } from "@vuepress/client";
 import { computed, defineComponent } from "vue";
-import WordIcon from "./icons/WordIcon.vue";
+import { WordIcon } from "./icons";
 import { usePageInfoI18n } from "../composables";
 
 import type { ReadingTime } from "@mr-hope/vuepress-plugin-reading-time";

@@ -19,7 +19,7 @@
 import { useBlogConfig, useTag } from "@mr-hope/vuepress-shared/client";
 import { computed, defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import TagIcon from "./icons/TagIcon.vue";
+import { TagIcon } from "./icons";
 import { usePageInfoI18n } from "../composables";
 
 import type { PropType } from "vue";

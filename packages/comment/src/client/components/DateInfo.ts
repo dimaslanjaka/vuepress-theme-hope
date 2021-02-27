@@ -1,6 +1,6 @@
 import { usePageFrontmatter } from "@vuepress/client";
 import { computed, defineComponent, h } from "vue";
-import CalendarIcon from "./icons/CalendarIcon.vue";
+import { CalendarIcon } from "./icons";
 import { usePageInfoI18n } from "../composables";
 
 import type { VNode } from "vue";
@@ -42,7 +42,7 @@ export default defineComponent({
             {
               class: "date-info",
               ariaLabel: hint.value,
-              dataBalloonPos: "down",
+              "data-balloon-pos": "down",
             },
             [h(CalendarIcon), h("span", date.value)]
           )

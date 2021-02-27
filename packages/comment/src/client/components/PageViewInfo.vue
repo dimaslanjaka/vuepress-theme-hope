@@ -18,8 +18,7 @@ import { usePageTitle } from "@mr-hope/vuepress-shared/client";
 import { useSiteData } from "@vuepress/client";
 import { computed, defineComponent, onMounted, watch, ref } from "vue";
 import { useRoute } from "vue-router";
-import EyeIcon from "./icons/EyeIcon.vue";
-import FireIcon from "./icons/FireIcon.vue";
+import { EyeIcon, FireIcon } from "./icons";
 import { usePageInfoI18n, useEnablePageViews } from "../composables";
 
 export default defineComponent({

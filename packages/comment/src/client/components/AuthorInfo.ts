@@ -1,6 +1,6 @@
 import { useAuthor } from "@mr-hope/vuepress-shared/client";
 import { computed, defineComponent, h } from "vue";
-import AuthorIcon from "./icons/AuthorIcon.vue";
+import { AuthorIcon } from "./icons";
 import { usePageInfoI18n } from "../composables";
 import { commentOptions } from "../define";
 
@@ -23,7 +23,7 @@ export default defineComponent({
             {
               class: "author-info",
               ariaLabel: hint.value,
-              dataBalloonPos: "down",
+              "data-balloon-pos": "down",
             },
             [h(AuthorIcon), h("span", text.value)]
           )
