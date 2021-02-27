@@ -3,7 +3,7 @@
 
 $accent-color: (
   color: #3eaf7c,
-  ammont: (
+  amount: (
     -10%,
     10%,
     25%,
@@ -15,7 +15,7 @@ $text-color: (
     #2c3e50,
     #9e9e9e,
   ),
-  ammont: (
+  amount: (
     10%,
     20%,
     25%,
@@ -29,12 +29,12 @@ $bg-color-blur: (rgba(255, 255, 255, 0.9), rgba(30, 30, 30, 0.9));
 $border-color: (#eaecef, #302d28);
 $code-bg-color: (#ecf4fa, #282c34);
 $code-highlight-line-color: (
-  color.scale(color.scale($code-bg-color, $saturate: 10%), $lightness: -5%),
-  color.scale(color.scale($code-bg-color, $saturate: 10%), $lightness: -5%)
+  color.scale(list.nth($code-bg-color, 1), $saturation: 10%, $lightness: -5%),
+  color.scale(list.nth($code-bg-color, 2), $saturation: 10%, $lightness: -5%)
 );
 $code-border-color: (
-  color.scale(color.scale($code-bg-color, $saturate: 20%), $lightness: -10%),
-  color.scale(color.scale($code-bg-color, $saturate: 20%), $lightness: -10%)
+  color.scale(list.nth($code-bg-color, 1), $saturation: 20%, $lightness: -10%),
+  color.scale(list.nth($code-bg-color, 2), $saturation: 20%, $lightness: -10%)
 );
 $arrow-color: (#ccc, #333);
 $box-shadow-color: (#f0f1f2, #0f0e0d);
@@ -54,4 +54,3 @@ $danger-color: #f55;
 $badge-tip-color: #42b983;
 $badge-warning-color: #f4cd00;
 $badge-danger-color: #f55;
-$code-group-nav-color: ();

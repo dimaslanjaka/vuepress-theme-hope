@@ -8,10 +8,13 @@
 @use 'layout';
 
 @function get-value($variable, $isDark) {
-  @if meta.type-of($variable) == string {
+  @if meta.type-of($variable) == color {
     @return #{$variable};
   } @else if meta.type-of($variable) == list {
-    @return #{if($isDark, list.nth($variable, 1), list.nth($variable, 0))};
+    @return #{if($isDark, list.nth($variable, 2), list.nth($variable, 1))};
+  } @else {
+    @debug "Unexpected variable type #{meta.type-of($variable)}";
+    @return transparent;
   }
 }
 
@@ -26,16 +29,16 @@
 @mixin inject-color($module, $isDark: false) {
   $variables: meta.module-variables($module);
 
-  @each $varName, $value in $variables {
-    @if meta.type-of($value) == map {
-      @each $ammont in map.get($value, "ammont") {
-        --#{$varName}-#{if($ammont > 0,"l","d")}#{$ammont / 1%}: color.scale(
+  @each $varName, $varValue in $variables {
+    @if meta.type-of($varValue) == map {
+      @each $amount in map.get($varValue, "amount") {
+        --#{$varName}-#{if($amount > 0,"l","d")}#{$amount / 1%}: color.scale(
           get-value(map.get($value, "color"), $isDark),
-          $lightness: $ammont
+          $lightness: $amount
         );
       }
     } @else {
-      --#{$varName}: get-value($value, $isDark);
+      --#{$varName}: get-value($varValue, $isDark);
     }
   }
 }

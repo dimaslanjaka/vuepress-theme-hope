@@ -33,7 +33,12 @@ export default [
       },
     ],
     plugins: [typescript(), styles(), terser()],
-    external: ["@vuepress/client", "balloon-css", "vue"],
+    external: [
+      "@mr-hope/vuepress-shared/styles/config/index.scss",
+      "@vuepress/client",
+      "balloon-css",
+      "vue",
+    ],
   },
   {
     input: "./src/client/appSetup.ts",
