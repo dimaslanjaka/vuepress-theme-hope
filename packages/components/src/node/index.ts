@@ -1,9 +1,10 @@
 import { lang2Path } from "@mr-hope/vuepress-shared";
-import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
-import type { Plugin } from "@vuepress/core";
 import { path } from "@vuepress/utils";
 import { i18n } from "./i18n";
 import { ComponentOptions, ComponentI18nConfig } from "../shared";
+
+import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
+import type { Plugin } from "@vuepress/core";
 
 export * from "../shared/types";
 

@@ -23,9 +23,8 @@ export default defineComponent({
             vnode.type.name === "CodeGroupItem"
         )
         .map((vnode) => {
-          if (vnode.props === null) {
-            vnode.props = {};
-          }
+          if (vnode.props === null) vnode.props = {};
+
           return vnode as VNode & { props: Exclude<VNode["props"], null> };
         });
 
@@ -43,9 +42,7 @@ export default defineComponent({
         );
 
         // if there is no `active` props on code-group-item, set the first item active
-        if (activeIndex.value === -1) {
-          activeIndex.value = 0;
-        }
+        if (activeIndex.value === -1) activeIndex.value = 0;
       } else {
         // re-render triggered by modifying `activeIndex` ref
 
@@ -73,7 +70,9 @@ export default defineComponent({
                       "code-group-nav-tab": true,
                       active: index === activeIndex.value,
                     },
-                    onClick: () => (activeIndex.value = index),
+                    onClick: () => {
+                      activeIndex.value = index;
+                    },
                   },
                   vnode.props.title
                 )

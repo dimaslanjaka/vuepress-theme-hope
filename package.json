@@ -4,6 +4,7 @@
   "description": "A light vuepress theme",
   "workspaces": [
     "demo/",
+    "docs/*",
     "packages/*"
   ],
   "scripts": {

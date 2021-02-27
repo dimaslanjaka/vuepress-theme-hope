@@ -29,6 +29,9 @@
   ],
   "scripts": {
     "clean": "rimraf ./client ./node",
+    "demo:build": "vuepress build __tests__/demo",
+    "demo:clean-serve": "vuepress dev __tests__/demo --clean-cache",
+    "demo:serve": "vuepress dev __tests__/demo",
     "rollup:build": "rollup -c",
     "rollup:watch": "rollup -c -w"
   },
@@ -40,7 +43,8 @@
     "vue-router": "^4.0.2"
   },
   "devDependencies": {
-    "rollup": "2.40.0"
+    "rollup": "2.40.0",
+    "vuepress": "2.0.0-alpha.26"
   },
   "publishConfig": {
     "access": "public"
