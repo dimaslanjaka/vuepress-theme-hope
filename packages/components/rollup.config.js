@@ -29,7 +29,12 @@ export default [
       styles(),
       terser(),
     ],
-    external: ["@vuepress/client", "lodash.debounce", "vue"],
+    external: [
+      "@vuepress/client",
+      "@vuepress/plugin-theme-data/lib/composables",
+      "lodash.debounce",
+      "vue",
+    ],
   },
   {
     input: "./src/client/appEnhance.ts",
@@ -52,6 +57,7 @@ export default [
     external: [
       "@mr-hope/vuepress-shared/styles/config/index.scss",
       "@vuepress/client",
+      "@vuepress/plugin-theme-data/lib/composables",
       "vue",
       "vue-router",
       "screenfull",
@@ -66,6 +72,7 @@ export default [
     external: [
       "@mr-hope/vuepress-shared/styles/config/index.scss",
       "@vuepress/client",
+      "@vuepress/plugin-theme-data/lib/composables",
       "vue",
       "vue-router",
       "screenfull",

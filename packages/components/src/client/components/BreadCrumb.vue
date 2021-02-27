@@ -19,11 +19,8 @@
 </template>
 
 <script lang="ts">
-import {
-  usePageFrontmatter,
-  usePagesData,
-  useThemeData,
-} from "@vuepress/client";
+import { usePageFrontmatter, usePagesData } from "@vuepress/client";
+import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
 import { computed, defineComponent, onMounted, watch, ref } from "vue";
 import { useRoute } from "vue-router";
 import { getLinks } from "../composables";

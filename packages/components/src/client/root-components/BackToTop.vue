@@ -25,11 +25,8 @@ import {
   onMounted,
   ref,
 } from "vue";
-import {
-  useRouteLocale,
-  usePageFrontmatter,
-  useThemeData,
-} from "@vuepress/client";
+import { useRouteLocale, usePageFrontmatter } from "@vuepress/client";
+import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
 import debounce from "lodash.debounce";
 import { componentI18n } from "../define";
 

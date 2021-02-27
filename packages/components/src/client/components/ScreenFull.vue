@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { useThemeLocaleData } from "@vuepress/client";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 import { defineComponent, onMounted, ref } from "vue";
 import * as screenfull from "screenfull";
 import type { Screenfull } from "screenfull";

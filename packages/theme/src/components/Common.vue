@@ -45,9 +45,9 @@ import {
   usePageData,
   usePageFrontmatter,
   useSiteData,
-  useThemeData,
   useThemeLocaleData,
 } from "@vuepress/client";
+import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
 import throttle from "lodash.throttle";
 import Navbar from "../components/Navbar.vue";
 import Sidebar from "../components/Sidebar.vue";
