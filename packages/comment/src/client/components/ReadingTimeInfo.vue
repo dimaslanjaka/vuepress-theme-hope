@@ -1,18 +1,6 @@
-<template>
-  <span
-    v-if="readingTime"
-    class="read-time-info"
-    :aria-label="hint"
-    data-balloon-pos="down"
-  >
-    <TimeIcon />
-    <span v-text="readingTime" />
-  </span>
-</template>
-
 <script lang="ts">
 import { usePageData, useRouteLocale } from "@vuepress/client";
-import { computed, defineComponent, inject } from "vue";
+import { computed, defineComponent, h, inject } from "vue";
 import { TimeIcon } from "./icons";
 import { pageInfoI18n } from "../define";
 
@@ -20,18 +8,20 @@ import type {
   ReadingTime,
   ReadingTimeI18nConfig,
 } from "@mr-hope/vuepress-plugin-reading-time";
+import type { VNode } from "vue";
 
 export default defineComponent({
-  name: "ReadtimeInfo",
+  name: "ReadingTimeInfo",
 
   components: { TimeIcon },
 
   setup() {
     const routeLocale = useRouteLocale();
     const page = usePageData<{ readingTime: ReadingTime }>();
-    const { minute, time } = inject<Record<string, ReadingTimeI18nConfig>>(
-      "reading-time-i18n"
-    )![routeLocale.value];
+    const { minute = "", time = "" } =
+      inject<Record<string, ReadingTimeI18nConfig>>("reading-time-i18n")?.[
+        routeLocale.value
+      ] || {};
 
     const hint = computed(() => pageInfoI18n[routeLocale.value].readingTime);
 
@@ -44,10 +34,18 @@ export default defineComponent({
           )
     );
 
-    return {
-      hint,
-      readingTime,
-    };
+    return (): VNode | null =>
+      readingTime.value
+        ? h(
+            "span",
+            {
+              class: "reading-time-info",
+              ariaLabel: hint.value,
+              "data-balloon-pos": "down",
+            },
+            [h(TimeIcon), h("span", readingTime.value)]
+          )
+        : null;
   },
 });
 </script>

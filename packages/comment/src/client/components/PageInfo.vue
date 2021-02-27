@@ -78,14 +78,7 @@ export default defineComponent({
         ? false
         : Array.isArray(themeConfig)
         ? themeConfig
-        : ([
-            "Author",
-            "PageView",
-            "Date",
-            "Category",
-            "Tag",
-            "ReadTime",
-          ] as PageInfoType[]);
+        : ["Author", "PageView", "Date", "Category", "Tag", "ReadingTime"];
     });
 
     const isOriginal = computed(() => frontmatter.value.original);

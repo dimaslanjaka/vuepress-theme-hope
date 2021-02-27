@@ -34,8 +34,8 @@ export default defineComponent({
       return result;
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    return (): VNode => h("span", options, props.text || slots.default?.());
+    return (): VNode =>
+      h("span", options.value, props.text || slots.default?.());
   },
 });
 </script>

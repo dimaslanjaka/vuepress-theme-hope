@@ -11,8 +11,6 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "OutboundLink",
 
-  components: {
-    RawOutboundLink: OutboundLink,
-  },
+  components: { RawOutboundLink: OutboundLink },
 });
 </script>

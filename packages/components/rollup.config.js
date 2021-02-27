@@ -30,6 +30,7 @@ export default [
       terser(),
     ],
     external: [
+      "@mr-hope/vuepress-shared/client",
       "@vuepress/client",
       "@vuepress/plugin-theme-data/lib/composables",
       "lodash.debounce",
@@ -55,6 +56,7 @@ export default [
       terser(),
     ],
     external: [
+      "@mr-hope/vuepress-shared/client",
       "@mr-hope/vuepress-shared/styles/config/index.scss",
       "@vuepress/client",
       "@vuepress/plugin-theme-data/lib/composables",

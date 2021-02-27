@@ -1,6 +1,8 @@
 import { defineComponent, h, onMounted } from "vue";
 import { pubID } from "../define";
 
+import type { VNode } from "vue";
+
 export default defineComponent({
   name: "AddThis",
 
@@ -15,9 +17,7 @@ export default defineComponent({
       } else
         console.error("[AddThis]: Please provide a pubid to let plugin work");
     });
-  },
 
-  render() {
-    return h("div", { class: "add-this" });
+    return (): VNode => h("div", { class: "add-this" });
   },
 });

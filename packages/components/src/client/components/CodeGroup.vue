@@ -89,15 +89,12 @@ export default defineComponent({
 
 <style lang="scss">
 .code-group-nav {
-  margin-top: 0.85rem;
   /* 2 * margin + border-radius of <pre> tag */
-  margin-bottom: calc(-1.7rem - 6px);
-  padding-bottom: calc(1.7rem - 6px);
-  padding-left: 10px;
-  padding-top: 10px;
+  margin: 0.85rem 0 calc(-1.7rem - 7px);
+  padding: 0 5px calc(1.7rem - 7px);
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  background-color: var(--code-bgcolor);
+  background-color: var(--code-border-color);
 
   @media (max-width: var(--mobile-narrow-break-point)) {
     margin-left: -1.5rem;
@@ -114,21 +111,62 @@ export default defineComponent({
 }
 
 .code-group-nav-tab {
+  position: relative;
   border: 0;
-  padding: 5px;
-  cursor: pointer;
+  padding: 6px 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   background-color: transparent;
   font-size: 0.85em;
   line-height: 1.4;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color, #242424);
   font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--code-highlight-line-color);
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: 1;
+    content: " ";
+    bottom: 0;
+    width: 8px;
+    height: 8px;
+  }
+
+  &::before {
+    right: 100%;
+  }
+
+  &::after {
+    left: 100%;
+  }
 
   &:focus {
     outline: none;
   }
 
   &.active {
-    border-bottom: var(--accent-color) 1px solid;
+    background-color: var(--code-bg-color);
+
+    &:before {
+      background: radial-gradient(
+        16px at left top,
+        transparent 50%,
+        var(--code-bgcolor) 50%
+      );
+    }
+
+    &:after {
+      background: radial-gradient(
+        16px at right top,
+        transparent 50%,
+        var(--code-bgcolor) 50%
+      );
+    }
   }
 }
 </style>

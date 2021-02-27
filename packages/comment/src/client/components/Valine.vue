@@ -1,9 +1,3 @@
-<template>
-  <div v-show="enableComment" class="valine-wrapper">
-    <div id="valine" />
-  </div>
-</template>
-
 <script lang="ts">
 import { useThemePluginConfig } from "@mr-hope/vuepress-shared/client";
 import {
@@ -11,11 +5,12 @@ import {
   usePageLang,
   useRouteLocale,
 } from "@vuepress/client";
-import { computed, defineComponent, nextTick, onMounted, watch } from "vue";
+import { computed, defineComponent, h, nextTick, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { resolveEnablePageViews } from "../composables";
 import { enableValine, valineI18n, valineOption } from "../define";
 
+import type { VNode } from "vue";
 import type { RouteLocation } from "vue-router";
 import type { CommentPluginFrontmatter, ValineOptions } from "../../shared";
 
@@ -98,7 +93,15 @@ export default defineComponent({
       }
     );
 
-    return { enableComment };
+    return (): VNode =>
+      h(
+        "div",
+        {
+          class: "valine-wrapper",
+          style: { display: enableComment.value ? "block" : "none" },
+        },
+        h("div", { id: "valine" })
+      );
   },
 });
 </script>

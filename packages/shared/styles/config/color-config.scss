@@ -28,6 +28,14 @@ $bg-color-light: (#f8f8f8, #272727);
 $bg-color-blur: (rgba(255, 255, 255, 0.9), rgba(30, 30, 30, 0.9));
 $border-color: (#eaecef, #302d28);
 $code-bg-color: (#ecf4fa, #282c34);
+$code-highlight-line-color: (
+  color.scale(color.scale($code-bg-color, $saturate: 10%), $lightness: -5%),
+  color.scale(color.scale($code-bg-color, $saturate: 10%), $lightness: -5%)
+);
+$code-border-color: (
+  color.scale(color.scale($code-bg-color, $saturate: 20%), $lightness: -10%),
+  color.scale(color.scale($code-bg-color, $saturate: 20%), $lightness: -10%)
+);
 $arrow-color: (#ccc, #333);
 $box-shadow-color: (#f0f1f2, #0f0e0d);
 $card-shadow-color: (rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.3));
@@ -36,6 +44,14 @@ $black: (#000, #fff);
 $dark-grey: (#666, #999);
 $light-grey: (#999, #666);
 $white: (#fff, #000);
-$grey3: (#333);
-$grey12: (#bbb);
-$grey14: (#eee);
+$grey3: (#333, #bbb);
+$grey12: (#bbb, #333);
+$grey14: (#eee, #111);
+
+$tip-color: #42b983;
+$warning-color: #f4cd00;
+$danger-color: #f55;
+$badge-tip-color: #42b983;
+$badge-warning-color: #f4cd00;
+$badge-danger-color: #f55;
+$code-group-nav-color: ();
