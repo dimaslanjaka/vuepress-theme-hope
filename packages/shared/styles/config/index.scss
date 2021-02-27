@@ -1,20 +1,15 @@
-@use 'break-point';
-@use 'color';
-@use 'layout';
 @use 'inject';
 
 :root {
-  @include inject-value("break-point");
-  @include inject-value("layout");
+  @include inject.inject-value("break-point");
+  @include inject.inject-value("layout");
 }
 
 :root,
 body.theme-light {
-  @include inject-color("color", false);
-  @include inject-color("colors", false);
+  @include inject.inject-color("color-config", false);
 }
 
 body.theme-dark {
-  @include inject-color("color", true);
-  @include inject-color("colors", true);
+  @include inject.inject-color("color-config", true);
 }

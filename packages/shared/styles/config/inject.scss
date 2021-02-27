@@ -3,6 +3,10 @@
 @use 'sass:map';
 @use 'sass:meta';
 
+@use 'break-point';
+@use 'color-config';
+@use 'layout';
+
 @function get-value($variable, $isDark) {
   @if meta.type-of($variable) == string {
     @return #{$variable};
@@ -23,7 +27,7 @@
   $variables: meta.module-variables($module);
 
   @each $varName, $value in $variables {
-    @if meta.type-of($variable) ==map {
+    @if meta.type-of($value) == map {
       @each $ammont in map.get($value, "ammont") {
         --#{$varName}-#{if($ammont > 0,"l","d")}#{$ammont / 1%}: color.scale(
           get-value(map.get($value, "color"), $isDark),

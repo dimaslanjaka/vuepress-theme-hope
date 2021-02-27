@@ -74,6 +74,7 @@
     "rollup-plugin-typescript2": "0.30.0",
     "rollup-plugin-vue": "6.0.0",
     "sass": "1.32.8",
+    "sass-loader": "^11.0.1",
     "sort-package-json": "1.49.0",
     "ts-jest": "26.5.2",
     "ts-node": "9.1.1",
