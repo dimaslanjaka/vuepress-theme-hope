@@ -47,5 +47,5 @@ export interface BasePageFrontMatter extends PageFrontmatter {
   /**
    * 版权文字
    */
-  copyrightText?: string | boolean;
+  copyrightText?: string | false;
 }
