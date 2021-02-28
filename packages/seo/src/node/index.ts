@@ -27,10 +27,7 @@ export const seoPlugin: Plugin<SeoOptions> = (options, app) => {
             unknown
           >,
         app,
-        permalink: resolvePagePermalink({
-          ...page,
-          options: {},
-        }),
+        permalink: resolvePagePermalink(page),
       };
       const metaContext: SeoContent = {
         ...generateSeo(seoOption, base, pageSeoInfo),

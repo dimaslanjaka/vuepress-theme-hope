@@ -40,4 +40,12 @@ export interface BasePageFrontMatter extends PageFrontmatter {
    * Page Banner
    */
   banner?: string;
+  /**
+   * 页脚文字
+   */
+  footer?: string | boolean;
+  /**
+   * 版权文字
+   */
+  copyrightText?: string | boolean;
 }

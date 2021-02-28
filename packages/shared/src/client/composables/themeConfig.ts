@@ -1,34 +1,15 @@
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
 import { computed } from "vue";
-import { getAuthor } from "../../shared";
+import { _getAuthor } from "../../shared";
 
-import type { ThemeConfig } from "@vuepress/core";
 import type { ComputedRef } from "vue";
-
-export interface BaseThemeConfig extends ThemeConfig {
-  /**
-   * 作者
-   */
-  author?: string[] | string;
-  /**
-   * Font class 图标前缀
-   *
-   * Font class Icon prefix
-   *
-   * @default 'icon-'
-   */
-  iconPrefix?: string;
-  /**
-   * Blog Config
-   */
-  blog: unknown | false;
-}
+import type { BaseThemeConfig } from "../../shared";
 
 export const useThemeAuthor = (): ComputedRef<string[]> =>
   computed(() => {
     const { author } = useThemeData<BaseThemeConfig>().value;
 
-    return getAuthor(author, true);
+    return _getAuthor(author, false);
   });
 
 export const useIconPrefix = (): ComputedRef<string> =>

@@ -1,6 +1,6 @@
 import { capitalize } from "./capitalize";
 
-export const getAuthor = (
+export const _getAuthor = (
   author: string[] | string | false | undefined,
   canDisable = false
 ): string[] => {
