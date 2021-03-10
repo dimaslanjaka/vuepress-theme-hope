@@ -233,8 +233,7 @@ export default defineComponent({
   }
 
   .site-name {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.5rem;
     color: var(--text-color);
     position: relative;
 

@@ -43,64 +43,90 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-@require '../styles/palette'
+<style lang="scss">
+.nav-links {
+  display: inline-block;
 
-.navbar-links
-  display inline-block
+  .sidebar & {
+    display: none;
+    padding: 0.5rem 0 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
 
-  .nav-link
-    line-height 1.4rem
-    color var(--dark-grey)
+    ul {
+      margin-top: 0.25rem;
+    }
+  }
+}
 
-    @media (max-width $MQMobile)
-      color var(--text-color)
+.nav-item {
+  position: relative;
+  display: inline-block;
+  line-height: 2rem;
 
-      &:hover, &.active
-        color var(--accent-color)
+  .navbar & {
+    margin-left: 1rem;
+  }
 
-    &.active
-      color var(--accent-color)
+  .sidebar & {
+    display: block;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    font-size: 1.1em;
+    line-height: 1.25rem;
+  }
 
-  .navbar-links-item
-    position relative
-    display inline-block
-    margin-left 1.5rem
-    line-height 2rem
+  &:first-child {
+    margin-left: 0;
+  }
 
-    @media (max-width $MQMobile)
-      margin-left 0
+  > .nav-link {
+    .navbar & {
+      color: var(--dark-grey);
 
-    &:first-child
-      margin-left 0
+      &::after {
+        position: absolute;
+        content: " ";
+        left: 50%;
+        right: 50%;
+        bottom: 0px;
+        height: 2px;
+        background: var(--accent-color-l10);
+        border-radius: 1px;
+        visibility: hidden;
+        transition: left 0.2s ease-in-out, right 0.2s ease-in-out;
+      }
 
-  .repo-link
-    color var(--dark-grey)
-    margin-left 1.5rem
+      &.active {
+        color: var(--accent-color);
+      }
 
-    @media (max-width $MQMobile)
-      margin-left 0
+      &:hover,
+      &.active {
+        &::after {
+          left: 0;
+          right: 0;
+          visibility: visible;
+        }
+      }
+    }
 
-@media (min-width $MQMobile)
-  .navbar-links-item > .nav-link
-    &::after
-      position absolute
-      content ' '
-      left 0
-      right 0
-      bottom 0px
-      height 2px
-      background var(--accent-color-l10)
-      border-radius 1px
-      visibility hidden
-      transform scaleX(0)
-      transition transform 0.3s ease-in-out
+    .sidebar & {
+      font-weight: bold;
+    }
+  }
+}
 
-    &:hover, &.active
-      &::after
-        visibility visible
-        transform scaleX(1)
+.repo-link {
+  color: var(--dark-grey);
 
-    &.active
-      color var(--accent-color)
+  .navbar & {
+    margin-left: 1rem;
+  }
+
+  .sidebar & {
+    display: block;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    font-size: 1.1em;
+    line-height: 1.25rem;
+  }
+}
 </style>

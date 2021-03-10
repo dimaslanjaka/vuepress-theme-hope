@@ -4,8 +4,7 @@
     class="nav-link"
     :class="{ active: isExact }"
     :to="item.link"
-    :exact="isExact"
-    :aria-label="ariaLabel"
+    :aria-label="linkAriaLabel"
     v-bind="$attrs"
   >
     <slot name="before" />
@@ -17,9 +16,9 @@
     v-else
     class="nav-link external"
     :href="item.link"
-    :rel="rel"
-    :target="target"
-    :aria-label="ariaLabel"
+    :rel="linkRel"
+    :target="linkTarget"
+    :aria-label="linkAriaLabel"
     v-bind="$attrs"
   >
     <slot name="before" />
@@ -33,7 +32,8 @@
 <script lang="ts">
 import { computed, defineComponent, toRefs } from "vue";
 import type { PropType } from "vue";
-import { useSiteData, useThemeLocaleData } from "@vuepress/client";
+import { useSiteData } from "@vuepress/client";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 import { isLinkHttp, isLinkMailto, isLinkTel } from "@vuepress/shared";
 import type { NavLink, ThemeHopeOptions } from "../types";
 
@@ -64,7 +64,7 @@ export default defineComponent({
     );
 
     // resolve the `target` attr
-    const target = computed(() => {
+    const linkTarget = computed(() => {
       if (hasNonHttpProtocal.value) return null;
       if (item.value.target) return item.value.target;
       if (hasHttpProtocol.value) return "_blank";
@@ -72,7 +72,7 @@ export default defineComponent({
     });
 
     // if the `target` attr is '_blank'
-    const isBlankTarget = computed(() => target.value === "_blank");
+    const isBlankTarget = computed(() => linkTarget.value === "_blank");
 
     // is `<RouterLink>` or not
     const isRouterLink = computed(
@@ -92,7 +92,7 @@ export default defineComponent({
     });
 
     // resolve the `rel` attr
-    const rel = computed(() => {
+    const linkRel = computed(() => {
       if (hasNonHttpProtocal.value) return null;
       if (item.value.rel) return item.value.rel;
       if (isBlankTarget.value) return "noopener noreferrer";
@@ -100,7 +100,9 @@ export default defineComponent({
     });
 
     // resolve the `aria-label` attr
-    const ariaLabel = computed(() => item.value.ariaLabel || item.value.text);
+    const linkAriaLabel = computed(
+      () => item.value.ariaLabel || item.value.text
+    );
 
     const iconPrefix = computed(() => {
       const { iconPrefix } = themeLocale.value;
@@ -109,14 +111,37 @@ export default defineComponent({
     });
 
     return {
-      ariaLabel,
       iconPrefix,
       isBlankTarget,
       isExact,
       isRouterLink,
-      rel,
-      target,
+      linkRel,
+      linkTarget,
+      linkAriaLabel,
     };
   },
 });
 </script>
+
+<style lang="scss">
+.nav-link {
+  line-height: 1.4rem;
+
+  .navbar & {
+    color: var(--dark-grey);
+
+    &.active {
+      color: var(--accent-color);
+    }
+  }
+
+  .sidebar & {
+    color: var(--text-color);
+
+    &:hover,
+    &.active {
+      color: var(--accent-color);
+    }
+  }
+}
+</style>
