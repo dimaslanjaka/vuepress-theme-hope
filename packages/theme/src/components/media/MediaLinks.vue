@@ -17,7 +17,8 @@
 </template>
 
 <script lang="ts">
-import { usePageFrontmatter, useThemeLocaleData } from "@vuepress/client";
+import { usePageFrontmatter } from "@vuepress/client";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 import { computed, defineComponent } from "vue";
 import type { ThemeHopeOptions } from "../../types";
 import Baidu from "./icons/Baidu.vue";
@@ -121,12 +122,12 @@ export default defineComponent({
   },
 
   setup() {
-    const pageFrontmatter = usePageFrontmatter();
+    const frontmatter = usePageFrontmatter();
     const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
 
     const mediaLink = computed<Partial<Record<BlogMedia, string>> | false>(
       () => {
-        const { medialink } = pageFrontmatter.value;
+        const { medialink } = frontmatter.value;
 
         return medialink === false
           ? false
@@ -163,31 +164,34 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-@require '../../styles/palette'
+<style lang="scss">
+.media-links-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 8px auto;
 
-.media-links-wrapper
-  display flex
-  justify-content center
-  flex-wrap wrap
-  margin 8px auto
+  .media-link {
+    width: 26px;
+    height: 26px;
+    margin: 4px;
+    transform: scale(1, 1);
+    transition: transform 0.18s ease-out 0.18s;
 
-  .media-link
-    width 26px
-    height 26px
-    margin 4px
-    transform scale(1, 1)
-    transition transform 0.18s ease-out 0.18s
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2, 1.2);
+    }
 
-    &:hover
-      cursor pointer
-      transform scale(1.2, 1.2)
+    &::after {
+      --balloon-font-size: 8px;
+      padding: 0.3em 0.6em;
+    }
 
-    &::after
-      --balloon-font-size 8px
-      padding 0.3em 0.6em
-
-    .icon
-      width 100%
-      height 100%
+    .icon {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
 </style>
