@@ -84,6 +84,7 @@ interface ActionConfig {
 interface HomePageFrontmatter extends BasePageFrontMatter {
   home: true;
   heroImage?: string;
+  darkHeroImage?: string;
   heroAlt?: string;
   heroText?: string;
   tagline?: string;
@@ -110,6 +111,12 @@ export default defineComponent({
       if (!frontmatter.value.heroImage) return null;
 
       return withBase(frontmatter.value.heroImage);
+    });
+
+    const darkHeroImage = computed(() => {
+      if (!frontmatter.value.darkHeroImage) return null;
+
+      return withBase(frontmatter.value.darkHeroImage);
     });
 
     const heroText = computed(() => {
@@ -152,6 +159,7 @@ export default defineComponent({
     });
 
     return {
+      darkHeroImage,
       heroImage,
       heroAlt,
       heroText,
