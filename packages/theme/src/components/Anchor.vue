@@ -189,7 +189,7 @@ export default Anchor;
         }
       }
 
-      @for $heading from 2 to 6 {
+      @for $heading from 2 through 6 {
         &.heading#{$heading} {
           padding-left: ($heading * 8 - 16) px;
           font-size: (16 - $heading) px;
