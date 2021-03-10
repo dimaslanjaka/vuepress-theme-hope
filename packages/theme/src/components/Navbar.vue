@@ -2,56 +2,54 @@
   <header ref="navbar" class="navbar" :class="{ 'can-hide': canHide }">
     <ToggleSidebarButton @toggle="$emit('toggle-sidebar')" />
 
-    <RouterLink
-      ref="siteInfo"
-      :to="$themeLocale.home || $routeLocale"
-      class="home-link"
-    >
+    <RouterLink ref="siteBrand" :to="siteBrandLink" class="home-link">
       <img
-        v-if="$themeLocale.logo"
+        v-if="siteBrandLogo"
         class="logo"
-        :class="{ light: Boolean($themeLocale.darkLogo) }"
-        :src="$withBase($themeLocale.logo)"
-        :alt="$siteLocale.title"
+        :class="{ light: Boolean(siteBrandDarkLogo) }"
+        :src="siteBrandLogo"
+        :alt="siteBrandTitle"
       />
       <img
-        v-if="$themeLocale.darkLogo"
+        v-if="siteBrandDarkLogo"
         class="logo dark"
-        :src="$withBase($themeLocale.darkLogo)"
-        :alt="$siteLocale.title"
+        :src="siteBrandDarkLogo"
+        :alt="siteBrandTitle"
       />
       <span
-        v-if="$siteLocale.title"
+        v-if="siteBrandTitle"
         class="site-name"
-        :class="{ 'can-hide': $themeLocale.logo }"
+        :class="{ 'can-hide': siteBrandLogo }"
       >
-        {{ $siteLocale.title }}
+        {{ siteBrandTitle }}
       </span>
     </RouterLink>
 
     <div class="navbar-links-wrapper" :style="linksWrapperStyle">
       <slot name="before" />
       <ThemeColor />
+      <NavbarLinks class="can-hide" />
+      <slot name="after" />
+      <Docsearch />
       <!-- <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algoliaConfig" /> -->
       <!-- <SearchBox
         v-else-if="
           $themeConfig.search !== false && $page.frontmatter.search !== false
         "
       /> -->
-      <NavbarLinks class="can-hide" />
-      <slot name="after" />
-      <Docsearch />
     </div>
   </header>
 </template>
 
 <script lang="ts">
-import { useThemeLocaleData } from "@vuepress/client";
 import { computed, defineComponent, onMounted, ref } from "vue";
-import type { ThemeHopeOptions } from "../types";
+import { useRouteLocale, useSiteLocaleData, withBase } from "@vuepress/client";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 import NavbarLinks from "./NavbarLinks.vue";
 import ThemeColor from "./Theme/ThemeColor.vue";
 import ToggleSidebarButton from "./ToggleSidebarButton.vue";
+
+import type { ThemeHopeOptions } from "../types";
 
 const getCssValue = (
   el: Element | null,
@@ -86,10 +84,24 @@ export default defineComponent({
   emits: ["toggle-sidebar"],
 
   setup() {
+    const routeLocale = useRouteLocale();
+    const siteLocale = useSiteLocaleData();
     const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
+
     const isMobile = ref(false);
+
     const navbar = ref<HTMLElement | null>(null);
-    const siteInfo = ref<HTMLElement | null>(null);
+    const siteBrand = ref<HTMLElement | null>(null);
+
+    const siteBrandLink = computed(
+      () => themeLocale.value.home || routeLocale.value
+    );
+    const siteBrandLogo = computed(() => withBase(themeLocale.value.logo));
+    const siteBrandDarkLogo = computed(() =>
+      withBase(themeLocale.value.darkLogo)
+    );
+    const siteBrandTitle = computed(() => siteLocale.value.title);
+
     const linksWrapperMaxWidth = ref(0);
     const linksWrapperStyle = computed(() => {
       if (!linksWrapperMaxWidth.value) return {};
@@ -108,13 +120,13 @@ export default defineComponent({
     // avoid overlapping of long title and long navbar links
     onMounted(() => {
       // TODO: migrate to css var
-      // refer to config.styl
+      // refer to _variables.scss
       const MOBILE_DESKTOP_BREAKPOINT = 719;
-      const NAVBAR_VERTICAL_PADDING =
+      const navbarHorizontalPadding =
         getCssValue(navbar.value, "paddingLeft") +
         getCssValue(navbar.value, "paddingRight");
-      const handler = (): void => {
-        if (document.documentElement.clientWidth < MOBILE_DESKTOP_BREAKPOINT) {
+      const handleLinksWrapWidth = (): void => {
+        if (window.innerWidth < MOBILE_DESKTOP_BREAKPOINT) {
           isMobile.value = true;
           linksWrapperMaxWidth.value = 0;
         } else {
@@ -122,112 +134,133 @@ export default defineComponent({
           linksWrapperMaxWidth.value =
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             navbar.value!.offsetWidth -
-            NAVBAR_VERTICAL_PADDING -
-            (siteInfo.value?.offsetWidth || 0);
+            navbarHorizontalPadding -
+            (siteBrand.value?.offsetWidth || 0);
         }
       };
-
-      handler();
-      window.addEventListener("resize", handler, false);
-      window.addEventListener("orientationchange", handler);
+      handleLinksWrapWidth();
+      window.addEventListener("resize", handleLinksWrapWidth, false);
+      window.addEventListener("orientationchange", handleLinksWrapWidth);
     });
 
     return {
       canHide,
-      isMobile,
-      linksWrapperStyle,
       navbar,
-      siteInfo,
+      siteBrand,
+      siteBrandLink,
+      siteBrandLogo,
+      siteBrandDarkLogo,
+      siteBrandTitle,
+      linksWrapperStyle,
     };
   },
 });
 </script>
 
-<style lang="stylus">
-@require '../styles/palette'
+<style lang="scss">
+.navbar {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $navbarHeight;
+  padding: $navbarVerticalPadding $navbarHorizontalPadding;
+  background: var(--bgcolor-blur);
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px var(--card-shadow-color);
+  backdrop-filter: saturate(200%) blur(20px);
+  line-height: $navbarHeight - $navbarVerticalPadding * 2;
+  transition: transform 0.3s ease-in-out;
 
-.navbar
-  position fixed
-  z-index 20
-  top 0
-  left 0
-  right 0
-  height $navbarHeight
-  padding $navbarVerticalPadding $navbarHorizontalPadding
-  background var(--bgcolor-blur)
-  box-sizing border-box
-  box-shadow 0 2px 8px var(--card-shadow-color)
-  backdrop-filter saturate(200%) blur(20px)
-  line-height $navbarHeight - $navbarVerticalPadding * 2
-  transition transform 0.3s ease-in-out
+  @media (max-width: $MQMobile) {
+    height: $navbarMobileHeight;
+    padding: $navbarMobileVerticalPadding $navbarMobileHorizontalPadding;
+    padding-left: $navbarMobileHorizontalPadding + 2.4rem;
+    line-height: $navbarMobileHeight - $navbarMobileVerticalPadding * 2;
+  }
 
-  @media (max-width $MQMobile)
-    height $navbarMobileHeight
-    padding $navbarMobileVerticalPadding $navbarMobileHorizontalPadding
-    padding-left $navbarMobileHorizontalPadding + 2.4rem
-    line-height $navbarMobileHeight - $navbarMobileVerticalPadding * 2
+  .hide-navbar &.can-hide {
+    transform: translateY(-100%);
+  }
 
-  .hide-navbar &.can-hide
-    transform translateY(-100%)
+  a,
+  span,
+  img {
+    display: inline-block;
+  }
 
-  a, span, img
-    display inline-block
+  .home-link:hover .site-name {
+    color: var(--accent-color);
+  }
 
-  .home-link:hover .site-name
-    color var(--accent-color)
+  .logo {
+    min-width: $navbarHeight - $navbarVerticalPadding * 2;
+    height: $navbarHeight - $navbarVerticalPadding * 2;
+    margin-right: 0.8rem;
+    vertical-align: top;
 
-  .logo
-    min-width $navbarHeight - $navbarVerticalPadding * 2
-    height $navbarHeight - $navbarVerticalPadding * 2
-    margin-right 0.8rem
-    vertical-align top
+    @media (max-width: $MQMobile) {
+      min-width: $navbarMobileHeight - $navbarMobileVerticalPadding * 2;
+      height: $navbarMobileHeight - $navbarMobileVerticalPadding * 2;
+    }
 
-    @media (max-width $MQMobile)
-      min-width $navbarMobileHeight - $navbarMobileVerticalPadding * 2
-      height $navbarMobileHeight - $navbarMobileVerticalPadding * 2
+    .theme-light & {
+      &.light {
+        display: block;
+      }
 
-    .theme-light &
-      &.light
-        display block
+      &.dark {
+        display: none;
+      }
+    }
 
-      &.dark
-        display none
+    .theme-dark & {
+      &.light {
+        display: none;
+      }
 
-    .theme-dark &
-      &.light
-        display none
+      &.dark {
+        display: block;
+      }
+    }
+  }
 
-      &.dark
-        display block
+  .can-hide {
+    @media (max-width: $MQMobile) {
+      display: none;
+    }
+  }
 
-  .can-hide
-    @media (max-width $MQMobile)
-      display none
+  .site-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color);
+    position: relative;
 
-  .site-name
-    font-size 1.3rem
-    font-weight 600
-    color var(--text-color)
-    position relative
+    @media (max-width: $MQMobile) {
+      width: calc(100vw - 9.4rem);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
 
-    @media (max-width $MQMobile)
-      width calc(100vw - 9.4rem)
-      overflow hidden
-      white-space nowrap
-      text-overflow ellipsis
+  .navbar-links-wrapper {
+    position: absolute;
+    top: $navbarVerticalPadding;
+    right: $navbarHorizontalPadding;
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 1.5rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
 
-  .navbar-links-wrapper
-    position absolute
-    top $navbarVerticalPadding
-    right $navbarHorizontalPadding
-    display flex
-    box-sizing border-box
-    padding-left 1.5rem
-    font-size 0.9rem
-    white-space nowrap
-
-    @media (max-width $MQMobile)
-      padding-left 0
-      top $navbarMobileVerticalPadding
-      right $navbarMobileHorizontalPadding
+    @media (max-width: $MQMobile) {
+      padding-left: 0;
+      top: $navbarMobileVerticalPadding;
+      right: $navbarMobileHorizontalPadding;
+    }
+  }
+}
 </style>
