@@ -33,7 +33,9 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-.dropdown-enter-from, .dropdown-leave-to
-  height 0 !important
+<style lang="scss">
+.dropdown-enter-from,
+.dropdown-leave-to {
+  height: 0 !important;
+}
 </style>
