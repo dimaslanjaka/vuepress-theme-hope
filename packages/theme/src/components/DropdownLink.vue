@@ -17,7 +17,7 @@
       class="mobile-dropdown-title"
       type="button"
       :aria-label="dropdownAriaLabel"
-      @click="setOpen(!open)"
+      @click="open = !open"
     >
       <span class="title">
         <i v-if="item.icon" :class="`iconfont ${iconPrefix}${item.icon}`" />
@@ -34,7 +34,19 @@
           class="dropdown-item"
         >
           <template v-if="child.children">
-            <h4>{{ child.text }}</h4>
+            <h4 class="dropdown-subtitle">
+              <NavLink
+                v-if="child.link"
+                :item="child"
+                @focusout="
+                  isLastItemOfArray(child, item.children) &&
+                    child.children.length === 0 &&
+                    (open = false)
+                "
+              />
+
+              <span v-else>{{ child.text }}</span>
+            </h4>
 
             <ul class="dropdown-subitem-wrapper">
               <li
@@ -68,13 +80,13 @@
 </template>
 
 <script lang="ts">
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 import { computed, defineComponent, ref, toRefs, watch } from "vue";
 import type { PropType } from "vue";
 import { useRoute } from "vue-router";
 import type { NavGroup, NavItem, ThemeHopeOptions } from "../types";
 import DropdownTransition from "./DropdownTransition.vue";
 import NavLink from "./NavLink.vue";
-import { useThemeLocaleData } from "@vuepress/client";
 
 export default defineComponent({
   name: "DropdownLink",
@@ -142,148 +154,180 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-@require '../styles/palette'
+<style lang="scss">
+.dropdown-wrapper {
+  cursor: pointer;
 
-.dropdown-wrapper
-  cursor pointer
+  .navbar & {
+    height: 1.8rem;
 
-  @media (max-width $MQMobile)
-    &.open .dropdown-title
-      margin-bottom 0.5rem
+    &:hover,
+    &.open {
+      .nav-dropdown {
+        display: block !important;
+      }
+    }
+  }
 
-  @media (min-width $MQMobile)
-    height 1.8rem
+  .sidebar & {
+    &.open .dropdown-title {
+      margin-bottom: 0.5rem;
+    }
+  }
 
-    &:hover .nav-dropdown, &.open .nav-dropdown
-      // override the inline style.
-      display block !important
+  .dropdown-title,
+  .mobile-dropdown-title {
+    cursor: inherit;
+    padding: inherit;
+    font-family: inherit;
+    line-height: 1.4rem;
+  }
 
-  .dropdown-title
-    display block
-    cursor inherit
-    padding inherit
-    color var(--dark-grey)
-    font-size 0.9rem
-    font-family inherit
-    font-weight 500
-    line-height 1.4rem
+  .dropdown-title {
+    color: var(--dark-grey);
+    font-size: 0.9rem;
+    font-weight: 500;
 
-    @media (max-width $MQMobile)
-      display none
+    .sidebar & {
+      display: none;
+    }
 
-    &::after
-      border-left 5px solid var(--accent-color)
+    &::after {
+      border-left: 5px solid var(--accent-color);
+    }
 
-    &:hover
-      border-color transparent
+    &:hover {
+      border-color: transparent;
+    }
 
-    .arrow
-      vertical-align middle
-      margin-top -1px
-      margin-left 0.4rem
+    .arrow {
+      font-size: 1.2em;
+    }
+  }
 
-  .mobile-dropdown-title
-    @extend .dropdown-title
-    display none
-    font-weight 600
-    font-size inherit
+  .mobile-dropdown-title {
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: inherit;
 
-    @media (max-width $MQMobile)
-      display block
-      color var(--text-color)
+    .navbar & {
+      display: none;
+    }
 
-    &:hover
-      color var(--accent-color)
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
 
-  .nav-dropdown
-    @media (max-width $MQMobile)
-      margin-top 0.25rem
-      transition height 0.1s ease-out
-      overflow hidden
-
-    @media (min-width $MQMobile)
-      display none
-      box-sizing border-box
-      position absolute
-      top 100%
-      right 0
-      max-height calc(100vh - 2.7rem)
+  .nav-dropdown {
+    .navbar & {
+      display: none;
+      box-sizing: border-box;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      max-height: calc(100vh - 2.7rem);
       // Avoid height shaked by clicking
-      height auto !important
-      margin 0
-      padding 0.6rem 0
-      border 1px solid var(--grey14)
-      border-radius 0.25rem
-      box-shadow 2px 2px 10px var(--card-shadow-color)
-      background var(--bgcolor)
-      text-align left
-      white-space nowrap
-      overflow-y auto
+      height: auto !important;
+      margin: 0;
+      padding: 0.6rem 0;
+      border: 1px solid var(--grey14);
+      border-radius: 0.25rem;
+      background: var(--bgcolor);
+      box-shadow: 2px 2px 10px var(--card-shadow-color);
+      text-align: left;
+      white-space: nowrap;
+      overflow-y: auto;
+    }
 
-  .dropdown-item
-    color inherit
-    line-height 1.7rem
+    .sidebar & {
+      margin-top: 0.25rem;
+      transition: height 0.1s ease-out;
+      overflow: hidden;
+    }
+  }
 
-    h4
-      margin 0
-      padding 0.75rem 1rem 0.25rem 0.75rem
-      border-top 1px solid var(--grey14)
-      color var(--dark-grey)
-      font-size 0.9rem
+  .dropdown-item {
+    color: inherit;
+    line-height: 1.7rem;
 
-      @media (max-width $MQMobile)
-        margin-top 0
-        padding-top 0
-        border-top 0
-        line-height 2rem
+    h4 {
+      margin: 0;
 
-    .nav-link
-      display block
-      position relative
-      margin-bottom 0
-      padding 0 1.5rem 0 1.25rem
-      border-bottom none
-      font-weight 400
-      line-height 1.7rem
+      .navbar & {
+        padding: 0.75rem 1rem 0.25rem 0.75rem;
+        border-top: 1px solid var(--grey14);
+        color: var(--dark-grey);
+        font-size: 0.9rem;
+      }
 
-      @media (min-width $MQMobile)
-        color var(--dark-grey)
+      .sidebar & {
+        padding-left: 1.25rem;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+    }
 
-      &:hover
-        color var(--accent-color)
+    &:first-child h4 {
+      .navbar & {
+        padding-top: 0;
+        border-top: 0;
+      }
+    }
 
-      &.active
-        color var(--accent-color)
+    .nav-link {
+      display: block;
+      position: relative;
+      margin-bottom: 0;
+      padding: 0 1.5rem 0 1.25rem;
+      border-bottom: none;
+      font-weight: 400;
+      line-height: 1.7rem;
 
-        &::after
-          content ''
-          position absolute
-          top calc(50% - 2px)
-          left 9px
-          width 0
-          height 0
-          border-top 3px solid transparent
-          border-left 5px solid var(--accent-color)
-          border-bottom 3px solid transparent
+      .navbar & {
+        color: var(--dark-grey);
+      }
 
-    & > .nav-link
-      @media (max-width $MQMobile)
-        font-size 15px
-        line-height 2rem
+      &:hover {
+        color: var(--accent-color);
+      }
 
-    .dropdown-subitem-wrapper
-      padding 0
-      list-style none
+      &.active {
+        color: var(--accent-color);
 
-    .dropdown-subitem
-      font-size 0.9em
+        &::before {
+          content: "";
+          position: absolute;
+          top: calc(50% - 3px);
+          left: 9px;
+          width: 0;
+          height: 0;
+          border-top: 3px solid transparent;
+          border-left: 5px solid var(--accent-color);
+          border-bottom: 3px solid transparent;
+        }
+      }
+    }
 
-      @media (max-width $MQMobile)
-        padding-left 1rem
+    & > .nav-link {
+      .sidebar & {
+        font-size: 15px;
+        line-height: 2rem;
+      }
+    }
 
-    &:first-child h4
-      margin-top 0
-      padding-top 0
-      border-top 0
+    .dropdown-subitem-wrapper {
+      padding: 0;
+      list-style: none;
+    }
+
+    .dropdown-subitem {
+      font-size: 0.9em;
+
+      .sidebar & {
+        padding-left: 0.5rem;
+      }
+    }
+  }
+}
 </style>
