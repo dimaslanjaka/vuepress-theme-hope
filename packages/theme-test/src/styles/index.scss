@@ -1,11 +1,12 @@
 @use 'normalize';
 
+@use '~@mr-hope/vuepress-shared/styles/config';
+
 @use 'arrow';
 @use 'badge';
 @use 'code';
 @use 'code-group';
 @use 'custom-container';
-@use 'home';
 @use 'layout';
 @use 'navbar';
 @use 'page';

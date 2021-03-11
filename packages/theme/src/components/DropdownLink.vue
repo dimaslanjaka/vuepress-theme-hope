@@ -233,7 +233,7 @@ export default defineComponent({
       padding: 0.6rem 0;
       border: 1px solid var(--grey14);
       border-radius: 0.25rem;
-      background: var(--bgcolor);
+      background: var(--bg-color);
       box-shadow: 2px 2px 10px var(--card-shadow-color);
       text-align: left;
       white-space: nowrap;

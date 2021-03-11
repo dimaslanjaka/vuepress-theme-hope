@@ -194,7 +194,7 @@ export default defineComponent({
       div {
         position: relative;
         padding: 0 0.5rem;
-        background: var(--bgcolor);
+        background: var(--bg-color);
         color: var(--accent-color);
         cursor: pointer;
 
@@ -256,7 +256,7 @@ export default defineComponent({
         border: 1px solid var(--border-color);
         border-radius: 0.25em;
         color: var(--text-color);
-        background: var(--bgcolor);
+        background: var(--bg-color);
         text-align: center;
         line-height: 2;
         outline: none;
@@ -267,7 +267,7 @@ export default defineComponent({
         padding: 0 0.75em;
         border: 1px solid var(--border-color);
         border-radius: 0.25em;
-        background: var(--bgcolor);
+        background: var(--bg-color);
         color: var(--accent-color);
         font-weight: 600;
         font-size: 15px;

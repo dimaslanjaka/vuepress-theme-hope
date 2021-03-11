@@ -65,72 +65,84 @@ export default defineComponent({
 </script>
 
 <style lang="stylus">
-@require '../../styles/palette'
+@require '../../styles/palette';
 
-.color-button
-  position relative
-  width 2.25rem
-  height 2.25rem
-  margin 0 0.25rem
-  padding 0.5rem
-  outline none
-  color #aaa
-  flex-shrink 0
+.color-button {
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0 0.25rem;
+  padding: 0.5rem;
+  outline: none;
+  color: #aaa;
+  flex-shrink: 0;
 
-  &:hover, &.select
-    color var(--accent-color)
+  &:hover, &.select {
+    color: var(--accent-color);
+  }
 
-  &.select:hover
-    color #aaa
+  &.select:hover {
+    color: #aaa;
+  }
 
-  .skin-icon
-    width 100%
-    height 100%
-    fill currentcolor
+  .skin-icon {
+    width: 100%;
+    height: 100%;
+    fill: currentcolor;
+  }
 
-  .color-picker-menu
-    background var(--bgcolor)
-    position absolute
-    top $navbarHeight - $navbarVerticalPadding
-    left 50%
-    min-width 100px
-    margin 0
-    padding 0.5em 0.75em
-    box-shadow 2px 2px 10px var(--card-shadow-color)
-    border-radius 0.25em
-    transform translateX(-50%)
-    z-index 150
+  .color-picker-menu {
+    background: var(--bg-color);
+    position: absolute;
+    top: $navbarHeight - $navbarVerticalPadding;
+    left: 50%;
+    min-width: 100px;
+    margin: 0;
+    padding: 0.5em 0.75em;
+    box-shadow: 2px 2px 10px var(--card-shadow-color);
+    border-radius: 0.25em;
+    transform: translateX(-50%);
+    z-index: 150;
 
-    @media (max-width $MQMobile)
-      top $navbarMobileHeight - $navbarMobileVerticalPadding
-      left calc(50% - 35px)
-      transform translateX(-80%)
+    @media (max-width: $MQMobile) {
+      top: $navbarMobileHeight - $navbarMobileVerticalPadding;
+      left: calc(50% - 35px);
+      transform: translateX(-80%);
 
-      &::before
-        left calc(50% + 35px)
+      &::before {
+        left: calc(50% + 35px);
+      }
+    }
 
-    &::before
-      content ''
-      position absolute
-      top -7px
-      left 50%
-      border-style solid
-      border-color transparent transparent var(--bgcolor)
-      border-width 0 7px 7px
-      transform translateX(-50%)
+    &::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      border-style: solid;
+      border-color: transparent transparent var(--bg-color);
+      border-width: 0 7px 7px;
+      transform: translateX(-50%);
 
-      @media (max-width $MQMobile)
-        left 80%
+      @media (max-width: $MQMobile) {
+        left: 80%;
+      }
+    }
 
-    &.menu-transition-enter-active, &.menu-transition-leave-active
-      transition all 0.25s ease-in-out
+    &.menu-transition-enter-active, &.menu-transition-leave-active {
+      transition: all 0.25s ease-in-out;
+    }
 
-    &.menu-transition-enter, &.menu-transition-leave-to
-      top 30px
-      opacity 0
+    &.menu-transition-enter, &.menu-transition-leave-to {
+      top: 30px;
+      opacity: 0;
+    }
 
-    ul
-      list-style-type none
-      margin 0
-      padding 0
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
 </style>

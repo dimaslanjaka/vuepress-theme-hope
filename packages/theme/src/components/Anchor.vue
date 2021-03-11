@@ -174,7 +174,7 @@ export default Anchor;
         left: -16px;
         width: 6px;
         height: 6px;
-        background: var(--bgcolor);
+        background: var(--bg-color);
         border: 1px solid var(--border-color);
         border-radius: 50%;
         transform: translateY(-3px);
