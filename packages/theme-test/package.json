@@ -18,15 +18,17 @@
   },
   "license": "MIT",
   "author": "Evan You",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "node/index.js",
+  "types": "node/index.d.ts",
   "files": [
     "lib"
   ],
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
     "clean": "rimraf lib *.tsbuildinfo",
-    "copy": "cpx \"src/**/*.{d.ts,vue,scss}\" lib"
+    "copy": "cpx \"src/**/*.{d.ts,vue,scss}\" lib",
+    "rollup:build": "rollup -c",
+    "rollup:watch": "rollup -c -w"
   },
   "dependencies": {
     "@vuepress/client": "2.0.0-alpha.25",
@@ -45,6 +47,9 @@
     "sass-loader": "^11.0.1",
     "vue": "^3.0.7",
     "vue-router": "^4.0.4"
+  },
+  "devDependencies": {
+    "rollup": "2.41.0"
   },
   "publishConfig": {
     "access": "public"

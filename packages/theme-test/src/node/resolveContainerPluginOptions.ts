@@ -1,6 +1,8 @@
 import type { ContainerPluginOptions } from "@vuepress/plugin-container";
 import type { DefaultThemePluginsOptions, DefaultThemeData } from "../types";
 
+import type { LocaleConfig } from "@vuepress/core";
+
 /**
  * Resolve options for @vuepress/plugin-container
  *
@@ -16,7 +18,7 @@ export const resolveContainerPluginOptions = (
   }
 
   const locales = Object.entries(localeOptions.locales || {}).reduce(
-    (result, [key, value]) => {
+    (result: LocaleConfig<{ defaultInfo: string }>, [key, value]) => {
       const defaultInfo = value?.[type];
       if (defaultInfo) {
         result[key] = {
@@ -48,11 +50,11 @@ export const resolveContainerPluginOptionsForDetails = (
 
   return {
     type: "details",
-    before: (info) =>
+    before: (info): string =>
       `<details class="custom-container details">${
         info ? `<summary>${info}</summary>` : ""
       }\n`,
-    after: () => "</details>\n",
+    after: (): string => "</details>\n",
   };
 };
 
@@ -70,8 +72,8 @@ export const resolveContainerPluginOptionsForCodeGroup = (
 
   return {
     type: "code-group",
-    before: () => `<CodeGroup>\n`,
-    after: () => "</CodeGroup>\n",
+    before: (): string => `<CodeGroup>\n`,
+    after: (): string => "</CodeGroup>\n",
   };
 };
 
@@ -89,7 +91,7 @@ export const resolveContainerPluginOptionsForCodeGroupItem = (
 
   return {
     type: "code-group-item",
-    before: (info) => `<CodeGroupItem title="${info}">\n`,
-    after: () => "</CodeGroupItem>\n",
+    before: (info): string => `<CodeGroupItem title="${info}">\n`,
+    after: (): string => "</CodeGroupItem>\n",
   };
 };

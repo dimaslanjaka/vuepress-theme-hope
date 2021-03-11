@@ -1,4 +1,4 @@
-@use '_normalize';
+@use 'normalize';
 
 @use 'arrow';
 @use 'badge';
@@ -16,4 +16,4 @@
 @use 'toc';
 @use 'transitions';
 
-@use '@vuepress/plugin-palette/style';
+// @use '@vuepress/plugin-palette/style';

@@ -118,7 +118,7 @@ export default defineComponent({
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail
      */
-    const handleDropdown = (e): void => {
+    const handleDropdown = (e: KeyboardEvent): void => {
       const isTriggerByTab = e.detail === 0;
       if (isTriggerByTab) {
         open.value = !open.value;

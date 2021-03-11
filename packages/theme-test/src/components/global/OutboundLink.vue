@@ -4,7 +4,7 @@
   </RawOutboundLink>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 import { OutboundLink } from "@vuepress/client";
 import { useThemeLocaleData } from "../../composables";

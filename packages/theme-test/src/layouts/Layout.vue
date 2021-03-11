@@ -85,11 +85,11 @@ export default defineComponent({
       isSidebarOpen.value = typeof to === "boolean" ? to : !isSidebarOpen.value;
     };
     const touchStart = { x: 0, y: 0 };
-    const onTouchStart = (e): void => {
+    const onTouchStart = (e: TouchEvent): void => {
       touchStart.x = e.changedTouches[0].clientX;
       touchStart.y = e.changedTouches[0].clientY;
     };
-    const onTouchEnd = (e): void => {
+    const onTouchEnd = (e: TouchEvent): void => {
       const dx = e.changedTouches[0].clientX - touchStart.x;
       const dy = e.changedTouches[0].clientY - touchStart.y;
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
@@ -109,7 +109,7 @@ export default defineComponent({
     }));
 
     // close sidebar after navigation
-    let unregisterRouterHook;
+    let unregisterRouterHook: () => void;
     onMounted(() => {
       const router = useRouter();
       unregisterRouterHook = router.afterEach(() => {

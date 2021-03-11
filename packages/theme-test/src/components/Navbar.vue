@@ -105,9 +105,9 @@ export default defineComponent({
 function getCssValue(el: HTMLElement | null, property: string): number {
   // NOTE: Known bug, will return 'auto' if style value is 'auto'
   const val = el?.ownerDocument?.defaultView?.getComputedStyle(el, null)?.[
-    property
+    property as any
   ];
-  const num = Number.parseInt(val, 10);
+  const num = Number.parseInt(val as string, 10);
   return Number.isNaN(num) ? 0 : num;
 }
 </script>

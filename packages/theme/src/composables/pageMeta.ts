@@ -3,8 +3,8 @@ import {
   usePageData,
   usePageFrontmatter,
   useSiteLocaleData,
-  useThemeLocaleData,
 } from "@vuepress/client";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 
 import type { ComputedRef } from "vue";
 import type {

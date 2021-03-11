@@ -1,10 +1,8 @@
 import { computed, inject } from "vue";
 import { useRoute } from "vue-router";
-import {
-  usePageData,
-  usePageFrontmatter,
-  useThemeLocaleData,
-} from "@vuepress/client";
+import { usePageData, usePageFrontmatter } from "@vuepress/client";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+
 import {
   isArray,
   isPlainObject,

@@ -24,11 +24,11 @@ export const defaultTheme: Theme<DefaultThemeOptions> = ({
   return {
     name: "@vuepress/theme-default",
 
-    layouts: path.resolve(__dirname, "./layouts"),
+    layouts: path.resolve(__dirname, "../client/layouts"),
 
-    clientAppEnhanceFiles: path.resolve(__dirname, "./clientAppEnhance.js"),
+    clientAppEnhanceFiles: path.resolve(__dirname, "../client/appEnhance.js"),
 
-    clientAppSetupFiles: path.resolve(__dirname, "./clientAppSetup.js"),
+    clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
 
     // use the relative file path to generate edit link
     extendsPageData: ({ filePathRelative }) => ({ filePathRelative }),
@@ -66,7 +66,7 @@ export const defaultTheme: Theme<DefaultThemeOptions> = ({
       ["@vuepress/git", resolveGitPluginOptions(themePlugins, localeOptions)],
       ["@vuepress/medium-zoom", resolveMediumZoomPluginOptions(themePlugins)],
       ["@vuepress/nprogress", themePlugins.nprogress !== false],
-      ["@vuepress/palette", { preset: "sass" }],
+      // ["@vuepress/palette", { preset: "sass" }],
       ["@vuepress/theme-data", { themeData: localeOptions }],
     ],
   };
