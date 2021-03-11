@@ -156,7 +156,7 @@ export default defineComponent({
       background: radial-gradient(
         16px at left top,
         transparent 50%,
-        var(--code-bgcolor) 50%
+        var(--code-bg-color) 50%
       );
     }
 
@@ -164,7 +164,7 @@ export default defineComponent({
       background: radial-gradient(
         16px at right top,
         transparent 50%,
-        var(--code-bgcolor) 50%
+        var(--code-bg-color) 50%
       );
     }
   }

@@ -2,10 +2,18 @@
 
 // colors
 $accentColor: #3eaf7c !default;
-$textColor: #2c3e50 !default;
+$bgColor: #fff !default;
+$darkBgColor: #1e1e1e !default;
+$bgColorLight: #f8f8f8 !default;
+$darkBgColorLight: #272727 !default;
+$bgColorBlur: rgba(255, 255, 255, 0.9) !default;
+$darkBgColorBlur: rgba(30, 30, 30, 0.9) !default;
+$textColor: #242424 !default;
+$darkTextColor: #9e9e9e !default;
 $borderColor: #eaecef !default;
-$codeBgColor: #282c34 !default;
-$arrowBgColor: #ccc !default;
+$darkBorderColor: #302d28 !default;
+$codeBgColor: #ecf4fa !default;
+$darkCodeBgColor: #282c34 !default;
 $tipColor: #42b983 !default;
 $warningColor: #e7c000 !default;
 $dangerColor: #cc0000 !default;

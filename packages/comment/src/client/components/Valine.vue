@@ -136,7 +136,7 @@ export default defineComponent({
     pre,
     code {
       color: var(--dark-grey, #666);
-      background: var(--code-bgcolor, #ecf4fa);
+      background: var(--code-bg-color, #ecf4fa);
     }
 
     blockquote {

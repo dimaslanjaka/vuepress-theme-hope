@@ -1,8 +1,10 @@
-@require '../palette';
+@use 'sass:color';
 
-{$contentClass} {
+@import "../variables";
+
+#{$contentClass} {
   code {
-    color: var(--text-color-l20);
+    color: color.scale($textColor, $lightness: 20%);
     padding: 0.25rem 0.5rem;
     margin: 0;
     font-size: 0.85em;
@@ -11,7 +13,7 @@
 
     .token {
       &.deleted {
-        color: #EC5975;
+        color: #ec5975;
       }
 
       &.inserted {
@@ -19,10 +21,9 @@
       }
     }
   }
-}
 
-{$contentClass} {
-  pre, pre[class*='language-'] {
+  pre,
+  pre[class*="language-"] {
     line-height: 1.4;
     padding: 1.25rem 1.5rem;
     margin: 0.85rem 0;
@@ -39,10 +40,29 @@
   }
 }
 
-div[class*='language-'] {
+div[class*="language-"] {
   position: relative;
   background: var(--code-bg-color);
   border-radius: 6px;
+
+  &::before {
+    position: absolute;
+    z-index: 3;
+    top: 0.8em;
+    right: 1em;
+    font-size: 0.75rem;
+  }
+
+  pre,
+  pre[class*="language-"] {
+    background: transparent;
+    position: relative;
+    z-index: 1;
+
+    code {
+      position: relative !important;
+    }
+  }
 
   .highlight-lines {
     user-select: none;
@@ -54,36 +74,18 @@ div[class*='language-'] {
     line-height: 1.4;
   }
 
-  pre, pre[class*='language-'] {
-    background: transparent;
-    position: relative;
-    z-index: 1;
-
-    code {
-      position: relative !important;
-    }
-  }
-
-  &::before {
-    position: absolute;
-    z-index: 3;
-    top: 0.8em;
-    right: 1em;
-    font-size: 0.75rem;
-  }
-
   &:not(.line-numbers-mode) {
-    .line-numbers-wrapper {
+    .line-numbers {
       display: none;
     }
   }
 
   &.line-numbers-mode {
-    .highlight-lines .highlighted {
+    .highlight-lines .highlight-line {
       position: relative;
 
       &:before {
-        content: ' ';
+        content: " ";
         position: absolute;
         z-index: 3;
         left: 0;
@@ -95,16 +97,20 @@ div[class*='language-'] {
     }
 
     pre {
-      padding-left: ($lineNumbersWrapperWidth + 1) rem;
+      margin-left: $lineNumbersWrapperWidth;
+      padding-left: 1rem;
       vertical-align: middle;
     }
 
-    .line-numbers-wrapper {
+    .line-numbers {
       position: absolute;
       top: 0;
       width: $lineNumbersWrapperWidth;
       text-align: center;
-      padding: 1.25rem 0;
+      padding-top: 1.25rem;
+      // padding: 1.25rem 0;
+      font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
       line-height: 1.4;
 
       br {
@@ -113,16 +119,15 @@ div[class*='language-'] {
 
       .line-number {
         position: relative;
-        z-index: 4;
+        z-index: 3;
         user-select: none;
         font-size: 0.85em;
       }
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
-      z-index: 2;
       top: 0;
       left: 0;
       width: $lineNumbersWrapperWidth;
@@ -133,58 +138,10 @@ div[class*='language-'] {
   }
 }
 
-for lang in $codeLang {
-  div{'[class~="language-' + lang + '"]'} {
+@each $lang in $codeLang {
+  div[class*="language-"].ext-#{$lang} {
     &:before {
-      content: '' + lang;
+      content: "" + $lang;
     }
   }
-}
-
-div[class~='language-javascript'] {
-  &:before {
-    content: 'js';
-  }
-}
-
-div[class~='language-typescript'] {
-  &:before {
-    content: 'ts';
-  }
-}
-
-div[class~='language-markup'] {
-  &:before {
-    content: 'html';
-  }
-}
-
-div[class~='language-markdown'] {
-  &:before {
-    content: 'md';
-  }
-}
-
-div[class~='language-json']:before {
-  content: 'json';
-}
-
-div[class~='language-ruby']:before {
-  content: 'rb';
-}
-
-div[class~='language-python']:before {
-  content: 'py';
-}
-
-div[class~='language-bash']:before {
-  content: 'sh';
-}
-
-div[class~='language-php']:before {
-  content: 'php';
-}
-
-div[class~='language-stylus']:before {
-  content: 'styl';
 }
