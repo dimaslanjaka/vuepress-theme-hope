@@ -41,13 +41,11 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import { usePageData, usePageFrontmatter, useSiteData } from "@vuepress/client";
 import {
-  usePageData,
-  usePageFrontmatter,
-  useSiteData,
+  useThemeData,
   useThemeLocaleData,
-} from "@vuepress/client";
-import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
+} from "@vuepress/plugin-theme-data/lib/composables";
 import throttle from "lodash.throttle";
 import Navbar from "../components/Navbar.vue";
 import Sidebar from "../components/Sidebar.vue";
@@ -78,7 +76,7 @@ export default defineComponent({
         frontmatter.value.navbar !== false &&
         themeLocale.value.navbar !== false &&
         Boolean(
-          siteData.value.$title ||
+          siteData.value.title ||
             themeData.value.logo ||
             themeData.value.repo ||
             themeData.value.nav ||

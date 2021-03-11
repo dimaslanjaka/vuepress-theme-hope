@@ -18,6 +18,8 @@ const config: UserConfig<DefaultThemeOptions> = {
     },
   },
 
+  theme: "hope-test",
+
   /** 主题配置 */
   themeConfig: {
     logo: "/logo.svg",

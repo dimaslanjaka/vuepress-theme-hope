@@ -14,52 +14,61 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus">
-@require '../styles/palette'
+<style lang="scss">
+.sidebar-button {
+  display: none;
+  box-sizing: content-box;
+  position: absolute;
+  top: calc(50% - 1.075rem);
+  left: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0.45rem;
+  font: unset;
+  vertical-align: middle;
+  transition: transform 0.2s ease-in-out;
 
-.sidebar-button
-  display none
-  box-sizing content-box
-  position absolute
-  top calc(50% - 1.075rem)
-  left 1rem
-  width 1.25rem
-  height 1.25rem
-  padding 0.45rem
-  font unset
-  vertical-align middle
-  transition transform 0.2s ease-in-out
+  @media (max-width: $MQMobile) {
+    display: block;
+  }
 
-  &::before
-    content ' '
-    margin-top 0.125em
+  &::before,
+  &::after,
+  .icon {
+    display: block;
+    width: 100%;
+    height: 0.2em;
+    transition: transform 0.2s ease-in-out;
+    border-radius: 0.05em;
+    background: var(--text-color);
+  }
 
-  &::after
-    content ' '
-    margin-bottom 0.125em
+  &::before {
+    content: " ";
+    margin-top: 0.125em;
+  }
 
-  .icon
-    margin 0.2em 0
+  &::after {
+    content: " ";
+    margin-bottom: 0.125em;
+  }
 
-  &::before, &::after, .icon
-    display block
-    width 100%
-    height 0.2em
-    transition transform 0.2s ease-in-out
-    border-radius 0.05em
-    background var(--text-color)
+  .icon {
+    margin: 0.2em 0;
+  }
 
-.sidebar-open .sidebar-button
-  &::before
-    transform translateY(0.4em) rotate(135deg)
+  .sidebar-open & {
+    &::before {
+      transform: translateY(0.4em) rotate(135deg);
+    }
 
-  .icon
-    transform scale(0)
+    .icon {
+      transform: scale(0);
+    }
 
-  &::after
-    transform translateY(-0.4em) rotate(-135deg)
-
-@media (max-width $MQMobile)
-  .sidebar-button
-    display block
+    &::after {
+      transform: translateY(-0.4em) rotate(-135deg);
+    }
+  }
+}
 </style>

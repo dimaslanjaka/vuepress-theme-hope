@@ -26,9 +26,9 @@ export const defaultTheme: Theme<ThemeHopeOptions> = (options, app) => {
 
     layouts: path.resolve(__dirname, "./layouts"),
 
-    clientAppEnhanceFiles: path.resolve(__dirname, "./clientAppEnhance.js"),
+    clientAppEnhanceFiles: path.resolve(__dirname, "./clientAppEnhance.ts"),
 
-    clientAppSetupFiles: path.resolve(__dirname, "./clientAppSetup.js"),
+    clientAppSetupFiles: path.resolve(__dirname, "./clientAppSetup.ts"),
 
     define: {
       // to determine if we have to register a mock `<Docsearch>` component
