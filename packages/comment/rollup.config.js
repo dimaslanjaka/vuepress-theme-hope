@@ -23,7 +23,7 @@ export default [
   },
   {
     input: "./src/node/index.ts",
-    output: [{ file: pkg.types, format: "esm", sourcemap: true }],
+    output: [{ file: pkg.types, format: "esm" }],
     plugins: [dts()],
   },
   {
@@ -56,9 +56,7 @@ export default [
   },
   {
     input: "./src/client/appEnhance.ts",
-    output: [
-      { file: "./client/appEnhance.d.ts", format: "esm", sourcemap: true },
-    ],
+    output: [{ file: "./client/appEnhance.d.ts", format: "esm" }],
     plugins: [dts()],
     external: ["balloon-css", /\.scss$/],
   },

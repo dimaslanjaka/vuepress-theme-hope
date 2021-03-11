@@ -16,7 +16,7 @@ export default [
   },
   {
     input: "./src/node/index.ts",
-    output: [{ file: "./node/index.d.ts", format: "cjs", sourcemap: true }],
+    output: [{ file: "./node/index.d.ts", format: "cjs" }],
     plugins: [dts()],
   },
   {
@@ -36,7 +36,7 @@ export default [
   },
   {
     input: "./src/client/index.ts",
-    output: [{ file: "./client/index.d.ts", format: "esm", sourcemap: true }],
+    output: [{ file: "./client/index.d.ts", format: "esm" }],
     plugins: [dts()],
   },
 ];

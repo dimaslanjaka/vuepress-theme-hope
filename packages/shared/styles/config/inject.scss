@@ -9,9 +9,9 @@
 
 @function get-value($variable, $isDark) {
   @if meta.type-of($variable) == color {
-    @return #{$variable};
+    @return $variable;
   } @else if meta.type-of($variable) == list {
-    @return #{if($isDark, list.nth($variable, 2), list.nth($variable, 1))};
+    @return if($isDark, list.nth($variable, 2), list.nth($variable, 1));
   } @else {
     @debug "Unexpected variable type #{meta.type-of($variable)}";
     @return transparent;
@@ -22,7 +22,7 @@
   $variables: meta.module-variables($module);
 
   @each $varName, $value in $variables {
-    --#{$varName}: $value;
+    --#{$varName}: #{$value};
   }
 }
 
@@ -31,14 +31,14 @@
 
   @each $varName, $varValue in $variables {
     @if meta.type-of($varValue) == map {
-      @each $amount in map.get($varValue, "amount") {
-        --#{$varName}-#{if($amount > 0,"l","d")}#{$amount / 1%}: color.scale(
-          get-value(map.get($value, "color"), $isDark),
-          $lightness: $amount
-        );
+      @each $amount in map.get($varValue, "amount") {    
+        --#{$varName}-#{if($amount > 0,"l","d")}#{$amount / 1%}: #{color.scale(
+            get-value(map.get($varValue, "color"), $isDark),
+            $lightness: $amount
+          )};
       }
     } @else {
-      --#{$varName}: get-value($varValue, $isDark);
+      --#{$varName}: #{get-value($varValue, $isDark)};
     }
   }
 }
