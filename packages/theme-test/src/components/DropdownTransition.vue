@@ -16,13 +16,13 @@ export default defineComponent({
   name: "DropdownTransition",
 
   setup() {
-    const setHeight = (items): void => {
+    const setHeight = (item: HTMLElement): void => {
       // explicitly set height so that it can be transitioned
-      items.style.height = items.scrollHeight + "px";
+      item.style.height = `${item.scrollHeight}px`;
     };
 
-    const unsetHeight = (items): void => {
-      items.style.height = "";
+    const unsetHeight = (item: HTMLElement): void => {
+      item.style.height = "";
     };
 
     return {
@@ -32,3 +32,10 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+.dropdown-enter-from,
+.dropdown-leave-to {
+  height: 0 !important;
+}
+</style>

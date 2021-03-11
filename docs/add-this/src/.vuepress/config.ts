@@ -7,12 +7,12 @@ const config: UserConfig<DefaultThemeOptions> = {
 
   locales: {
     "/": {
-      lang: "zh-CN",
       title: "Share Plugin",
       description: "Share Plugin provided by AddThis",
     },
 
     "/zh/": {
+      lang: "zh-CN",
       title: "分享插件",
       description: "由 AddThis 提供的分享插件",
     },
@@ -62,9 +62,10 @@ const config: UserConfig<DefaultThemeOptions> = {
           },
         ],
         lang: "zh-CN",
-        selectText: "选择语言",
+        selectLanguageText: "选择语言",
+        selectLanguageAriaLabel: "选择语言",
         lastUpdatedText: "上次编辑于",
-        label: "简体中文",
+        selectLanguageName: "简体中文",
       },
     },
   },

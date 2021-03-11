@@ -1,6 +1,6 @@
 import type { LocaleData, ThemeConfig } from "@vuepress/core";
 import type { ThemeData } from "@vuepress/plugin-theme-data";
-import type { NavbarConfig, SidebarConfig } from "./nav";
+import type { NavbarConfig, SidebarConfig } from "../nav";
 
 export interface DefaultThemeOptions
   extends ThemeConfig,
