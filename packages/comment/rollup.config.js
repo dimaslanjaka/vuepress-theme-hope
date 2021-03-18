@@ -1,5 +1,6 @@
 import dts from "rollup-plugin-dts";
 import pkg from "./package.json";
+import copy from "rollup-plugin-copy";
 import styles from "rollup-plugin-styles";
 import typescript from "@rollup/plugin-typescript";
 import typescript2 from "rollup-plugin-typescript2";
@@ -41,8 +42,10 @@ export default [
           },
         },
       }),
-      styles(),
       terser(),
+      copy({
+        targets: [{ src: "./src/client/styles/**", dest: "client/styles" }],
+      }),
     ],
     external: [
       "@mr-hope/vuepress-plugin-reading-time/client",
@@ -52,6 +55,7 @@ export default [
       "valine",
       "vue",
       "vue-router",
+      /\.scss$/,
     ],
   },
   {

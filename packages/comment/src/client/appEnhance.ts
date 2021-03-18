@@ -3,7 +3,7 @@ import PageInfo from "./components/PageInfo.vue";
 
 import type { ClientAppEnhance } from "@vuepress/client";
 
-import "./styles/tag.scss";
+import "./styles/index.scss";
 
 const enhanceApp: ClientAppEnhance = ({ app }) => {
   app.component("Comment", Comment);

@@ -68,32 +68,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-.categories-wrapper {
-  list-style: none;
-  margin: 0;
-  padding-left: 0;
-
-  .category {
-    display: inline-block;
-
-    > span {
-      &:after {
-        content: ", ";
-      }
-
-      &:last-child:after {
-        content: "";
-      }
-    }
-
-    &.clickable {
-      > span:hover {
-        cursor: pointer;
-        color: var(--accent-color, #3eaf7c);
-      }
-    }
-  }
-}
-</style>
