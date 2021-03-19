@@ -778,6 +778,12 @@ declare module "reveal.js-plugins/chalkboard/chalkboard.js" {
   export default chalkboardPlugin;
 }
 
+declare module "*.scss" {
+  const content: undefined;
+
+  export default content;
+}
+
 declare module "*.styl" {
   const content: undefined;
 

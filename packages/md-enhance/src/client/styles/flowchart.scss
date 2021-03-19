@@ -1,0 +1,27 @@
+@use '@mr-hope/vuepress-palette' as *;
+
+.md-flowchart {
+  overflow-x: scroll;
+  text-align: center;
+  transition: all 1s;
+  padding: 0.6em 0.4em;
+
+  &.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--grey15);
+  }
+
+  @media (max-width: $sceenS) {
+    margin: 0 -1.5rem;
+    padding: 0.6em 0;
+  }
+
+  svg.md-flowchart-loading-icon {
+    width: 2.5em;
+    height: 2.5em;
+    margin: 2.5em auto;
+    fill: var(--accent-color);
+  }
+}

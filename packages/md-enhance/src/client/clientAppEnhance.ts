@@ -11,7 +11,7 @@ const clientAppEnhance: ClientAppEnhance = () => {
   // if (MARKDOWN_ENHANCE_OPTIONS.footnote || MARKDOWN_ENHANCE_OPTIONS.enableAll)
   //   void import("vuepress-plugin-md-enhance/client/styles/footnote.styl");
   if (MARKDOWN_ENHANCE_OPTIONS.tex || MARKDOWN_ENHANCE_OPTIONS.enableAll) {
-    void import("./styles/tex.styl");
+    void import("./styles/tex.scss");
     void import("katex/dist/katex.min.css");
   }
   // if (MARKDOWN_ENHANCE_OPTIONS.flowchart || MARKDOWN_ENHANCE_OPTIONS.enableAll)
