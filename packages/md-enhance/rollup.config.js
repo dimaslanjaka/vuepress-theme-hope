@@ -1,66 +1,28 @@
 import dts from "rollup-plugin-dts";
-import pkg from "./package.json";
-import copy from "rollup-plugin-copy";
-import typescript from "@rollup/plugin-typescript";
-import typescript2 from "rollup-plugin-typescript2";
-import vue from "rollup-plugin-vue";
-import { terser } from "rollup-plugin-terser";
+import { rollupTypescript, rollupVue } from "../../script/rollup";
 
 export default [
-  {
-    input: "./src/node/index.ts",
-    output: [
-      { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
-    ],
-    plugins: [
-      typescript({
-        declaration: true,
-        declarationMap: true,
-      }),
-      terser(),
-    ],
-    external: ["@mr-hope/vuepress-shared", "@vuepress/utils"],
-  },
-  {
-    input: "./src/node/index.ts",
-    output: [{ file: pkg.types, format: "esm" }],
-    plugins: [dts()],
-  },
-  {
-    input: "./src/client/appEnhance.ts",
-    output: [
-      { file: "./client/appEnhance.js", format: "esm", sourcemap: true },
-    ],
-    plugins: [
-      vue(),
-      typescript2({
-        tsconfigOverride: {
-          compilerOptions: {
-            declaration: false,
-            declarationMap: false,
-          },
-        },
-      }),
-      terser(),
-      copy({
-        targets: [{ src: "./src/client/styles/**", dest: "client/styles" }],
-      }),
-    ],
+  ...rollupTypescript("node/index", {
     external: [
-      "@mr-hope/vuepress-plugin-reading-time/client",
-      "@mr-hope/vuepress-shared/client",
-      "@vuepress/client",
-      "balloon-css",
-      "valine",
+      "@mr-hope/vuepress-shared",
+      "@vuepress/utils",
+      "hash-sum",
+      "katex",
+    ],
+  }),
+  ...rollupVue("client/appEnhance.ts", {
+    external: [
+      "flowchart.js",
+      "katex/dist/katex.min.css",
+      "lodash.debounce",
       "vue",
-      "vue-router",
       /\.scss$/,
     ],
-  },
-  {
-    input: "./src/client/appEnhance.ts",
-    output: [{ file: "./client/appEnhance.d.ts", format: "esm" }],
-    plugins: [dts()],
-    external: ["balloon-css", /\.scss$/],
-  },
+    dtsExternal: [/\.scss$/],
+    copy: [["client/styles", "client"]],
+  }),
+  ...rollupVue("client/appSetup.ts", {
+    external: ["vue", /\.scss$/],
+    dtsExternal: [/\.scss$/],
+  }),
 ];

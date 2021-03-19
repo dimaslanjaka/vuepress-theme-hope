@@ -1,22 +1,17 @@
-<template>
-  <div :class="{ loading }" class="md-flowchart">
-    <Loading v-if="loading" class="md-flowchart-loading-icon" />
-  </div>
-</template>
-
-<script lang="ts">
 import {
   computed,
   defineComponent,
+  h,
   onBeforeUnmount,
   onMounted,
   ref,
 } from "vue";
-import type { PropType } from "vue";
 import Loading from "./icons/LoadingIcon.vue";
 import debounce from "lodash.debounce";
 import presets from "./presets";
 import * as Flowchart from "flowchart.js";
+
+import type { PropType, VNode } from "vue";
 
 let svg: Flowchart.Instance;
 
@@ -38,7 +33,7 @@ export default defineComponent({
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const $preset = computed<Record<string, any>>(() => {
-      const preset = presets[props.preset as "ant" | "vue"];
+      const preset = presets[props.preset];
 
       if (!preset) {
         console.warn(`[md-enhance:flowchart] Unknown preset: ${props.preset}`);
@@ -66,7 +61,7 @@ export default defineComponent({
       const delay = (): Promise<void> =>
         new Promise((resolve) => setTimeout(resolve, 500));
 
-      (flowchart.value as HTMLElement).setAttribute("id", props.id);
+      flowchart.value?.setAttribute("id", props.id);
 
       void Promise.all([
         import(/* webpackChunkName: "flowchart" */ "flowchart.js"),
@@ -74,7 +69,7 @@ export default defineComponent({
       ]).then(([flowchart]) => {
         const { parse } = flowchart;
 
-        svg = parse(props.code);
+        svg = parse(decodeURIComponent(props.code));
         scale.value = getScale(window.innerWidth);
 
         svg.drawSVG(props.id, { ...$preset.value, scale: scale.value });
@@ -88,9 +83,14 @@ export default defineComponent({
       window.removeEventListener("resize", resizeHandler.value);
     });
 
-    return {
-      loading,
-    };
+    return (): VNode =>
+      h(
+        "div",
+        {
+          class: { loading: loading.value, "md-flowchart": true },
+          ref: flowchart,
+        },
+        loading.value ? h(Loading, { class: "md-flowchart-loading-icon" }) : []
+      );
   },
 });
-</script>

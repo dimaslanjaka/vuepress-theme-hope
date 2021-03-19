@@ -1,5 +1,6 @@
 @use '@mr-hope/vuepress-palette' as *;
 @use '@mr-hope/vuepress-shared/styles/arrow';
+@use '@mr-hope/vuepress-shared/styles/reset';
 
 .code-demo-wrapper {
   margin-top: 10px;
@@ -53,7 +54,7 @@
         border-radius: 0;
       }
 
-      @media (max-width: $sceenS) {
+      @media (max-width: $screenS) {
         margin: 0.8rem 0;
 
         &.line-numbers-mode::after {
@@ -120,6 +121,7 @@
   }
 
   .button {
+    @include reset.button();
     position: relative;
     margin: 0;
     padding: 0;

@@ -25,6 +25,16 @@ import type { PropType } from "vue";
 import { usePageFrontmatter } from "@vuepress/client";
 import Loading from "./icons/LoadingIcon.vue";
 
+import "../shared/reveal";
+
+import type { RevealOptions } from "reveal.js";
+
+declare const REVEAL_CONFIG: Partial<RevealOptions>;
+declare const REVEAL_PLUGINS: string[];
+
+export const revealConfig = REVEAL_CONFIG;
+export const revealPlugins = REVEAL_PLUGINS;
+
 type ThemeType =
   | "auto"
   | "black"

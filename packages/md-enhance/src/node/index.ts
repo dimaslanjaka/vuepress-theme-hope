@@ -1,6 +1,6 @@
 import { path } from "@vuepress/utils";
 import { codeDemoDefaultSetting } from "./markdown-it/code-demo";
-// import flowchart from "./markdown-it/flowchart";
+import flowchart from "./markdown-it/flowchart";
 import footnote from "./markdown-it/footnote";
 import katex from "./markdown-it/katex";
 import mark from "./markdown-it/mark";
@@ -50,8 +50,8 @@ const markdownEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (option, app) => {
           : {},
     }),
 
-    clientAppSetupFiles: path.resolve(__dirname, "./clientAppSetup.js"),
-    clientAppEnhanceFiles: path.resolve(__dirname, "./clientAppEnhance.js"),
+    clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
+    clientAppEnhanceFiles: path.resolve(__dirname, "../client/appEnhance.js"),
 
     extendsMarkdown: (markdownIt): void => {
       if (markdownOption.sup || markdownOption.enableAll) markdownIt.use(sup);
@@ -59,9 +59,8 @@ const markdownEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (option, app) => {
       if (markdownOption.footnote || markdownOption.enableAll)
         markdownIt.use(footnote);
       if (markdownOption.mark || markdownOption.enableAll) markdownIt.use(mark);
-      // if (markdownOption.flowchart || markdownOption.enableAll)
-      //   // @ts-ignore
-      //   markdownIt.use(flowchart);
+      if (markdownOption.flowchart || markdownOption.enableAll)
+        markdownIt.use(flowchart);
       if (markdownOption.tex || markdownOption.enableAll)
         markdownIt.use(katex, [
           {

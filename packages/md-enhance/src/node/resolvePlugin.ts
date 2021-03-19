@@ -23,6 +23,7 @@ export const resolvePlugin = (
   };
 
   const config: PluginConfig[] = [
+    ["@mr-hope/palette"],
     [
       "@vuepress/container",
       { type: "info", defaultTitle: resolveConfig(i18n.info) },

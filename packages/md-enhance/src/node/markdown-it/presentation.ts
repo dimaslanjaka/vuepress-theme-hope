@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import * as hash from "hash-sum";
+import hash from "hash-sum";
 import * as MarkdownIt from "markdown-it";
 import * as StateBlock from "markdown-it/lib/rules_block/state_block";
 const presentation = (

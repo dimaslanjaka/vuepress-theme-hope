@@ -1,4 +1,4 @@
-import * as hash from "hash-sum";
+import hash from "hash-sum";
 import * as Token from "markdown-it/lib/token";
 
 export const codeDemoRender = (tokens: Token[], idx: number): string => {

@@ -1,11 +1,9 @@
 /* eslint-disable max-statements */
-import * as hash from "hash-sum";
+import hash from "hash-sum";
 import * as MarkdownIt from "markdown-it";
 import * as StateBlock from "markdown-it/lib/rules_block/state_block";
 
-const flowchart = (
-  md: MarkdownIt & { $dataBlock: Record<string, string> }
-): void => {
+const flowchart = (md: MarkdownIt): void => {
   const OPEN_MARKER = "```flow";
   const CLOSEMARKER = "```";
 
@@ -100,10 +98,10 @@ const flowchart = (
     const token = tokens[idx];
     const key = `flowchart_${hash(idx)}`;
     const { content, info } = token;
-    md.$dataBlock[key] = content;
-    return `<FlowChart id="${key}" :code="$dataBlock.${key}" preset="${
-      info.trim() || "vue"
-    }"></FlowChart>`;
+
+    return `<FlowChart id="${key}" code="${encodeURIComponent(
+      content
+    )}" preset="${info.trim() || "vue"}"></FlowChart>`;
   };
 };
 

@@ -1,10 +1,10 @@
 @use '@mr-hope/vuepress-palette' as *;
 
 .md-flowchart {
+  padding: 0.6em 0.4em;
+  transition: all 1s;
   overflow-x: scroll;
   text-align: center;
-  transition: all 1s;
-  padding: 0.6em 0.4em;
 
   &.loading {
     display: flex;
@@ -13,7 +13,7 @@
     background: var(--grey15);
   }
 
-  @media (max-width: $sceenS) {
+  @media (max-width: $screenS) {
     margin: 0 -1.5rem;
     padding: 0.6em 0;
   }

@@ -6,7 +6,9 @@ import type {
   VueCode,
   VueScript,
 } from "./typings";
-import type { CodeDemoOptions } from "../../shared";
+import type { CodeDemoOptions, CodeDemoGlobalOptions } from "../../shared";
+
+declare const CODE_DEMO_OPTIONS: CodeDemoGlobalOptions;
 
 export const option = CODE_DEMO_OPTIONS;
 

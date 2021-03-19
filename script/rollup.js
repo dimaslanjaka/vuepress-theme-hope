@@ -8,7 +8,13 @@ import styles from "rollup-plugin-styles";
 
 export const rollupTypescript = (
   filePath,
-  { external = [], dtsExternal = [], useStyle = false, copy = [] } = {}
+  {
+    external = [],
+    dtsExternal = [],
+    useStyle = false,
+    copy = [],
+    tsconfig = {},
+  } = {}
 ) => [
   {
     input: `./src/${filePath}.ts`,
@@ -21,7 +27,7 @@ export const rollupTypescript = (
       },
     ],
     plugins: [
-      typescript(),
+      typescript(tsconfig),
       ...(useStyle ? [styles()] : []),
       terser(),
       ...(copy.length
