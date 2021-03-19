@@ -42,7 +42,7 @@
     "balloon-css": "^1.2.0"
   },
   "devDependencies": {
-    "rollup": "2.41.0"
+    "rollup": "2.41.5"
   },
   "publishConfig": {
     "access": "public"

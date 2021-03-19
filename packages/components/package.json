@@ -40,11 +40,11 @@
     "@types/lodash.debounce": "^4.0.6",
     "lodash.debounce": "^4.0.8",
     "screenfull": "^5.1.0",
-    "vue-router": "^4.0.2"
+    "vue-router": "^4.0.5"
   },
   "devDependencies": {
-    "rollup": "2.41.0",
-    "vuepress": "2.0.0-alpha.26"
+    "rollup": "2.41.5",
+    "vuepress": "2.0.0-beta.3"
   },
   "publishConfig": {
     "access": "public"
