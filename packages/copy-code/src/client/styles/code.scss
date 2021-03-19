@@ -1,4 +1,5 @@
-@use "~@mr-hope/vuepress-shared/styles/reset";
+@use '@mr-hope/vuepress-palette' as *;
+@use "@mr-hope/vuepress-shared/styles/reset";
 
 .copy-code-button {
   @include reset.button;
@@ -21,7 +22,7 @@
     bottom: -14px;
     z-index: 100;
 
-    @media (max-width: var(--screen-s)) {
+    @media (max-width: $screenS) {
       right: -2px;
       border-top-right-radius: 50% 20%;
       border-bottom-right-radius: 50% 20%;

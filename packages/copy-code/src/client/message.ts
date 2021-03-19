@@ -1,5 +1,3 @@
-import "./styles/message.scss";
-
 export default class Message {
   private containerElement: HTMLElement;
 

@@ -1,3 +1,5 @@
+@use '@mr-hope/vuepress-palette' as *;
+
 @keyframes message-move-in {
   0% {
     opacity: 0;
@@ -24,7 +26,7 @@
 
 #message-container {
   position: fixed;
-  top: calc(var(--navbar-height, 3.6rem) + 1rem);
+  top: $navbarHeight + 1rem;
   left: 0;
   right: 0;
   z-index: 100;
@@ -34,9 +36,9 @@
     display: inline-block;
     padding: 8px 10px;
     border-radius: 3px;
-    box-shadow: 0 0 10px 0 var(--box-shadow-color, #bbb);
-    background: var(--bg-color, #fff);
-    color: var(--text-color, #333);
+    box-shadow: 0 0 10px 0 var(--box-shadow-color);
+    background: var(--bg-color);
+    color: var(--text-color);
     font-size: 14px;
     transition: height 0.2s ease-in-out, margin 0.2s ease-in-out;
 

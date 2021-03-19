@@ -27,6 +27,8 @@ const copyCodePlugin: Plugin<CopyCodeOptions> = (options, app) => {
     }),
 
     clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
+
+    plugins: [["@mr-hope/palette"]],
   };
 };
 

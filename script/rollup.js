@@ -1,19 +1,39 @@
 import typescript from "@rollup/plugin-typescript";
+import rollupCopy from "rollup-plugin-copy";
 import dts from "rollup-plugin-dts";
 import { terser } from "rollup-plugin-terser";
+import styles from "rollup-plugin-styles";
 
-export const rollupTypescript = (filePath, external = [], dtsExternal = []) => [
+export const rollupTypescript = (
+  filePath,
+  { external = [], dtsExternal = [], useStyle = false, copy = [] } = {}
+) => [
   {
     input: `./src/${filePath}.ts`,
     output: [
       {
         file: `./${filePath}.js`,
-        format: filePath.includes("/node/") ? "cjs" : "esm",
+        format: filePath.startsWith("node/") ? "cjs" : "esm",
         sourcemap: true,
         exports: "named",
       },
     ],
-    plugins: [typescript(), terser()],
+    plugins: [
+      typescript(),
+      ...(useStyle ? [styles()] : []),
+      terser(),
+      ...(copy.length
+        ? [
+            rollupCopy({
+              targets: copy.map((item) =>
+                typeof item === "string"
+                  ? { src: `./src/${item}`, dest: item }
+                  : { src: `./src/${item[0]}`, dest: item[1] }
+              ),
+            }),
+          ]
+        : []),
+    ],
     external,
   },
   {
