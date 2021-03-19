@@ -1,0 +1,60 @@
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
+@forward '@mr-hope/vuepress-palette';
+@forward '../palette';
+
+@function get-color($variable, $isDark) {
+  @if meta.type-of($variable) == color {
+    @return $variable;
+  } @else if meta.type-of($variable) == list {
+    @return if($isDark, list.nth($variable, 2), list.nth($variable, 1));
+  } @else {
+    @debug "Unexpected variable type #{meta.type-of($variable)}";
+    @return transparent;
+  }
+}
+
+@mixin inject-value($module) {
+  $variables: meta.module-variables($module);
+
+  @each $varName, $varValue in $variables {
+    // length
+    @if meta.type-of($varValue) == length {
+      --#{$varName}: #{$varValue};
+    } @else if meta.type-of($varValue) == map {
+      // it's a valid color config
+      @if meta.type-of(map.get($varValue, "amount")) ==
+        list and
+        meta.type-of(map.get($varValue, "color")) ==
+        list
+      {
+        @each $amount in map.get($varValue, "amount") {
+          :root {
+            --#{$varName}-#{if($amount > 0,"l","d")}#{$amount / 1%}: #{color.scale(
+                get-color(map.get($varValue, "color"), false),
+                $lightness: $amount
+              )};
+          }
+
+          body[dark] {
+            --#{$varName}-#{if($amount > 0,"l","d")}#{$amount / 1%}: #{color.scale(
+                get-color(map.get($varValue, "color"), true),
+                $lightness: $amount
+              )};
+          }
+        }
+      }
+    } @else if meta.type-of($varValue) == list and list.length($varValue) == 2 {
+      :root {
+        --#{$varName}: #{get-color($varValue, false)};
+      }
+
+      body[dark] {
+        --#{$varName}: #{get-color($varValue, true)};
+      }
+    }
+  }
+}

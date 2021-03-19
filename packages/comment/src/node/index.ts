@@ -34,6 +34,7 @@ const commentPlugin: Plugin<CommentOptions> = (options, app) => {
     clientAppEnhanceFiles: path.resolve(__dirname, "../client/appEnhance.js"),
 
     plugins: [
+      ["@mr-hope/palette"],
       ["@mr-hope/reading-time", { wordPerminute: options.wordPerminute }],
     ],
   };
