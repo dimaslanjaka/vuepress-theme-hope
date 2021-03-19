@@ -1,7 +1,7 @@
 // import { usePageTitle } from "@mr-hope/vuepress-shared/client";
 import { usePageFrontmatter } from "@vuepress/client";
 import { computed, defineComponent, h } from "vue";
-import Valine from "./Valine.vue";
+import Valine from "./Valine";
 import { commentOptions } from "../define";
 
 import type { VNode } from "vue";

@@ -1,6 +1,8 @@
 import typescript from "@rollup/plugin-typescript";
+import typescript2 from "rollup-plugin-typescript2";
 import rollupCopy from "rollup-plugin-copy";
 import dts from "rollup-plugin-dts";
+import vue from "rollup-plugin-vue";
 import { terser } from "rollup-plugin-terser";
 import styles from "rollup-plugin-styles";
 
@@ -44,7 +46,10 @@ export const rollupTypescript = (
   },
 ];
 
-export const rollupVue = (filePath, external = [], dtsExternal = []) => {
+export const rollupVue = (
+  filePath,
+  { external = [], dtsExternal = [], useStyle = false, copy = [] } = {}
+) => {
   const temp = filePath.split(".");
   const ext = temp.pop();
   const filename = temp.join(".");
@@ -60,7 +65,30 @@ export const rollupVue = (filePath, external = [], dtsExternal = []) => {
           exports: "named",
         },
       ],
-      plugins: [typescript(), terser()],
+      plugins: [
+        vue(),
+        typescript2({
+          tsconfigOverride: {
+            compilerOptions: {
+              declaration: false,
+              declarationMap: false,
+            },
+          },
+        }),
+        ...(useStyle ? [styles()] : []),
+        terser(),
+        ...(copy.length
+          ? [
+              rollupCopy({
+                targets: copy.map((item) =>
+                  typeof item === "string"
+                    ? { src: `./src/${item}`, dest: item }
+                    : { src: `./src/${item[0]}`, dest: item[1] }
+                ),
+              }),
+            ]
+          : []),
+      ],
       external,
     },
     ...(ext === "ts"
