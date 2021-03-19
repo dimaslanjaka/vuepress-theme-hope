@@ -1,27 +1,22 @@
 <script lang="ts">
+import { i18n } from "@mr-hope/vuepress-plugin-reading-time/client/i18n";
 import { usePageData, useRouteLocale } from "@vuepress/client";
-import { computed, defineComponent, h, inject } from "vue";
-import { TimeIcon } from "./icons";
+import { computed, defineComponent, h } from "vue";
+import { TimerIcon } from "./icons";
 import { pageInfoI18n } from "../define";
 
-import type {
-  ReadingTime,
-  ReadingTimeI18nConfig,
-} from "@mr-hope/vuepress-plugin-reading-time";
+import type { ReadingTime } from "@mr-hope/vuepress-plugin-reading-time";
 import type { VNode } from "vue";
 
 export default defineComponent({
   name: "ReadingTimeInfo",
 
-  components: { TimeIcon },
+  components: { TimerIcon },
 
   setup() {
     const routeLocale = useRouteLocale();
     const page = usePageData<{ readingTime: ReadingTime }>();
-    const { minute = "", time = "" } =
-      inject<Record<string, ReadingTimeI18nConfig>>("reading-time-i18n")?.[
-        routeLocale.value
-      ] || {};
+    const { minute = "", time = "" } = i18n[routeLocale.value] || {};
 
     const hint = computed(() => pageInfoI18n[routeLocale.value].readingTime);
 
@@ -43,7 +38,7 @@ export default defineComponent({
               ariaLabel: hint.value,
               "data-balloon-pos": "down",
             },
-            [h(TimeIcon), h("span", readingTime.value)]
+            [h(TimerIcon), h("span", readingTime.value)]
           )
         : null;
   },

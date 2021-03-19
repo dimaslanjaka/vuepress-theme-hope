@@ -36,7 +36,8 @@
     }
 
     .vwrap {
-      border-color: var(--grey12);
+      border-width: 0;
+      box-shadow: 0 0 8px 4px var(--box-shadow-color);
 
       .vicon.actived {
         fill: var(--accent-color);
@@ -141,10 +142,14 @@
           }
 
           .vmeta .vat {
+            padding: 4px 6px;
             color: var(--accent-color);
+            transition: background-color 0.4s, color 0.4s;
+            border-radius: 4px;
 
             &:hover {
-              color: var(--accent-color-d10);
+              background-color: var(--accent-color);
+              color: var(--white);
             }
           }
         }
@@ -155,6 +160,10 @@
           &.expand:after {
             color: var(--grey);
           }
+        }
+
+        .vreply-wrapper .vwrap {
+          margin: 0 8px;
         }
 
         .vquote {
