@@ -1,8 +1,8 @@
 @use '@mr-hope/vuepress-palette' as *;
 
-@import "~reveal.js/dist/reveal.css";
-@use './highlight';
-@use './theme';
+@import "reveal.js/dist/reveal.css";
+@use 'highlight';
+@use 'theme';
 
 .md-presentation {
   width: 100%;

@@ -12,9 +12,17 @@ export default [
   }),
   ...rollupVue("client/appEnhance.ts", {
     external: [
+      "@vuepress/client",
       "flowchart.js",
       "katex/dist/katex.min.css",
       "lodash.debounce",
+      "reveal.js",
+      "reveal.js/plugin/markdown/markdown.esm.js",
+      "reveal.js/plugin/highlight/highlight.esm.js",
+      "reveal.js/plugin/math/math.esm.js",
+      "reveal.js/plugin/search/search.esm.js",
+      "reveal.js/plugin/notes/notes.esm.js",
+      "reveal.js/plugin/zoom/zoom.esm.js",
       "vue",
       /\.scss$/,
     ],

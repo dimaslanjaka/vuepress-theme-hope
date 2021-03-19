@@ -6,9 +6,9 @@ import {
   onMounted,
   ref,
 } from "vue";
-import Loading from "./icons/LoadingIcon.vue";
 import debounce from "lodash.debounce";
-import presets from "./presets";
+import { loadingIcon } from "./loading";
+import presets from "../presets";
 import * as Flowchart from "flowchart.js";
 
 import type { PropType, VNode } from "vue";
@@ -17,8 +17,6 @@ let svg: Flowchart.Instance;
 
 export default defineComponent({
   name: "FlowChart",
-
-  components: { Loading },
 
   props: {
     id: { type: String, required: true },
@@ -84,13 +82,10 @@ export default defineComponent({
     });
 
     return (): VNode =>
-      h(
-        "div",
-        {
-          class: { loading: loading.value, "md-flowchart": true },
-          ref: flowchart,
-        },
-        loading.value ? h(Loading, { class: "md-flowchart-loading-icon" }) : []
-      );
+      h("div", {
+        class: { loading: loading.value, "md-flowchart": true },
+        ref: flowchart,
+        innerHTML: loading.value ? loadingIcon : "",
+      });
   },
 });

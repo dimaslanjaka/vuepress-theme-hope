@@ -1,5 +1,5 @@
-import FlowChart from "./FlowChart";
-// import Presentation from "./Presentation.vue";
+import FlowChart from "./components/FlowChart";
+import Presentation from "./components/Presentation";
 
 import "./styles/index.scss";
 
@@ -21,15 +21,16 @@ const clientAppEnhance: ClientAppEnhance = ({ app }) => {
     MARKDOWN_ENHANCE_OPTIONS.flowchart ||
     MARKDOWN_ENHANCE_OPTIONS.enableAll
   ) {
-    void import("./styles/flowchart.scss");
-
     app.component("FlowChart", FlowChart);
+    void import("./styles/flowchart.scss");
   }
-  // if (
-  //   MARKDOWN_ENHANCE_OPTIONS.presentation ||
-  //   MARKDOWN_ENHANCE_OPTIONS.enableAll
-  // )
-  //   app.component("Presentation", Presentation);
+  if (
+    MARKDOWN_ENHANCE_OPTIONS.presentation ||
+    MARKDOWN_ENHANCE_OPTIONS.enableAll
+  ) {
+    app.component("Presentation", Presentation);
+    void import("./styles/slides.scss");
+  }
 };
 
 export default clientAppEnhance;

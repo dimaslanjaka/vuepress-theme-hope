@@ -1,33 +1,9 @@
-<template>
-  <div
-    ref="presentation"
-    class="md-presentation reveal reveal-viewport"
-    :class="{ loading }"
-  >
-    <Loading v-if="loading" class="md-presentation-loading-icon" />
-    <div v-show="!loading" class="slides">
-      <section
-        data-markdown
-        data-separator="^\r?\n---\r?\n$"
-        data-separator-vertical="^\r?\n--\r?\n$"
-      >
-        <script type="text/template">
-          {{code}}
-        </script>
-      </section>
-    </div>
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
-import type { PropType } from "vue";
+import { defineComponent, h, onMounted, ref } from "vue";
 import { usePageFrontmatter } from "@vuepress/client";
-import Loading from "./icons/LoadingIcon.vue";
-
-import "../shared/reveal";
+import { loadingIcon } from "./loading";
 
 import type { RevealOptions } from "reveal.js";
+import type { PropType, VNode } from "vue";
 
 declare const REVEAL_CONFIG: Partial<RevealOptions>;
 declare const REVEAL_PLUGINS: string[];
@@ -52,8 +28,6 @@ type ThemeType =
 export default defineComponent({
   name: "Presentation",
 
-  components: { Loading },
-
   props: {
     id: { type: String, required: true },
     code: { type: String, required: true },
@@ -61,7 +35,7 @@ export default defineComponent({
   },
 
   setup(props) {
-    const frontmatter = usePageFrontmatter();
+    const frontmatter = usePageFrontmatter<{ reveal: RevealOptions }>();
     const loading = ref(false);
     const presentation = ref<HTMLElement | null>(null);
 
@@ -155,10 +129,25 @@ export default defineComponent({
       }
     });
 
-    return {
-      loading,
-      presentation,
-    };
+    return (): VNode =>
+      h(
+        "div",
+        {
+          class: {
+            "md-presentation": true,
+            reveal: true,
+            "reveal-viewport": true,
+            loading: loading.value,
+          },
+          ref: presentation,
+        },
+        [
+          h("div", { innerHTML: loading.value ? loadingIcon : "" }),
+          h("div", {
+            style: { display: loading.value ? "none" : "block" },
+            innerHTML: `<section data-markdown data-separator="^\\r?\\n---\\r?\\n$" data-separator-vertical="^\\r?\\n--\\r?\\n$"><script type="text/template">${props.code}</script></section>`,
+          }),
+        ]
+      );
   },
 });
-</script>

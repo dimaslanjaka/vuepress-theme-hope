@@ -14,6 +14,7 @@ export const rollupTypescript = (
     useStyle = false,
     copy = [],
     tsconfig = {},
+    output = {},
   } = {}
 ) => [
   {
@@ -24,6 +25,7 @@ export const rollupTypescript = (
         format: filePath.startsWith("node/") ? "cjs" : "esm",
         sourcemap: true,
         exports: "named",
+        ...output,
       },
     ],
     plugins: [
@@ -54,7 +56,13 @@ export const rollupTypescript = (
 
 export const rollupVue = (
   filePath,
-  { external = [], dtsExternal = [], useStyle = false, copy = [] } = {}
+  {
+    external = [],
+    dtsExternal = [],
+    useStyle = false,
+    copy = [],
+    output = {},
+  } = {}
 ) => {
   const temp = filePath.split(".");
   const ext = temp.pop();
@@ -69,6 +77,7 @@ export const rollupVue = (
           format: filePath.includes("/node/") ? "cjs" : "esm",
           sourcemap: true,
           exports: "named",
+          ...output,
         },
       ],
       plugins: [

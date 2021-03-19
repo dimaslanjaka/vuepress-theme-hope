@@ -122,7 +122,7 @@ tr {
   &:nth-child(2n) {
     background: #f6f8fa;
 
-    .theme-dark & {
+    & {
       background: #252322;
     }
   }
@@ -133,7 +133,7 @@ td {
   border: 1px solid var(--grey14);
   padding: 0.6em 1em;
 
-  .theme-dark & {
+  & {
     border: 1px solid var(--grey12);
   }
 }

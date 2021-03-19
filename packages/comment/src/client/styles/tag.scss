@@ -23,7 +23,7 @@
     overflow: hidden;
     transition: all 0.2s;
 
-    .theme-dark & {
+    [dark-theme] & {
       background: #222;
     }
 
@@ -49,7 +49,7 @@
         }
       }
 
-      .theme-dark & {
+      [dark-theme] & {
         color: color.scale($color, $lightness: -10%);
         border-color: color.scale($color, $lightness: - 10%);
 

@@ -196,7 +196,7 @@ h6 {
     &:hover {
       color: var(--accent-color-l10);
 
-      .theme-dark & {
+      [dark-theme] & {
         color: var(--accent-color-d10);
       }
     }
