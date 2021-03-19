@@ -32,7 +32,7 @@ $heading3Size: 1.3em;
 $heading4Size: 1em;
 
 .reveal[theme="white"] {
-  @include mixin.dark-bg-text-color(#fff);
+  @include mixins.dark-bg-text-color(#fff);
 }
 
 @include theme.theme("[theme='white']");

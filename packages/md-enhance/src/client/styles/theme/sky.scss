@@ -22,15 +22,15 @@ $linkColorHover: lighten($linkColor, 20%);
 $selectionBackgroundColor: #134674;
 
 @mixin bodyBackground() {
-  @include mixin.radial-gradient-mixin(#add9e4, #f7fbfc);
+  @include mixins.radial-gradient-mixin(#add9e4, #f7fbfc);
 }
 
 .reveal[theme="sky"] {
-  @include mixin.dark-bg-text-color(#fff);
+  @include mixins.dark-bg-text-color(#fff);
 
   a {
     line-height: 1.3em;
   }
 }
 
-@include mixin.theme("[theme='sky']");
+@include mixins.theme("[theme='sky']");

@@ -34,6 +34,7 @@
   "main": "node/index.js",
   "types": "node/index.d.ts",
   "scripts": {
+    "copy": "cpx src/client/styles/** client/styles",
     "clean": "rimraf client node *.tsbuildinfo",
     "demo:build": "vuepress build __tests__/demo",
     "demo:serve": "vuepress dev __tests__/demo",

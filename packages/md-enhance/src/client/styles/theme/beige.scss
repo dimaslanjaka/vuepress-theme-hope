@@ -8,8 +8,8 @@
 @use "template/settings";
 @use "template/theme";
 
-@use "fonts/league-gothic/league-gothic.css";
 @use "fonts/lato";
+@import "fonts/league-gothic/league-gothic.css";
 
 $mainColor: #333;
 $headingColor: #333;
@@ -26,7 +26,7 @@ $heading1TextShadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb,
 
 // Background generator
 @mixin bodyBackground() {
-  @include mixin.radial-gradient(
+  @include mixins.radial-gradient(
     rgba(247, 242, 211, 1),
     rgba(255, 255, 255, 1)
   );
@@ -34,7 +34,7 @@ $heading1TextShadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb,
 
 .reveal[theme="beige"] {
   // Change text colors against dark slide backgrounds
-  @include mixin.dark-bg-text-color(#fff);
+  @include mixins.dark-bg-text-color(#fff);
 }
 
 @include theme.theme("[theme='beige']");

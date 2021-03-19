@@ -21,7 +21,7 @@ $linkColorHover: lighten($linkColor, 20%);
 $selectionBackgroundColor: #26351c;
 
 .reveal[theme="serif"] {
-  @include mixin.dark-bg-text-color(#fff);
+  @include mixins.dark-bg-text-color(#fff);
 
   a {
     line-height: 1.3em;

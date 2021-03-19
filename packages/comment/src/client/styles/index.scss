@@ -1,6 +1,7 @@
+@use 'sass:meta';
 @use 'category';
 @use 'tag';
 @use 'pageinfo';
 @use 'valine';
 
-@use '@mr-hope/vuepress-style';
+@include meta.load-css("@mr-hope/vuepress-style");

@@ -6,14 +6,14 @@
     "vuepress-plugin",
     "components"
   ],
-  "homepage": "https://github.com/Mister-Hope/vuepress-theme-hope/tree/v2/packages/@mr-hope/vuepress-plugin-components#readme",
+  "homepage": "https://github.com/Mister-Hope/vuepress-theme-hope/tree/v2/packages/components#readme",
   "bugs": {
     "url": "https://github.com/Mister-Hope/vuepress-theme-hope/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mister-Hope/vuepress-theme-hope.git",
-    "directory": "packages/@mr-hope/vuepress-plugin-components"
+    "directory": "packages/components"
   },
   "license": "MIT",
   "author": {

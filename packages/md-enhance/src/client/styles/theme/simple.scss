@@ -25,7 +25,7 @@ $linkColorHover: lighten($linkColor, 20%);
 $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 
 .reveal[theme="simple"] {
-  @include mixin.dark-bg-text-color(#fff);
+  @include mixins.dark-bg-text-color(#fff);
 }
 
 @include theme.theme("[theme='simple']");

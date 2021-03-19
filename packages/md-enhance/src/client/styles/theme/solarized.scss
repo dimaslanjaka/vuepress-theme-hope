@@ -6,8 +6,8 @@
 @use "template/mixins";
 @use "template/settings";
 @use 'template/theme';
-@use 'fonts/league-gothic/league-gothic.css';
 @use 'fonts/lato';
+@import "fonts/league-gothic/league-gothic.css";
 
 // Solarized colors
 $base03: #002b36;

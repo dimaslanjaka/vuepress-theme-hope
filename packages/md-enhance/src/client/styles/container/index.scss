@@ -64,10 +64,10 @@ $darkTextColor: #9e9e9e !default;
     }
 
     &::before {
-      @include svg.background-svg(icon.$infoIcon);
+      @include svg.background-svg(icons.$infoIcon);
 
       body[dark-theme] & {
-        @include svg.background-svg(icon.$infoDarkIcon);
+        @include svg.background-svg(icons.$infoDarkIcon);
       }
     }
   }
@@ -81,10 +81,10 @@ $darkTextColor: #9e9e9e !default;
     }
 
     &::before {
-      @include svg.background-svg(icon.$tipIcon);
+      @include svg.background-svg(icons.$tipIcon);
 
       body[dark-theme] & {
-        @include svg.background-svg(icon.$tipDarkIcon);
+        @include svg.background-svg(icons.$tipDarkIcon);
       }
     }
   }
@@ -97,12 +97,11 @@ $darkTextColor: #9e9e9e !default;
       color: color.scale(#f4cd00, $lightness: -20%);
     }
 
-
     &::before {
-      @include svg.background-svg(icon.$warningIcon);
+      @include svg.background-svg(icons.$warningIcon);
 
       body[dark-theme] & {
-        @include svg.background-svg(icon.$warningDarkIcon);
+        @include svg.background-svg(icons.$warningDarkIcon);
       }
     }
   }
@@ -115,14 +114,12 @@ $darkTextColor: #9e9e9e !default;
       color: color.scale(#f55, $lightness: -20%);
     }
 
-
     &::before {
-      @include svg.background-svg(icon.$dangerIcon);
+      @include svg.background-svg(icons.$dangerIcon);
 
       body[dark-theme] & {
-        @include svg.background-svg(icon.$dangerDarkIcon);
+        @include svg.background-svg(icons.$dangerDarkIcon);
       }
-    }
     }
   }
 

@@ -47,7 +47,7 @@ $selectionBackgroundColor: $blood;
 $selectionColor: #fff;
 
 .reveal[theme="blood"] {
-  @include mixin.light-bg-text-color(#222);
+  @include mixins.light-bg-text-color(#222);
 }
 
 @include theme.theme("[theme='blood']");

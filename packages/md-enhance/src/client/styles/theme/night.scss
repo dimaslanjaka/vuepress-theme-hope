@@ -22,7 +22,7 @@ $headingTextTransform: none;
 $selectionBackgroundColor: #e7ad52;
 
 .reveal[theme="night"] {
-  @include mixin.light-bg-text-color(#222);
+  @include mixins.light-bg-text-color(#222);
 }
 
 @include theme.theme("[theme='night']");

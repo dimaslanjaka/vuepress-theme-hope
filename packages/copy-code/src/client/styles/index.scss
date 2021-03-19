@@ -1,4 +1,5 @@
+@use 'sass:meta';
 @use 'code';
 @use 'message';
 
-@use '@mr-hope/vuepress-style';
+@include meta.load-css("@mr-hope/vuepress-style");
