@@ -6,7 +6,7 @@ export default [
   }),
   ...rollupVue("client/appEnhance.ts", {
     external: [
-      "@mr-hope/vuepress-plugin-reading-time/client",
+      "@mr-hope/vuepress-plugin-reading-time/client/i18n",
       "@mr-hope/vuepress-shared/client",
       "@vuepress/client",
       "balloon-css",
@@ -16,6 +16,6 @@ export default [
       /\.scss$/,
     ],
     dtsExternal: ["balloon-css", /\.scss$/],
-    copy: ["./src/client/styles", "client"],
+    copy: [["client/styles", "client"]],
   }),
 ];
