@@ -40,11 +40,9 @@ export default defineComponent({
     const presentation = ref<HTMLElement | null>(null);
 
     onMounted(() => {
-      (presentation.value as HTMLElement).setAttribute("id", props.id);
-      const revealElement = document.querySelector(`#${props.id}`);
-
-      if (revealElement) {
-        revealElement.setAttribute("theme", props.theme);
+      if (presentation.value) {
+        presentation.value.setAttribute("id", props.id);
+        presentation.value.setAttribute("theme", props.theme);
 
         const promises = [import(/* webpackChunkName: "reveal" */ "reveal.js")];
 
@@ -54,56 +52,56 @@ export default defineComponent({
           )
         );
 
-        if (REVEAL_PLUGINS.includes("highlight"))
+        if (revealPlugins.includes("highlight"))
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/highlight/highlight.esm.js"
             )
           );
 
-        if (REVEAL_PLUGINS.includes("math"))
+        if (revealPlugins.includes("math"))
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/math/math.esm.js"
             )
           );
 
-        if (REVEAL_PLUGINS.includes("search"))
+        if (revealPlugins.includes("search"))
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/search/search.esm.js"
             )
           );
 
-        if (REVEAL_PLUGINS.includes("notes"))
+        if (revealPlugins.includes("notes"))
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/notes/notes.esm.js"
             )
           );
 
-        if (REVEAL_PLUGINS.includes("zoom"))
+        if (revealPlugins.includes("zoom"))
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/zoom/zoom.esm.js"
             )
           );
 
-        // if (REVEAL_PLUGINS.includes("anything"))
+        // if (revealPlugins.includes("anything"))
         //   promises.push(
         //     import(
         //       /* webpackChunkName: "reveal" */ "reveal.js-plugins/anything/anything.js"
         //     )
         //   );
 
-        // if (REVEAL_PLUGINS.includes("audio"))
+        // if (revealPlugins.includes("audio"))
         //   promises.push(
         //     import(
         //       /* webpackChunkName: "reveal" */ "reveal.js-plugins/audio-slideshow/audio-slideshow.js"
         //     )
         //   );
 
-        // if (REVEAL_PLUGINS.includes("chalkboard"))
+        // if (revealPlugins.includes("chalkboard"))
         //   promises.push(
         //     import(
         //       /* webpackChunkName: "reveal" */ "reveal.js-plugins/chalkboard/chalkboard.js"
@@ -111,14 +109,15 @@ export default defineComponent({
         //   );
 
         void Promise.all(promises).then(([revealJS, ...plugins]) => {
-          const reveal = new revealJS.default(revealElement as HTMLElement, {
-            plugins: plugins.map((plugin) => plugin.default),
-          });
+          const reveal = new revealJS.default(
+            presentation.value as HTMLElement,
+            { plugins: plugins.map((plugin) => plugin.default) }
+          );
 
           void reveal
             .initialize({
               slideNumber: true,
-              ...REVEAL_CONFIG,
+              ...revealConfig,
               ...(frontmatter.value.reveal || {}),
               embedded: frontmatter.value.layout !== "Slide",
             })
@@ -142,11 +141,14 @@ export default defineComponent({
           ref: presentation,
         },
         [
-          h("div", { innerHTML: loading.value ? loadingIcon : "" }),
           h("div", {
+            class: "slides",
             style: { display: loading.value ? "none" : "block" },
-            innerHTML: `<section data-markdown data-separator="^\\r?\\n---\\r?\\n$" data-separator-vertical="^\\r?\\n--\\r?\\n$"><script type="text/template">${props.code}</script></section>`,
+            innerHTML: `<section data-markdown data-separator="^\\r?\\n---\\r?\\n$" data-separator-vertical="^\\r?\\n--\\r?\\n$"><script type="text/template">${decodeURIComponent(
+              props.code
+            )}</script></section>`,
           }),
+          h("div", { innerHTML: loading.value ? loadingIcon : "" }),
         ]
       );
   },

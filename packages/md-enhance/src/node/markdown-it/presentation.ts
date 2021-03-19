@@ -2,9 +2,7 @@
 import hash from "hash-sum";
 import * as MarkdownIt from "markdown-it";
 import * as StateBlock from "markdown-it/lib/rules_block/state_block";
-const presentation = (
-  md: MarkdownIt & { $dataBlock: Record<string, string> }
-): void => {
+const presentation = (md: MarkdownIt): void => {
   const OPEN_MARKER = "@slidestart";
   const openChar = OPEN_MARKER.charCodeAt(0);
   const CLOSEMARKER = "@slideend";
@@ -109,10 +107,10 @@ const presentation = (
     const token = tokens[idx];
     const key = `presentation_${hash(idx)}`;
     const { content, info } = token;
-    md.$dataBlock[key] = content;
-    return `<Presentation id="${key}" key="${key}" :code="$dataBlock.${key}" theme="${
-      info.trim() || "auto"
-    }"></Presentation>`;
+
+    return `<Presentation id="${key}" key="${key}" code="${encodeURIComponent(
+      content
+    )}" theme="${info.trim() || "auto"}"></Presentation>`;
   };
 };
 

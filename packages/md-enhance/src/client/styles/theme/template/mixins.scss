@@ -60,7 +60,12 @@
 
 @mixin radial-gradient($outer, $inner, $type: circle) {
   background: $outer;
-  background: -moz-radial-gradient(center, $type cover, $inner 0%, $outer 100%);
+  background: -moz-radial-gradient(
+    center,
+    $type farthest-corner,
+    $inner 0%,
+    $outer 100%
+  );
   background: -webkit-gradient(
     radial,
     center center,
@@ -72,13 +77,28 @@
   );
   background: -webkit-radial-gradient(
     center,
-    $type cover,
+    $type farthest-corner,
     $inner 0%,
     $outer 100%
   );
-  background: -o-radial-gradient(center, $type cover, $inner 0%, $outer 100%);
-  background: -ms-radial-gradient(center, $type cover, $inner 0%, $outer 100%);
-  background: radial-gradient(center, $type cover, $inner 0%, $outer 100%);
+  background: -o-radial-gradient(
+    center,
+    $type farthest-corner,
+    $inner 0%,
+    $outer 100%
+  );
+  background: -ms-radial-gradient(
+    center,
+    $type farthest-corner,
+    $inner 0%,
+    $outer 100%
+  );
+  background: radial-gradient(
+    center,
+    $type farthest-corner,
+    $inner 0%,
+    $outer 100%
+  );
 }
 
 // Generates the presentation background, can be overridden

@@ -30,6 +30,8 @@ const clientAppEnhance: ClientAppEnhance = ({ app }) => {
   ) {
     app.component("Presentation", Presentation);
     void import("./styles/slides.scss");
+    void import("./styles/theme/fonts/league-gothic/league-gothic.css");
+    void import("./styles/theme/fonts/source-sans-pro/source-sans-pro.css");
   }
 };
 

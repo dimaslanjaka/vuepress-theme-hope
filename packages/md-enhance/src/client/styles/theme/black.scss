@@ -4,11 +4,9 @@
  * By Hakim El Hattab, http://hakim.se
  */
 
-@use "template/mixins";
-@use "template/settings";
-@use "template/theme";
-
-@use "fonts/source-sans-pro/source-sans-pro.css";
+@import "template/mixins";
+@import "template/settings";
+@import "template/theme";
 
 $backgroundColor: #191919;
 
@@ -32,11 +30,11 @@ $heading3Size: 1.3em;
 $heading4Size: 1em;
 
 .reveal[theme="black"] {
-  @include mixins.light-bg-text-color(#222);
+  @include light-bg-text-color(#222);
 }
 
-@include theme.theme("[theme='black']");
+@include theme("[theme='black']");
 
 body[dark-theme] {
-  @include theme.theme("[theme='auto']");
+  @include theme("[theme='auto']");
 }

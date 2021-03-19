@@ -4,12 +4,11 @@
  * Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
 
-@use "template/mixins";
-@use "template/settings";
-@use "template/theme";
-
 @use "fonts/lato";
-@import "fonts/league-gothic/league-gothic.css";
+
+@import "template/mixins";
+@import "template/settings";
+@import "template/theme";
 
 $mainColor: #333;
 $headingColor: #333;
@@ -26,15 +25,12 @@ $heading1TextShadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb,
 
 // Background generator
 @mixin bodyBackground() {
-  @include mixins.radial-gradient(
-    rgba(247, 242, 211, 1),
-    rgba(255, 255, 255, 1)
-  );
+  @include radial-gradient(rgba(247, 242, 211, 1), rgba(255, 255, 255, 1));
 }
 
 .reveal[theme="beige"] {
   // Change text colors against dark slide backgrounds
-  @include mixins.dark-bg-text-color(#fff);
+  @include dark-bg-text-color(#fff);
 }
 
-@include theme.theme("[theme='beige']");
+@include theme("[theme='beige']");

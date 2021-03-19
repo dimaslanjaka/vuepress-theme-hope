@@ -4,11 +4,12 @@
  * Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
 
-@use "template/mixins";
-@use "template/settings";
-@use 'template/theme';
-@use 'fonts/quicksand';
-@use 'fonts/open-sans';
+@use "fonts/quicksand";
+@use "fonts/open-sans";
+
+@import "template/mixins";
+@import "template/settings";
+@import "template/theme";
 
 $mainFont: "Open Sans", sans-serif;
 $mainColor: #333;
@@ -22,15 +23,15 @@ $linkColorHover: lighten($linkColor, 20%);
 $selectionBackgroundColor: #134674;
 
 @mixin bodyBackground() {
-  @include mixins.radial-gradient-mixin(#add9e4, #f7fbfc);
+  @include radial-gradient(#add9e4, #f7fbfc);
 }
 
 .reveal[theme="sky"] {
-  @include mixins.dark-bg-text-color(#fff);
+  @include dark-bg-text-color(#fff);
 
   a {
     line-height: 1.3em;
   }
 }
 
-@include mixins.theme("[theme='sky']");
+@include theme("[theme='sky']");

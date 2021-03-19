@@ -1,6 +1,5 @@
 import type { UserConfig } from "@vuepress/cli";
 import type { DefaultThemeOptions } from "@vuepress/theme-default";
-import { en, zh } from "./config/navbar";
 
 const config: UserConfig<DefaultThemeOptions> = {
   /** 部署目录 */
@@ -97,9 +96,6 @@ const config: UserConfig<DefaultThemeOptions> = {
         /** 辅助标签 */
         ariaLabel: "Select language",
 
-        /** 该语言下的更新时间文字 */
-        lastUpdated: "Last update",
-
         /** 该语言在下拉菜单中的标签 */
         label: "English",
 
@@ -130,8 +126,6 @@ const config: UserConfig<DefaultThemeOptions> = {
       },
       /** 默认语言 */
       "/zh/": {
-        /** 头部导航栏的配置 */
-        nav: zh,
         lang: "zh-CN",
         selectLanguageText: "选择语言",
         selectLanguageAriaLabel: "选择语言",

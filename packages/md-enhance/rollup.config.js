@@ -25,8 +25,9 @@ export default [
       "reveal.js/plugin/zoom/zoom.esm.js",
       "vue",
       /\.scss$/,
+      /\.css$/,
     ],
-    dtsExternal: [/\.scss$/],
+    dtsExternal: [/\.scss$/, /\.css$/],
     copy: [["client/styles", "client"]],
   }),
   ...rollupVue("client/appSetup.ts", {

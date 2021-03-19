@@ -4,11 +4,12 @@
  * Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
 
-@use "template/mixins";
-@use "template/settings";
-@use 'template/theme';
-@use 'fonts/montserrat';
-@use 'fonts/open-sans';
+@use "fonts/montserrat";
+@use "fonts/open-sans";
+
+@import "template/mixins";
+@import "template/settings";
+@import "template/theme";
 
 $backgroundColor: #111;
 
@@ -22,7 +23,7 @@ $headingTextTransform: none;
 $selectionBackgroundColor: #e7ad52;
 
 .reveal[theme="night"] {
-  @include mixins.light-bg-text-color(#222);
+  @include light-bg-text-color(#222);
 }
 
-@include theme.theme("[theme='night']");
+@include theme("[theme='night']");

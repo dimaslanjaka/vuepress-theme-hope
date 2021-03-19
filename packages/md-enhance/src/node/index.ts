@@ -4,7 +4,7 @@ import flowchart from "./markdown-it/flowchart";
 import footnote from "./markdown-it/footnote";
 import katex from "./markdown-it/katex";
 import mark from "./markdown-it/mark";
-// import presentation from "./markdown-it/presentation";
+import presentation from "./markdown-it/presentation";
 import sub from "./markdown-it/sub";
 import sup from "./markdown-it/sup";
 import { resolvePlugin } from "./resolvePlugin";
@@ -72,9 +72,8 @@ const markdownEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (option, app) => {
             },
           },
         ]);
-      // if (markdownOption.presentation || markdownOption.enableAll)
-      //   // @ts-ignore
-      //   markdownIt.use(presentation);
+      if (markdownOption.presentation || markdownOption.enableAll)
+        markdownIt.use(presentation);
     },
 
     plugins: resolvePlugin(markdownOption, themeConfig),

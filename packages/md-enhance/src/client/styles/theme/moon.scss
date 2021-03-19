@@ -3,13 +3,11 @@
  * Author: Achim Staebler
  */
 
-@use "template/mixins";
-@use "template/settings";
-@use 'template/theme';
+@use "fonts/lato";
 
-@use 'fonts/lato';
-
-@import "fonts/league-gothic/league-gothic.css";
+@import "template/mixins";
+@import "template/settings";
+@import "template/theme";
 
 // Solarized colors
 $base03: #002b36;
@@ -39,7 +37,7 @@ $linkColorHover: lighten($linkColor, 20%);
 $selectionBackgroundColor: $magenta;
 
 .reveal[theme="moon"] {
-  @include mixins.light-bg-text-color(#222);
+  @include light-bg-text-color(#222);
 }
 
-@include theme.theme("[theme='moon']");
+@include theme("[theme='moon']");
