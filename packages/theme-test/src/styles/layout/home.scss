@@ -1,22 +1,22 @@
 @use 'sass:color';
 @use 'sass:list';
 
-@import "~@mr-hope/vuepress-shared/styles/colors";
-@import "../styles/variables";
+@use '@mr-hope/vuepress-palette' as *;
 
 .home {
   display: block;
-  max-width: var(--home-page-width);
-  min-height: calc(100vh - var(--navbar-height));
-  padding: var(--navbar-height) 2rem 0;
+  max-width: $homePageWidth;
+  min-height: 100vh - $navbarHeight;
+  padding: $navbarHeight 2rem 0;
   margin: 0px auto;
+  overflow-x: hidden;
 
-  @media (max-width: $MQNarrow) {
-    min-height: calc(100vh - var(--navbar-mobile-height));
-    padding-top: var(--navbar-mobile-height);
+  @media (max-width: $screenL) {
+    min-height: 100vh - $navbarMobileHeight;
+    padding-top: $navbarMobileHeight;
   }
 
-  @media (max-width: $MQMobileNarrow) {
+  @media (max-width: $screenS) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
@@ -24,7 +24,7 @@
   .hero {
     text-align: center;
 
-    @media (min-width: $MQNarrow) {
+    @media (min-width: $screenL) {
       display: flex;
       justify-content: space-evenly;
       align-items: center;
@@ -37,17 +37,17 @@
       max-height: 320px;
       margin: 0;
 
-      @media (max-width: $MQNarrow) {
+      @media (max-width: $screenL) {
         max-height: 280px;
         margin: 3rem auto 1.5rem;
       }
 
-      @media (max-width: $MQMobile) {
+      @media (max-width: $screenM) {
         max-height: 240px;
         margin: 2rem auto 1.2rem;
       }
 
-      @media (max-width: $MQMobileNarrow) {
+      @media (max-width: $screenS) {
         max-height: 210px;
         margin: 1.5rem auto 1rem;
       }
@@ -76,11 +76,11 @@
     h1 {
       font-size: 3rem;
 
-      @media (max-width: $MQMobile) {
+      @media (max-width: $screenM) {
         font-size: 2.5rem;
       }
 
-      @media (max-width: $MQMobileNarrow) {
+      @media (max-width: $screenS) {
         font-size: 2rem;
       }
     }
@@ -90,11 +90,11 @@
     .action {
       margin: 1.8rem auto;
 
-      @media (max-width: $MQMobile) {
+      @media (max-width: $screenM) {
         margin: 1.5rem auto;
       }
 
-      @media (max-width: $MQMobileNarrow) {
+      @media (max-width: $screenS) {
         margin: 1.2rem auto;
       }
     }
@@ -105,11 +105,11 @@
       font-size: 1.6rem;
       line-height: 1.3;
 
-      @media (max-width: $MQMobile) {
+      @media (max-width: $screenM) {
         font-size: 1.4rem;
       }
 
-      @media (max-width: $MQMobileNarrow) {
+      @media (max-width: $screenS) {
         font-size: 1.2rem;
       }
     }
@@ -125,13 +125,12 @@
       transition: background 0.1s ease;
       overflow: hidden;
 
-      @media (max-width: $MQMobile) {
+      @media (max-width: $screenM) {
         padding: 0.8rem 1.2rem;
         font-size: 1.1rem;
       }
 
-      @media (max-width: $MQMobileNarrow) {
-        padding: 0.6rem 1rem;
+      @media (max-width: $screenS) {
         font-size: 1rem;
       }
 
@@ -169,7 +168,7 @@
     padding: 1.2rem 0;
     border-top: 1px solid var(--border-color);
 
-    @media (max-width: $MQMobileNarrow) {
+    @media (max-width: $screenS) {
       margin: 0 -1.5rem;
     }
 
@@ -184,15 +183,15 @@
       transition: transform 0.3s, box-shadow 0.3s;
       overflow: hidden;
 
-      @media (max-width: $MQNarrow) {
+      @media (max-width: $screenL) {
         flex-basis: calc(50% - 4rem);
       }
 
-      @media (max-width: $MQMobile) {
+      @media (max-width: $screenM) {
         font-size: 0.95rem;
       }
 
-      @media (max-width: $MQMobileNarrow) {
+      @media (max-width: $screenS) {
         flex-basis: calc(100%);
         font-size: 0.9rem;
         margin: 0.5rem 0;
@@ -215,7 +214,7 @@
         font-size: 1.25rem;
         font-weight: 500;
 
-        @media (max-width: $MQMobileNarrow) {
+        @media (max-width: $screenS) {
           font-size: 1.2rem;
         }
       }

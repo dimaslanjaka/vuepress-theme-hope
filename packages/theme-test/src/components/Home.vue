@@ -73,8 +73,6 @@ import { isArray } from "@vuepress/shared";
 import DropTransition from "./DropTransition.vue";
 import NavLink from "./NavLink.vue";
 
-import "./Home.scss";
-
 import type { BasePageFrontMatter } from "@mr-hope/vuepress-shared";
 
 interface ActionConfig {

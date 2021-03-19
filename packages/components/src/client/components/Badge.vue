@@ -49,7 +49,7 @@ export default defineComponent({
   border-radius: 3px;
   padding: 0 6px;
   color: var(--white);
-  background-color: #42b983;
+  background-color: var(--accent-color);
   vertical-align: top;
 
   .table-of-contents & {
@@ -57,15 +57,15 @@ export default defineComponent({
   }
 
   &.tip {
-    background-color: var(--badge-tip-color, #42b983);
+    background-color: var(--badge-tip-color);
   }
 
   &.warning {
-    background-color: var(--badge-warning-color, #e7c000);
+    background-color: var(--badge-warning-color);
   }
 
   &.danger {
-    background-color: var(--badge-danger-color, #cc0000);
+    background-color: var(--badge-danger-color);
   }
 
   & + & {

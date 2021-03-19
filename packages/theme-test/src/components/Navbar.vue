@@ -49,8 +49,6 @@ import NavbarLinks from "./NavbarLinks.vue";
 // import ThemeColor from "./Theme/ThemeColor.vue";
 import ToggleSidebarButton from "./ToggleSidebarButton.vue";
 
-import "./Navbar.scss";
-
 import type { HopeThemeOptions } from "../types";
 
 const getCssValue = (

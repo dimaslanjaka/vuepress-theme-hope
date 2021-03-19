@@ -10,17 +10,13 @@ declare const DOCSEARCH_PROPS: unknown;
 
 const clientAppEnhance: ClientAppEnhance = ({ app }) => {
   /* eslint-disable vue/match-component-file-name */
-  // @ts-ignore
   app.component("Badge", Badge);
-  // @ts-ignore
   app.component("CodeGroup", CodeGroup);
-  // @ts-ignore
   app.component("CodeGroupItem", CodeGroupItem);
 
   // unregister the built-in `<OutboundLink>` to avoid warning
   delete app._context.components.OutboundLink;
   // override the built-in `<OutboundLink>`
-  // @ts-ignore
   app.component("OutboundLink", OutboundLink);
 
   // docsearch feature might not be commonly used, so we don't put it
@@ -29,7 +25,6 @@ const clientAppEnhance: ClientAppEnhance = ({ app }) => {
     // register a mock `<Docsearch>` if docsearch plugin is not enabled
     app.component("Docsearch", () => null);
   }
-  /* eslint-enable vue/match-component-file-name */
 };
 
 export default clientAppEnhance;
