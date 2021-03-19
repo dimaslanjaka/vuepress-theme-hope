@@ -34,12 +34,12 @@
         $darkColor: helper.get-color(map.get($varValue, "color"), true);
 
         :root {
-          #{$keyName}: $lightColor;
+          #{$keyName}: #{$lightColor};
         }
 
         @if $lightColor!=$darkColor {
           body[dark-theme] {
-            #{$keyName}: $darkColor;
+            #{$keyName}: #{$darkColor};
           }
         }
 
