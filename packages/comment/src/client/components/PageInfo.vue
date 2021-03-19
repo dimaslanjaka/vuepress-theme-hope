@@ -27,12 +27,12 @@ import {
 import { usePageFrontmatter, useRouteLocale } from "@vuepress/client";
 import { computed, defineComponent } from "vue";
 import AuthorInfo from "./AuthorInfo";
-import CategoryInfo from "./CategoryInfo.vue";
+import CategoryInfo from "./CategoryInfo";
 import DateInfo from "./DateInfo";
-import PageViewInfo from "./PageViewInfo.vue";
-import ReadingTimeInfo from "./ReadingTimeInfo.vue";
-import TagInfo from "./TagInfo.vue";
-import WordInfo from "./WordInfo.vue";
+import PageViewInfo from "./PageViewInfo";
+import ReadingTimeInfo from "./ReadingTimeInfo";
+import TagInfo from "./TagInfo";
+import WordInfo from "./WordInfo";
 import { commentOptions, pageInfoI18n } from "../define";
 
 import type {

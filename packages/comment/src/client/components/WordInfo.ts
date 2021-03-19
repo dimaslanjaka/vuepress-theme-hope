@@ -1,8 +1,7 @@
-<script lang="ts">
 import { usePageData, useRouteLocale } from "@vuepress/client";
 import { computed, defineComponent, h, inject } from "vue";
 import { WordIcon } from "./icons";
-import { pageInfoI18n } from "../define";
+import { commentOptions, pageInfoI18n } from "../define";
 
 import type {
   ReadingTime,
@@ -36,12 +35,15 @@ export default defineComponent({
             "span",
             {
               class: "words-info",
-              ariaLabel: hint.value,
-              "data-balloon-pos": "down",
+              ...(commentOptions.hint !== false
+                ? {
+                    ariaLabel: hint.value,
+                    "data-balloon-pos": "down",
+                  }
+                : {}),
             },
             [h(WordIcon), h("span", words.value)]
           )
         : null;
   },
 });
-</script>

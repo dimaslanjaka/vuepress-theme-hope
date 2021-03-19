@@ -1,9 +1,8 @@
-<script lang="ts">
 import { i18n } from "@mr-hope/vuepress-plugin-reading-time/client/i18n";
 import { usePageData, useRouteLocale } from "@vuepress/client";
 import { computed, defineComponent, h } from "vue";
 import { TimerIcon } from "./icons";
-import { pageInfoI18n } from "../define";
+import { commentOptions, pageInfoI18n } from "../define";
 
 import type { ReadingTime } from "@mr-hope/vuepress-plugin-reading-time";
 import type { VNode } from "vue";
@@ -35,12 +34,15 @@ export default defineComponent({
             "span",
             {
               class: "reading-time-info",
-              ariaLabel: hint.value,
-              "data-balloon-pos": "down",
+              ...(commentOptions.hint !== false
+                ? {
+                    ariaLabel: hint.value,
+                    "data-balloon-pos": "down",
+                  }
+                : {}),
             },
             [h(TimerIcon), h("span", readingTime.value)]
           )
         : null;
   },
 });
-</script>

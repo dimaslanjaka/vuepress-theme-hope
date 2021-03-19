@@ -28,8 +28,12 @@ export default defineComponent({
             "span",
             {
               class: "author-info",
-              ariaLabel: hint.value,
-              "data-balloon-pos": "down",
+              ...(commentOptions.hint !== false
+                ? {
+                    ariaLabel: hint.value,
+                    "data-balloon-pos": "down",
+                  }
+                : {}),
             },
             [h(AuthorIcon), h("span", text.value)]
           )

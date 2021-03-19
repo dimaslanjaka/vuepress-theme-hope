@@ -1,7 +1,7 @@
 import { usePageFrontmatter, useRouteLocale } from "@vuepress/client";
 import { computed, defineComponent, h } from "vue";
 import { CalendarIcon } from "./icons";
-import { pageInfoI18n } from "../define";
+import { commentOptions, pageInfoI18n } from "../define";
 
 import type { VNode } from "vue";
 import type { CommentPluginFrontmatter } from "../../shared";
@@ -42,8 +42,12 @@ export default defineComponent({
             "span",
             {
               class: "date-info",
-              ariaLabel: hint.value,
-              "data-balloon-pos": "down",
+              ...(commentOptions.hint !== false
+                ? {
+                    ariaLabel: hint.value,
+                    "data-balloon-pos": "down",
+                  }
+                : {}),
             },
             [h(CalendarIcon), h("span", date.value)]
           )

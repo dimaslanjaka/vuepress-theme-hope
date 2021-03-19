@@ -1,16 +1,10 @@
-<template>
-  <Valine v-if="type === 'valine'" v-show="enable" />
-  <span v-else class="vssue" />
-  <!-- <Vssue v-else-if="options.type === 'vssue'" v-show="enable" :title="title" /> -->
-</template>
-
-<script lang="ts">
-import { usePageTitle } from "@mr-hope/vuepress-shared/client";
+// import { usePageTitle } from "@mr-hope/vuepress-shared/client";
 import { usePageFrontmatter } from "@vuepress/client";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, h } from "vue";
 import Valine from "./Valine.vue";
 import { commentOptions } from "../define";
 
+import type { VNode } from "vue";
 import type { CommentPluginFrontmatter } from "../../shared";
 
 export default defineComponent({
@@ -20,6 +14,8 @@ export default defineComponent({
 
   setup() {
     const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
+
+    const type = commentOptions.type;
 
     const enable = computed(() => {
       return (
@@ -31,11 +27,14 @@ export default defineComponent({
       );
     });
 
-    return {
-      enable,
-      type: commentOptions.type,
-      title: usePageTitle(),
-    };
+    return (): VNode | null =>
+      type === "valine"
+        ? h(Valine, { style: { display: enable.value ? "block" : "none" } })
+        : // : type === "vssue"
+          // ? h(Vssue, {
+          //     title: usePageTitle().value,
+          //     style: { display: enable.value ? "block" : "none" },
+          //   })
+          null;
   },
 });
-</script>

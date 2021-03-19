@@ -26,6 +26,14 @@ interface BaseCommentOptions {
    */
   author?: string | string[];
   /**
+   * 是否启用文章信息的弹窗提示
+   *
+   * Whether enable hint popup for pageinfo
+   *
+   * @default true
+   */
+  hint?: boolean;
+  /**
    * 文章信息配置
    *
    * Page Info display configuration

@@ -23,10 +23,12 @@ const commentPlugin: Plugin<CommentOptions> = (options, app) => {
     name: "comment",
 
     define: () => ({
-      COMMENT_OPTIONS:
-        Object.keys(options).length > 0
+      COMMENT_OPTIONS: {
+        hint: !themeConfig.pure,
+        ...(Object.keys(options).length > 0
           ? options
-          : (themeConfig.comment as CommentOptions) || {},
+          : (themeConfig.comment as CommentOptions) || {}),
+      },
       PAGE_INFO_I18N: pageInfoI18nConfig,
       VALINE_I18N: valineI18nConfig,
     }),

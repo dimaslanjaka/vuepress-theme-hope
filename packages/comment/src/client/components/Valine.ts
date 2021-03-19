@@ -1,4 +1,3 @@
-<script lang="ts">
 import { useThemePluginConfig } from "@mr-hope/vuepress-shared/client";
 import {
   usePageFrontmatter,
@@ -89,19 +88,15 @@ export default defineComponent({
       (newValue: RouteLocation, oldValue: RouteLocation) => {
         if (newValue.path !== oldValue.path)
           // Refresh comment when navigating to a new page
-          nextTick(() => initValine(newValue.path));
+          void nextTick(() => initValine(newValue.path));
       }
     );
 
     return (): VNode =>
-      h(
-        "div",
-        {
-          class: "valine-wrapper",
-          style: { display: enableComment.value ? "block" : "none" },
-        },
-        h("div", { id: "valine" })
-      );
+      h("div", {
+        class: "valine-wrapper",
+        style: { display: enableComment.value ? "block" : "none" },
+        innerHTML: '<div id="valine" />',
+      });
   },
 });
-</script>

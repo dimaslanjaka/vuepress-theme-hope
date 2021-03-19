@@ -1,31 +1,16 @@
-<template>
-  <span
-    v-if="enablePageViews"
-    class="visitor-info"
-    :aria-label="hint"
-    data-balloon-pos="down"
-  >
-    <EyeIcon v-if="pageViews < 1000" />
-    <FireIcon v-else />
-    <span :id="visitorID" :data-flag-title="title" class="leancloud_visitors">
-      <span class="leancloud-visitors-count">...</span>
-    </span>
-  </span>
-</template>
-
-<script lang="ts">
 import { usePageTitle } from "@mr-hope/vuepress-shared/client";
 import {
   usePageFrontmatter,
   useRouteLocale,
   useSiteData,
 } from "@vuepress/client";
-import { computed, defineComponent, onMounted, watch, ref } from "vue";
+import { computed, defineComponent, h, onMounted, watch, ref } from "vue";
 import { useRoute } from "vue-router";
 import { EyeIcon, FireIcon } from "./icons";
 import { resolveEnablePageViews } from "../composables";
-import { pageInfoI18n } from "../define";
+import { commentOptions, pageInfoI18n } from "../define";
 
+import type { VNode } from "vue";
 import type { CommentPluginFrontmatter } from "../../shared";
 
 export default defineComponent({
@@ -82,13 +67,29 @@ export default defineComponent({
       }
     );
 
-    return {
-      enablePageViews,
-      hint,
-      pageViews,
-      title,
-      visitorID,
-    };
+    return (): VNode | null =>
+      enablePageViews.value
+        ? h(
+            "span",
+            {
+              class: "visitor-info",
+              ...(commentOptions.hint !== false
+                ? {
+                    ariaLabel: hint.value,
+                    "data-balloon-pos": "down",
+                  }
+                : {}),
+            },
+            [
+              h(pageViews.value < 1000 ? EyeIcon : FireIcon),
+              h("span", {
+                class: "leancloud_visitors",
+                id: visitorID.value,
+                "data-flag-title": title.value,
+                innerHTML: '<span class="leancloud-visitors-count">...</span>',
+              }),
+            ]
+          )
+        : null;
   },
 });
-</script>

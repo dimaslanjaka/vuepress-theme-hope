@@ -1,4 +1,4 @@
-import Comment from "./components/Comment.vue";
+import Comment from "./components/Comment";
 import PageInfo from "./components/PageInfo.vue";
 
 import type { ClientAppEnhance } from "@vuepress/client";
