@@ -102,7 +102,9 @@ export class FeedPage {
   }
 
   get guid(): string {
-    return this.feedOption.guid || this.page._permalink || this.link;
+    // TODO: Add support for permalink
+    // return this.feedOption.guid || this.page._permalink || this.link;
+    return this.feedOption.guid || this.link;
   }
 
   get pubDate(): Date | undefined {
