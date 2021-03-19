@@ -19,7 +19,7 @@
     &.clickable {
       > span:hover {
         cursor: pointer;
-        color: var(--accent-color, #3eaf7c);
+        color: var(--accent-color);
       }
     }
   }

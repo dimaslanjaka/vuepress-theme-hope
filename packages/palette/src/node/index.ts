@@ -9,7 +9,7 @@ export const palettePlugin: Plugin<never> = (_, app) => {
   const importCode = (filePath: string): string => `@forward '${filePath}';\n`;
 
   return {
-    name: "@vuepress/plugin-palette",
+    name: "palette",
 
     alias: {
       "@mr-hope/vuepress-palette": app.dir.temp(tempPaletteFile),

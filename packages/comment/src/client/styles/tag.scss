@@ -1,6 +1,6 @@
 @use 'sass:color';
 @use 'sass:list';
-@use '~@mr-hope/vuepress-shared/styles/colors';
+@use '@mr-hope/vuepress-palette' as *;
 
 .tags-wrapper {
   list-style: none;
@@ -29,13 +29,13 @@
 
     &.clickable:hover {
       cursor: pointer;
-      background: var(--bg-color, #fff);
-      box-shadow: 0 1px 6px 0 var(--card-shadow-color, rgba(0, 0, 0, 0.2));
+      background: var(--bg-color);
+      box-shadow: 0 1px 6px 0 var(--card-shadow-color);
     }
   }
 
-  @each $color in colors.$colors {
-    $index: list.index(colors.$colors, $color) - 1;
+  @each $color in $colors {
+    $index: list.index($colors, $color) - 1;
 
     .tag#{$index} {
       &,

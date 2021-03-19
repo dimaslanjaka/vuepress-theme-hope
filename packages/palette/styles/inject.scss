@@ -2,20 +2,10 @@
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:meta';
+@use 'helper';
 
-@forward '@mr-hope/vuepress-palette';
-@forward '../palette';
-
-@function get-color($variable, $isDark) {
-  @if meta.type-of($variable) == color {
-    @return $variable;
-  } @else if meta.type-of($variable) == list {
-    @return if($isDark, list.nth($variable, 2), list.nth($variable, 1));
-  } @else {
-    @debug "Unexpected variable type #{meta.type-of($variable)}";
-    @return transparent;
-  }
-}
+@use '../palette';
+@use '@mr-hope/vuepress-palette';
 
 @mixin inject-value($module) {
   $variables: meta.module-variables($module);
@@ -34,14 +24,14 @@
         @each $amount in map.get($varValue, "amount") {
           :root {
             --#{$varName}-#{if($amount > 0,"l","d")}#{$amount / 1%}: #{color.scale(
-                get-color(map.get($varValue, "color"), false),
+                helper.get-color(map.get($varValue, "color"), false),
                 $lightness: $amount
               )};
           }
 
           body[dark] {
             --#{$varName}-#{if($amount > 0,"l","d")}#{$amount / 1%}: #{color.scale(
-                get-color(map.get($varValue, "color"), true),
+                helper.get-color(map.get($varValue, "color"), true),
                 $lightness: $amount
               )};
           }
@@ -49,11 +39,11 @@
       }
     } @else if meta.type-of($varValue) == list and list.length($varValue) == 2 {
       :root {
-        --#{$varName}: #{get-color($varValue, false)};
+        --#{$varName}: #{helper.get-color($varValue, false)};
       }
 
       body[dark] {
-        --#{$varName}: #{get-color($varValue, true)};
+        --#{$varName}: #{helper.get-color($varValue, true)};
       }
     }
   }
