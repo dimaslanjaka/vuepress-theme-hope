@@ -42,11 +42,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-.drop-enter,
-.drop-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-</style>

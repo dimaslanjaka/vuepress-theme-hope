@@ -1,14 +1,11 @@
 @use 'normalize';
 
-@use '~@mr-hope/vuepress-shared/styles/config';
-
-@use 'arrow';
 @use 'badge';
 @use 'code';
-@use 'code/light';
-@use 'code/dark';
 @use 'code-group';
 @use 'custom-container';
+@use 'dropdown';
+@use 'home';
 @use 'layout';
 @use 'navbar';
 @use 'page';
@@ -16,8 +13,9 @@
 @use 'sidebar';
 @use 'sr-only';
 @use 'toc';
-@use 'transitions';
+@use 'transition';
 
 @use 'theme';
 
-// @use '@vuepress/plugin-palette/style';
+@use '@vuepress/plugin-palette/style';
+@use '@mr-hope/vuepress-style';

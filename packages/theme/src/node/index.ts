@@ -31,9 +31,14 @@ export const defaultTheme: Theme<DefaultThemeOptions> = ({
     clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
 
     // use the relative file path to generate edit link
-    extendsPageData: ({ filePathRelative }) => ({ filePathRelative }),
+    extendsPageData: ({
+      filePathRelative,
+    }): { filePathRelative: string | null } => ({
+      filePathRelative,
+    }),
 
     plugins: [
+      ["@mr-hope/palette"],
       [
         "@vuepress/active-header-links",
         resolveActiveHeaderLinksPluginOptions(themePlugins),

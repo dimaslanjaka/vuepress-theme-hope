@@ -1,14 +1,18 @@
-import { inject } from "vue";
-import type { ComputedRef, InjectionKey } from "vue";
+import { computed, inject } from "vue";
 import { useRoute } from "vue-router";
-import { usePageData } from "@vuepress/client";
-import type { PageHeader } from "@vuepress/client";
+import { usePageData, usePageFrontmatter } from "@vuepress/client";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+
 import {
   isArray,
   isPlainObject,
   isString,
   resolveLocalePath,
 } from "@vuepress/shared";
+import { useNavLink } from "./navbar";
+
+import type { ComputedRef, InjectionKey } from "vue";
+import type { PageHeader } from "@vuepress/client";
 import type {
   DefaultThemeData,
   DefaultThemePageFrontmatter,
@@ -16,7 +20,6 @@ import type {
   SidebarConfigObject,
   ResolvedSidebarItem,
 } from "../types";
-import { useNavLink } from "./useNavLink";
 
 export type SidebarItemsRef = ComputedRef<ResolvedSidebarItem[]>;
 
@@ -29,42 +32,11 @@ export const sidebarItemsSymbol: InjectionKey<SidebarItemsRef> = Symbol.for(
  */
 export const useSidebarItems = (): SidebarItemsRef => {
   const sidebarItems = inject(sidebarItemsSymbol);
-  if (!sidebarItems) {
+
+  if (!sidebarItems)
     throw new Error("useSidebarItems() is called without provider.");
-  }
+
   return sidebarItems;
-};
-
-/**
- * Resolve sidebar items global computed
- *
- * It should only be resolved and provided once
- */
-export const resolveSidebarItems = (
-  frontmatter: DefaultThemePageFrontmatter,
-  themeLocale: DefaultThemeData
-): ResolvedSidebarItem[] => {
-  // get sidebar config from frontmatter > themeConfig
-  const sidebarConfig = frontmatter.sidebar ?? themeLocale.sidebar ?? "auto";
-
-  // resolve sidebar items according to the config
-  if (frontmatter.home === true || sidebarConfig === false) {
-    return [];
-  }
-
-  if (sidebarConfig === "auto") {
-    return resolveAutoSidebarItems();
-  }
-
-  if (isArray(sidebarConfig)) {
-    return resolveArraySidebarItems(sidebarConfig);
-  }
-
-  if (isPlainObject(sidebarConfig)) {
-    return resolveMultiSidebarItems(sidebarConfig);
-  }
-
-  return [];
 };
 
 /**
@@ -104,35 +76,28 @@ export const resolveArraySidebarItems = (
 
   return sidebarConfig.map(
     (item): ResolvedSidebarItem => {
-      if (isString(item)) {
-        return useNavLink(item);
-      }
-      if (!item.isGroup) {
-        return item as ResolvedSidebarItem;
-      }
+      if (isString(item)) return useNavLink(item);
+
+      if (!item.isGroup) return item as ResolvedSidebarItem;
 
       return {
         ...item,
         children: item.children.map(
           (subItem): ResolvedSidebarItem => {
-            let childItem: ResolvedSidebarItem;
-            if (isString(subItem)) {
-              childItem = useNavLink(subItem);
-            } else {
-              childItem = subItem as ResolvedSidebarItem;
-            }
+            const childItem: ResolvedSidebarItem = isString(subItem)
+              ? useNavLink(subItem)
+              : (subItem as ResolvedSidebarItem);
 
             // if the sidebar item is current page and children is not set
             // use headers of current page as children
             if (
               childItem.link === route.path &&
               childItem.children === undefined
-            ) {
+            )
               return {
                 ...childItem,
                 children: page.value.headers.map(headerToSidebarItem),
               };
-            }
 
             return childItem;
           }
@@ -153,4 +118,28 @@ export const resolveMultiSidebarItems = (
   const matchedSidebarConfig = sidebarConfig[sidebarPath] ?? [];
 
   return resolveArraySidebarItems(matchedSidebarConfig);
+};
+
+/**
+ * Resolve sidebar items global computed
+ *
+ * It should only be resolved and provided once
+ */
+export const resolveSidebarItems = (
+  frontmatter: DefaultThemePageFrontmatter,
+  themeLocale: DefaultThemeData
+): ResolvedSidebarItem[] => {
+  // get sidebar config from frontmatter > themeConfig
+  const sidebarConfig = frontmatter.sidebar ?? themeLocale.sidebar ?? "auto";
+
+  // resolve sidebar items according to the config
+  return frontmatter.home === true || sidebarConfig === false
+    ? []
+    : sidebarConfig === "auto"
+    ? resolveAutoSidebarItems()
+    : isArray(sidebarConfig)
+    ? resolveArraySidebarItems(sidebarConfig)
+    : isPlainObject(sidebarConfig)
+    ? resolveMultiSidebarItems(sidebarConfig)
+    : [];
 };

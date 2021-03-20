@@ -1,12 +1,13 @@
 @use 'sass:color';
+@use 'sass:list';
+@use "@mr-hope/vuepress-palette" as *;
 
-@import "../variables";
+// FIXME: fix out why
+$darkCodeBgColor: list.nth($codeBgColor, 1);
 
-body.theme-dark {
-  #{$contentClass} {
-    code {
-      background: var(--grey12);
-    }
+body[dark-theme] {
+  #{$contentClass} code {
+    background: var(--grey12);
   }
 
   /**

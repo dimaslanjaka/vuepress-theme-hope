@@ -1,4 +1,4 @@
-export * from "./useNavLink";
-export * from "./useResolveRouteWithRedirect";
-export * from "./useSidebarItems";
+export * from "./navbar";
+export * from "./resolveRouteWithRedirect";
+export * from "./sidebar";
 export * from "./useThemeData";

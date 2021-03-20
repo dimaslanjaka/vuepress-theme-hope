@@ -32,8 +32,8 @@
   ],
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
-    "clean": "rimraf client node *.tsbuildinfo",
-    "copy": "cpx \"src/**/*.{d.ts,vue,scss}\" lib",
+    "clean": "rimraf client node layouts styles *.tsbuildinfo",
+    "copy": "cpx \"src/styles/**/*.scss\" styles",
     "rollup:build": "rollup -c",
     "rollup:watch": "rollup -c -w"
   },

@@ -1,7 +1,5 @@
-@use 'fonts/crimson.css';
-@use '~@mr-hope/vuepress-shared/styles/wrapper';
-
-@import "_variables";
+@use "@mr-hope/vuepress-palette" as *;
+@use "@mr-hope/vuepress-shared/styles/wrapper";
 
 html,
 body {
@@ -35,11 +33,11 @@ body {
     }
 
     // unknow container
-    p.demo {
-      padding: 1rem 1.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
+    // p.demo {
+    //   padding: 1rem 1.5rem;
+    //   border: 1px solid #ddd;
+    //   border-radius: 4px;
+    // }
 
     img {
       max-width: 100%;
@@ -102,7 +100,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 500;
+  // TODO: 500 blog and 600 docs
+  // font-weight: 500;
+  font-weight: 600;
   line-height: 1.25;
 
   #{$contentClass}:not(.custom) > & {
@@ -137,7 +137,7 @@ p {
       hyphens: auto;
       overflow-wrap: break-word;
 
-      @media (max-width: $MQMobileNarrow) {
+      @media (max-width: $screenS) {
         text-align: left;
       }
     }
@@ -214,7 +214,7 @@ tr {
   &:nth-child(2n) {
     background: #f6f8fa;
 
-    .theme-dark & {
+    [dark-theme] & {
       background: #252322;
     }
   }
@@ -225,7 +225,7 @@ td {
   border: 1px solid var(--grey14);
   padding: 0.6em 1em;
 
-  .theme-dark & {
+  [dark-theme] & {
     border: 1px solid var(--grey12);
   }
 }

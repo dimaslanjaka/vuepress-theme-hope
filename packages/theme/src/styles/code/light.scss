@@ -1,12 +1,12 @@
 @use 'sass:color';
+@use 'sass:list';
+@use "@mr-hope/vuepress-palette" as *;
 
-@import "../variables";
+$codeBgColor: list.nth($codeBgColor, 1);
 
 body:not(.theme-dark) {
-  #{$contentClass} {
-    code {
-      background: rgba(127, 127, 127, 0.12);
-    }
+  #{$contentClass} code {
+    background: rgba(127, 127, 127, 0.12);
   }
 
   /**
