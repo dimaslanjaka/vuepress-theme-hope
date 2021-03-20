@@ -27,7 +27,7 @@
 
     <div class="navbar-links-wrapper" :style="linksWrapperStyle">
       <slot name="before" />
-      <ThemeColor />
+      <!-- <ThemeColor /> -->
       <NavbarLinks class="can-hide" />
       <slot name="after" />
       <Docsearch />
@@ -46,7 +46,7 @@ import { computed, defineComponent, onMounted, ref } from "vue";
 import { useRouteLocale, useSiteLocaleData, withBase } from "@vuepress/client";
 import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 import NavbarLinks from "./NavbarLinks.vue";
-import ThemeColor from "./Theme/ThemeColor.vue";
+// import ThemeColor from "./Theme/ThemeColor.vue";
 import ToggleSidebarButton from "./ToggleSidebarButton.vue";
 
 import type { ThemeHopeOptions } from "../types";
@@ -77,7 +77,7 @@ export default defineComponent({
 
   components: {
     NavbarLinks,
-    ThemeColor,
+    // ThemeColor,
     ToggleSidebarButton,
   },
 
@@ -96,9 +96,11 @@ export default defineComponent({
     const siteBrandLink = computed(
       () => themeLocale.value.home || routeLocale.value
     );
-    const siteBrandLogo = computed(() => withBase(themeLocale.value.logo));
+    const siteBrandLogo = computed(() =>
+      themeLocale.value.logo ? withBase(themeLocale.value.logo) : null
+    );
     const siteBrandDarkLogo = computed(() =>
-      withBase(themeLocale.value.darkLogo)
+      themeLocale.value.darkLogo ? withBase(themeLocale.value.darkLogo) : null
     );
     const siteBrandTitle = computed(() => siteLocale.value.title);
 
@@ -156,110 +158,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-.navbar {
-  position: fixed;
-  z-index: 20;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: $navbarHeight;
-  padding: $navbarVerticalPadding $navbarHorizontalPadding;
-  background: var(--bg-color-blur);
-  box-sizing: border-box;
-  box-shadow: 0 2px 8px var(--card-shadow-color);
-  backdrop-filter: saturate(200%) blur(20px);
-  line-height: $navbarHeight - $navbarVerticalPadding * 2;
-  transition: transform 0.3s ease-in-out;
-
-  @media (max-width: $MQMobile) {
-    height: $navbarMobileHeight;
-    padding: $navbarMobileVerticalPadding $navbarMobileHorizontalPadding;
-    padding-left: $navbarMobileHorizontalPadding + 2.4rem;
-    line-height: $navbarMobileHeight - $navbarMobileVerticalPadding * 2;
-  }
-
-  .hide-navbar &.can-hide {
-    transform: translateY(-100%);
-  }
-
-  a,
-  span,
-  img {
-    display: inline-block;
-  }
-
-  .home-link:hover .site-name {
-    color: var(--accent-color);
-  }
-
-  .logo {
-    min-width: $navbarHeight - $navbarVerticalPadding * 2;
-    height: $navbarHeight - $navbarVerticalPadding * 2;
-    margin-right: 0.8rem;
-    vertical-align: top;
-
-    @media (max-width: $MQMobile) {
-      min-width: $navbarMobileHeight - $navbarMobileVerticalPadding * 2;
-      height: $navbarMobileHeight - $navbarMobileVerticalPadding * 2;
-    }
-
-    .theme-light & {
-      &.light {
-        display: block;
-      }
-
-      &.dark {
-        display: none;
-      }
-    }
-
-    .theme-dark & {
-      &.light {
-        display: none;
-      }
-
-      &.dark {
-        display: block;
-      }
-    }
-  }
-
-  .can-hide {
-    @media (max-width: $MQMobile) {
-      display: none;
-    }
-  }
-
-  .site-name {
-    font-size: 1.5rem;
-    color: var(--text-color);
-    position: relative;
-
-    @media (max-width: $MQMobile) {
-      width: calc(100vw - 9.4rem);
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  }
-
-  .navbar-links-wrapper {
-    position: absolute;
-    top: $navbarVerticalPadding;
-    right: $navbarHorizontalPadding;
-    display: flex;
-    box-sizing: border-box;
-    padding-left: 1.5rem;
-    font-size: 0.9rem;
-    white-space: nowrap;
-
-    @media (max-width: $MQMobile) {
-      padding-left: 0;
-      top: $navbarMobileVerticalPadding;
-      right: $navbarMobileHorizontalPadding;
-    }
-  }
-}
-</style>
