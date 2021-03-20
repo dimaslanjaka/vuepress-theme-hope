@@ -1,7 +1,7 @@
 @use 'sass:color';
+@use "@mr-hope/vuepress-shared/styles/wrapper";
 
 @import "_variables";
-@import "_wrapper";
 
 .page {
   padding-bottom: 2rem;
@@ -9,7 +9,8 @@
 }
 
 .page-meta {
-  @extend %wrapper;
+  @include wrapper.wrapper;
+
   padding-top: 1rem;
   padding-bottom: 1rem;
   overflow: auto;
@@ -53,7 +54,7 @@
 }
 
 .page-nav {
-  @extend %wrapper;
+  @include wrapper.wrapper;
   padding-top: 1rem;
   padding-bottom: 0;
 

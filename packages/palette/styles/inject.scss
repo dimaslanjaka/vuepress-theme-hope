@@ -5,7 +5,6 @@
 @use 'sass:meta';
 @use 'helper';
 
-@use '../palette';
 @use '@mr-hope/vuepress-palette';
 
 @mixin inject-value($module) {

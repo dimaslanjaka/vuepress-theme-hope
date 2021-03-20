@@ -1,13 +1,19 @@
-@mixin wrapper($contentWidth: 740px, $MQNarrow: 719px, $MQMobileNarrow: 419px) {
+@use "@mr-hope/vuepress-palette";
+
+@mixin wrapper(
+  $contentWidth: vuepress-palette.$contentWidth,
+  $screenL: vuepress-palette.$screenL,
+  $screenS: vuepress-palette.$screenS
+) {
   max-width: $contentWidth;
   margin: 0 auto;
   padding: 2rem 2.5rem;
 
-  @media (max-width: $MQNarrow) {
+  @media (max-width: $screenL) {
     padding: 1.5rem;
   }
 
-  @media (max-width: $MQMobileNarrow) {
+  @media (max-width: $screenS) {
     padding: 1rem 1.5rem;
   }
 }
