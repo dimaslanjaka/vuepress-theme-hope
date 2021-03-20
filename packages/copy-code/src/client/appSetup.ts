@@ -1,9 +1,7 @@
-import { useRouteLocale } from "@vuepress/client";
+import { defineClientAppSetup, useRouteLocale } from "@vuepress/client";
 import { onMounted, onUpdated } from "vue";
 import { i18n, options } from "./define";
 import Message from "./message";
-
-import type { ClientAppSetup } from "@vuepress/client";
 
 import "./styles/index.scss";
 import "balloon-css";
@@ -15,7 +13,7 @@ const isMobile = (): boolean =>
       )
     : false;
 
-const clientAppSetup: ClientAppSetup = () => {
+export default defineClientAppSetup(() => {
   const routeLocale = useRouteLocale();
   let message: Message;
 
@@ -97,6 +95,4 @@ const clientAppSetup: ClientAppSetup = () => {
   onUpdated(() => {
     if (!isMobile() || options.showInMobile) genCopyButton();
   });
-};
-
-export default clientAppSetup;
+});

@@ -1,14 +1,14 @@
+import { defineClientAppEnhance } from "@vuepress/client";
 import FlowChart from "./components/FlowChart";
 import Presentation from "./components/Presentation";
 
 import "./styles/index.scss";
 
-import type { ClientAppEnhance } from "@vuepress/client";
 import type { MarkdownEnhanceOptions } from "../shared";
 
 declare const MARKDOWN_ENHANCE_OPTIONS: MarkdownEnhanceOptions;
 
-const clientAppEnhance: ClientAppEnhance = ({ app }) => {
+export default defineClientAppEnhance(({ app }) => {
   if (MARKDOWN_ENHANCE_OPTIONS.align || MARKDOWN_ENHANCE_OPTIONS.enableAll)
     void import("./styles/align.scss");
   if (MARKDOWN_ENHANCE_OPTIONS.footnote || MARKDOWN_ENHANCE_OPTIONS.enableAll)
@@ -33,6 +33,4 @@ const clientAppEnhance: ClientAppEnhance = ({ app }) => {
     void import("./styles/theme/fonts/league-gothic/league-gothic.css");
     void import("./styles/theme/fonts/source-sans-pro/source-sans-pro.css");
   }
-};
-
-export default clientAppEnhance;
+});
