@@ -84,9 +84,11 @@ import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables"
 import { computed, defineComponent, ref, toRefs, watch } from "vue";
 import type { PropType } from "vue";
 import { useRoute } from "vue-router";
-import type { NavGroup, NavItem, ThemeHopeOptions } from "../types";
+import type { NavGroup, NavItem, HopeThemeOptions } from "../types";
 import DropdownTransition from "./DropdownTransition.vue";
 import NavLink from "./NavLink.vue";
+
+import "./DropdownLink.scss";
 
 export default defineComponent({
   name: "DropdownLink",
@@ -111,7 +113,7 @@ export default defineComponent({
 
     const open = ref(false);
     const route = useRoute();
-    const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
+    const themeLocale = useThemeLocaleData<HopeThemeOptions>();
 
     const iconPrefix = computed(() => {
       const { iconPrefix } = themeLocale.value;

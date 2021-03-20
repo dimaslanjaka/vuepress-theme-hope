@@ -1,13 +1,15 @@
 import type { ActiveHeaderLinksPluginOptions } from "@vuepress/plugin-active-header-links";
-import type { ThemeHopeOptions } from "../types";
+import type { DefaultThemePluginsOptions } from "../types";
 
 /**
  * Resolve options for @vuepress/plugin-active-header-links
  */
 export const resolveActiveHeaderLinksPluginOptions = (
-  options: ThemeHopeOptions
+  themePlugins: DefaultThemePluginsOptions
 ): ActiveHeaderLinksPluginOptions | boolean => {
-  if (options.themePlugins?.activeHeaderLinks === false) return false;
+  if (themePlugins?.activeHeaderLinks === false) {
+    return false;
+  }
 
   return {
     headerLinkSelector: ".sidebar-link",

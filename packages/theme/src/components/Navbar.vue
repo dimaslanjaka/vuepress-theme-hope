@@ -49,7 +49,7 @@ import NavbarLinks from "./NavbarLinks.vue";
 // import ThemeColor from "./Theme/ThemeColor.vue";
 import ToggleSidebarButton from "./ToggleSidebarButton.vue";
 
-import type { ThemeHopeOptions } from "../types";
+import type { HopeThemeOptions } from "../types";
 
 const getCssValue = (
   el: Element | null,
@@ -86,7 +86,7 @@ export default defineComponent({
   setup() {
     const routeLocale = useRouteLocale();
     const siteLocale = useSiteLocaleData();
-    const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
+    const themeLocale = useThemeLocaleData<HopeThemeOptions>();
 
     const isMobile = ref(false);
 

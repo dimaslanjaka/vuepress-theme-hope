@@ -1,39 +1,34 @@
 import type { Theme } from "@vuepress/core";
 import { path } from "@vuepress/utils";
 import {
-  assignDefaultOptions,
+  assignDefaultLocaleOptions,
   resolveActiveHeaderLinksPluginOptions,
   resolveContainerPluginOptions,
   resolveContainerPluginOptionsForDetails,
-  resolveDebugPluginOptions,
-  resolveDocsearchPluginOptions,
+  resolveContainerPluginOptionsForCodeGroup,
+  resolveContainerPluginOptionsForCodeGroupItem,
   resolveGitPluginOptions,
   resolveMediumZoomPluginOptions,
-  resolvePaletteStylusPluginOptions,
 } from "./node";
-import type { ThemeHopeOptions } from "./types";
+import type { DefaultThemeOptions } from "./types";
 
 export * from "./node";
 export * from "./types";
 
-export const defaultTheme: Theme<ThemeHopeOptions> = (options, app) => {
-  assignDefaultOptions(options);
-
-  const docsearchOptions = resolveDocsearchPluginOptions(options);
+export const defaultTheme: Theme<DefaultThemeOptions> = ({
+  themePlugins = {},
+  ...localeOptions
+}) => {
+  assignDefaultLocaleOptions(localeOptions);
 
   return {
     name: "@vuepress/theme-default",
 
-    layouts: path.resolve(__dirname, "./layouts"),
+    layouts: path.resolve(__dirname, "../client/layouts"),
 
-    clientAppEnhanceFiles: path.resolve(__dirname, "./clientAppEnhance.ts"),
+    clientAppEnhanceFiles: path.resolve(__dirname, "../client/appEnhance.js"),
 
-    clientAppSetupFiles: path.resolve(__dirname, "./clientAppSetup.ts"),
-
-    define: {
-      // to determine if we have to register a mock `<Docsearch>` component
-      DOCSEARCH_ENABLE: docsearchOptions !== false,
-    },
+    clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
 
     // use the relative file path to generate edit link
     extendsPageData: ({ filePathRelative }) => ({ filePathRelative }),
@@ -41,22 +36,38 @@ export const defaultTheme: Theme<ThemeHopeOptions> = (options, app) => {
     plugins: [
       [
         "@vuepress/active-header-links",
-        resolveActiveHeaderLinksPluginOptions(options),
+        resolveActiveHeaderLinksPluginOptions(themePlugins),
       ],
-      ["@vuepress/back-to-top", options.themePlugins?.backToTop !== false],
-      ["@vuepress/container", resolveContainerPluginOptions(options, "tip")],
+      ["@vuepress/back-to-top", themePlugins.backToTop !== false],
       [
         "@vuepress/container",
-        resolveContainerPluginOptions(options, "warning"),
+        resolveContainerPluginOptions(themePlugins, localeOptions, "tip"),
       ],
-      ["@vuepress/container", resolveContainerPluginOptions(options, "danger")],
-      ["@vuepress/container", resolveContainerPluginOptionsForDetails(options)],
-      ["@vuepress/debug", resolveDebugPluginOptions(options, app)],
-      ["@vuepress/docsearch", docsearchOptions],
-      ["@vuepress/git", resolveGitPluginOptions(options)],
-      ["@vuepress/medium-zoom", resolveMediumZoomPluginOptions(options)],
-      ["@vuepress/nprogress", options.themePlugins?.nprogress !== false],
-      ["@vuepress/palette-stylus", resolvePaletteStylusPluginOptions()],
+      [
+        "@vuepress/container",
+        resolveContainerPluginOptions(themePlugins, localeOptions, "warning"),
+      ],
+      [
+        "@vuepress/container",
+        resolveContainerPluginOptions(themePlugins, localeOptions, "danger"),
+      ],
+      [
+        "@vuepress/container",
+        resolveContainerPluginOptionsForDetails(themePlugins),
+      ],
+      [
+        "@vuepress/container",
+        resolveContainerPluginOptionsForCodeGroup(themePlugins),
+      ],
+      [
+        "@vuepress/container",
+        resolveContainerPluginOptionsForCodeGroupItem(themePlugins),
+      ],
+      ["@vuepress/git", resolveGitPluginOptions(themePlugins, localeOptions)],
+      ["@vuepress/medium-zoom", resolveMediumZoomPluginOptions(themePlugins)],
+      ["@vuepress/nprogress", themePlugins.nprogress !== false],
+      // ["@vuepress/palette", { preset: "sass" }],
+      ["@vuepress/theme-data", { themeData: localeOptions }],
     ],
   };
 };

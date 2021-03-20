@@ -1,8 +1,8 @@
-@use "@mr-hope/vuepress-palette" as *;
+@import "../styles/variables";
 
 .navbar {
   position: fixed;
-  z-index: 200;
+  z-index: 20;
   top: 0;
   left: 0;
   right: 0;
@@ -30,6 +30,10 @@
   span,
   img {
     display: inline-block;
+  }
+
+  .home-link:hover .site-name {
+    color: var(--accent-color);
   }
 
   .logo {

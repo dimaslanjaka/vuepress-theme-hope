@@ -2,13 +2,12 @@
   <RouterLink
     v-if="isRouterLink"
     class="nav-link"
-    :class="{ active: isExact }"
     :to="item.link"
+    :exact="isExact"
     :aria-label="linkAriaLabel"
     v-bind="$attrs"
   >
     <slot name="before" />
-    <i v-if="item.icon" :class="`iconfont ${iconPrefix}${item.icon}`" />
     {{ item.text }}
     <slot name="after" />
   </RouterLink>
@@ -22,7 +21,6 @@
     v-bind="$attrs"
   >
     <slot name="before" />
-    <i v-if="item.icon" :class="`iconfont ${iconPrefix}${item.icon}`" />
     {{ item.text }}
     <OutboundLink v-if="isBlankTarget" />
     <slot name="after" />
@@ -33,9 +31,8 @@
 import { computed, defineComponent, toRefs } from "vue";
 import type { PropType } from "vue";
 import { useSiteData } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 import { isLinkHttp, isLinkMailto, isLinkTel } from "@vuepress/shared";
-import type { NavLink, ThemeHopeOptions } from "../types";
+import type { NavLink } from "../types";
 
 export default defineComponent({
   name: "NavLink",
@@ -51,18 +48,14 @@ export default defineComponent({
 
   setup(props) {
     const site = useSiteData();
-    const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
-
     const { item } = toRefs(props);
 
     // if the link has http protocol
     const hasHttpProtocol = computed(() => isLinkHttp(item.value.link));
-
     // if the link has non-http protocol
     const hasNonHttpProtocal = computed(
       () => isLinkMailto(item.value.link) || isLinkTel(item.value.link)
     );
-
     // resolve the `target` attr
     const linkTarget = computed(() => {
       if (hasNonHttpProtocal.value) return null;
@@ -70,10 +63,8 @@ export default defineComponent({
       if (hasHttpProtocol.value) return "_blank";
       return null;
     });
-
     // if the `target` attr is '_blank'
     const isBlankTarget = computed(() => linkTarget.value === "_blank");
-
     // is `<RouterLink>` or not
     const isRouterLink = computed(
       () =>
@@ -81,7 +72,6 @@ export default defineComponent({
         !hasNonHttpProtocal.value &&
         !isBlankTarget.value
     );
-
     // is the `exact` prop of `<RouterLink>` should be true
     const isExact = computed(() => {
       const localeKeys = Object.keys(site.value.locales);
@@ -90,7 +80,6 @@ export default defineComponent({
       }
       return item.value.link === "/";
     });
-
     // resolve the `rel` attr
     const linkRel = computed(() => {
       if (hasNonHttpProtocal.value) return null;
@@ -98,20 +87,12 @@ export default defineComponent({
       if (isBlankTarget.value) return "noopener noreferrer";
       return null;
     });
-
     // resolve the `aria-label` attr
     const linkAriaLabel = computed(
       () => item.value.ariaLabel || item.value.text
     );
 
-    const iconPrefix = computed(() => {
-      const { iconPrefix } = themeLocale.value;
-
-      return iconPrefix === "" ? "" : (iconPrefix as string) || "icon-";
-    });
-
     return {
-      iconPrefix,
       isBlankTarget,
       isExact,
       isRouterLink,
@@ -122,26 +103,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-.nav-link {
-  line-height: 1.4rem;
-
-  .navbar & {
-    color: var(--dark-grey);
-
-    &.active {
-      color: var(--accent-color);
-    }
-  }
-
-  .sidebar & {
-    color: var(--text-color);
-
-    &:hover,
-    &.active {
-      color: var(--accent-color);
-    }
-  }
-}
-</style>

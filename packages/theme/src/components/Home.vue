@@ -70,7 +70,7 @@ import {
   withBase,
 } from "@vuepress/client";
 import { isArray } from "@vuepress/shared";
-import DropTransition from "./transition/DropTransition";
+import DropTransition from "./DropTransition.vue";
 import NavLink from "./NavLink.vue";
 
 import type { BasePageFrontMatter } from "@mr-hope/vuepress-shared";

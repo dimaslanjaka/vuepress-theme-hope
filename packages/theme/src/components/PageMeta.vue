@@ -5,7 +5,7 @@
     </div>
 
     <div v-if="lastUpdated" class="meta-item last-updated">
-      <span class="meta-item-label">{{ $themeLocale.lastUpdatedText }}: </span>
+      <span class="meta-item-label">{{ themeLocale.lastUpdatedText }}: </span>
       <span class="meta-item-info">{{ lastUpdated }}</span>
     </div>
 
@@ -13,7 +13,7 @@
       v-if="contributors && contributors.length"
       class="meta-item contributors"
     >
-      <span class="meta-item-label">{{ $themeLocale.contributorsText }}: </span>
+      <span class="meta-item-label">{{ themeLocale.contributorsText }}: </span>
       <span class="meta-item-info">
         <template v-for="(contributor, index) in contributors" :key="index">
           <span class="contributor" :title="`email: ${contributor.email}`">
@@ -27,13 +27,93 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
+import type { ComputedRef } from "vue";
 import {
-  useContributors,
-  useEditNavLink,
-  useLastUpdated,
-} from "../composables";
+  usePageData,
+  usePageFrontmatter,
+  useSiteLocaleData,
+} from "@vuepress/client";
+import { useThemeLocaleData } from "../composables";
+import type { DefaultThemePageData, NavLink as NavLinkType } from "../types";
+import { resolveEditLink } from "../utils";
 import NavLink from "./NavLink.vue";
+
+const useEditNavLink = (): ComputedRef<null | NavLinkType> => {
+  const themeLocale = useThemeLocaleData();
+  const page = usePageData<DefaultThemePageData>();
+  const frontmatter = usePageFrontmatter();
+
+  return computed(() => {
+    const showEditLink =
+      frontmatter.value.editLink ?? themeLocale.value.editLink ?? true;
+    if (!showEditLink) {
+      return null;
+    }
+
+    const {
+      repo,
+      docsRepo = repo,
+      docsBranch = "main",
+      docsDir = "",
+      editLinkText,
+    } = themeLocale.value;
+
+    if (!docsRepo) return null;
+
+    const editLink = resolveEditLink({
+      docsRepo,
+      docsBranch,
+      docsDir,
+      filePathRelative: page.value.filePathRelative,
+      editLinkPattern: themeLocale.value.editLinkPattern,
+    });
+
+    if (!editLink) return null;
+
+    return {
+      text: editLinkText ?? "Edit this page",
+      link: editLink,
+    };
+  });
+};
+
+const useLastUpdated = (): ComputedRef<null | string> => {
+  const siteLocale = useSiteLocaleData();
+  const themeLocale = useThemeLocaleData();
+  const page = usePageData<DefaultThemePageData>();
+  const frontmatter = usePageFrontmatter();
+
+  return computed(() => {
+    const showLastUpdated =
+      frontmatter.value.lastUpdated ?? themeLocale.value.lastUpdated ?? true;
+
+    if (!showLastUpdated) return null;
+
+    if (!page.value.git?.updatedTime) return null;
+
+    const updatedDate = new Date(page.value.git?.updatedTime);
+
+    return updatedDate.toLocaleString(siteLocale.value.lang);
+  });
+};
+
+const useContributors = (): ComputedRef<
+  null | Required<DefaultThemePageData["git"]>["contributors"]
+> => {
+  const themeLocale = useThemeLocaleData();
+  const page = usePageData<DefaultThemePageData>();
+  const frontmatter = usePageFrontmatter();
+
+  return computed(() => {
+    const showContributors =
+      frontmatter.value.contributors ?? themeLocale.value.contributors ?? true;
+
+    if (!showContributors) return null;
+
+    return page.value.git?.contributors ?? null;
+  });
+};
 
 export default defineComponent({
   name: "PageMeta",
@@ -43,11 +123,13 @@ export default defineComponent({
   },
 
   setup() {
+    const themeLocale = useThemeLocaleData();
     const editNavLink = useEditNavLink();
     const lastUpdated = useLastUpdated();
     const contributors = useContributors();
 
     return {
+      themeLocale,
       editNavLink,
       lastUpdated,
       contributors,
@@ -55,58 +137,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="stylus">
-@require '../styles/palette.styl'
-@require '../styles/wrapper.styl'
-
-.page-meta
-  @extend $wrapper
-  padding-top 1rem
-  padding-bottom 1rem
-  font-family Arial, Helvetica, sans-serif
-  overflow auto
-
-  .meta-item
-    cursor default
-    margin-top 0.8rem
-
-    .meta-item-label
-      font-weight 500
-      color lighten($textColor, 25%)
-
-    .meta-item-info
-      font-weight 400
-      color #767676
-
-  .edit-link
-    display inline-block
-    margin-right 0.25rem
-
-    @media (max-width $MQMobile)
-      margin-bottom 8px
-      font-size 0.8em
-
-    a
-      color var(--accent-color-l10)
-
-  .last-updated
-    float right
-
-    @media (max-width $MQMobile)
-      font-size 0.8em
-      float none
-      // text-align left
-
-    .prefix
-      font-weight 500
-      color var(--text-color-l25)
-
-    .time
-      font-weight 400
-      color var(--dark-grey)
-
-  .contributors
-    @media (max-width $MQMobile)
-      font-size 0.8em
-</style>

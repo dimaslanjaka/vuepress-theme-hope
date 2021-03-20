@@ -1,79 +1,38 @@
 <template>
-  <Common :sidebar="false">
-    <main class="page not-found">
+  <div class="theme-container">
+    <div class="theme-default-content">
       <h1>404</h1>
 
-      <blockquote v-text="getMsg()" />
+      <blockquote>{{ getMsg() }}</blockquote>
 
-      <button class="action-button" @click="back" v-text="i18n.back" />
-      <RouterLink class="action-button" to="/" v-text="i18n.home" />
-    </main>
-  </Common>
+      <RouterLink :to="homeLink">{{ homeText }}</RouterLink>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { defineComponent } from "vue";
 import { useRouteLocale } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
-import Common from "../components/Common";
-import { getDefaultLocale } from "@mr-hope/vuepress-shared";
-
-import type { HopeThemeLocaleConfigItem } from "@mr-hope/vuepress-shared";
-import type { ThemeHopeOptions } from "../types";
+import { useThemeLocaleData } from "../composables";
 
 export default defineComponent({
-  name: "NotFound",
-
-  components: { Common },
+  name: "404",
 
   setup() {
     const routeLocale = useRouteLocale();
-    const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
+    const themeLocale = useThemeLocaleData();
 
-    const i18n = computed<HopeThemeLocaleConfigItem["error404"]>(
-      () => themeLocale.value.error404 || getDefaultLocale().error404
-    );
-
+    const messages = themeLocale.value.notFound ?? ["Not Found"];
     const getMsg = (): string =>
-      i18n.value.hint[Math.floor(Math.random() * i18n.value.hint.length)];
-
-    const back = (): void => window.history.go(-1);
+      messages[Math.floor(Math.random() * messages.length)];
+    const homeLink = themeLocale.value.home ?? routeLocale.value;
+    const homeText = themeLocale.value.backToHome ?? "Back to home";
 
     return {
-      back,
       getMsg,
-      i18n,
+      homeLink,
+      homeText,
     };
   },
 });
 </script>
-
-<style lang="stylus">
-@require '../styles/palette';
-
-.page.not-found {
-  display: block;
-  max-width: $homePageWidth;
-  margin: 0px auto;
-  padding: ($navbarHeight + 1rem) 2rem;
-
-  .action-button {
-    display: inline-block;
-    box-sizing: border-box;
-    margin: 0 0.25rem;
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--accent-color-d10);
-    border-radius: 0.25rem;
-    background: var(--accent-color);
-    color: var(--white);
-    font-size: 1rem;
-    outline: none;
-    transition: background 0.1s ease;
-
-    &:hover {
-      cursor: pointer;
-      background: var(--accent-color-l10);
-    }
-  }
-}
-</style>

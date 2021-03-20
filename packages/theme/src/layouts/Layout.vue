@@ -1,50 +1,132 @@
 <template>
-  <Common :sidebar="$frontmatter.blog !== true">
-    <!-- <template
-      v-if="$frontmatter.blog && $themeConfig.blog !== false"
-      #sidebar-bottom
-    >
-      <BlogInfo />
-    </template> -->
+  <div
+    class="theme-container"
+    :class="containerClass"
+    @touchstart="onTouchStart"
+    @touchend="onTouchEnd"
+  >
+    <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar">
+      <template #before>
+        <slot name="navbar-before" />
+      </template>
+      <template #after>
+        <slot name="navbar-after" />
+      </template>
+    </Navbar>
 
-    <template #default>
-      <!-- <BlogHome v-if="$frontmatter.blog && $themeConfig.blog !== false" /> -->
+    <div class="sidebar-mask" @click="toggleSidebar(false)" />
 
-      <Home v-if="$frontmatter.home" />
-      <!-- <Home v-else-if="$frontmatter.home" /> -->
+    <Sidebar>
+      <template #top>
+        <slot name="sidebar-top" />
+      </template>
+      <template #bottom>
+        <slot name="sidebar-bottom" />
+      </template>
+    </Sidebar>
 
-      <Home v-if="$frontmatter.home" />
+    <Home v-if="$frontmatter.home" />
 
-      <Page v-else>
+    <Transition v-else name="fade-slide-y" mode="out-in">
+      <Page :key="$page.path">
         <template #top>
           <slot name="page-top" />
         </template>
-
         <template #bottom>
           <slot name="page-bottom" />
         </template>
       </Page>
-    </template>
-  </Common>
+    </Transition>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-// import BlogInfo from "@BlogInfo";
-// import BlogHome from "@BlogHome";
-import Common from "../components/Common";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  ref,
+  Transition,
+} from "vue";
+import { useRouter } from "vue-router";
+import { usePageFrontmatter } from "@vuepress/client";
 import Home from "../components/Home.vue";
 import Page from "../components/Page.vue";
+import Navbar from "../components/Navbar.vue";
+import Sidebar from "../components/Sidebar.vue";
+import { useSidebarItems, useThemeLocaleData } from "../composables";
 
 export default defineComponent({
   name: "Layout",
 
   components: {
-    // BlogInfo,
-    // BlogHome,
-    Common,
     Home,
     Page,
+    Navbar,
+    Sidebar,
+    Transition,
+  },
+
+  setup() {
+    const frontmatter = usePageFrontmatter();
+    const themeLocale = useThemeLocaleData();
+
+    // navbar
+    const shouldShowNavbar = computed(
+      () =>
+        frontmatter.value.navbar !== false && themeLocale.value.navbar !== false
+    );
+
+    // sidebar
+    const sidebarItems = useSidebarItems();
+    const isSidebarOpen = ref(false);
+    const toggleSidebar = (to?: boolean): void => {
+      isSidebarOpen.value = typeof to === "boolean" ? to : !isSidebarOpen.value;
+    };
+    const touchStart = { x: 0, y: 0 };
+    const onTouchStart = (e: TouchEvent): void => {
+      touchStart.x = e.changedTouches[0].clientX;
+      touchStart.y = e.changedTouches[0].clientY;
+    };
+    const onTouchEnd = (e: TouchEvent): void => {
+      const dx = e.changedTouches[0].clientX - touchStart.x;
+      const dy = e.changedTouches[0].clientY - touchStart.y;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        if (dx > 0 && touchStart.x <= 80) {
+          toggleSidebar(true);
+        } else {
+          toggleSidebar(false);
+        }
+      }
+    };
+
+    // classes
+    const containerClass = computed(() => ({
+      "no-navbar": !shouldShowNavbar.value,
+      "no-sidebar": !sidebarItems.value.length,
+      "sidebar-open": isSidebarOpen.value,
+    }));
+
+    // close sidebar after navigation
+    let unregisterRouterHook: () => void;
+    onMounted(() => {
+      const router = useRouter();
+      unregisterRouterHook = router.afterEach(() => {
+        toggleSidebar(false);
+      });
+    });
+    onUnmounted(() => {
+      unregisterRouterHook();
+    });
+
+    return {
+      containerClass,
+      shouldShowNavbar,
+      toggleSidebar,
+      onTouchStart,
+      onTouchEnd,
+    };
   },
 });
 </script>
