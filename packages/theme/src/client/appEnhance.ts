@@ -1,10 +1,10 @@
 import { defineClientAppEnhance } from "@vuepress/client";
-import Badge from "./components/global/Badge.vue";
-import CodeGroup from "./components/global/CodeGroup.vue";
-import CodeGroupItem from "./components/global/CodeGroupItem.vue";
-import OutboundLink from "./components/global/OutboundLink.vue";
+import Badge from "../components/global/Badge.vue";
+import CodeGroup from "../components/global/CodeGroup.vue";
+import CodeGroupItem from "../components/global/CodeGroupItem.vue";
+import OutboundLink from "../components/global/OutboundLink.vue";
 
-import "./styles/index.scss";
+import "../styles/index.scss";
 
 declare const DOCSEARCH_PROPS: unknown;
 

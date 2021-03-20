@@ -18,7 +18,7 @@ const config: UserConfig<DefaultThemeOptions> = {
     },
   },
 
-  theme: "hope-test",
+  theme: "hope",
 
   /** 主题配置 */
   themeConfig: {

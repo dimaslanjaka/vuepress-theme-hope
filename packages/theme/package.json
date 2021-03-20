@@ -24,14 +24,15 @@
     "email": "zhangbowang1998@gmail.com",
     "url": "https://mrhope.site"
   },
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "node/index.js",
+  "types": "node/index.d.ts",
   "files": [
-    "lib"
+    "client",
+    "node"
   ],
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
-    "clean": "rimraf lib *.tsbuildinfo",
+    "clean": "rimraf client node *.tsbuildinfo",
     "copy": "cpx \"src/**/*.{d.ts,vue,scss}\" lib",
     "rollup:build": "rollup -c",
     "rollup:watch": "rollup -c -w"
