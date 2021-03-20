@@ -85,7 +85,7 @@ export default defineComponent({
       h("div", {
         class: { loading: loading.value, "md-flowchart": true },
         ref: flowchart,
-        innerHTML: loading.value ? loadingIcon : "",
+        // innerHTML: loading.value ? loadingIcon : "",
       });
   },
 });

@@ -141,6 +141,7 @@ export default defineComponent({
           ref: presentation,
         },
         [
+          // h("div", { innerHTML: loading.value ? loadingIcon : "" }),
           h("div", {
             class: "slides",
             style: { display: loading.value ? "none" : "block" },
@@ -148,7 +149,6 @@ export default defineComponent({
               props.code
             )}</script></section>`,
           }),
-          h("div", { innerHTML: loading.value ? loadingIcon : "" }),
         ]
       );
   },
