@@ -193,6 +193,10 @@ export interface DefaultThemeLocaleData extends LocaleData {
 
 export interface ThemeHopeOptions extends ThemeData<DefaultThemeLocaleData> {
   /**
+   * Author
+   */
+  author?: string;
+  /**
    * Options for docsearch / algolia
    */
   docsearch?: DocsearchPluginOptions;

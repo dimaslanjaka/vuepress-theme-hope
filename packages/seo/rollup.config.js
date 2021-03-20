@@ -1,28 +1,13 @@
-import pkg from "./package.json";
-import typescript from "@rollup/plugin-typescript";
-import dts from "rollup-plugin-dts";
-import { terser } from "rollup-plugin-terser";
+import { rollupTypescript } from "../../script/rollup";
 
-export default [
-  {
-    input: "./src/node/index.ts",
-    output: [
-      { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
-    ],
-    plugins: [typescript(), terser()],
-    external: [
-      "@mr-hope/vuepress-shared",
-      "@vuepress/core",
-      "@vuepress/client",
-      "chalk",
-      "fs-extra",
-      "path",
-      "sitemap",
-    ],
-  },
-  {
-    input: "./src/node/index.ts",
-    output: [{ file: pkg.types, format: "esm", sourcemap: true }],
-    plugins: [dts()],
-  },
-];
+export default rollupTypescript("node/index", {
+  external: [
+    "@mr-hope/vuepress-shared",
+    "@vuepress/core",
+    "@vuepress/client",
+    "chalk",
+    "fs-extra",
+    "path",
+    "sitemap",
+  ],
+});

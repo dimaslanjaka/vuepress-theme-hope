@@ -32,7 +32,9 @@
   "scripts": {
     "build": "tsc -b tsconfig.build.json",
     "clean": "rimraf lib *.tsbuildinfo",
-    "copy": "cpx \"src/**/*.{d.ts,vue,styl}\" lib"
+    "copy": "cpx \"src/**/*.{d.ts,vue,styl}\" lib",
+    "rollup:build": "rollup -c",
+    "rollup:watch": "rollup -c -w"
   },
   "dependencies": {
     "@types/lodash.throttle": "^4.1.6",

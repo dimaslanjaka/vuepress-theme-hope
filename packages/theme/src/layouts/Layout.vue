@@ -32,7 +32,7 @@
 import { defineComponent } from "vue";
 // import BlogInfo from "@BlogInfo";
 // import BlogHome from "@BlogHome";
-import Common from "../components/Common.vue";
+import Common from "../components/Common";
 import Home from "../components/Home.vue";
 import Page from "../components/Page.vue";
 

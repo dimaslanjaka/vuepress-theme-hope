@@ -5,15 +5,15 @@ import type { ThemeHopeOptions } from "../types";
  * Resolve options for @vuepress/plugin-medium-zoom
  */
 export const resolveMediumZoomPluginOptions = (
-  options: ThemeHopeOptions
+  themePlugins: ThemeHopeOptions
 ): MediumZoomPluginOptions | boolean => {
-  if (options.themePlugins?.mediumZoom === false) {
+  if (themePlugins?.mediumZoom === false) {
     return false;
   }
 
   return {
     selector: ".theme-default-content :not(a) > img",
-    options: {},
+    zoomOptions: {},
     delay: 300,
   };
 };

@@ -1,11 +1,5 @@
-<template>
-  <!-- eslint-disable-next-line vue/no-v-html -->
-  <div v-html="copyright" />
-</template>
-
-<script lang="ts">
-import { useThemeLocaleData } from "@vuepress/client";
-import { computed, defineComponent, ref } from "vue";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { computed, defineComponent, h, ref, VNode } from "vue";
 import type { ThemeHopeOptions } from "../types";
 
 export default defineComponent({
@@ -25,6 +19,7 @@ export default defineComponent({
 
     const copyright = computed(() => {
       const { author } = themeLocale.value;
+      // TODO: Move i18n in one place
       const content: Record<string, string> = {
         "zh-CN": `${props.html}\n-----\n${
           author ? `著作权归${author}所有。\n` : ""
@@ -40,9 +35,6 @@ export default defineComponent({
       return content[props.lang];
     });
 
-    return {
-      copyright,
-    };
+    return (): VNode => h("div", { innerHTML: copyright });
   },
 });
-</script>

@@ -1,45 +1,12 @@
-<template>
-  <div
-    class="theme-container"
-    :class="containerClass"
-    @touchstart="onTouchStart"
-    @touchend="onTouchEnd"
-  >
-    <!-- <Password v-if="isGlobalEncrypted" @password-verify="checkGlobalPassword" /> -->
-    <!-- Content -->
-    <!-- <template v-else> -->
-    <Navbar v-if="showNavbar" @toggle-sidebar="toggleSidebar">
-      <template #before>
-        <slot name="navbar-before" />
-      </template>
-      <template #after>
-        <slot name="navbar-after" />
-      </template>
-    </Navbar>
-
-    <div class="sidebar-mask" @click="toggleSidebar(false)" />
-
-    <Sidebar>
-      <template #top>
-        <slot name="sidebar-top" />
-      </template>
-      <template #center>
-        <slot name="sidebar-center" />
-      </template>
-      <template #bottom>
-        <slot name="sidebar-bottom" />
-      </template>
-    </Sidebar>
-
-    <slot />
-
-    <PageFooter :key="$route.path" />
-    <!-- </template> -->
-  </div>
-</template>
-
-<script lang="ts">
-import { computed, defineComponent, onMounted, onUnmounted, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  h,
+  onMounted,
+  onUnmounted,
+  ref,
+  VNode,
+} from "vue";
 import { useRouter } from "vue-router";
 import { usePageData, usePageFrontmatter, useSiteData } from "@vuepress/client";
 import {
@@ -63,7 +30,7 @@ export default defineComponent({
     Sidebar,
   },
 
-  setup() {
+  setup(_props, { slots }) {
     const frontmatter = usePageFrontmatter();
     const themeData = useThemeData<ThemeHopeOptions>();
     const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
@@ -161,13 +128,35 @@ export default defineComponent({
       unregisterRouterHook();
     });
 
-    return {
-      containerClass,
-      showNavbar,
-      toggleSidebar,
-      onTouchStart,
-      onTouchEnd,
-    };
+    return (): VNode =>
+      h(
+        "div",
+        {
+          class: { "theme-container": true, ...containerClass.value },
+          onTouchStart,
+          onTouchEnd,
+        },
+        // isGlobalEncrypted.value?h(Password，{onPasswordVerify:checkGlobalPassword}):
+        [
+          showNavbar.value
+            ? h(
+                Navbar,
+                { onToggleSidebar: toggleSidebar },
+                {
+                  navbarBefore: () => slots.navbarBefore?.(),
+                  navbarAfter: () => slots.navbarAfter?.(),
+                }
+              )
+            : null,
+          h("div", { class: "sidebar-mask", onClick: toggleSidebar(false) }),
+          h(Sidebar, {
+            sidebarTop: () => slots.sidebarTop?.(),
+            sidebarCenter: () => slots.sidebarCenter?.(),
+            sidebarBottom: () => slots.sidebarBottom?.(),
+          }),
+          slots.default?.(),
+          h(PageFooter),
+        ]
+      );
   },
 });
-</script>

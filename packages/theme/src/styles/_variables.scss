@@ -1,0 +1,51 @@
+// @import "@vuepress/plugin-palette/palette";
+
+// colors
+$accentColor: #3eaf7c !default;
+$bgColor: #fff !default;
+$darkBgColor: #1e1e1e !default;
+$bgColorLight: #f8f8f8 !default;
+$darkBgColorLight: #272727 !default;
+$bgColorBlur: rgba(255, 255, 255, 0.9) !default;
+$darkBgColorBlur: rgba(30, 30, 30, 0.9) !default;
+$textColor: #242424 !default;
+$darkTextColor: #9e9e9e !default;
+$borderColor: #eaecef !default;
+$darkBorderColor: #302d28 !default;
+$codeBgColor: #ecf4fa !default;
+$darkCodeBgColor: #282c34 !default;
+$tipColor: #42b983 !default;
+$warningColor: #e7c000 !default;
+$dangerColor: #cc0000 !default;
+$badgeTipColor: $tipColor !default;
+$badgeWarningColor: $warningColor !default;
+$badgeDangerColor: $dangerColor !default;
+
+// layout
+$navbarHeight: 3.6rem !default;
+$sidebarWidth: 20rem !default;
+$contentWidth: 740px !default;
+$homePageWidth: 960px !default;
+
+// responsive breakpoints
+$MQNarrow: 959px !default;
+$MQMobile: 719px !default;
+$MQMobileNarrow: 419px !default;
+
+// code
+$lineNumbersWrapperWidth: 3.5rem !default;
+$codeLang: "c" "cpp" "cs" "css" "dart" "docker" "fs" "go" "html" "java" "js"
+  "json" "kt" "less" "makefile" "md" "php" "py" "rb" "rs" "sass" "scss" "sh"
+  "styl" "ts" "toml" "vue" "yml" !default;
+
+// other
+$contentClass: ".theme-default-content" !default;
+
+// theme-color
+$colorPicker: (
+  red: #e74c3c,
+  blue: #3498db,
+  green: #3eaf7c,
+  orange: #f39c12,
+  purple: #8e44ad,
+) !default;
