@@ -20,16 +20,13 @@
         v-if="siteBrandTitle"
         class="site-name"
         :class="{ 'can-hide': siteBrandLogo }"
+        >{{ siteBrandTitle }}</span
       >
-        {{ siteBrandTitle }}
-      </span>
     </RouterLink>
 
     <div class="navbar-links-wrapper" :style="linksWrapperStyle">
       <slot name="before" />
       <!-- <ThemeColor /> -->
-      <NavbarLinks class="can-hide" />
-      <slot name="after" />
       <Docsearch />
       <!-- <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algoliaConfig" /> -->
       <!-- <SearchBox
@@ -37,6 +34,11 @@
           $themeConfig.search !== false && $page.frontmatter.search !== false
         "
       /> -->
+      <slot name="center" />
+      <NavLinks class="can-hide" />
+      <LanguageDropdown />
+      <RepoLink class="can-hide" />
+      <slot name="after" />
     </div>
   </header>
 </template>
@@ -45,11 +47,13 @@
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useRouteLocale, useSiteLocaleData, withBase } from "@vuepress/client";
 import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
-import NavbarLinks from "./NavbarLinks.vue";
+import LanguageDropdown from "./LanguageDropdown";
+import RepoLink from "./RepoLink.vue";
+import NavLinks from "./NavLinks";
 // import ThemeColor from "./Theme/ThemeColor.vue";
-import ToggleSidebarButton from "./ToggleSidebarButton.vue";
+import ToggleSidebarButton from "./ToggleSidebarButton";
 
-import type { DefaultThemeOptions } from "../types";
+import type { DefaultThemeData } from "../../types";
 
 const getCssValue = (
   el: Element | null,
@@ -76,7 +80,9 @@ export default defineComponent({
   name: "Navbar",
 
   components: {
-    NavbarLinks,
+    LanguageDropdown,
+    NavLinks,
+    RepoLink,
     // ThemeColor,
     ToggleSidebarButton,
   },
@@ -86,7 +92,7 @@ export default defineComponent({
   setup() {
     const routeLocale = useRouteLocale();
     const siteLocale = useSiteLocaleData();
-    const themeLocale = useThemeLocaleData<DefaultThemeOptions>();
+    const themeLocale = useThemeLocaleData<DefaultThemeData>();
 
     const isMobile = ref(false);
 
@@ -119,6 +125,8 @@ export default defineComponent({
       return autoHide !== "none" && (autoHide === "always" || isMobile.value);
     });
 
+    // TODO: Add algolia search
+
     // avoid overlapping of long title and long navbar links
     onMounted(() => {
       // TODO: migrate to css var
@@ -127,6 +135,7 @@ export default defineComponent({
       const navbarHorizontalPadding =
         getCssValue(navbar.value, "paddingLeft") +
         getCssValue(navbar.value, "paddingRight");
+
       const handleLinksWrapWidth = (): void => {
         if (window.innerWidth < MOBILE_DESKTOP_BREAKPOINT) {
           isMobile.value = true;
@@ -140,7 +149,9 @@ export default defineComponent({
             (siteBrand.value?.offsetWidth || 0);
         }
       };
+
       handleLinksWrapWidth();
+      // TODO: Add destory
       window.addEventListener("resize", handleLinksWrapWidth, false);
       window.addEventListener("orientationchange", handleLinksWrapWidth);
     });

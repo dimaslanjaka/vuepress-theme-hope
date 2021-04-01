@@ -148,7 +148,10 @@ export default defineComponent({
                 }
               )
             : null,
-          h("div", { class: "sidebar-mask", onClick: toggleSidebar(false) }),
+          h("div", {
+            class: "sidebar-mask",
+            onClick: () => toggleSidebar(false),
+          }),
           h(Sidebar, {
             sidebarTop: () => slots.sidebarTop?.(),
             sidebarCenter: () => slots.sidebarCenter?.(),

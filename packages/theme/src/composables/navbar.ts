@@ -34,19 +34,17 @@ export const useNavLink = (item: string): NavLink => {
 /**
  * Get navbar config of select language dropdown
  */
-export const useNavbarSelectLanguage = (): ComputedRef<
-  ResolvedNavbarItem[]
-> => {
+export const useNavbarSelectLanguage = (): ComputedRef<ResolvedNavbarItem | null> => {
   const router = useRouter();
   const routeLocale = useRouteLocale();
   const siteLocale = useSiteLocaleData();
   const themeLocale = useThemeLocaleData<DefaultThemeData>();
 
-  return computed<ResolvedNavbarItem[]>(() => {
+  return computed<ResolvedNavbarItem | null>(() => {
     const localePaths = Object.keys(siteLocale.value.locales);
 
     // do not display language selection dropdown if there is only one language
-    if (localePaths.length < 2) return [];
+    if (localePaths.length < 2) return null;
 
     const { fullPath, path } = router.currentRoute.value;
     const languageDropdown: ResolvedNavbarItem = {
@@ -88,14 +86,14 @@ export const useNavbarSelectLanguage = (): ComputedRef<
       }),
     };
 
-    return [languageDropdown];
+    return languageDropdown;
   });
 };
 
 /**
  * Get navbar config of repository link
  */
-export const useNavbarRepo = (): ComputedRef<ResolvedNavbarItem[]> => {
+export const useNavbarRepo = (): ComputedRef<ResolvedNavbarItem | null> => {
   const themeLocale = useThemeLocaleData<DefaultThemeData>();
   const repoType = computed(() => resolveRepoType(themeLocale.value.repo));
   const repoLink = computed(() =>
@@ -114,13 +112,11 @@ export const useNavbarRepo = (): ComputedRef<ResolvedNavbarItem[]> => {
 
   return computed(() =>
     repoLink.value && repoLabel.value
-      ? [
-          {
-            text: repoLabel.value,
-            link: repoLink.value,
-          },
-        ]
-      : []
+      ? {
+          text: repoLabel.value,
+          link: repoLink.value,
+        }
+      : null
   );
 };
 

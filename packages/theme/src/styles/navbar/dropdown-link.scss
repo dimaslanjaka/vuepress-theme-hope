@@ -43,7 +43,7 @@
     position: absolute;
     top: 100%;
     right: 0;
-    max-height: 100vh - $navbarHeight;
+    max-height: calc(100vh - $navbarHeight);
     margin: 0;
     padding: 0.6rem 0;
     border: 1px solid var(--grey14);

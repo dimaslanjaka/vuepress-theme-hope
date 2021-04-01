@@ -15,20 +15,24 @@ export default defineComponent({
     const dropdown = useNavbarSelectLanguage();
 
     return (): VNode | null =>
-      dropdown.value.length
+      dropdown.value
         ? h("div", { class: "nav-links" }, [
             h("div", { class: "nav-item" }, [
-              h(DropdownLink, { item: dropdown.value }, [
-                h(I18nIcon, {
-                  slot: "title",
-                  style: {
-                    width: "1rem",
-                    height: "1rem",
-                    verticalAlign: "middle",
-                    marginLeft: "1rem",
-                  },
-                }),
-              ]),
+              h(
+                DropdownLink,
+                { item: dropdown.value },
+                {
+                  title: () =>
+                    h(I18nIcon, {
+                      style: {
+                        width: "1rem",
+                        height: "1rem",
+                        verticalAlign: "middle",
+                        marginLeft: "1rem",
+                      },
+                    }),
+                }
+              ),
             ]),
           ])
         : null;
