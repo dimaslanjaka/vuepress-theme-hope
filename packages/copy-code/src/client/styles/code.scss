@@ -1,5 +1,5 @@
-@use '@mr-hope/vuepress-palette' as *;
 @use "@mr-hope/vuepress-shared/styles/reset";
+@use '@mr-hope/vuepress-palette' as *;
 
 .copy-code-button {
   @include reset.button;
