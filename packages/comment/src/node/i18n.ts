@@ -1,8 +1,8 @@
-import type { LangPaths } from "@mr-hope/vuepress-shared";
+import type { HopeLangPath } from "@mr-hope/vuepress-shared";
 import type { PageInfoI18nConfig } from "../shared";
 
 /** Muti language config for Page Info */
-export const pageInfoI18n: Record<LangPaths, PageInfoI18nConfig> = {
+export const pageInfoI18n: Record<HopeLangPath, PageInfoI18nConfig> = {
   "/zh/": {
     author: "作者🖊",
     time: "写作日期📅",
@@ -23,6 +23,16 @@ export const pageInfoI18n: Record<LangPaths, PageInfoI18nConfig> = {
     readingTime: "Reading Time⌛",
     words: "Words🔠",
   },
+  "/de/": {
+    author: "Autor🖊",
+    time: "Datum📅",
+    origin: "Original💡",
+    views: "Besucher🔢",
+    category: "Kategorie🌈",
+    tag: "Tags🏷",
+    readingTime: "Lesezeit⌛",
+    words: "Wörter🔠",
+  },
   "/vi/": {
     author: "Người viết🖊",
     time: "Ngày viết📅",
@@ -35,8 +45,9 @@ export const pageInfoI18n: Record<LangPaths, PageInfoI18nConfig> = {
   },
 };
 
-export const valineI18n: Record<LangPaths, string> = {
+export const valineI18n: Record<HopeLangPath, string> = {
   "/zh/": "请留言",
   "/en/": "Write a comment here",
+  "/de/": "Schreibe ein Kommentar",
   "/vi/": "Để lại bình luận",
 };

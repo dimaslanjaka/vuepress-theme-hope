@@ -1,17 +1,8 @@
-import type { Langs } from "@mr-hope/vuepress-shared";
 // import type { Vssue } from "vssue";
 import type { ValineOption } from "valine";
 import type { PageInfoType } from "./pageInfo";
 
 interface BaseCommentOptions {
-  /**
-   * 主目录所对应的语言。
-   *
-   * The language of the home directory.
-   *
-   * @default 'en-US'
-   */
-  baseLang?: Langs;
   /**
    * 评论服务
    *
