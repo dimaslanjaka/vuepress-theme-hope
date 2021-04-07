@@ -1,4 +1,4 @@
-import { deepAssign } from "@mr-hope/vuepress-shared";
+import { deepAssign, getRootLang } from "@mr-hope/vuepress-shared";
 import { error, resolveUrl } from "./utils";
 
 import type { App } from "@vuepress/core";
@@ -25,8 +25,6 @@ export const checkOptions = (
   app: App
 ): FeedOptions | false => {
   const { themeConfig } = app.options;
-  const baseLang =
-    options.baseLang || (themeConfig.baseLang as string | undefined);
   const hostname =
     options.hostname || (themeConfig.hostname as string | undefined);
 
@@ -37,7 +35,7 @@ export const checkOptions = (
     return false;
   }
 
-  options.baseLang = baseLang || "en-US";
+  options.rootLang = getRootLang(app);
 
   return options as FeedOptions;
 };
@@ -65,7 +63,7 @@ export const getFeedChannelOption = (
   options: FeedOptions,
   app: App
 ): FeedChannelOption => {
-  const { baseLang, hostname, icon, image } = options;
+  const { rootLang, hostname, icon, image } = options;
   const { base, themeConfig } = app.options;
   const { title, description } = app.siteData;
   const author =
@@ -80,7 +78,7 @@ export const getFeedChannelOption = (
     title,
     link: resolveUrl(hostname, base),
     description,
-    language: baseLang,
+    language: rootLang,
     copyright,
     pubDate: new Date(),
     lastUpdated: new Date(),
