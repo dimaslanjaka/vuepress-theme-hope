@@ -20,14 +20,13 @@ export default defineComponent({
 
   props: {
     id: { type: String, required: true },
-    code: { type: String, required: true },
     preset: { type: String as PropType<"ant" | "vue">, default: "vue" },
   },
 
   setup(props) {
     const loading = ref(true);
     const scale = ref(1);
-    const flowchart = ref<HTMLElement | null>(null);
+    const flowchartElement = ref<HTMLElement | null>(null);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const $preset = computed<Record<string, any>>(() => {
@@ -59,7 +58,7 @@ export default defineComponent({
       const delay = (): Promise<void> =>
         new Promise((resolve) => setTimeout(resolve, 500));
 
-      flowchart.value?.setAttribute("id", props.id);
+      flowchartElement.value?.setAttribute("id", props.id);
 
       void Promise.all([
         import(/* webpackChunkName: "flowchart" */ "flowchart.js"),
@@ -67,7 +66,9 @@ export default defineComponent({
       ]).then(([flowchart]) => {
         const { parse } = flowchart;
 
-        svg = parse(decodeURIComponent(props.code));
+        svg = parse(
+          decodeURIComponent(flowchartElement.value?.dataset.code || "")
+        );
         scale.value = getScale(window.innerWidth);
 
         svg.drawSVG(props.id, { ...$preset.value, scale: scale.value });
@@ -84,7 +85,7 @@ export default defineComponent({
     return (): VNode =>
       h("div", {
         class: { loading: loading.value, "md-flowchart": true },
-        ref: flowchart,
+        ref: flowchartElement,
         // innerHTML: loading.value ? loadingIcon : "",
       });
   },

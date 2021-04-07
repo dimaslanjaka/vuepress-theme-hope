@@ -31,7 +31,7 @@ export default [
     copy: [["client/styles", "client"]],
   }),
   ...rollupVue("client/appSetup.ts", {
-    external: ["vue", /\.scss$/],
+    external: ["@vuepress/client", "vue", /\.scss$/],
     dtsExternal: [/\.scss$/],
   }),
 ];

@@ -1,23 +1,19 @@
-import { lang2Path } from "@mr-hope/vuepress-shared";
+import { getRootLangPath } from "@mr-hope/vuepress-shared";
 import { codeDemoRender } from "./markdown-it/code-demo";
 import { i18n } from "./i18n";
 
-import type { PluginConfig, ThemeConfig } from "@vuepress/core";
+import type { App, PluginConfig } from "@vuepress/core";
 import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
 import type { MarkdownEnhanceOptions } from "../shared";
 
 export const resolvePlugin = (
   markdownOption: MarkdownEnhanceOptions,
-  themeConfig: ThemeConfig
+  app: App
 ): PluginConfig[] => {
-  const baseLang =
-    markdownOption.baseLang || (themeConfig.baseLang as string) || "en-US";
-  const baseLangPath = lang2Path(baseLang);
-
   const resolveConfig = (
     titleConfig: PluginI18nConvert<string>
   ): PluginI18nConvert<string> => {
-    titleConfig["/"] = titleConfig[baseLangPath];
+    titleConfig["/"] = titleConfig[getRootLangPath(app)];
 
     return titleConfig;
   };

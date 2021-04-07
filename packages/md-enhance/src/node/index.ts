@@ -9,7 +9,7 @@ import sub from "./markdown-it/sub";
 import sup from "./markdown-it/sup";
 import { resolvePlugin } from "./resolvePlugin";
 
-import type { Plugin, PluginObject } from "@vuepress/core";
+import type { Plugin } from "@vuepress/core";
 import type { MarkdownEnhanceOptions } from "../shared";
 
 export {
@@ -76,8 +76,8 @@ const markdownEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (option, app) => {
         markdownIt.use(presentation);
     },
 
-    plugins: resolvePlugin(markdownOption, themeConfig),
-  } as PluginObject;
+    plugins: resolvePlugin(markdownOption, app),
+  };
 };
 
 export default markdownEnhancePlugin;
