@@ -1,4 +1,4 @@
-import { lang2Path } from "@mr-hope/vuepress-shared";
+import { getRootLangPath } from "@mr-hope/vuepress-shared";
 import { path } from "@vuepress/utils";
 import { i18n } from "./i18n";
 import { readingTime } from "./reading-time";
@@ -11,12 +11,9 @@ export * from "./reading-time";
 export * from "../shared";
 
 const readingTimePlugin: Plugin<ReadingTimeOptions> = (options, app) => {
-  const baseLang =
-    options.baseLang || (app.options.themeConfig.baseLang as string) || "en-US";
-  const baseLangPath = lang2Path(baseLang);
   const readingTimeConfig = i18n as PluginI18nConvert<ReadingTimeOptions>;
 
-  readingTimeConfig["/"] = readingTimeConfig[baseLangPath];
+  readingTimeConfig["/"] = readingTimeConfig[getRootLangPath(app)];
 
   return {
     name: "reading-time",

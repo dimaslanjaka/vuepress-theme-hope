@@ -1,5 +1,5 @@
-import type { Plugin } from "@vuepress/core";
 import { fs } from "@vuepress/utils";
+import type { Plugin } from "@vuepress/core";
 
 export const palettePlugin: Plugin<never> = (_, app) => {
   const userPalette = app.dir.source(".vuepress/styles/hope-palette.scss");
