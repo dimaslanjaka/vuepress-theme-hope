@@ -1,4 +1,3 @@
-<script lang="ts">
 import { useRouteLocale, usePageFrontmatter } from "@vuepress/client";
 import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
 import debounce from "lodash.debounce";
@@ -13,6 +12,8 @@ import {
 } from "vue";
 import { componentI18n } from "../define";
 import { BacktoTopIcon } from "../icons";
+
+import "../styles/back-to-top.scss";
 
 import type { VNode } from "vue";
 
@@ -92,42 +93,3 @@ export default defineComponent({
       ]);
   },
 });
-</script>
-
-<style lang="scss">
-@use "~@mr-hope/vuepress-shared/styles/reset";
-
-.back-to-top {
-  @include reset.button;
-  position: fixed !important;
-  right: 1rem;
-  bottom: 4rem;
-  z-index: 10;
-  width: 3rem;
-  height: 3rem;
-  padding: 8px;
-
-  &:hover {
-    color: var(--accent-color-l25);
-  }
-
-  svg {
-    width: 100%;
-    border-radius: 50%;
-    background: var(--bg-color);
-    color: var(--accent-color);
-    overflow: hidden;
-    fill: currentcolor;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

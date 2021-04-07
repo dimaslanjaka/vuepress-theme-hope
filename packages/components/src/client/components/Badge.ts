@@ -1,4 +1,3 @@
-<script lang="ts">
 import { computed, defineComponent, h } from "vue";
 import type { VNode } from "vue";
 
@@ -38,38 +37,3 @@ export default defineComponent({
       h("span", options.value, props.text || slots.default?.());
   },
 });
-</script>
-
-<style lang="scss">
-.badge {
-  display: inline-block;
-  font-size: 14px;
-  height: 18px;
-  line-height: 18px;
-  border-radius: 3px;
-  padding: 0 6px;
-  color: var(--white);
-  background-color: var(--accent-color);
-  vertical-align: top;
-
-  .table-of-contents & {
-    vertical-align: middle;
-  }
-
-  &.tip {
-    background-color: var(--badge-tip-color);
-  }
-
-  &.warning {
-    background-color: var(--badge-warning-color);
-  }
-
-  &.danger {
-    background-color: var(--badge-danger-color);
-  }
-
-  & + & {
-    margin-left: 5px;
-  }
-}
-</style>

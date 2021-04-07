@@ -1,21 +1,17 @@
-import { lang2Path } from "@mr-hope/vuepress-shared";
+import { getRootLangPath } from "@mr-hope/vuepress-shared";
 import { path } from "@vuepress/utils";
 import { i18n } from "./i18n";
-import { ComponentOptions, ComponentI18nConfig } from "../shared";
+import { ComponentI18nConfig } from "../shared";
 
 import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
 import type { Plugin } from "@vuepress/core";
 
 export * from "../shared/types";
 
-const componentPlugin: Plugin<ComponentOptions> = (options, app) => {
-  const { themeConfig } = app.options;
-  const baseLang =
-    options.baseLang || (themeConfig.baseLang as string | undefined) || "en-US";
-  const baseLangPath = lang2Path(baseLang);
+const componentPlugin: Plugin<never> = (_options, app) => {
   const componentConfig = i18n as PluginI18nConvert<ComponentI18nConfig>;
 
-  componentConfig["/"] = componentConfig[baseLangPath];
+  componentConfig["/"] = componentConfig[getRootLangPath(app)];
 
   return {
     name: "components",

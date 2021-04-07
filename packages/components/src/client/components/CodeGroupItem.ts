@@ -1,4 +1,3 @@
-<script lang="ts">
 import { defineComponent, h } from "vue";
 import type { VNode } from "vue";
 
@@ -24,19 +23,3 @@ export default defineComponent({
       ]);
   },
 });
-</script>
-
-<style lang="scss">
-.code-group-item {
-  display: none;
-
-  &.active {
-    display: block;
-  }
-
-  div[class*="language-"] {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-</style>

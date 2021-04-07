@@ -1,13 +1,14 @@
 import { defineClientAppEnhance } from "@vuepress/client";
-import Badge from "./components/Badge.vue";
-import BreadCrumb from "./components/BreadCrumb.vue";
-import CodeGroup from "./components/CodeGroup.vue";
-import CodeGroupItem from "./components/CodeGroupItem.vue";
-import OutboundLink from "./components/OutboundLink.vue";
+import Badge from "./components/Badge";
+import BreadCrumb from "./components/BreadCrumb";
+import CodeGroup from "./components/CodeGroup";
+import CodeGroupItem from "./components/CodeGroupItem";
+import OutboundLink from "./components/OutboundLink";
 import Pagination from "./components/Pagination.vue";
-import ScreenFull from "./components/ScreenFull.vue";
+import ScreenFull from "./components/ScreenFull";
 
 import "@mr-hope/vuepress-shared/styles/config/index.scss";
+import "./styles/index.scss";
 
 export default defineClientAppEnhance(({ app }) => {
   app.component("Badge", Badge);

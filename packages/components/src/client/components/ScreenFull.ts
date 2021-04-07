@@ -1,4 +1,3 @@
-<script lang="ts">
 import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
 import { defineComponent, h, onMounted, ref } from "vue";
 import * as screenfull from "screenfull";
@@ -40,32 +39,3 @@ export default defineComponent({
         : null;
   },
 });
-</script>
-
-<style lang="scss">
-@use '~@mr-hope/vuepress-shared/styles/reset';
-
-button.full-screen,
-.cancel-full-screen {
-  @include reset.button;
-  width: 1.8rem;
-  height: 1.8rem;
-  padding: 4px;
-  color: #aaa;
-
-  & svg {
-    width: 100%;
-    height: 100%;
-    fill: currentcolor;
-  }
-}
-
-.enter-fullscreen-icon:hover,
-.cancel-fullscreen-icon {
-  color: var(--accent-color);
-}
-
-.cancel-fullscreen-icon:hover {
-  color: #aaa;
-}
-</style>

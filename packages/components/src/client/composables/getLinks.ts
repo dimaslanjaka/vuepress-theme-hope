@@ -1,7 +1,7 @@
 import { RouteLocation } from "vue-router";
 
 export const getLinks = (route: RouteLocation): string[] => {
-  const routePaths = route.fullPath.split("#")[0].split("/");
+  const routePaths = route.path.split("/");
   const links: string[] = [];
   let link = "";
 
