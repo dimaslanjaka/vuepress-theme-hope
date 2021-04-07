@@ -1,29 +1,42 @@
-import type { HopeThemeLocaleConfigItem, LangPaths, Langs } from "./types";
+import type {
+  HopeThemeLocaleConfigItem,
+  HopeLangPath,
+  HopeLang,
+} from "./types";
 
-export const langs: Langs[] = ["zh-CN", "en-US", "vi-VN"];
+export const langs: HopeLang[] = ["zh-CN", "en-US", "vi-VN", "de-AT"];
 
-export const lang2PathConfig: Record<Langs, LangPaths> = {
+export const lang2PathConfig: Record<HopeLang, HopeLangPath> = {
   "zh-CN": "/zh/",
   "en-US": "/en/",
+  "de-AT": "/de/",
   "vi-VN": "/vi/",
 };
 
-export const path2langConfig: Record<LangPaths, Langs> = {
+export const path2langConfig: Record<HopeLangPath, HopeLang> = {
   "/zh/": "zh-CN",
   "/en/": "en-US",
+  "/de/": "de-AT",
   "/vi/": "vi-VN",
 };
 
-export const localesConfig: Record<Langs, HopeThemeLocaleConfigItem> = {
+export const localesConfig: Record<HopeLang, HopeThemeLocaleConfigItem> = {
   "zh-CN": {
     lang: "zh-CN",
     selectText: "选择语言",
-    lastUpdated: "上次编辑于",
     label: "简体中文",
-    editLinkText: "在 GitHub 上编辑此页",
+    meta: {
+      contributor: "贡献者",
+      editLink: "编辑此页",
+      updateTime: "上次编辑于",
+    },
     themeColor: {
       themeColor: "主题色",
       themeMode: "主题模式",
+    },
+    encrypt: {
+      title: "请输入密码",
+      errorHint: "请输入正确密码",
     },
     error404: {
       hint: [
@@ -44,6 +57,7 @@ export const localesConfig: Record<Langs, HopeThemeLocaleConfigItem> = {
       timelineText: "昨日不在",
       allText: "全部",
       intro: "个人介绍",
+      star: "收藏",
       slides: "幻灯片",
       encrypt: "加密",
     },
@@ -52,19 +66,26 @@ export const localesConfig: Record<Langs, HopeThemeLocaleConfigItem> = {
   "en-US": {
     lang: "en-US",
     selectText: "Language",
-    ariaLabel: "Select language",
-    lastUpdated: "Last update",
     label: "English",
-    editLinkText: "Edit on Github",
+    ariaLabel: "Select language",
+    meta: {
+      contributor: "Contributors",
+      editLink: "Edit this page",
+      updateTime: "Last update",
+    },
     themeColor: {
       themeColor: "Theme Color",
       themeMode: "Theme Mode",
     },
+    encrypt: {
+      title: "Please enter password",
+      errorHint: "Please enter the corrent password!",
+    },
     error404: {
       hint: [
-        "There's nothing here.",
+        "There’s nothing here.",
         "How did we get here?",
-        "That's a Four-Oh-Four.",
+        "That’s a Four-Oh-Four.",
         "Looks like we've got some broken links.",
       ],
       back: "Go back",
@@ -79,20 +100,72 @@ export const localesConfig: Record<Langs, HopeThemeLocaleConfigItem> = {
       timelineText: "Yesterday Once More!",
       allText: "All",
       intro: "Personal Intro",
+      star: "Star",
       slides: "Slides",
       encrypt: "Encrypted",
     },
   },
+
+  "de-AT": {
+    lang: "de-AT",
+    selectText: "Sprache",
+    label: "Deutsch",
+    ariaLabel: "Sprache wählen",
+    meta: {
+      contributor: "Mitwirkende",
+      editLink: "Diese Seite barbeiten",
+      updateTime: "Zuletzt geändert",
+    },
+    themeColor: {
+      themeColor: "Design-Farbe",
+      themeMode: "Design-Modus",
+    },
+    encrypt: {
+      title: "Passwort eingeben",
+      errorHint: "Bitte das korrekte Passwort eingeben!",
+    },
+    error404: {
+      hint: [
+        "Hier gibt es nichts.",
+        "Wie sind wir hier hergekommen?",
+        "Das ist wohl eine Vier-Null-Vier.",
+        "Sieht aus als hättest du einen kaputten Link gefunden.",
+      ],
+      back: "Zurück",
+      home: "Zur Startseite",
+    },
+    blog: {
+      article: "Artikel",
+      articleList: "Artikel Liste",
+      category: "Kategorie",
+      tag: "Tags",
+      timeline: "Timeline",
+      timelineText: "Yesterday Once More!",
+      allText: "Alle",
+      intro: "Persönliche Einleitung",
+      star: "Star",
+      slides: "Slides",
+      encrypt: "Verschlüsselt",
+    },
+  },
+
   "vi-VN": {
     lang: "vi-VN",
     selectText: "Ngôn ngữ",
-    ariaLabel: "Chọn ngôn ngữ",
-    lastUpdated: "Cập nhật gần nhất lúc",
     label: "Tiếng Việt",
-    editLinkText: "Chỉnh sửa trên GitHub",
+    ariaLabel: "Chọn ngôn ngữ",
+    meta: {
+      contributor: "Người đóng góp",
+      editLink: "chỉnh sửa trang này",
+      updateTime: "Cập nhật gần nhất lúc",
+    },
     themeColor: {
       themeColor: "Màu nền",
       themeMode: "Theme Mode",
+    },
+    encrypt: {
+      title: "Xin vui lòng nhập mật khẩu",
+      errorHint: "Vui lòng nhập đúng mật khẩu",
     },
     error404: {
       hint: [
@@ -113,6 +186,7 @@ export const localesConfig: Record<Langs, HopeThemeLocaleConfigItem> = {
       timelineText: "Yesterday Once More!",
       allText: "Tất cả",
       intro: "Giới thiệu cá nhân",
+      star: "Ngôi sao",
       slides: "bài thuyết trình",
       encrypt: "mã hóa",
     },
