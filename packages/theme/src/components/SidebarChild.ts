@@ -71,7 +71,8 @@ const renderChildren = (
   );
 };
 
-export const SidebarChild: FunctionalComponent<{
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const SidebarChild: FunctionalComponent<{
   item: ResolvedSidebarItem;
   depth: number;
 }> = ({ item, depth }) => {
@@ -123,3 +124,5 @@ SidebarChild.props = {
     default: 0,
   },
 };
+
+export default SidebarChild;

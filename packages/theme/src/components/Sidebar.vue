@@ -18,7 +18,7 @@
 import { defineComponent } from "vue";
 import { useSidebarItems } from "../composables";
 import NavbarLinks from "./NavbarLinks.vue";
-import { SidebarChild } from "./SidebarChild";
+import SidebarChild from "./SidebarChild";
 
 export default defineComponent({
   name: "Sidebar",

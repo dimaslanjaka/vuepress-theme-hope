@@ -1,22 +1,14 @@
 import { defineClientAppEnhance } from "@vuepress/client";
-import Badge from "../components/global/Badge.vue";
-import CodeGroup from "../components/global/CodeGroup.vue";
-import CodeGroupItem from "../components/global/CodeGroupItem.vue";
-import OutboundLink from "../components/global/OutboundLink.vue";
 
 import "../styles/index.scss";
 
 declare const DOCSEARCH_PROPS: unknown;
 
 export default defineClientAppEnhance(({ app }) => {
-  app.component("Badge", Badge);
-  app.component("CodeGroup", CodeGroup);
-  app.component("CodeGroupItem", CodeGroupItem);
-
-  // unregister the built-in `<OutboundLink>` to avoid warning
-  delete app._context.components.OutboundLink;
-  // override the built-in `<OutboundLink>`
-  app.component("OutboundLink", OutboundLink);
+  // // unregister the built-in `<OutboundLink>` to avoid warning
+  // delete app._context.components.OutboundLink;
+  // // override the built-in `<OutboundLink>`
+  // app.component("OutboundLink", OutboundLink);
 
   // docsearch feature might not be commonly used, so we don't put it
   // into dependencies of default theme, but it is supported
