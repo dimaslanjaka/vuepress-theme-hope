@@ -1,3 +1,4 @@
+import nodeResole from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import typescript2 from "rollup-plugin-typescript2";
 import rollupCopy from "rollup-plugin-copy";
@@ -12,6 +13,7 @@ export const rollupTypescript = (
     external = [],
     dtsExternal = [],
     useStyle = false,
+    resolve = false,
     copy = [],
     tsconfig = {},
     output = {},
@@ -31,6 +33,7 @@ export const rollupTypescript = (
     plugins: [
       typescript(tsconfig),
       ...(useStyle ? [styles()] : []),
+      ...(resolve ? [nodeResole()] : []),
       terser(),
       ...(copy.length
         ? [
@@ -60,6 +63,7 @@ export const rollupVue = (
     external = [],
     dtsExternal = [],
     useStyle = false,
+    resolve = false,
     copy = [],
     output = {},
   } = {}
@@ -91,6 +95,7 @@ export const rollupVue = (
           },
         }),
         ...(useStyle ? [styles()] : []),
+        ...(resolve ? [nodeResole()] : []),
         terser(),
         ...(copy.length
           ? [

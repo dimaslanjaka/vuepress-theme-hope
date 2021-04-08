@@ -1,8 +1,7 @@
-import { i18n } from "@mr-hope/vuepress-plugin-reading-time/client/i18n";
 import { usePageData, useRouteLocale } from "@vuepress/client";
 import { computed, defineComponent, h } from "vue";
 import { TimerIcon } from "./icons";
-import { commentOptions, pageInfoI18n } from "../define";
+import { commentOptions, pageInfoI18n, readingTimeI18n } from "../define";
 
 import type { ReadingTime } from "@mr-hope/vuepress-plugin-reading-time";
 import type { VNode } from "vue";
@@ -15,7 +14,7 @@ export default defineComponent({
   setup() {
     const routeLocale = useRouteLocale();
     const page = usePageData<{ readingTime: ReadingTime }>();
-    const { minute = "", time = "" } = i18n[routeLocale.value] || {};
+    const { minute = "", time = "" } = readingTimeI18n[routeLocale.value] || {};
 
     const hint = computed(() => pageInfoI18n[routeLocale.value].readingTime);
 
