@@ -47,7 +47,7 @@
     "valine": "^1.4.14"
   },
   "devDependencies": {
-    "rollup": "2.44.0",
+    "rollup": "2.45.2",
     "vuepress": "2.0.0-beta.6"
   },
   "publishConfig": {
