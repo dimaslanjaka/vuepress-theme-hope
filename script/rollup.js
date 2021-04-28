@@ -1,4 +1,5 @@
-import nodeResole from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import typescript2 from "rollup-plugin-typescript2";
 import rollupCopy from "rollup-plugin-copy";
@@ -6,6 +7,8 @@ import dts from "rollup-plugin-dts";
 import vue from "rollup-plugin-vue";
 import { terser } from "rollup-plugin-terser";
 import styles from "rollup-plugin-styles";
+
+const isProduction = process.env.mode === "production";
 
 export const rollupTypescript = (
   filePath,
@@ -17,6 +20,7 @@ export const rollupTypescript = (
     copy = [],
     tsconfig = {},
     output = {},
+    inlineDynamicImports = true,
   } = {}
 ) => [
   {
@@ -33,8 +37,8 @@ export const rollupTypescript = (
     plugins: [
       typescript(tsconfig),
       ...(useStyle ? [styles()] : []),
-      ...(resolve ? [nodeResole()] : []),
-      terser(),
+      ...(resolve ? [nodeResolve(), commonjs()] : []),
+      ...(isProduction ? [terser()] : []),
       ...(copy.length
         ? [
             rollupCopy({
@@ -47,6 +51,7 @@ export const rollupTypescript = (
           ]
         : []),
     ],
+    inlineDynamicImports,
     external,
   },
   {
@@ -66,6 +71,7 @@ export const rollupVue = (
     resolve = false,
     copy = [],
     output = {},
+    inlineDynamicImports = true,
   } = {}
 ) => {
   const temp = filePath.split(".");
@@ -95,8 +101,8 @@ export const rollupVue = (
           },
         }),
         ...(useStyle ? [styles()] : []),
-        ...(resolve ? [nodeResole()] : []),
-        terser(),
+        ...(resolve ? [nodeResolve(), commonjs()] : []),
+        ...(isProduction ? [terser()] : []),
         ...(copy.length
           ? [
               rollupCopy({
@@ -109,13 +115,14 @@ export const rollupVue = (
             ]
           : []),
       ],
+      inlineDynamicImports,
       external,
     },
     ...(ext === "ts"
       ? [
           {
             input: `./src/${filePath}`,
-            output: [{ file: `./${filePath}.d.ts`, format: "esm" }],
+            output: [{ file: `./${filename}.d.ts`, format: "esm" }],
             plugins: [dts()],
             external: dtsExternal,
           },

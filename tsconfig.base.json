@@ -6,8 +6,6 @@
     "allowUnusedLabels": false,
     "alwaysStrict": false,
     "baseUrl": "./",
-    "declaration": true,
-    "declarationMap": true,
     "diagnostics": false,
     "downlevelIteration": false,
     "experimentalDecorators": true,
