@@ -1,5 +1,5 @@
 import { useRouteLocale, usePageFrontmatter } from "@vuepress/client";
-import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import debounce from "lodash.debounce";
 import {
   Transition,

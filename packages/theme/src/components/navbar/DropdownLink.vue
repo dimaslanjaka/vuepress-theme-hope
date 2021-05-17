@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import { computed, defineComponent, ref, toRef, watch } from "vue";
 import type { PropType } from "vue";
 import { useRoute } from "vue-router";

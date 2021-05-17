@@ -1,5 +1,5 @@
 import { usePageFrontmatter, usePagesData } from "@vuepress/client";
-import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import { computed, defineComponent, h, onMounted, watch, ref } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import { getLinks } from "../composables";

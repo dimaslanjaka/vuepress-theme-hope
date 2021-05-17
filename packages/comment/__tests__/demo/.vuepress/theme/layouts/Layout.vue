@@ -51,7 +51,7 @@ import {
 } from "vue";
 import { useRouter } from "vue-router";
 import { usePageFrontmatter } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import Home from "@vuepress/theme-default/lib/components/Home.vue";
 import Page from "../components/Page.vue";
 import Navbar from "@vuepress/theme-default/lib/components/Navbar.vue";

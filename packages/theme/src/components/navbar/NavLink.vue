@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { useSiteData } from "@vuepress/client";
-import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import { isLinkHttp, isLinkMailto, isLinkTel } from "@vuepress/shared";
 import { computed, defineComponent, toRef } from "vue";
 

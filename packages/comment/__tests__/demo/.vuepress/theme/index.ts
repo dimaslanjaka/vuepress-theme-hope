@@ -4,8 +4,6 @@ import type { DefaultThemeOptions } from "@vuepress/theme-default";
 const commentTheme: Theme<DefaultThemeOptions> = {
   name: "comment",
 
-  extends: "@vuepress/theme-default",
-
   plugins: [
     [
       "@mr-hope/comment",

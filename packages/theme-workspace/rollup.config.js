@@ -60,7 +60,7 @@ export default [
     ],
     external: [
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "@vuepress/shared",
       "vue",
       "vue-router",
@@ -101,7 +101,7 @@ export default [
     ],
     external: [
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "@vuepress/shared",
       "vue",
       "vue-router",
@@ -141,7 +141,7 @@ export default [
     ],
     external: [
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "@vuepress/shared",
       "vue",
       "vue-router",
@@ -171,7 +171,7 @@ export default [
     ],
     external: [
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "@vuepress/shared",
       "vue",
       "vue-router",

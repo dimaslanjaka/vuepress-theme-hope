@@ -1,4 +1,4 @@
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import { defineComponent, h, onMounted, ref } from "vue";
 import * as screenfull from "screenfull";
 import { CancelFullScreenIcon, EnterFullScreenIcon } from "../icons";

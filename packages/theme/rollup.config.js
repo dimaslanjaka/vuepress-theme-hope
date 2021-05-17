@@ -9,7 +9,7 @@ export default [
     copy: [["styles", "./"]],
     external: [
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "@vuepress/shared",
       "vue",
       "vue-router",
@@ -20,7 +20,7 @@ export default [
   ...rollupVue("client/appSetup.ts", {
     external: [
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "@vuepress/shared",
       "vue",
       "vue-router",
@@ -29,7 +29,7 @@ export default [
   ...rollupVue("layouts/Layout.vue", {
     external: [
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "@vuepress/shared",
       "vue",
       "vue-router",
@@ -40,7 +40,7 @@ export default [
   ...rollupVue("layouts/404.vue", {
     external: [
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "@vuepress/shared",
       "vue",
       "vue-router",

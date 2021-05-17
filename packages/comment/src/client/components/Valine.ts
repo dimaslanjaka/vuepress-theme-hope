@@ -7,16 +7,20 @@ import {
 import { computed, defineComponent, h, nextTick, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { resolveEnablePageViews } from "../composables";
-import { enableValine, valineI18n, valineOption } from "../define";
+import { enableValine, valineOption } from "../define";
 
 import type { VNode } from "vue";
 import type { RouteLocation } from "vue-router";
 import type { CommentPluginFrontmatter, ValineOptions } from "../../shared";
 
+declare const VALINE_I18N: Record<string, string>;
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Window {
   AV: unknown;
 }
+
+import "../styles/valine.scss";
 
 export default defineComponent({
   name: "Valine",
@@ -60,8 +64,8 @@ export default defineComponent({
             appId: valineOption.appId,
             appKey: valineOption.appKey,
             placeholder:
-              valineOption.placeholder || valineI18n[routeLocale.value],
-            meta: valineOption.meta || ["nick", "mail", "link"],
+              valineOption.placeholder || VALINE_I18N[routeLocale.value],
+            meta: valineOption.meta || ["nick", "mail"],
             requiredFields: valineOption.requiredFields || ["nick"],
             avatar: valineOption.avatar || "retro",
             visitor: enablePageViews.value,

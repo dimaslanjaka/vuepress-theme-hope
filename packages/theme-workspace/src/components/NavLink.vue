@@ -33,7 +33,7 @@
 import { computed, defineComponent, toRefs } from "vue";
 import type { PropType } from "vue";
 import { useSiteData } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import { isLinkHttp, isLinkMailto, isLinkTel } from "@vuepress/shared";
 import type { NavLink, ThemeHopeOptions } from "../types";
 

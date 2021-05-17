@@ -1,7 +1,7 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useRouteLocale, useSiteLocaleData } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import { isLinkHttp, isString } from "@vuepress/shared";
 import { useResolveRouteWithRedirect } from "./resolveRouteWithRedirect";
 import { resolveRepoType } from "../utils/repoType";

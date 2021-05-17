@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import { useSidebarItems } from "../composables";
 import { BlogOptions } from "../types";
 // import BloggerInfo from "./Blog/BloggerInfo.vue";

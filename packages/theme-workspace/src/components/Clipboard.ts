@@ -1,4 +1,4 @@
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import { computed, defineComponent, h, ref, VNode } from "vue";
 import type { ThemeHopeOptions } from "../types";
 

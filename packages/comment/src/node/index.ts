@@ -17,15 +17,25 @@ const commentPlugin: Plugin<CommentOptions> = (options, app) => {
   pageInfoI18nConfig["/"] = pageInfoI18nConfig[rootLangPath];
   valineI18nConfig["/"] = valineI18nConfig[rootLangPath];
 
+  const commentOptions: CommentOptions =
+    Object.keys(options).length > 0
+      ? (options as CommentOptions)
+      : (themeConfig.comment as CommentOptions) || { type: "disable" };
+
   const config: PluginObject = {
     name: "comment",
+
+    alias: {
+      "@Valine":
+        commentOptions.type === "valine"
+          ? path.resolve(__dirname, "../client/components/Valine")
+          : "@mr-hope/vuepress-shared/lib/esm/noopModule",
+    },
 
     define: () => ({
       COMMENT_OPTIONS: {
         hint: !themeConfig.pure,
-        ...(Object.keys(options).length > 0
-          ? options
-          : (themeConfig.comment as CommentOptions) || {}),
+        ...commentOptions,
       },
       PAGE_INFO_I18N: pageInfoI18nConfig,
       VALINE_I18N: valineI18nConfig,
@@ -36,12 +46,13 @@ const commentPlugin: Plugin<CommentOptions> = (options, app) => {
     plugins: [
       ["@mr-hope/palette"],
       ["@mr-hope/reading-time", { wordPerminute: options.wordPerminute }],
+      ["@vuepress/git"],
     ],
   };
 
-  // if (options.type === "vssue")
+  // if (commentOptions.type === "vssue")
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  // config.plugins!.push(["@vssue/vuepress-plugin-vssue", options]);
+  // config.plugins!.push(["@vssue/vuepress-plugin-vssue", commentOptions]);
 
   return config;
 };

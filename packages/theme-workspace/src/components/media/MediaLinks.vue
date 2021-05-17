@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { usePageFrontmatter } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import { computed, defineComponent } from "vue";
 import type { ThemeHopeOptions } from "../../types";
 import Baidu from "./icons/Baidu.vue";

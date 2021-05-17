@@ -12,7 +12,7 @@ import { usePageData, usePageFrontmatter, useSiteData } from "@vuepress/client";
 import {
   useThemeData,
   useThemeLocaleData,
-} from "@vuepress/plugin-theme-data/lib/composables";
+} from "@vuepress/plugin-theme-data/lib/client";
 import throttle from "lodash.throttle";
 import Navbar from "../components/Navbar.vue";
 import Sidebar from "../components/Sidebar.vue";

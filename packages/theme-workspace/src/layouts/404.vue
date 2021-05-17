@@ -14,7 +14,7 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { useRouteLocale } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import Common from "../components/Common";
 import { getDefaultLocale } from "@mr-hope/vuepress-shared";
 

@@ -44,7 +44,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useRouteLocale, useSiteLocaleData, withBase } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import NavbarLinks from "./NavbarLinks.vue";
 // import ThemeColor from "./Theme/ThemeColor.vue";
 import ToggleSidebarButton from "./ToggleSidebarButton.vue";

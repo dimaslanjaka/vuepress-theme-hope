@@ -13,7 +13,7 @@ export default [
   ...rollupTypescript("client/index", {
     external: [
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "dayjs",
       "dayjs/plugin/localizedFormat",
       "dayjs/plugin/objectSupport",

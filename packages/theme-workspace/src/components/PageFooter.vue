@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { usePageFrontmatter } from "@vuepress/client";
-import { useThemeData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
 import { computed, defineComponent } from "vue";
 import { HopeFooterConfig } from "../types";
 import MediaLinks from "./media/MediaLinks.vue";

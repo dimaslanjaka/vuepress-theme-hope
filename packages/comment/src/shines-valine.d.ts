@@ -161,3 +161,11 @@ declare module "valine" {
 
   export default Valine;
 }
+
+declare module "@Valine" {
+  import type { ComponentOptions } from "vue";
+
+  const component: ComponentOptions;
+
+  export default component;
+}

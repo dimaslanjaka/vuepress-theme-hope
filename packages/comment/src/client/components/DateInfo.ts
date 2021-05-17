@@ -1,4 +1,8 @@
-import { usePageFrontmatter, useRouteLocale } from "@vuepress/client";
+import {
+  usePageData,
+  usePageFrontmatter,
+  useRouteLocale,
+} from "@vuepress/client";
 import { computed, defineComponent, h } from "vue";
 import { CalendarIcon } from "./icons";
 import { commentOptions, pageInfoI18n } from "../define";
@@ -14,6 +18,9 @@ export default defineComponent({
   setup() {
     const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
     const routeLocale = useRouteLocale();
+    const page = usePageData<{
+      git: { createTimeStamp: number | undefined };
+    }>();
 
     const date = computed(() => {
       let { date } = frontmatter.value;
@@ -29,6 +36,14 @@ export default defineComponent({
         }
 
         return date;
+      }
+
+      const { createTimeStamp } = page.value.git;
+
+      if (createTimeStamp) {
+        const date = new Date(createTimeStamp);
+
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       }
 
       return "";

@@ -14,7 +14,7 @@ export default [
       "@mr-hope/vuepress-shared/client",
       "@mr-hope/vuepress-shared/styles/config/index.scss",
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "vue",
       "vue-router",
       "screenfull",
@@ -27,7 +27,7 @@ export default [
     external: [
       "@mr-hope/vuepress-shared/client",
       "@vuepress/client",
-      "@vuepress/plugin-theme-data/lib/composables",
+      "@vuepress/plugin-theme-data/lib/client",
       "lodash.debounce",
       "vue",
       /\.scss$/,

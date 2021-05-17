@@ -46,7 +46,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useRouteLocale, useSiteLocaleData, withBase } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/composables";
+import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
 import LanguageDropdown from "./LanguageDropdown";
 import RepoLink from "./RepoLink.vue";
 import NavLinks from "./NavLinks";
