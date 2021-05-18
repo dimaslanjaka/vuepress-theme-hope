@@ -31,6 +31,9 @@
   ],
   "scripts": {
     "clean": "rimraf ./node",
+    "demo:build": "vuepress build __tests__/demo",
+    "demo:clean-serve": "vuepress dev __tests__/demo --clean-cache",
+    "demo:serve": "vuepress dev __tests__/demo",
     "rollup:build": "rollup -c",
     "rollup:watch": "rollup -c -w"
   },
