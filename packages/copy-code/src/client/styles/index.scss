@@ -2,4 +2,4 @@
 @use 'code';
 @use 'message';
 
-@include meta.load-css("@mr-hope/vuepress-style");
+@use "@mr-hope/vuepress-style";
