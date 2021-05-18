@@ -1,7 +1,6 @@
 import type { PageFrontmatter } from "@vuepress/client";
 
 export interface BasePageFrontMatter extends PageFrontmatter {
-  // Basic Info
   /** Page icon */
   icon?: string;
   /** Page Author(s) */
