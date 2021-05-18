@@ -38,8 +38,7 @@
     $index: list.index($colors, $color) - 1;
 
     .tag#{$index} {
-      &,
-      .theme-light & {
+      & {
         color: color.scale($color, $lightness: 10%);
         border-color: color.scale($color, $lightness: 10%);
 

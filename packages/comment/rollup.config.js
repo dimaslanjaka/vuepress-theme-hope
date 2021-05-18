@@ -12,19 +12,19 @@ export default [
       "balloon-css",
       "vue",
       "vue-router",
-      "@Valine",
+      "@Waline",
       /\.scss$/,
     ],
     dtsExternal: ["balloon-css", /\.scss$/],
     copy: [["client/styles", "client"]],
   }),
-  ...rollupVue("client/components/Valine.ts", {
+  ...rollupVue("client/components/Waline.ts", {
     external: [
       "@mr-hope/vuepress-shared/client",
       "@vuepress/client",
+      "@waline/client",
       "vue",
       "vue-router",
-      "valine",
       /\.scss$/,
     ],
     dtsExternal: [/\.scss$/],

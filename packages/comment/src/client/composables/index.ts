@@ -1,16 +1,16 @@
 import { useThemePluginConfig } from "@mr-hope/vuepress-shared/client";
-import { enableValine, valineOption } from "../define";
+import { enableWaline, walineOption } from "../define";
 
-import type { CommentPluginFrontmatter, ValineOptions } from "../../shared";
+import type { CommentPluginFrontmatter, WalineOptions } from "../../shared";
 
 export const resolveEnablePageViews = (
   frontmatter: CommentPluginFrontmatter
 ): boolean => {
-  const themePluginConfig = useThemePluginConfig<ValineOptions>("comment");
+  const themePluginConfig = useThemePluginConfig<WalineOptions>("comment");
 
-  if (!enableValine) return false;
+  if (!enableWaline) return false;
   const themeConfig = themePluginConfig.value.pageviews;
-  const pluginConfig = valineOption.pageviews !== false;
+  const pluginConfig = walineOption.pageviews !== false;
   const pageConfig = frontmatter.pageviews;
 
   return (

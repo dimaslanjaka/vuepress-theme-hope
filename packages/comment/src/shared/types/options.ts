@@ -1,5 +1,5 @@
 // import type { Vssue } from "vssue";
-import type { ValineOption } from "valine";
+import type { WalineOption } from "@waline/client";
 import type { PageInfoType } from "./pageInfo";
 
 interface BaseCommentOptions {
@@ -8,8 +8,8 @@ interface BaseCommentOptions {
    *
    * Comment Service
    */
-  // type: "valine" | "vssue" | "disable";
-  type: "valine" | "disable";
+  // type: "waline" | "vssue" | "disable";
+  type: "waline" | "disable";
   /**
    * 默认作者
    *
@@ -53,10 +53,10 @@ interface BaseCommentOptions {
   wordPerminute?: number;
 }
 
-export interface ValineOptions
+export interface WalineOptions
   extends BaseCommentOptions,
-    Omit<ValineOption, "el" | "visitor"> {
-  type: "valine";
+    Omit<WalineOption, "el" | "visitor"> {
+  type: "waline";
 
   /**
    * 是否启用访问量
@@ -191,6 +191,6 @@ export interface DisableCommentOptions extends BaseCommentOptions {
  * Comment options
  */
 export type CommentOptions =
-  | ValineOptions
+  | WalineOptions
   // | VssueOptions
   | DisableCommentOptions;

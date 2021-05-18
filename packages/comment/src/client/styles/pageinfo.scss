@@ -18,10 +18,14 @@
         font-size: 0.9em;
       }
     }
-  }
 
-  .page-title + #{contentClass}:not(.custom) {
-    padding-top: 0;
+    + #{$contentClass}:not(.custom) {
+      padding-top: 0;
+    }
+
+    + #{$contentClass}:not(.custom) > h1:first-child {
+      display: none;
+    }
   }
 
   .page-info {
@@ -69,9 +73,5 @@
       height: 1em;
       margin-right: 0.25em;
     }
-  }
-
-  #{contentClass}:not(.custom) > h1:first-child {
-    display: none;
   }
 }

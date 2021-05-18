@@ -20,8 +20,8 @@
 
 <script>
 import { defineComponent } from "vue";
-import PageMeta from "@vuepress/theme-default/lib/components/PageMeta.vue";
-import PageNav from "@vuepress/theme-default/lib/components/PageNav.vue";
+import PageMeta from "@vuepress/theme-default/lib/client/components/PageMeta.vue";
+import PageNav from "@vuepress/theme-default/lib/client/components/PageNav.vue";
 
 export default defineComponent({
   name: "Page",

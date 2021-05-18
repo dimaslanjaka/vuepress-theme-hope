@@ -53,6 +53,9 @@ export const rollupTypescript = (
     ],
     inlineDynamicImports,
     external,
+    treeshake: {
+      unknownGlobalSideEffects: false,
+    },
   },
   {
     input: `./src/${filePath}.ts`,
@@ -117,6 +120,9 @@ export const rollupVue = (
       ],
       inlineDynamicImports,
       external,
+      treeshake: {
+        unknownGlobalSideEffects: false,
+      },
     },
     ...(ext === "ts"
       ? [

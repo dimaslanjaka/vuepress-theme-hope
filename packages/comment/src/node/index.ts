@@ -1,6 +1,6 @@
 import { getRootLangPath } from "@mr-hope/vuepress-shared";
 import { path } from "@vuepress/utils";
-import { pageInfoI18n, valineI18n } from "./i18n";
+import { pageInfoI18n, walineI18n } from "./i18n";
 
 import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
 import type { CommentOptions, PageInfoI18nConfig } from "../shared";
@@ -13,10 +13,10 @@ const commentPlugin: Plugin<CommentOptions> = (options, app) => {
   const rootLangPath = getRootLangPath(app);
   const pageInfoI18nConfig =
     pageInfoI18n as PluginI18nConvert<PageInfoI18nConfig>;
-  const valineI18nConfig = valineI18n as PluginI18nConvert<string>;
+  const walineI18nConfig = walineI18n as PluginI18nConvert<string>;
 
   pageInfoI18nConfig["/"] = pageInfoI18nConfig[rootLangPath];
-  valineI18nConfig["/"] = valineI18nConfig[rootLangPath];
+  walineI18nConfig["/"] = walineI18nConfig[rootLangPath];
 
   const commentOptions: CommentOptions =
     Object.keys(options).length > 0
@@ -27,9 +27,9 @@ const commentPlugin: Plugin<CommentOptions> = (options, app) => {
     name: "comment",
 
     alias: {
-      "@Valine":
-        commentOptions.type === "valine"
-          ? path.resolve(__dirname, "../client/components/Valine")
+      "@Waline":
+        commentOptions.type === "waline"
+          ? path.resolve(__dirname, "../client/components/Waline")
           : "@mr-hope/vuepress-shared/lib/esm/noopModule",
     },
 
@@ -39,7 +39,7 @@ const commentPlugin: Plugin<CommentOptions> = (options, app) => {
         ...commentOptions,
       },
       PAGE_INFO_I18N: pageInfoI18nConfig,
-      VALINE_I18N: valineI18nConfig,
+      WALINE_I18N: walineI18nConfig,
     }),
 
     clientAppEnhanceFiles: path.resolve(__dirname, "../client/appEnhance.js"),

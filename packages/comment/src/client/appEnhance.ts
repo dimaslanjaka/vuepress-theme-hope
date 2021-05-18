@@ -1,6 +1,6 @@
 import { defineClientAppEnhance } from "@vuepress/client";
 import Comment from "./components/Comment";
-import PageInfo from "./components/PageInfo.vue";
+import PageInfo from "./components/PageInfo";
 
 import "./styles/index.scss";
 

@@ -25,10 +25,16 @@
       </template>
     </Sidebar>
 
-    <Home v-if="$frontmatter.home" />
+    <Home v-if="frontmatter.home" />
 
-    <Transition v-else name="fade-slide-y" mode="out-in">
-      <Page :key="$page.path">
+    <Transition
+      v-else
+      name="fade-slide-y"
+      mode="out-in"
+      @before-enter="onBeforeEnter"
+      @before-leave="onBeforeLeave"
+    >
+      <Page :key="page.path">
         <template #top>
           <slot name="page-top" />
         </template>
@@ -50,14 +56,18 @@ import {
   Transition,
 } from "vue";
 import { useRouter } from "vue-router";
-import { usePageFrontmatter } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
-import Home from "@vuepress/theme-default/lib/components/Home.vue";
+import { usePageData, usePageFrontmatter } from "@vuepress/client";
+import Home from "@vuepress/theme-default/lib/client/components/Home.vue";
 import Page from "../components/Page.vue";
-import Navbar from "@vuepress/theme-default/lib/components/Navbar.vue";
-import Sidebar from "@vuepress/theme-default/lib/components/Sidebar.vue";
-import { useSidebarItems } from "@vuepress/theme-default/lib/composables";
-import type { DefaultThemeOptions } from "@vuepress/theme-default/lib/types";
+import Navbar from "@vuepress/theme-default/lib/client/components/Navbar.vue";
+import Sidebar from "@vuepress/theme-default/lib/client/components/Sidebar.vue";
+import {
+  useScrollPromise,
+  useSidebarItems,
+  useThemeLocaleData,
+} from "@vuepress/theme-default/lib/client/composables";
+
+import type { DefaultThemePageFrontmatter } from "@vuepress/theme-default/lib/shared";
 
 export default defineComponent({
   name: "Layout",
@@ -71,8 +81,9 @@ export default defineComponent({
   },
 
   setup() {
-    const frontmatter = usePageFrontmatter();
-    const themeLocale = useThemeLocaleData<DefaultThemeOptions>();
+    const page = usePageData();
+    const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>();
+    const themeLocale = useThemeLocaleData();
 
     // navbar
     const shouldShowNavbar = computed(
@@ -87,11 +98,11 @@ export default defineComponent({
       isSidebarOpen.value = typeof to === "boolean" ? to : !isSidebarOpen.value;
     };
     const touchStart = { x: 0, y: 0 };
-    const onTouchStart = (e): void => {
+    const onTouchStart = (e: TouchEvent): void => {
       touchStart.x = e.changedTouches[0].clientX;
       touchStart.y = e.changedTouches[0].clientY;
     };
-    const onTouchEnd = (e): void => {
+    const onTouchEnd = (e: TouchEvent): void => {
       const dx = e.changedTouches[0].clientX - touchStart.x;
       const dy = e.changedTouches[0].clientY - touchStart.y;
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
@@ -104,14 +115,17 @@ export default defineComponent({
     };
 
     // classes
-    const containerClass = computed(() => ({
-      "no-navbar": !shouldShowNavbar.value,
-      "no-sidebar": !sidebarItems.value.length,
-      "sidebar-open": isSidebarOpen.value,
-    }));
+    const containerClass = computed(() => [
+      {
+        "no-navbar": !shouldShowNavbar.value,
+        "no-sidebar": !sidebarItems.value.length,
+        "sidebar-open": isSidebarOpen.value,
+      },
+      frontmatter.value.pageClass,
+    ]);
 
     // close sidebar after navigation
-    let unregisterRouterHook;
+    let unregisterRouterHook: () => void;
     onMounted(() => {
       const router = useRouter();
       unregisterRouterHook = router.afterEach(() => {
@@ -122,12 +136,21 @@ export default defineComponent({
       unregisterRouterHook();
     });
 
+    // handle scrollBehavior with transition
+    const scrollPromise = useScrollPromise();
+    const onBeforeEnter = scrollPromise.resolve;
+    const onBeforeLeave = scrollPromise.pending;
+
     return {
+      frontmatter,
+      page,
       containerClass,
       shouldShowNavbar,
       toggleSidebar,
       onTouchStart,
       onTouchEnd,
+      onBeforeEnter,
+      onBeforeLeave,
     };
   },
 });

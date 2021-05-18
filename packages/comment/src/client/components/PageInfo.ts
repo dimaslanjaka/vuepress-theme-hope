@@ -1,31 +1,13 @@
-<template>
-  <div class="page-title">
-    <h1>
-      <i
-        v-if="$frontmatter.icon"
-        :class="`iconfont ${iconPrefix}${$frontmatter.icon}`"
-      />
-      {{ $page.title }}
-    </h1>
-    <div v-if="config" class="page-info">
-      <span v-if="isOriginal" class="origin" v-text="originText" />
-      <component
-        :is="`${item}-info`"
-        v-for="item in config"
-        :key="$route.path + item"
-      />
-    </div>
-    <hr />
-  </div>
-</template>
-
-<script lang="ts">
 import {
   useIconPrefix,
   useThemePluginConfig,
 } from "@mr-hope/vuepress-shared/client";
-import { usePageFrontmatter, useRouteLocale } from "@vuepress/client";
-import { computed, defineComponent } from "vue";
+import {
+  usePageData,
+  usePageFrontmatter,
+  useRouteLocale,
+} from "@vuepress/client";
+import { computed, defineComponent, resolveComponent, h } from "vue";
 import AuthorInfo from "./AuthorInfo";
 import CategoryInfo from "./CategoryInfo";
 import DateInfo from "./DateInfo";
@@ -35,6 +17,7 @@ import TagInfo from "./TagInfo";
 import WordInfo from "./WordInfo";
 import { commentOptions, pageInfoI18n } from "../define";
 
+import type { VNode } from "vue";
 import type {
   CommentOptions,
   CommentPluginFrontmatter,
@@ -57,9 +40,11 @@ export default defineComponent({
   },
 
   setup() {
+    const page = usePageData();
     const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
     const routeLocale = useRouteLocale();
     const themePluginConfig = useThemePluginConfig<CommentOptions>("comment");
+    const iconPrefix = useIconPrefix();
 
     const config = computed<PageInfoType[] | false>(() => {
       const themeConfig = themePluginConfig.value.pageInfo;
@@ -84,12 +69,28 @@ export default defineComponent({
     const isOriginal = computed(() => frontmatter.value.original);
     const originText = computed(() => pageInfoI18n[routeLocale.value].origin);
 
-    return {
-      config,
-      iconPrefix: useIconPrefix(),
-      isOriginal,
-      originText,
-    };
+    return (): VNode =>
+      h("div", { class: "page-title" }, [
+        h("h1", [
+          frontmatter.value.icon
+            ? h("i", {
+                class: [
+                  "iconfont",
+                  `${iconPrefix.value}${frontmatter.value.icon}`,
+                ],
+              })
+            : null,
+          page.value.title,
+        ]),
+        config.value
+          ? h("div", { class: "page-info" }, [
+              isOriginal.value
+                ? h("span", { class: "origin" }, originText.value)
+                : null,
+              config.value.map((item) => h(resolveComponent(`${item}-info`))),
+            ])
+          : null,
+        h("hr"),
+      ]);
   },
 });
-</script>

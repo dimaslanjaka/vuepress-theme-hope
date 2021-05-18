@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import { path } from "@vuepress/utils";
 import type { UserConfig } from "@vuepress/cli";
 import type { DefaultThemeOptions } from "@vuepress/theme-default";
 
@@ -11,7 +11,7 @@ const config: UserConfig<DefaultThemeOptions> = {
 
   dest: "./dist",
 
-  theme: resolve(__dirname, "./theme"),
+  theme: path.resolve(__dirname, "./theme"),
 
   themeConfig: {
     logo: "/logo.svg",

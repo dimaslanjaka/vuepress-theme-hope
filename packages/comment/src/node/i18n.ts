@@ -45,7 +45,7 @@ export const pageInfoI18n: Record<HopeLangPath, PageInfoI18nConfig> = {
   },
 };
 
-export const valineI18n: Record<HopeLangPath, string> = {
+export const walineI18n: Record<HopeLangPath, string> = {
   "/zh/": "请留言。(填写邮箱可在被回复时收到邮件提醒)",
   "/en/":
     "Write a comment here (Fill in the email address to receive an email notification when being replied)",
