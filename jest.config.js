@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   // transform: {
-  //   "@vuepress/client/.*.js$": "babel-jest",
+  //   "@vuepress/client/.*\\.js$": "babel-jest",
   //   "\\.ts$": "ts-jest",
   // },
   // transformIgnorePatterns: [

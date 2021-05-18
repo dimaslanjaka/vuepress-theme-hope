@@ -1,4 +1,4 @@
-import { getChinese, getWordNumber, readingTime } from "../src/reading-time";
+import { getChinese, getWordNumber, readingTime } from "../src/node";
 
 describe("Reading Time Test", () => {
   it("Words test", () => {

@@ -1,5 +1,7 @@
+import type { KatexOptions } from "katex";
 import type { CodeDemoGlobalOptions } from "./code-demo";
-import type { PresentationOptions } from "./reveal";
+import type { PresentationOptions } from "./presentation";
+import type { TaskListOptions } from "./tasklist";
 
 /** md-enhance plugin configuration */
 export type MarkdownEnhanceOptions = Partial<{
@@ -11,6 +13,14 @@ export type MarkdownEnhanceOptions = Partial<{
    * @default true
    */
   lineNumbers: boolean;
+  /**
+   * 是否修复包含特殊字符的图片路径
+   *
+   * Whether to fix image links containing special characters
+   *
+   * @default true
+   */
+  imageFix: boolean;
   /**
    * 是否启用自定义对齐支持
    *
@@ -52,21 +62,29 @@ export type MarkdownEnhanceOptions = Partial<{
    */
   mark: boolean;
   /**
+   * 是否启用任务里表支持
+   *
+   * Whether to enable tastlist format support
+   *
+   * @default false
+   */
+  tasklist: TaskListOptions | boolean;
+  /**
    * 是否启用 TeX 语法支持
    *
    * Whether to enable TeX syntax support
    *
    * @default false
    */
-  tex: boolean;
+  tex: KatexOptions | boolean;
   /**
-   * 是否启用流程图支持
+   * 是否启用 Mermaid 流程图支持
    *
-   * Whether to enable flowchart support
+   * Whether to enable mermaid support
    *
    * @default false
    */
-  flowchart: boolean;
+  mermaid: boolean;
   /**
    * 是否启用代码示例功能
    *

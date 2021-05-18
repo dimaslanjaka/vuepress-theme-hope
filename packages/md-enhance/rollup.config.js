@@ -1,4 +1,3 @@
-import dts from "rollup-plugin-dts";
 import { rollupTypescript, rollupVue } from "../../script/rollup";
 
 export default [
@@ -6,16 +5,19 @@ export default [
     external: [
       "@mr-hope/vuepress-shared",
       "@vuepress/utils",
+      "markdown-it/lib/token",
+      "markdown-it/lib/helpers/parse_link_label",
+      "mdurl",
       "hash-sum",
       "katex",
     ],
   }),
-  ...rollupVue("client/appEnhance.ts", {
+  ...rollupTypescript("client/appEnhance", {
     external: [
+      "@Mermaid",
+      "@Presentation",
       "@vuepress/client",
-      "flowchart.js",
       "katex/dist/katex.min.css",
-      "lodash.debounce",
       "reveal.js",
       "reveal.js/plugin/markdown/markdown.esm.js",
       "reveal.js/plugin/highlight/highlight.esm.js",
@@ -30,7 +32,7 @@ export default [
     dtsExternal: [/\.scss$/, /\.css$/],
     copy: [["client/styles", "client"]],
   }),
-  ...rollupVue("client/appSetup.ts", {
+  ...rollupTypescript("client/appSetup", {
     external: ["@vuepress/client", "vue", /\.scss$/],
     dtsExternal: [/\.scss$/],
   }),

@@ -1,4 +1,4 @@
-import { getDate } from "../src/composables/date";
+import { getDate } from "../src/shared";
 
 describe("getDate()", () => {
   describe("should parse day", () => {

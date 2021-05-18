@@ -1,12 +1,15 @@
 import { path } from "@vuepress/utils";
 import { codeDemoDefaultSetting } from "./markdown-it/code-demo";
-import flowchart from "./markdown-it/flowchart";
-import footnote from "./markdown-it/footnote";
-import katex from "./markdown-it/katex";
-import mark from "./markdown-it/mark";
-import presentation from "./markdown-it/presentation";
-import sub from "./markdown-it/sub";
-import sup from "./markdown-it/sup";
+import {
+  footnote,
+  katex,
+  mark,
+  mermaid,
+  presentation,
+  sub,
+  sup,
+  tasklist,
+} from "./markdown-it";
 import { resolvePlugin } from "./resolvePlugin";
 
 import type { Plugin } from "@vuepress/core";
@@ -27,41 +30,88 @@ const markdownEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (option, app) => {
       ? (themeConfig.mdEnhance as MarkdownEnhanceOptions) || {}
       : option;
 
+  const alignEnable = markdownOption.enableAll || markdownOption.align || false;
+  const demoEnable = markdownOption.enableAll || markdownOption.demo || false;
+  const footnoteEnable =
+    markdownOption.enableAll || markdownOption.footnote || false;
+  const tasklistEnable =
+    markdownOption.enableAll || markdownOption.tasklist || false;
+  const mermaidEnable =
+    markdownOption.enableAll || Boolean(markdownOption.mermaid) || false;
+  const presentationEnable =
+    markdownOption.enableAll || Boolean(markdownOption.presentation) || false;
+  const texEnable =
+    markdownOption.enableAll || Boolean(markdownOption.tex) || false;
+
+  const revealPlugins =
+    typeof markdownOption.presentation === "object" &&
+    Array.isArray(markdownOption.presentation.plugins)
+      ? markdownOption.presentation.plugins
+      : [];
+
   return {
     name: "md-enhance",
 
+    alias: {
+      "@Mermaid": mermaidEnable
+        ? path.resolve(__dirname, "../client/Mermaid.js")
+        : "@mr-hope/vuepress-shared/lib/esm/noopModule",
+      "@Presentation": presentationEnable
+        ? path.resolve(__dirname, "../client/Presentation.vue")
+        : "@mr-hope/vuepress-shared/lib/esm/noopModule",
+    },
+
     define: (): Record<string, unknown> => ({
-      MARKDOWN_ENHANCE_OPTIONS: markdownOption,
+      MARKDOWN_ENHANCE_ALIGN: alignEnable,
+      MARKDOWN_ENHANCE_FOOTNOTE: footnoteEnable,
+      MARKDOWN_ENHANCE_MERMAID: mermaidEnable,
+      MARKDOWN_ENHANCE_PRESENTATION: presentationEnable,
+      MARKDOWN_ENHANCE_TASKLIST: tasklistEnable,
+      MARKDOWN_ENHANCE_TEX: texEnable,
       CODE_DEMO_OPTIONS: {
         ...codeDemoDefaultSetting,
         ...(typeof markdownOption.demo === "boolean"
           ? {}
           : markdownOption.demo),
       },
-      REVEAL_PLUGINS:
-        typeof markdownOption.presentation === "object" &&
-        Array.isArray(markdownOption.presentation.plugins)
-          ? markdownOption.presentation.plugins
-          : [],
+      MERMAID_OPTIONS:
+        typeof markdownOption.mermaid === "object"
+          ? markdownOption.mermaid
+          : {},
       REVEAL_CONFIG:
         typeof markdownOption.presentation === "object" &&
         typeof markdownOption.presentation.revealConfig === "object"
           ? markdownOption.presentation.revealConfig
           : {},
+      REVEAL_PLUGIN_HIGHLIGHT: revealPlugins.includes("highlight"),
+      REVEAL_PLUGIN_MATH: revealPlugins.includes("math"),
+      REVEAL_PLUGIN_NOTES: revealPlugins.includes("notes"),
+      REVEAL_PLUGIN_SEARCH: revealPlugins.includes("search"),
+      REVEAL_PLUGIN_ZOOM: revealPlugins.includes("zoom"),
     }),
 
-    clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
+    ...(demoEnable
+      ? {
+          clientAppSetupFiles: path.resolve(__dirname, "../client/appSetup.js"),
+        }
+      : {}),
     clientAppEnhanceFiles: path.resolve(__dirname, "../client/appEnhance.js"),
 
     extendsMarkdown: (markdownIt): void => {
+      // TODO: Watch if if works
+      // if (markdownOption.imageFix !== false) markdownIt.use(decodeURL);
       if (markdownOption.sup || markdownOption.enableAll) markdownIt.use(sup);
       if (markdownOption.sub || markdownOption.enableAll) markdownIt.use(sub);
-      if (markdownOption.footnote || markdownOption.enableAll)
-        markdownIt.use(footnote);
+      if (footnoteEnable) markdownIt.use(footnote);
       if (markdownOption.mark || markdownOption.enableAll) markdownIt.use(mark);
-      if (markdownOption.flowchart || markdownOption.enableAll)
-        markdownIt.use(flowchart);
-      if (markdownOption.tex || markdownOption.enableAll)
+      if (tasklistEnable)
+        markdownIt.use(tasklist, [
+          typeof markdownOption.tasklist === "object"
+            ? markdownOption.tasklist
+            : {},
+        ]);
+      if (mermaidEnable) markdownIt.use(mermaid);
+      if (texEnable)
         markdownIt.use(katex, [
           {
             macros: {
@@ -70,10 +120,12 @@ const markdownEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (option, app) => {
               "\\iiiint": "\\int\\!\\!\\!\\!\\iiint",
               "\\idotsint": "\\int\\!\\cdots\\!\\int",
             },
+            ...(typeof markdownOption.tex === "object"
+              ? markdownOption.tex
+              : {}),
           },
         ]);
-      if (markdownOption.presentation || markdownOption.enableAll)
-        markdownIt.use(presentation);
+      if (presentationEnable) markdownIt.use(presentation);
     },
 
     plugins: resolvePlugin(markdownOption, app),

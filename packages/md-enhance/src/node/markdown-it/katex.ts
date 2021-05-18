@@ -2,7 +2,8 @@
 import * as MarkdownIt from "markdown-it";
 import * as StateBlock from "markdown-it/lib/rules_block/state_block";
 import * as StateInline from "markdown-it/lib/rules_inline/state_inline";
-import * as katex from "katex";
+import * as Katex from "katex";
+import { escapeHtml } from "./utils";
 
 /*
  * Test if potential opening or closing delimieter
@@ -12,29 +13,21 @@ const isValidDelim = (
   state: StateInline,
   pos: number
 ): { canOpen: boolean; canClose: boolean } => {
-  let canOpen = true;
-  let canClose = true;
-  const max = state.posMax;
-  const prevChar = pos > 0 ? state.src.charCodeAt(pos - 1) : -1;
-  const nextChar = pos + 1 <= max ? state.src.charCodeAt(pos + 1) : -1;
-
-  /*
-   * Check non-whitespace conditions for opening and closing, and
-   * check that closing delimeter isn’t followed by a number
-   */
-  if (
-    prevChar === 0x20 /* " " */ ||
-    prevChar === 0x09 /* \t */ ||
-    (nextChar >= 0x30 /* "0" */ && nextChar <= 0x39) /* "9" */
-  )
-    canClose = false;
-
-  if (nextChar === 0x20 /* " " */ || nextChar === 0x09 /* \t */)
-    canOpen = false;
+  const prevChar = pos > 0 ? state.src.charAt(pos - 1) : "";
+  const nextChar = pos + 1 <= state.posMax ? state.src.charAt(pos + 1) : "";
 
   return {
-    canOpen,
-    canClose,
+    canOpen: nextChar !== " " && nextChar !== "\t",
+
+    /*
+     * Check non-whitespace conditions for opening and closing, and
+     * check that closing delimeter isn’t followed by a number
+     */
+    canClose: !(
+      prevChar === " " ||
+      prevChar === "\t" ||
+      /[0-9]/u.exec(nextChar)
+    ),
   };
 };
 
@@ -94,6 +87,7 @@ const inlineTex = (state: StateInline, silent?: boolean): boolean => {
 
   // Check for valid closing delimiter
   res = isValidDelim(state, match);
+
   if (!res.canClose) {
     if (!silent) state.pending += "$";
 
@@ -108,6 +102,7 @@ const inlineTex = (state: StateInline, silent?: boolean): boolean => {
   }
 
   state.pos = match + 1;
+
   return true;
 };
 
@@ -165,56 +160,48 @@ const blockTex = (
 
   token.block = true;
   token.content =
-    (firstLine && firstLine.trim() ? `${firstLine}\n` : "") +
+    (firstLine?.trim() ? `${firstLine}\n` : "") +
     state.getLines(start + 1, next, state.tShift[start], true) +
-    (lastLine && lastLine.trim() ? lastLine : "");
+    (lastLine?.trim() ? lastLine : "");
   token.map = [start, state.line];
   token.markup = "$$";
 
   return true;
 };
 
-const escapeHtml = (unsafeHTML: string): string =>
-  unsafeHTML
-    .replace(/&/gu, "&amp;")
-    .replace(/</gu, "&lt;")
-    .replace(/>/gu, "&gt;")
-    .replace(/"/gu, "&quot;")
-    .replace(/'/gu, "&#039;");
+// set KaTeX as the renderer for markdown-it-simplemath
+const katexInline = (tex: string, options: Katex.KatexOptions): string => {
+  options.displayMode = false;
 
-export default (
+  try {
+    return Katex.renderToString(tex, options);
+  } catch (error) {
+    if (options.throwOnError) console.warn(error);
+
+    return `<span class='katex-error' title='${escapeHtml(
+      (error as Error).toString()
+    )}'>${escapeHtml(tex)}</span>`;
+  }
+};
+
+const katexBlock = (tex: string, options: Katex.KatexOptions): string => {
+  options.displayMode = true;
+
+  try {
+    return `<p class='katex-block'>${Katex.renderToString(tex, options)}</p>`;
+  } catch (error) {
+    if (options.throwOnError) console.warn(error);
+
+    return `<p class='katex-block katex-error' title='${escapeHtml(
+      (error as Error).toString()
+    )}'>${escapeHtml(tex)}</p>`;
+  }
+};
+
+export const katex = (
   md: MarkdownIt,
   options: katex.KatexOptions = { throwOnError: false }
 ): void => {
-  // set KaTeX as the renderer for markdown-it-simplemath
-  const katexInline = (tex: string): string => {
-    options.displayMode = false;
-
-    try {
-      return katex.renderToString(tex, options);
-    } catch (error) {
-      if (options.throwOnError) console.warn(error);
-
-      return `<span class='katex-error' title='${escapeHtml(
-        (error as Error).toString()
-      )}'>${escapeHtml(tex)}</span>`;
-    }
-  };
-
-  const katexBlock = (tex: string): string => {
-    options.displayMode = true;
-
-    try {
-      return `<p class='katex-block'>${katex.renderToString(tex, options)}</p>`;
-    } catch (error) {
-      if (options.throwOnError) console.warn(error);
-
-      return `<p class='katex-block katex-error' title='${escapeHtml(
-        (error as Error).toString()
-      )}'>${escapeHtml(tex)}</p>`;
-    }
-  };
-
   md.inline.ruler.after("escape", "inlineTex", inlineTex);
   // It’s a workaround here because types issue
   md.block.ruler.after("blockquote", "blockTex", blockTex, {
@@ -222,7 +209,7 @@ export default (
   });
 
   md.renderer.rules.inlineTex = (tokens, idx): string =>
-    katexInline(tokens[idx].content);
+    katexInline(tokens[idx].content, options);
   md.renderer.rules.blockTex = (tokens, idx): string =>
-    `${katexBlock(tokens[idx].content)}\n`;
+    `${katexBlock(tokens[idx].content, options)}\n`;
 };

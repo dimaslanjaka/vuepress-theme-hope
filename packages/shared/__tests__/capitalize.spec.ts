@@ -1,4 +1,4 @@
-import { capitalize, strictCapitalize } from "../src";
+import { capitalize, strictCapitalize } from "../src/shared";
 
 it("capitalize", () => {
   expect(capitalize("mrhope")).toEqual("Mrhope");
