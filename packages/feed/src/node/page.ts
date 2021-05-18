@@ -115,9 +115,11 @@ export class FeedPage {
   }
 
   get lastUpdated(): Date {
-    const lastUpdatedTimeStamp = (this.$page as Page & {
-      lastUpdatedTime: number;
-    }).lastUpdatedTime;
+    const lastUpdatedTimeStamp = (
+      this.$page as Page & {
+        lastUpdatedTime: number;
+      }
+    ).lastUpdatedTime;
 
     return lastUpdatedTimeStamp ? new Date(lastUpdatedTimeStamp) : new Date();
   }

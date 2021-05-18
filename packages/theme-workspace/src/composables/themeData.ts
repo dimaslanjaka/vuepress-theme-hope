@@ -10,5 +10,6 @@ import type { DefaultThemeLocaleData, ThemeHopeOptions } from "../types";
 
 export const useThemeData = (): ThemeDataRef<ThemeHopeOptions> =>
   _useThemeData<ThemeHopeOptions>();
-export const useThemeLocaleData = (): ThemeLocaleDataRef<DefaultThemeLocaleData> =>
-  _useThemeLocaleData<DefaultThemeLocaleData>();
+export const useThemeLocaleData =
+  (): ThemeLocaleDataRef<DefaultThemeLocaleData> =>
+    _useThemeLocaleData<DefaultThemeLocaleData>();

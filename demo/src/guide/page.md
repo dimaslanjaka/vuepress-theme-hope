@@ -36,7 +36,6 @@ lang: en-US
 title: Title of this page
 description: Description of this page
 ---
-
 ```
 
 You must have noticed that those fields are similar with the [Site Config](./configuration.md#site-config) of in the [Config File](./configuration.md#config-file). You can override `lang`, `title`, `description`, etc., of current page via frontmatter. So you can take frontmatter as page scope config.

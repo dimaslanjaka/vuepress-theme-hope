@@ -23,9 +23,8 @@ import type {
 
 export type SidebarItemsRef = ComputedRef<ResolvedSidebarItem[]>;
 
-export const sidebarItemsSymbol: InjectionKey<SidebarItemsRef> = Symbol.for(
-  "sidebarItems"
-);
+export const sidebarItemsSymbol: InjectionKey<SidebarItemsRef> =
+  Symbol.for("sidebarItems");
 
 /**
  * Inject sidebar items global computed
@@ -74,37 +73,30 @@ export const resolveArraySidebarItems = (
   const route = useRoute();
   const page = usePageData();
 
-  return sidebarConfig.map(
-    (item): ResolvedSidebarItem => {
-      if (isString(item)) return useNavLink(item);
+  return sidebarConfig.map((item): ResolvedSidebarItem => {
+    if (isString(item)) return useNavLink(item);
 
-      if (!item.isGroup) return item as ResolvedSidebarItem;
+    if (!item.isGroup) return item as ResolvedSidebarItem;
 
-      return {
-        ...item,
-        children: item.children.map(
-          (subItem): ResolvedSidebarItem => {
-            const childItem: ResolvedSidebarItem = isString(subItem)
-              ? useNavLink(subItem)
-              : (subItem as ResolvedSidebarItem);
+    return {
+      ...item,
+      children: item.children.map((subItem): ResolvedSidebarItem => {
+        const childItem: ResolvedSidebarItem = isString(subItem)
+          ? useNavLink(subItem)
+          : (subItem as ResolvedSidebarItem);
 
-            // if the sidebar item is current page and children is not set
-            // use headers of current page as children
-            if (
-              childItem.link === route.path &&
-              childItem.children === undefined
-            )
-              return {
-                ...childItem,
-                children: page.value.headers.map(headerToSidebarItem),
-              };
+        // if the sidebar item is current page and children is not set
+        // use headers of current page as children
+        if (childItem.link === route.path && childItem.children === undefined)
+          return {
+            ...childItem,
+            children: page.value.headers.map(headerToSidebarItem),
+          };
 
-            return childItem;
-          }
-        ),
-      };
-    }
-  );
+        return childItem;
+      }),
+    };
+  });
 };
 
 /**

@@ -30,7 +30,9 @@ export default defineComponent({
               onClick: () => {
                 if (screenfull.isEnabled)
                   void screenfull.toggle().then(() => {
-                    isFullscreen.value = (screenfull as Screenfull).isFullscreen;
+                    isFullscreen.value = (
+                      screenfull as Screenfull
+                    ).isFullscreen;
                   });
               },
             },

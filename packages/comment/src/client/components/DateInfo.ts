@@ -18,9 +18,10 @@ export default defineComponent({
   setup() {
     const frontmatter = usePageFrontmatter<CommentPluginFrontmatter>();
     const routeLocale = useRouteLocale();
-    const page = usePageData<{
-      git: { createTimeStamp: number | undefined };
-    }>();
+    const page =
+      usePageData<{
+        git: { createTimeStamp: number | undefined };
+      }>();
 
     const date = computed(() => {
       let { date } = frontmatter.value;

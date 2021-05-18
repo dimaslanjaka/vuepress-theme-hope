@@ -48,9 +48,10 @@ const feedPlugin: Plugin<FeedOptions> = (options, app) => {
     },
 
     async generated(): Promise<void> {
-      const feedPages = (typeof pluginOptions.sort === "function"
-        ? pages.sort(pluginOptions.sort)
-        : pages
+      const feedPages = (
+        typeof pluginOptions.sort === "function"
+          ? pages.sort(pluginOptions.sort)
+          : pages
       ).slice(0, pluginOptions.count);
 
       await new FeedGenerator(

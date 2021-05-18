@@ -11,7 +11,8 @@ export * from "../shared/types";
 const commentPlugin: Plugin<CommentOptions> = (options, app) => {
   const { themeConfig } = app.options;
   const rootLangPath = getRootLangPath(app);
-  const pageInfoI18nConfig = pageInfoI18n as PluginI18nConvert<PageInfoI18nConfig>;
+  const pageInfoI18nConfig =
+    pageInfoI18n as PluginI18nConvert<PageInfoI18nConfig>;
   const valineI18nConfig = valineI18n as PluginI18nConvert<string>;
 
   pageInfoI18nConfig["/"] = pageInfoI18nConfig[rootLangPath];

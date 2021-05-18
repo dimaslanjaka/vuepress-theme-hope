@@ -36,7 +36,6 @@ lang: zh-CN
 title: 页面的标题
 description: 页面的描述
 ---
-
 ```
 
 你肯定注意到 Frontmatter 中的字段和[配置文件](./configuration.md#config-file)中的[站点配置](./configuration.md#站点配置)十分类似。你可以通过 Frontmatter 来覆盖当前页面的 `lang`, `title`, `description` 等属性。因此，你可以把 Frontmatter 当作页面级作用域的配置。

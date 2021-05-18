@@ -73,10 +73,12 @@ export default defineComponent({
       if (status === "on") toggleDarkmode(true);
       else if (status === "off") toggleDarkmode(false);
       else {
-        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)")
-          .matches;
-        const isLightMode = window.matchMedia("(prefers-color-scheme: light)")
-          .matches;
+        const isDarkMode = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const isLightMode = window.matchMedia(
+          "(prefers-color-scheme: light)"
+        ).matches;
 
         window
           .matchMedia("(prefers-color-scheme: dark)")

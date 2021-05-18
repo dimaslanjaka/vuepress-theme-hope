@@ -27,7 +27,7 @@ Note: This warning will be shown only once.`
 
 /** Check if the lang is supported */
 export const checkLang = (lang: string | undefined): boolean => {
-  const result = langs.includes((lang as unknown) as HopeLang);
+  const result = langs.includes(lang as unknown as HopeLang);
 
   return result;
 };
