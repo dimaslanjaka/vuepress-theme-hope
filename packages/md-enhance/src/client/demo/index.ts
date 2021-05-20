@@ -36,10 +36,9 @@ export const initDemo = (): void => {
           const vueCode = getVueCode(codeType, config);
 
           if (vueCode.script) {
-            const component = window.Vue.extend(vueCode.script);
-            const app = new component().$mount();
+            const app = window.Vue.createApp(vueCode.script);
 
-            appElement.appendChild(app.$el);
+            app.mount(appElement);
           }
 
           initDom({ code: vueCode, codeType, container, title });

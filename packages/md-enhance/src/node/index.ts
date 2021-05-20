@@ -1,6 +1,7 @@
 import { path } from "@vuepress/utils";
 import { codeDemoDefaultSetting } from "./markdown-it/code-demo";
 import {
+  decodeURL,
   footnote,
   katex,
   mark,
@@ -54,10 +55,10 @@ const markdownEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (option, app) => {
 
     alias: {
       "@Mermaid": mermaidEnable
-        ? path.resolve(__dirname, "../client/Mermaid.js")
+        ? path.resolve(__dirname, "../client/components/Mermaid")
         : "@mr-hope/vuepress-shared/lib/esm/noopModule",
       "@Presentation": presentationEnable
-        ? path.resolve(__dirname, "../client/Presentation.vue")
+        ? path.resolve(__dirname, "../client/components/Presentation")
         : "@mr-hope/vuepress-shared/lib/esm/noopModule",
     },
 
@@ -98,8 +99,7 @@ const markdownEnhancePlugin: Plugin<MarkdownEnhanceOptions> = (option, app) => {
     clientAppEnhanceFiles: path.resolve(__dirname, "../client/appEnhance.js"),
 
     extendsMarkdown: (markdownIt): void => {
-      // TODO: Watch if if works
-      // if (markdownOption.imageFix !== false) markdownIt.use(decodeURL);
+      if (markdownOption.imgFix !== false) markdownIt.use(decodeURL);
       if (markdownOption.sup || markdownOption.enableAll) markdownIt.use(sup);
       if (markdownOption.sub || markdownOption.enableAll) markdownIt.use(sub);
       if (footnoteEnable) markdownIt.use(footnote);

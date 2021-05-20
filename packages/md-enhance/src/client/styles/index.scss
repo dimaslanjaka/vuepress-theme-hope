@@ -1,4 +1,4 @@
 @use 'sass:meta';
 @use 'container';
 
-@include meta.load-css("@mr-hope/vuepress-style");
+@use "@mr-hope/vuepress-style";

@@ -1,14 +1,16 @@
 import { defineComponent, h, onMounted, ref } from "vue";
 import { usePageFrontmatter } from "@vuepress/client";
+import { LoadingIcon } from "./loading";
 
 import type { RevealOptions } from "reveal.js";
 import type { PropType, VNode } from "vue";
 
 declare const REVEAL_CONFIG: Partial<RevealOptions>;
-declare const REVEAL_PLUGINS: string[];
-
-export const revealConfig = REVEAL_CONFIG;
-export const revealPlugins = REVEAL_PLUGINS;
+declare const REVEAL_PLUGIN_HIGHLIGHT: boolean;
+declare const REVEAL_PLUGIN_MATH: boolean;
+declare const REVEAL_PLUGIN_NOTES: boolean;
+declare const REVEAL_PLUGIN_SEARCH: boolean;
+declare const REVEAL_PLUGIN_ZOOM: boolean;
 
 type ThemeType =
   | "auto"
@@ -29,19 +31,24 @@ export default defineComponent({
 
   props: {
     id: { type: String, required: true },
-    code: { type: String, required: true },
     theme: { type: String as PropType<ThemeType>, default: "auto" },
   },
 
   setup(props) {
     const frontmatter = usePageFrontmatter<{ reveal: RevealOptions }>();
+    const code = ref("");
     const loading = ref(false);
-    const presentation = ref<HTMLElement | null>(null);
+    const presentationContainer = ref<HTMLElement | null>(null);
+    const presentationElement = ref<HTMLElement | null>(null);
 
     onMounted(() => {
-      if (presentation.value) {
-        presentation.value.setAttribute("id", props.id);
-        presentation.value.setAttribute("theme", props.theme);
+      if (presentationElement.value) {
+        code.value = decodeURIComponent(
+          presentationContainer.value?.dataset.code || ""
+        );
+
+        presentationElement.value.setAttribute("id", props.id);
+        presentationElement.value.setAttribute("theme", props.theme);
 
         const promises = [import(/* webpackChunkName: "reveal" */ "reveal.js")];
 
@@ -51,56 +58,56 @@ export default defineComponent({
           )
         );
 
-        if (revealPlugins.includes("highlight"))
+        if (REVEAL_PLUGIN_HIGHLIGHT)
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/highlight/highlight.esm.js"
             )
           );
 
-        if (revealPlugins.includes("math"))
+        if (REVEAL_PLUGIN_MATH)
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/math/math.esm.js"
             )
           );
 
-        if (revealPlugins.includes("search"))
+        if (REVEAL_PLUGIN_SEARCH)
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/search/search.esm.js"
             )
           );
 
-        if (revealPlugins.includes("notes"))
+        if (REVEAL_PLUGIN_NOTES)
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/notes/notes.esm.js"
             )
           );
 
-        if (revealPlugins.includes("zoom"))
+        if (REVEAL_PLUGIN_ZOOM)
           promises.push(
             import(
               /* webpackChunkName: "reveal" */ "reveal.js/plugin/zoom/zoom.esm.js"
             )
           );
 
-        // if (revealPlugins.includes("anything"))
+        // if (REVEAL_PLUGINS.includes("anything"))
         //   promises.push(
         //     import(
         //       /* webpackChunkName: "reveal" */ "reveal.js-plugins/anything/anything.js"
         //     )
         //   );
 
-        // if (revealPlugins.includes("audio"))
+        // if (REVEAL_PLUGINS.includes("audio"))
         //   promises.push(
         //     import(
         //       /* webpackChunkName: "reveal" */ "reveal.js-plugins/audio-slideshow/audio-slideshow.js"
         //     )
         //   );
 
-        // if (revealPlugins.includes("chalkboard"))
+        // if (REVEAL_PLUGINS.includes("chalkboard"))
         //   promises.push(
         //     import(
         //       /* webpackChunkName: "reveal" */ "reveal.js-plugins/chalkboard/chalkboard.js"
@@ -109,19 +116,24 @@ export default defineComponent({
 
         void Promise.all(promises).then(([revealJS, ...plugins]) => {
           const reveal = new revealJS.default(
-            presentation.value as HTMLElement,
+            presentationElement.value as HTMLElement,
             { plugins: plugins.map((plugin) => plugin.default) }
           );
 
           void reveal
             .initialize({
+              backgroundTransition: "slide",
+              hash: frontmatter.value.layout === "Slide",
+              mouseWheel: frontmatter.value.layout === "Slide",
+              transition: "slide",
               slideNumber: true,
-              ...revealConfig,
+              ...REVEAL_CONFIG,
               ...(frontmatter.value.reveal || {}),
               embedded: frontmatter.value.layout !== "Slide",
             })
             .then(() => {
               loading.value = false;
+              reveal.configure({ backgroundTransition: "slide" });
             });
         });
       }
@@ -131,23 +143,26 @@ export default defineComponent({
       h(
         "div",
         {
+          ref: presentationContainer,
           class: {
-            "md-presentation": true,
-            reveal: true,
-            "reveal-viewport": true,
+            "md-enhance-presentation": true,
             loading: loading.value,
           },
-          ref: presentation,
         },
         [
-          // h("div", { innerHTML: loading.value ? loadingIcon : "" }),
-          h("div", {
-            class: "slides",
-            style: { display: loading.value ? "none" : "block" },
-            innerHTML: `<section data-markdown data-separator="^\\r?\\n---\\r?\\n$" data-separator-vertical="^\\r?\\n--\\r?\\n$"><script type="text/template">${decodeURIComponent(
-              props.code
-            )}</script></section>`,
-          }),
+          loading.value ? h(LoadingIcon) : null,
+          h(
+            "div",
+            {
+              ref: presentationElement,
+              class: ["reveal", "reveal-viewport"],
+            },
+            h("div", {
+              class: "slides",
+              style: { display: loading.value ? "none" : "block" },
+              innerHTML: `<section data-markdown data-separator="^\\r?\\n---\\r?\\n$" data-separator-vertical="^\\r?\\n--\\r?\\n$"><script type="text/template">${code.value}</script></section>`,
+            })
+          ),
         ]
       );
   },

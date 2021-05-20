@@ -6,7 +6,7 @@ import {
   onMounted,
   ref,
 } from "vue";
-import { loadingIcon } from "./loading";
+import { LoadingIcon } from "./loading";
 import MermaidAPI from "mermaid/mermaidAPI";
 
 import type { Mermaid } from "mermaid";
@@ -24,7 +24,6 @@ export default defineComponent({
   },
 
   setup(props) {
-    const loading = ref(true);
     const svgCode = ref("");
     const mermaidElement = ref<HTMLElement | null>(null);
     let observer: MutationObserver;
@@ -49,7 +48,6 @@ export default defineComponent({
           container.style.top = "-9999px";
 
           const renderCallback = (code: string): void => {
-            loading.value = false;
             svgCode.value = code;
             document.body.removeChild(container);
           };
@@ -147,13 +145,20 @@ export default defineComponent({
     });
 
     return (): VNode =>
-      svgCode.value
-        ? // mermaid
-          h("div", {
-            class: "md-mermaid",
-            innerHTML: svgCode.value,
-          })
-        : // loading
-          h("div", { class: "md-mermaid-loading" }, [h(loadingIcon)]);
+      h(
+        "div",
+        {
+          ref: mermaidElement,
+          class: {
+            "md-enhance-mermaid": true,
+            loading: !svgCode.value,
+          },
+        },
+        svgCode.value
+          ? // mermaid
+            h("div", { class: "content", innerHTML: svgCode.value })
+          : // loading
+            h(LoadingIcon)
+      );
   },
 });

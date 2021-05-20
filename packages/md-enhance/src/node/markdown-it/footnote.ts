@@ -1,12 +1,9 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable max-statements */
-
 import * as MarkdownIt from "markdown-it";
 import * as Renderer from "markdown-it/lib/renderer";
 import * as StateBlock from "markdown-it/lib/rules_block/state_block";
 import StateCore from "markdown-it/lib/rules_core/state_core";
 import * as StateInline from "markdown-it/lib/rules_inline/state_inline";
-import * as Token from "markdown-it/lib/token";
+import Token from "markdown-it/lib/token";
 import parseLinkLabel from "markdown-it/lib/helpers/parse_link_label";
 
 interface FootNoteToken extends Token {

@@ -7,7 +7,6 @@ export interface PhotoSwipeImageInfo extends PhotoSwipe.Item {
 export const getImageInfo = (image: HTMLImageElement): PhotoSwipeImageInfo => {
   return {
     src: image.src,
-    // eslint-disable-next-line id-length
     w: image.naturalWidth,
     h: image.naturalHeight,
     title: image.alt,

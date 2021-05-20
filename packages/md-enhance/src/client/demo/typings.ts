@@ -1,4 +1,5 @@
-import type { FunctionComponent } from "react";
+import type { CreateAppFunction } from "vue";
+import type { FunctionComponent, ReactElement } from "react";
 
 export interface CodeType {
   html: [code: string, type: string] | [];
@@ -30,4 +31,23 @@ export interface VueCode extends Code {
 
 export interface ReactCode extends Code {
   script?: FunctionComponent;
+}
+
+declare global {
+  interface Window {
+    Babel: {
+      transform: (
+        code: string,
+        options: {
+          presets?: string[];
+        }
+      ) => { code: string };
+    };
+    ReactDOM: {
+      render: (reactElement: ReactElement, element: HTMLElement) => void;
+    };
+    Vue: {
+      createApp: CreateAppFunction<HTMLElement>;
+    };
+  }
 }

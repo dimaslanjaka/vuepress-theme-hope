@@ -3,6 +3,7 @@ import { codeDemoRender } from "./markdown-it/code-demo";
 import { i18n } from "./i18n";
 
 import type { App, PluginConfig } from "@vuepress/core";
+import type { LocaleConfig } from "@vuepress/shared";
 import type { PluginI18nConvert } from "@mr-hope/vuepress-shared";
 import type { MarkdownEnhanceOptions } from "../shared";
 
@@ -12,10 +13,21 @@ export const resolvePlugin = (
 ): PluginConfig[] => {
   const resolveConfig = (
     titleConfig: PluginI18nConvert<string>
-  ): PluginI18nConvert<string> => {
-    titleConfig["/"] = titleConfig[getRootLangPath(app)];
+  ): LocaleConfig<{
+    defaultInfo: string;
+  }> => {
+    const locale: LocaleConfig<{
+      defaultInfo: string;
+    }> = {};
 
-    return titleConfig;
+    for (const key in titleConfig)
+      locale[key] = {
+        defaultInfo: titleConfig[key as keyof PluginI18nConvert<string>],
+      };
+
+    locale["/"] = { defaultInfo: titleConfig[getRootLangPath(app)] };
+
+    return locale;
   };
 
   const config: PluginConfig[] = [

@@ -1,5 +1,4 @@
 export * from "./code-demo";
-export * from "./decode-url";
 export * from "./footnote";
 export * from "./katex";
 export * from "./mark";

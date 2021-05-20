@@ -1,6 +1,6 @@
 import * as MarkdownIt from "markdown-it";
 import StateCore from "markdown-it/lib/rules_core/state_core";
-import * as Token from "markdown-it/lib/token";
+import Token from "markdown-it/lib/token";
 
 import {
   getParentTokenIndex,

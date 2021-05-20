@@ -1,4 +1,4 @@
-import { rollupTypescript, rollupVue } from "../../script/rollup";
+import { rollupTypescript } from "../../script/rollup";
 
 export default [
   ...rollupTypescript("node/index", {
@@ -34,6 +34,20 @@ export default [
   }),
   ...rollupTypescript("client/appSetup", {
     external: ["@vuepress/client", "vue", /\.scss$/],
+    dtsExternal: [/\.scss$/],
+  }),
+  ...rollupTypescript("client/components/Mermaid", {
+    external: ["@mr-hope/vuepress-shared/client", "mermaid", "vue", /\.scss$/],
+    dtsExternal: [/\.scss$/],
+  }),
+  ...rollupTypescript("client/components/Presentation", {
+    external: [
+      "@mr-hope/vuepress-shared/client",
+      "@vuepress/client",
+      /^reveal\.js/,
+      "vue",
+      /\.scss$/,
+    ],
     dtsExternal: [/\.scss$/],
   }),
 ];

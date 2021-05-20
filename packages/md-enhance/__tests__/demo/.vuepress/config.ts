@@ -65,21 +65,6 @@ const config: UserConfig<DefaultThemeOptions> = {
     /** 网站的logo */
     logo: "/logo.svg",
 
-    /** 侧边栏配置 */
-    sidebar: {
-      "/guide/": [
-        "",
-        "sup-sub",
-        "align",
-        "footnote",
-        "flowchart",
-        "tex",
-        "presentation",
-      ],
-
-      "/": ["", "guide/", "api"],
-    },
-
     /** 侧边栏标题显示深度，0-2 */
     sidebarDepth: 2,
 
@@ -103,25 +88,27 @@ const config: UserConfig<DefaultThemeOptions> = {
         editLinkText: "Edit on Github",
 
         /** 该语言下头部导航栏的配置 */
-        nav: [
-          { text: "Home", link: "/en/" },
-          { text: "Guide", link: "/en/guide/" },
-          { text: "Config", link: "/en/api/" },
+        navbar: [
+          { text: "Home", link: "/" },
+          { text: "Guide", link: "/guide/" },
+          { text: "Config", link: "/api/" },
         ],
 
-        /** 该语言下侧边栏的配置 */
+        /** 侧边栏配置 */
         sidebar: {
-          "/en/guide/": [
-            "",
-            "sup-sub",
-            "align",
-            "footnote",
-            "flowchart",
-            "tex",
-            "presentation",
+          "/guide/": [
+            "/guide/readme.md",
+            "/guide/sup-sub.md",
+            "/guide/align.md",
+            "/guide/footnote.md",
+            "/guide/mermaid.md",
+            "/guide/tex.md",
+            "/guide/presentation/readme.md",
+            "/guide/presentation/demo.md",
+            "/guide/presentation/theme.md",
           ],
 
-          "/en/": ["", "guide/", "api"],
+          "/": ["/readme.md", "/guide/readme.md"],
         },
       },
       /** 默认语言 */
@@ -152,8 +139,25 @@ const config: UserConfig<DefaultThemeOptions> = {
 
   plugins: [
     /** Markdown 增强 */
-    ["md-enhance", { enableAll: true }],
+    [
+      "md-enhance",
+      {
+        enableAll: true,
+        presentation: {
+          plugins: [
+            "highlight",
+            "math",
+            "search",
+            "notes",
+            "zoom",
+            "anything",
+            "audio",
+            "chalkboard",
+          ],
+        },
+      },
+    ],
   ],
 };
 
-export = config;
+export default config;

@@ -4,17 +4,11 @@
 
 @import "reveal.js/dist/reveal.css";
 
-.md-presentation {
+.md-enhance-presentation {
   width: 100%;
+  height: 400px;
   min-height: 400px;
   transition: all 1s;
-
-  &.loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--grey15);
-  }
 
   @media (max-width: $screenS) {
     width: calc(100% + 3rem);
@@ -22,10 +16,21 @@
     margin: 0 -1.5rem;
   }
 
-  svg.md-presentation-loading-icon {
-    width: 2.5em;
-    height: 2.5em;
-    margin: 2.5em auto;
-    fill: var(--accent-color);
+  &.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--grey15);
+
+    svg {
+      width: 2.5em;
+      height: 2.5em;
+      margin: 2.5em auto;
+      fill: var(--accent-color);
+    }
+  }
+
+  .content {
+    height: 100%;
   }
 }

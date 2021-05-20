@@ -6,22 +6,6 @@ import type { TaskListOptions } from "./tasklist";
 /** md-enhance plugin configuration */
 export type MarkdownEnhanceOptions = Partial<{
   /**
-   * 是否在每个代码块的左侧显示行号
-   *
-   * Whether to show line numbers to the left of each code block
-   *
-   * @default true
-   */
-  lineNumbers: boolean;
-  /**
-   * 是否修复包含特殊字符的图片路径
-   *
-   * Whether to fix image links containing special characters
-   *
-   * @default true
-   */
-  imageFix: boolean;
-  /**
    * 是否启用自定义对齐支持
    *
    * Whether to enable align support
