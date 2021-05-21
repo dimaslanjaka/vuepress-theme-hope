@@ -7,6 +7,8 @@ import type { Plugin } from "@vuepress/core";
 import type { PhotoSwipeOptions } from "../shared";
 import type PhotoSwipeDefaultUI from "photoswipe/dist/photoswipe-ui-default";
 
+export type { PhotoSwipeOptions } from "../shared";
+
 const photoSwipePlugin: Plugin<PhotoSwipeOptions> = (options, app) => {
   const option =
     Object.keys(options).length > 0

@@ -17,7 +17,3 @@ export interface ComponentI18nConfig {
     errorText: string;
   };
 }
-
-declare global {
-  const COMPONENT_I18N: Record<string, ComponentI18nConfig>;
-}
