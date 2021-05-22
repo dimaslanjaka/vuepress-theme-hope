@@ -35,6 +35,8 @@ const photoSwipePlugin: Plugin<PhotoSwipeOptions> = (options, app) => {
       __dirname,
       "../client/root-components/PhotoSwipe.js"
     ),
+
+    plugins: [["@mr-hope/palette"]],
   };
 };
 

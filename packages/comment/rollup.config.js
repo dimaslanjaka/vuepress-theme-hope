@@ -1,4 +1,4 @@
-import { rollupTypescript, rollupVue } from "../../script/rollup";
+import { rollupTypescript } from "../../script/rollup";
 
 export default [
   ...rollupTypescript("node/index", {
