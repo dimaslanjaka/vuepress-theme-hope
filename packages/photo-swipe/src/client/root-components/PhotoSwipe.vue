@@ -141,7 +141,7 @@ export default defineComponent({
     };
 
     watch(
-      () => route,
+      () => route.path,
       () => update()
     );
 

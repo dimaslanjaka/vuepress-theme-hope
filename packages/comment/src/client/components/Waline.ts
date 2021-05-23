@@ -88,16 +88,14 @@ export default defineComponent({
     });
 
     watch(
-      () => route,
-      (newValue: RouteLocation, oldValue: RouteLocation) => {
+      () => route.path,
+      (path: string) => {
         // Refresh comment when navigating to a new page
-        if (newValue.path !== oldValue.path) {
-          void nextTick(() => {
-            if (timeout) clearTimeout(timeout);
+        void nextTick(() => {
+          if (timeout) clearTimeout(timeout);
 
-            timeout = setTimeout(() => initWaline(newValue.path), 1000);
-          });
-        }
+          timeout = setTimeout(() => initWaline(path), 1000);
+        });
       }
     );
 

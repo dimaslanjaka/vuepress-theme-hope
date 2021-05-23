@@ -68,7 +68,7 @@ export default defineComponent({
       if (breadcrumbConfig.length > 1) config.value = breadcrumbConfig;
     };
 
-    watch(route, updateConfig);
+    watch(() => route.path, updateConfig);
 
     onMounted(() => {
       void updateConfig();
