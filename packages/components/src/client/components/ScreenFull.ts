@@ -27,6 +27,7 @@ export default defineComponent({
             "button",
             {
               class: "full-screen",
+              ariaPressed: isFullscreen.value,
               onClick: () => {
                 if (screenfull.isEnabled)
                   void screenfull.toggle().then(() => {

@@ -1,3 +1,22 @@
+import type PhotoSwipeDefaultUI from "photoswipe/dist/photoswipe-ui-default";
+
+export interface PhowoSwipeI18n {
+  /** 关闭 */
+  close: string;
+  /** 全屏 */
+  fullsreen: string;
+  /** 分享 */
+  share: string;
+  /** 缩放 */
+  zoom: string;
+  /** 上一个 */
+  prev: string;
+  /** 下一个 */
+  next: string;
+  /** 按钮 */
+  buttons: PhotoSwipeDefaultUI.ShareButtonData[];
+}
+
 export interface PhotoSwipeOptions {
   /**
    * 选择的范围，只有 container 元素内部的图片才会支持点击缩放。

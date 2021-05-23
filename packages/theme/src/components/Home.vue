@@ -41,16 +41,26 @@
 
     <DropTransition :delay="0.16">
       <div v-if="features.length" class="features">
-        <div
-          v-for="feature in features"
+        <template
+          v-for="(feature, index) in $frontmatter.features"
           :key="feature.title"
-          class="feature"
-          :class="{ link: feature.link }"
-          @click="feature.link ? navigate(feature.link) : ''"
         >
-          <h2>{{ feature.title }}</h2>
-          <p>{{ feature.details }}</p>
-        </div>
+          <RouterLink
+            v-if="feature.link"
+            :to="feature.link"
+            class="feature"
+            :class="['link', `feature${index % 9}`]"
+            tabindex="0"
+            role="navigation"
+          >
+            <h2>{{ feature.title }}</h2>
+            <p>{{ feature.details }}</p>
+          </RouterLink>
+          <div v-else class="feature" :class="`feature${index % 9}`">
+            <h2>{{ feature.title }}</h2>
+            <p>{{ feature.details }}</p>
+          </div>
+        </template>
       </div>
     </DropTransition>
 

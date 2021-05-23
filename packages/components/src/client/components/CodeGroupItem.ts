@@ -18,8 +18,13 @@ export default defineComponent({
 
   setup(props, { slots }) {
     return (): VNode =>
-      h("div", { class: { "code-group-item": true, active: props.active } }, [
-        slots.default?.(),
-      ]);
+      h(
+        "div",
+        {
+          class: { "code-group-item": true, active: props.active },
+          ariaSelected: props.active,
+        },
+        slots.default?.()
+      );
   },
 });

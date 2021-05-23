@@ -95,7 +95,6 @@ export default defineComponent({
               "button",
               {
                 class: "modal-button",
-
                 useHint: useHint.value,
                 onClick: () => {
                   isOpen.value = true;

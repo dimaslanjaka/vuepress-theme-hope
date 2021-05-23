@@ -7,6 +7,7 @@ export default defineComponent({
   setup(_props, { slots }) {
     // index of current active item
     const activeIndex = ref(-1);
+    const tabRefs = ref<HTMLUListElement[]>([]);
 
     return (): VNode | null => {
       // NOTICE: here we put the `slots.default()` inside the render function to make
@@ -57,13 +58,38 @@ export default defineComponent({
             h(
               "li",
               {
+                ref: (element) => {
+                  if (element)
+                    tabRefs.value[index] = element as HTMLUListElement;
+                },
                 class: {
                   "code-group-nav-tab": true,
                   active: index === activeIndex.value,
                 },
                 role: "button",
+                tabindex: 0,
+                ariaPressed: index === activeIndex.value,
+                ariaExpanded: index === activeIndex.value,
                 onClick: () => {
                   activeIndex.value = index;
+                },
+                onKeyDown: (event: KeyboardEvent) => {
+                  if (event.key === " " || event.key === "Enter") {
+                    event.preventDefault();
+                    activeIndex.value = index;
+                  } else if (event.key === "ArrowRight") {
+                    event.preventDefault();
+                    if (index + 1 < items.length) {
+                      activeIndex.value = index + 1;
+                      tabRefs.value[index + 1].focus();
+                    }
+                  } else if (event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    if (index - 1 >= 0) {
+                      activeIndex.value = index - 1;
+                      tabRefs.value[index - 1].focus();
+                    }
+                  }
                 },
               },
               vnode.props.title

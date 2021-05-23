@@ -53,10 +53,6 @@
     left: 100%;
   }
 
-  &:focus {
-    outline: none;
-  }
-
   &.active {
     background-color: var(--code-bg-color);
 

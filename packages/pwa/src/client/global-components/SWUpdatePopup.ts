@@ -43,10 +43,16 @@ export default defineComponent({
           reload,
         }) || [
           enabled.value
-            ? h("div", { class: "sw-update-popup", onClick: () => reload() }, [
-                message.value,
-                h("span", { class: "update" }, h(UpdateIcon)),
-              ])
+            ? h(
+                "div",
+                {
+                  class: "sw-update-popup",
+                  role: "button",
+                  tabindex: 0,
+                  onClick: () => reload(),
+                },
+                [message.value, h("span", { class: "update" }, h(UpdateIcon))]
+              )
             : null,
         ]
       );
