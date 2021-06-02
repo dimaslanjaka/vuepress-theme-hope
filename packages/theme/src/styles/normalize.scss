@@ -183,6 +183,10 @@ a.header-anchor {
   &:hover {
     text-decoration: none;
   }
+
+  &:focus-visible {
+    opacity: 1;
+  }
 }
 
 code,
