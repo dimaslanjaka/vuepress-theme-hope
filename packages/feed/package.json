@@ -37,7 +37,7 @@
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "rollup": "2.48.0"
+    "rollup": "2.50.5"
   },
   "publishConfig": {
     "access": "public"

@@ -35,10 +35,10 @@
     "rollup:watch": "rollup -c -w"
   },
   "dependencies": {
-    "dayjs": "^1.10.4"
+    "dayjs": "^1.10.5"
   },
   "devDependencies": {
-    "rollup": "2.48.0"
+    "rollup": "2.50.5"
   },
   "publishConfig": {
     "access": "public"
