@@ -38,7 +38,7 @@
     "dayjs": "^1.10.5"
   },
   "devDependencies": {
-    "rollup": "2.50.5"
+    "rollup": "2.50.6"
   },
   "publishConfig": {
     "access": "public"
