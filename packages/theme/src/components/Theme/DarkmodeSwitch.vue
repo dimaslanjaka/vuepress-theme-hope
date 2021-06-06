@@ -1,130 +1,106 @@
 <template>
-  <div class="darkmode-switch">
-    <template v-if="darkmodeConfig === 'auto-switch'">
-      <div
-        class="item day"
-        :class="{ active: darkmode === 'off' }"
-        @click="setDarkmode('off')"
-      >
-        <LightIcon />
-      </div>
-      <div
-        class="item auto"
-        :class="{ active: darkmode === 'auto' }"
-        @click="setDarkmode('auto')"
-      >
-        <AutoIcon />
-      </div>
-      <div
-        class="item night"
-        :class="{ active: darkmode === 'on' }"
-        @click="setDarkmode('on')"
-      >
-        <DarkIcon />
-      </div>
-    </template>
-    <div v-else-if="darkmodeConfig === 'switch'" class="switch">
-      <input
-        id="switch"
-        class="switch-input"
-        type="checkbox"
-        :checked="darkmode !== 'on'"
-        @click="setDarkmode(darkmode === 'on' ? 'off' : 'on')"
-      />
-      <label class="label" for="switch">
-        <span class="label-content" />
-      </label>
+    <div class="darkmode-switch">
+        <template v-if="darkmodeConfig === 'auto-switch'">
+            <div class="item day" :class="{ active: darkmode === 'off' }" @click="setDarkmode('off')">
+                <LightIcon />
+            </div>
+            <div class="item auto" :class="{ active: darkmode === 'auto' }" @click="setDarkmode('auto')">
+                <AutoIcon />
+            </div>
+            <div class="item night" :class="{ active: darkmode === 'on' }" @click="setDarkmode('on')">
+                <DarkIcon />
+            </div>
+        </template>
+        <div v-else-if="darkmodeConfig === 'switch'" class="switch">
+            <input
+                id="switch"
+                class="switch-input"
+                type="checkbox"
+                :checked="darkmode !== 'on'"
+                @click="setDarkmode(darkmode === 'on' ? 'off' : 'on')"
+            />
+            <label class="label" for="switch">
+                <span class="label-content" />
+            </label>
+        </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
-import { useThemeLocaleData } from "@vuepress/client";
-import AutoIcon from "./icons/AutoIcon.vue";
-import DarkIcon from "./icons/DarkIcon.vue";
-import LightIcon from "./icons/LightIcon.vue";
-import { changeClass } from "../../utils";
-import type { DarkmodeOption, ThemeHopeOptions } from "../../types";
+import { computed, defineComponent, onMounted, ref } from 'vue';
+import { useThemeLocaleData } from '@vuepress/client';
+import AutoIcon from './icons/AutoIcon.vue';
+import DarkIcon from './icons/DarkIcon.vue';
+import LightIcon from './icons/LightIcon.vue';
+import { changeClass } from '../../utils';
+import type { DarkmodeOption, ThemeHopeOptions } from '../../types';
 
-type DarkmodeStatus = "auto" | "on" | "off";
+type DarkmodeStatus = 'auto' | 'on' | 'off';
 
 export default defineComponent({
-  name: "DarkmodeSwitch",
+    name: 'DarkmodeSwitch',
 
-  components: { AutoIcon, DarkIcon, LightIcon },
+    components: { AutoIcon, DarkIcon, LightIcon },
 
-  setup() {
-    const darkmode = ref<DarkmodeStatus>("auto");
-    const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
+    setup() {
+        const darkmode = ref<DarkmodeStatus>('auto');
+        const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
 
-    const darkmodeConfig = computed<DarkmodeOption>(
-      () => themeLocale.value.darkmode || "auto-switch"
-    );
+        const darkmodeConfig = computed<DarkmodeOption>(() => themeLocale.value.darkmode || 'auto-switch');
 
-    const toggleDarkmode = (isDarkmode: boolean): void => {
-      const classes = document.body.classList;
+        const toggleDarkmode = (isDarkmode: boolean): void => {
+            const classes = document.body.classList;
 
-      if (isDarkmode) changeClass(classes, ["theme-dark"], ["theme-light"]);
-      else changeClass(classes, ["theme-light"], ["theme-dark"]);
-    };
+            if (isDarkmode) changeClass(classes, ['theme-dark'], ['theme-light']);
+            else changeClass(classes, ['theme-light'], ['theme-dark']);
+        };
 
-    const setDarkmode = (status: DarkmodeStatus): void => {
-      if (status === "on") toggleDarkmode(true);
-      else if (status === "off") toggleDarkmode(false);
-      else {
-        const isDarkMode = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        const isLightMode = window.matchMedia(
-          "(prefers-color-scheme: light)"
-        ).matches;
+        const setDarkmode = (status: DarkmodeStatus): void => {
+            if (status === 'on') toggleDarkmode(true);
+            else if (status === 'off') toggleDarkmode(false);
+            else {
+                const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
 
-        window
-          .matchMedia("(prefers-color-scheme: dark)")
-          .addEventListener("change", (event) => {
-            if (event.matches) toggleDarkmode(true);
-          });
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+                    if (event.matches) toggleDarkmode(true);
+                });
 
-        window
-          .matchMedia("(prefers-color-scheme: light)")
-          .addEventListener("change", (event) => {
-            if (event.matches) toggleDarkmode(false);
-          });
+                window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (event) => {
+                    if (event.matches) toggleDarkmode(false);
+                });
 
-        if (isDarkMode) toggleDarkmode(true);
-        else if (isLightMode) toggleDarkmode(false);
-        else {
-          const timeHour = new Date().getHours();
+                if (isDarkMode) toggleDarkmode(true);
+                else if (isLightMode) toggleDarkmode(false);
+                else {
+                    const timeHour = new Date().getHours();
 
-          toggleDarkmode(timeHour < 6 || timeHour >= 18);
-        }
-      }
+                    toggleDarkmode(timeHour < 6 || timeHour >= 18);
+                }
+            }
 
-      darkmode.value = status;
-      localStorage.setItem("darkmode", status);
-    };
+            darkmode.value = status;
+            localStorage.setItem('darkmode', status);
+        };
 
-    onMounted(() => {
-      darkmode.value =
-        (localStorage.getItem("darkmode") as "auto" | "on" | "off" | null) ||
-        "auto";
+        onMounted(() => {
+            darkmode.value = (localStorage.getItem('darkmode') as 'auto' | 'on' | 'off' | null) || 'auto';
 
-      if (darkmodeConfig.value === "auto-switch")
-        if (darkmode.value === "auto") setDarkmode("auto");
-        else setDarkmode(darkmode.value);
-      else if (darkmodeConfig.value === "auto") setDarkmode("auto");
-      else if (darkmodeConfig.value === "switch") setDarkmode(darkmode.value);
-      // disabled
-      else setDarkmode("off");
-    });
+            if (darkmodeConfig.value === 'auto-switch')
+                if (darkmode.value === 'auto') setDarkmode('auto');
+                else setDarkmode(darkmode.value);
+            else if (darkmodeConfig.value === 'auto') setDarkmode('auto');
+            else if (darkmodeConfig.value === 'switch') setDarkmode(darkmode.value);
+            // disabled
+            else setDarkmode('off');
+        });
 
-    return {
-      darkmode,
-      darkmodeConfig,
-      setDarkmode,
-    };
-  },
+        return {
+            darkmode,
+            darkmodeConfig,
+            setDarkmode,
+        };
+    },
 });
 </script>
 

@@ -2,24 +2,24 @@
  * Base nav item, displayed as text
  */
 export interface NavItem {
-  text: string;
-  ariaLabel?: string;
+    text: string;
+    ariaLabel?: string;
 }
 
 /**
  * Base nav group, has nav items children
  */
 export interface NavGroup<T> extends NavItem {
-  children: T[];
+    children: T[];
 }
 
 /**
  * Props for `<NavLink>`
  */
 export interface NavLink extends NavItem {
-  link: string;
-  rel?: string;
-  target?: string;
+    link: string;
+    rel?: string;
+    target?: string;
 }
 
 /**
@@ -37,16 +37,16 @@ export type ResolvedNavbarItem = NavbarItem | NavGroup<ResolvedNavbarItem>;
  */
 // user config
 export interface SidebarItem extends NavLink, NavGroup<SidebarItem | string> {
-  isGroup?: false;
+    isGroup?: false;
 }
 export interface SidebarGroup extends NavGroup<SidebarItem | string> {
-  isGroup: true;
+    isGroup: true;
 }
 export type SidebarConfigArray = (SidebarGroup | SidebarItem | string)[];
 export type SidebarConfigObject = Record<string, SidebarConfigArray>;
 export type SidebarConfig = SidebarConfigArray | SidebarConfigObject;
 // resolved
 export interface ResolvedSidebarItem extends Partial<NavLink> {
-  isGroup?: boolean;
-  children?: ResolvedSidebarItem[];
+    isGroup?: boolean;
+    children?: ResolvedSidebarItem[];
 }

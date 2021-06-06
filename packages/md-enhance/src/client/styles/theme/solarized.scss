@@ -5,9 +5,9 @@
 
 @use "fonts/lato";
 
-@import "template/mixins";
-@import "template/settings";
-@import "template/theme";
+@import 'template/mixins';
+@import 'template/settings';
+@import 'template/theme';
 
 // Solarized colors
 $base03: #002b36;

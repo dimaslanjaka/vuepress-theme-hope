@@ -1,5 +1,5 @@
-import type { ContainerPluginOptions } from "@vuepress/plugin-container";
-import type { ThemeHopeOptions } from "../types";
+import type { ContainerPluginOptions } from '@vuepress/plugin-container';
+import type { ThemeHopeOptions } from '../types';
 
 /**
  * Resolve options for @vuepress/plugin-container
@@ -7,30 +7,27 @@ import type { ThemeHopeOptions } from "../types";
  * For custom blocks default title
  */
 export const resolveContainerPluginOptions = (
-  options: ThemeHopeOptions,
-  type: "tip" | "warning" | "danger"
+    options: ThemeHopeOptions,
+    type: 'tip' | 'warning' | 'danger'
 ): ContainerPluginOptions | boolean => {
-  if (options.themePlugins?.container?.[type] === false) {
-    return false;
-  }
+    if (options.themePlugins?.container?.[type] === false) {
+        return false;
+    }
 
-  const locales = Object.entries(options.locales || {}).reduce(
-    (result, [key, value]) => {
-      const defaultInfo = value?.[type];
-      if (defaultInfo) {
-        (result as any)[key] = {
-          defaultInfo,
-        };
-      }
-      return result;
-    },
-    {}
-  );
+    const locales = Object.entries(options.locales || {}).reduce((result, [key, value]) => {
+        const defaultInfo = value?.[type];
+        if (defaultInfo) {
+            (result as any)[key] = {
+                defaultInfo,
+            };
+        }
+        return result;
+    }, {});
 
-  return {
-    type,
-    locales,
-  };
+    return {
+        type,
+        locales,
+    };
 };
 
 /**
@@ -39,18 +36,15 @@ export const resolveContainerPluginOptions = (
  * For details block
  */
 export const resolveContainerPluginOptionsForDetails = (
-  options: ThemeHopeOptions
+    options: ThemeHopeOptions
 ): ContainerPluginOptions | boolean => {
-  if (options.themePlugins?.container?.details === false) {
-    return false;
-  }
+    if (options.themePlugins?.container?.details === false) {
+        return false;
+    }
 
-  return {
-    type: "details",
-    before: (info) =>
-      `<details class="custom-block details">${
-        info ? `<summary>${info}</summary>` : ""
-      }\n`,
-    after: () => "</details>\n",
-  };
+    return {
+        type: 'details',
+        before: (info) => `<details class="custom-block details">${info ? `<summary>${info}</summary>` : ''}\n`,
+        after: () => '</details>\n',
+    };
 };

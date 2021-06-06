@@ -1,2 +1,2 @@
-export * from "./resolveEditLink";
-export * from "./repoType";
+export * from './resolveEditLink';
+export * from './repoType';

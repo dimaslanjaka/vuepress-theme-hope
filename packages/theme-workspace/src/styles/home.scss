@@ -4,243 +4,243 @@
 @use '@mr-hope/vuepress-palette' as *;
 
 .home {
-  display: block;
-  max-width: $homePageWidth;
-  min-height: 100vh - $navbarHeight;
-  padding: $navbarHeight 2rem 0;
-  margin: 0px auto;
-  overflow-x: hidden;
+    display: block;
+    max-width: $homePageWidth;
+    min-height: 100vh - $navbarHeight;
+    padding: $navbarHeight 2rem 0;
+    margin: 0px auto;
+    overflow-x: hidden;
 
-  @media (max-width: $screenL) {
-    min-height: 100vh - $navbarMobileHeight;
-    padding-top: $navbarMobileHeight;
-  }
-
-  @media (max-width: $screenS) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  .hero {
-    text-align: center;
-
-    @media (min-width: $screenL) {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      text-align: left;
+    @media (max-width: $screenL) {
+        min-height: 100vh - $navbarMobileHeight;
+        padding-top: $navbarMobileHeight;
     }
-
-    img {
-      display: block;
-      max-width: 100%;
-      max-height: 320px;
-      margin: 0;
-
-      @media (max-width: $screenL) {
-        max-height: 280px;
-        margin: 3rem auto 1.5rem;
-      }
-
-      @media (max-width: $screenM) {
-        max-height: 240px;
-        margin: 2rem auto 1.2rem;
-      }
-
-      @media (max-width: $screenS) {
-        max-height: 210px;
-        margin: 1.5rem auto 1rem;
-      }
-
-      .theme-light & {
-        &.light {
-          display: block;
-        }
-
-        &.dark {
-          display: none;
-        }
-      }
-
-      .theme-dark & {
-        &.light {
-          display: none;
-        }
-
-        &.dark {
-          display: block;
-        }
-      }
-    }
-
-    h1 {
-      font-size: 3rem;
-
-      @media (max-width: $screenM) {
-        font-size: 2.5rem;
-      }
-
-      @media (max-width: $screenS) {
-        font-size: 2rem;
-      }
-    }
-
-    h1,
-    .description,
-    .action {
-      margin: 1.8rem auto;
-
-      @media (max-width: $screenM) {
-        margin: 1.5rem auto;
-      }
-
-      @media (max-width: $screenS) {
-        margin: 1.2rem auto;
-      }
-    }
-
-    .description {
-      max-width: 35rem;
-      color: var(--text-color-l40);
-      font-size: 1.6rem;
-      line-height: 1.3;
-
-      @media (max-width: $screenM) {
-        font-size: 1.4rem;
-      }
-
-      @media (max-width: $screenS) {
-        font-size: 1.2rem;
-      }
-    }
-
-    .action-button {
-      display: inline-block;
-      margin: 0.6rem 0.8rem;
-      padding: 1rem 1.5rem;
-      border: 2px solid var(--accent-color);
-      border-radius: 2rem;
-      color: var(--accent-color);
-      font-size: 1.2rem;
-      transition: background 0.1s ease;
-      overflow: hidden;
-
-      @media (max-width: $screenM) {
-        padding: 0.8rem 1.2rem;
-        font-size: 1.1rem;
-      }
-
-      @media (max-width: $screenS) {
-        font-size: 1rem;
-      }
-
-      &:hover {
-        color: var(--white);
-        background-color: var(--accent-color);
-      }
-
-      &.primary {
-        color: var(--white);
-        background-color: var(--accent-color);
-
-        &:hover {
-          border-color: var(--accent-color-l10);
-          background-color: var(--accent-color-l10);
-        }
-
-        .theme-dark & {
-          &:hover {
-            border-color: var(--accent-color-d10);
-            background-color: var(--accent-color-d10);
-          }
-        }
-      }
-    }
-  }
-
-  .features {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: stretch;
-    align-content: stretch;
-    margin: 0 -2rem;
-    padding: 1.2rem 0;
-    border-top: 1px solid var(--border-color);
 
     @media (max-width: $screenS) {
-      margin: 0 -1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 
-    .feature {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      flex-basis: calc(33% - 4rem);
-      margin: 0.5rem;
-      padding: 0 1.5rem;
-      border-radius: 0.5rem;
-      transition: transform 0.3s, box-shadow 0.3s;
-      overflow: hidden;
+    .hero {
+        text-align: center;
 
-      @media (max-width: $screenL) {
-        flex-basis: calc(50% - 4rem);
-      }
+        @media (min-width: $screenL) {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            text-align: left;
+        }
 
-      @media (max-width: $screenM) {
-        font-size: 0.95rem;
-      }
+        img {
+            display: block;
+            max-width: 100%;
+            max-height: 320px;
+            margin: 0;
 
-      @media (max-width: $screenS) {
-        flex-basis: calc(100%);
-        font-size: 0.9rem;
-        margin: 0.5rem 0;
-        border-radius: 0;
-      }
+            @media (max-width: $screenL) {
+                max-height: 280px;
+                margin: 3rem auto 1.5rem;
+            }
 
-      &.link {
-        cursor: pointer;
-      }
+            @media (max-width: $screenM) {
+                max-height: 240px;
+                margin: 2rem auto 1.2rem;
+            }
 
-      &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 2px 12px 0 var(--card-shadow-color);
-      }
+            @media (max-width: $screenS) {
+                max-height: 210px;
+                margin: 1.5rem auto 1rem;
+            }
 
-      h2 {
-        margin-bottom: 0.25rem;
-        border-bottom: none;
-        color: var(--text-color-l10);
-        font-size: 1.25rem;
-        font-weight: 500;
+            .theme-light & {
+                &.light {
+                    display: block;
+                }
+
+                &.dark {
+                    display: none;
+                }
+            }
+
+            .theme-dark & {
+                &.light {
+                    display: none;
+                }
+
+                &.dark {
+                    display: block;
+                }
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+
+            @media (max-width: $screenM) {
+                font-size: 2.5rem;
+            }
+
+            @media (max-width: $screenS) {
+                font-size: 2rem;
+            }
+        }
+
+        h1,
+        .description,
+        .action {
+            margin: 1.8rem auto;
+
+            @media (max-width: $screenM) {
+                margin: 1.5rem auto;
+            }
+
+            @media (max-width: $screenS) {
+                margin: 1.2rem auto;
+            }
+        }
+
+        .description {
+            max-width: 35rem;
+            color: var(--text-color-l40);
+            font-size: 1.6rem;
+            line-height: 1.3;
+
+            @media (max-width: $screenM) {
+                font-size: 1.4rem;
+            }
+
+            @media (max-width: $screenS) {
+                font-size: 1.2rem;
+            }
+        }
+
+        .action-button {
+            display: inline-block;
+            margin: 0.6rem 0.8rem;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 2rem;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            transition: background 0.1s ease;
+            overflow: hidden;
+
+            @media (max-width: $screenM) {
+                padding: 0.8rem 1.2rem;
+                font-size: 1.1rem;
+            }
+
+            @media (max-width: $screenS) {
+                font-size: 1rem;
+            }
+
+            &:hover {
+                color: var(--white);
+                background-color: var(--accent-color);
+            }
+
+            &.primary {
+                color: var(--white);
+                background-color: var(--accent-color);
+
+                &:hover {
+                    border-color: var(--accent-color-l10);
+                    background-color: var(--accent-color-l10);
+                }
+
+                .theme-dark & {
+                    &:hover {
+                        border-color: var(--accent-color-d10);
+                        background-color: var(--accent-color-d10);
+                    }
+                }
+            }
+        }
+    }
+
+    .features {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        align-content: stretch;
+        margin: 0 -2rem;
+        padding: 1.2rem 0;
+        border-top: 1px solid var(--border-color);
 
         @media (max-width: $screenS) {
-          font-size: 1.2rem;
+            margin: 0 -1.5rem;
         }
-      }
 
-      p {
-        margin-top: 0;
-        color: var(--text-color-l25);
-      }
+        .feature {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-basis: calc(33% - 4rem);
+            margin: 0.5rem;
+            padding: 0 1.5rem;
+            border-radius: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+
+            @media (max-width: $screenL) {
+                flex-basis: calc(50% - 4rem);
+            }
+
+            @media (max-width: $screenM) {
+                font-size: 0.95rem;
+            }
+
+            @media (max-width: $screenS) {
+                flex-basis: calc(100%);
+                font-size: 0.9rem;
+                margin: 0.5rem 0;
+                border-radius: 0;
+            }
+
+            &.link {
+                cursor: pointer;
+            }
+
+            &:hover {
+                transform: scale(1.05);
+                box-shadow: 0 2px 12px 0 var(--card-shadow-color);
+            }
+
+            h2 {
+                margin-bottom: 0.25rem;
+                border-bottom: none;
+                color: var(--text-color-l10);
+                font-size: 1.25rem;
+                font-weight: 500;
+
+                @media (max-width: $screenS) {
+                    font-size: 1.2rem;
+                }
+            }
+
+            p {
+                margin-top: 0;
+                color: var(--text-color-l25);
+            }
+        }
     }
-  }
 
-  #{$contentClass} {
-    padding-bottom: 1.5rem;
-  }
+    #{$contentClass} {
+        padding-bottom: 1.5rem;
+    }
 }
 
 @each $color in $colors {
-  $index: list.index($colors, $color) - 1;
+    $index: list.index($colors, $color) - 1;
 
-  .home .features .feature#{$index} {
-    & {
-      background: color.scale($color, $lightness: 90%);
-    }
+    .home .features .feature#{$index} {
+        & {
+            background: color.scale($color, $lightness: 90%);
+        }
 
-    [dark-theme] & {
-      background: color.scale($color, $lightness: -75%);
+        [dark-theme] & {
+            background: color.scale($color, $lightness: -75%);
+        }
     }
-  }
 }

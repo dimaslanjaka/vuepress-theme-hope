@@ -11,15 +11,15 @@ Let the Markdown file in your VuePress site support task list.
 
 ```js {7}
 module.exports = {
-  plugins: [
-    [
-      "md-enhance",
-      {
-        // Enable Task List
-        tasklist: true,
-      },
+    plugins: [
+        [
+            'md-enhance',
+            {
+                // Enable Task List
+                tasklist: true,
+            },
+        ],
     ],
-  ],
 };
 ```
 
@@ -34,6 +34,6 @@ module.exports = {
 - [x] Plan B
 
 ```md
-- [ ] Plan A
-- [x] Plan B
+-   [ ] Plan A
+-   [x] Plan B
 ```

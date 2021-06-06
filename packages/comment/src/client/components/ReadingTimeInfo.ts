@@ -1,47 +1,44 @@
-import { usePageData, useRouteLocale } from "@vuepress/client";
-import { computed, defineComponent, h } from "vue";
-import { TimerIcon } from "./icons";
-import { commentOptions, pageInfoI18n, readingTimeI18n } from "../define";
+import { usePageData, useRouteLocale } from '@vuepress/client';
+import { computed, defineComponent, h } from 'vue';
+import { TimerIcon } from './icons';
+import { commentOptions, pageInfoI18n, readingTimeI18n } from '../define';
 
-import type { ReadingTime } from "@mr-hope/vuepress-plugin-reading-time";
-import type { VNode } from "vue";
+import type { ReadingTime } from '@mr-hope/vuepress-plugin-reading-time';
+import type { VNode } from 'vue';
 
 export default defineComponent({
-  name: "ReadingTimeInfo",
+    name: 'ReadingTimeInfo',
 
-  components: { TimerIcon },
+    components: { TimerIcon },
 
-  setup() {
-    const routeLocale = useRouteLocale();
-    const page = usePageData<{ readingTime: ReadingTime }>();
-    const { minute = "", time = "" } = readingTimeI18n[routeLocale.value] || {};
+    setup() {
+        const routeLocale = useRouteLocale();
+        const page = usePageData<{ readingTime: ReadingTime }>();
+        const { minute = '', time = '' } = readingTimeI18n[routeLocale.value] || {};
 
-    const hint = computed(() => pageInfoI18n[routeLocale.value].readingTime);
+        const hint = computed(() => pageInfoI18n[routeLocale.value].readingTime);
 
-    const readingTime = computed(() =>
-      page.value.readingTime.minutes < 1
-        ? minute
-        : time.replace(
-            "$time",
-            Math.round(page.value.readingTime.minutes).toString()
-          )
-    );
+        const readingTime = computed(() =>
+            page.value.readingTime.minutes < 1
+                ? minute
+                : time.replace('$time', Math.round(page.value.readingTime.minutes).toString())
+        );
 
-    return (): VNode | null =>
-      readingTime.value
-        ? h(
-            "span",
-            {
-              class: "reading-time-info",
-              ...(commentOptions.hint !== false
-                ? {
-                    ariaLabel: hint.value,
-                    "data-balloon-pos": "down",
-                  }
-                : {}),
-            },
-            [h(TimerIcon), h("span", readingTime.value)]
-          )
-        : null;
-  },
+        return (): VNode | null =>
+            readingTime.value
+                ? h(
+                      'span',
+                      {
+                          class: 'reading-time-info',
+                          ...(commentOptions.hint !== false
+                              ? {
+                                    ariaLabel: hint.value,
+                                    'data-balloon-pos': 'down',
+                                }
+                              : {}),
+                      },
+                      [h(TimerIcon), h('span', readingTime.value)]
+                  )
+                : null;
+    },
 });

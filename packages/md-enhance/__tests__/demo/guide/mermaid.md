@@ -11,15 +11,15 @@ Let the Markdown file support [mermaid](https://mermaid-js.github.io/mermaid/#/)
 
 ```js {7}
 module.exports = {
-  plugins: [
-    [
-      "md-enhance",
-      {
-        // Enable mermaid
-        mermaid: true,
-      },
+    plugins: [
+        [
+            'md-enhance',
+            {
+                // Enable mermaid
+                mermaid: true,
+            },
+        ],
     ],
-  ],
 };
 ```
 

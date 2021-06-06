@@ -11,15 +11,15 @@ Let the Markdown file in your VuePress site support the $\TeX$ syntax.
 
 ```js {7}
 module.exports = {
-  plugins: [
-    [
-      "md-enhance",
-      {
-        // Enable Tex Support
-        tex: true,
-      },
+    plugins: [
+        [
+            'md-enhance',
+            {
+                // Enable Tex Support
+                tex: true,
+            },
+        ],
     ],
-  ],
 };
 ```
 
@@ -140,27 +140,27 @@ $$\iint_1^2 x^2\; \iiint_1^2 x^2\; \iiiint_1^2 x^2\; \idotsint_1^2 x^2$$
 
 - English letters can be entered directly
 
-  $a \quad b \quad c \quad x \quad y \quad z \quad A \quad B \quad C$
+    $a \quad b \quad c \quad x \quad y \quad z \quad A \quad B \quad C$
 
-  ```md
-  $a \quad b \quad c \quad x \quad y \quad z \quad A \quad B \quad C$
-  ```
+    ```md
+    $a \quad b \quad c \quad x \quad y \quad z \quad A \quad B \quad C$
+    ```
 
 - Greek characters use `\characterName` to enter symbols, and output capital letters when the first letter is capitalized.
 
-  $\alpha \quad \beta \quad \gamma \quad \Omega \quad \Delta \quad \Gamma$
+    $\alpha \quad \beta \quad \gamma \quad \Omega \quad \Delta \quad \Gamma$
 
-  ```md
-  $\alpha \quad \beta \quad \gamma \quad \Omega \quad \Delta \quad \Gamma$
-  ```
+    ```md
+    $\alpha \quad \beta \quad \gamma \quad \Omega \quad \Delta \quad \Gamma$
+    ```
 
 - Other mathematical expressions can be used correspondingly
 
-  $\log_{a}{b} \quad \partial x$
+    $\log_{a}{b} \quad \partial x$
 
-  ```md
-  $\log_{a}{b} \quad \partial x$
-  ```
+    ```md
+    $\log_{a}{b} \quad \partial x$
+    ```
 
 ### Superscript and subscript
 
@@ -266,69 +266,69 @@ A small matix: $( \begin{smallmatrix} a&b\\c&d \end{smallmatrix} )$.
 
 - **newline**
 
-  Use `\\` or `\newline` to wrap
+    Use `\\` or `\newline` to wrap
 
-  $$
-  x = a+b+c+{} \\
-  d+e+f+g
-  $$
+    $$
+    x = a+b+c+{} \\
+    d+e+f+g
+    $$
 
-  $$
-  x = a+b+c+ \newline
-  d+e+f+g
-  $$
+    $$
+    x = a+b+c+ \newline
+    d+e+f+g
+    $$
 
-  ```md
-  $$
-  x = a+b+c+ \\
-  d+e+f+g
-  $$
+    ```md
+    $$
+    x = a+b+c+ \\
+    d+e+f+g
+    $$
 
-  $$
-  x = a+b+c+ \newline
-  d+e+f+g
-  $$
-  ```
+    $$
+    x = a+b+c+ \newline
+    d+e+f+g
+    $$
+    ```
 
-  ::: tip
+    ::: tip
 
-  Note that because $\KaTeX$ supports auto word wrapping, if you specify a line feed manually, a warning is output in the console.
+    Note that because $\KaTeX$ supports auto word wrapping, if you specify a line feed manually, a warning is output in the console.
 
-  :::
+    :::
 
 - **Alignment**
 
-  You can use the `aligned` environment to achieve alignment, and`&`to identify fixed anchor points
+    You can use the `aligned` environment to achieve alignment, and`&`to identify fixed anchor points
 
-  $$
-  \begin{aligned}
-  x ={}& a+b+c+{} \\
-  &d+e+f+g
-  \end{aligned}
-  $$
+    $$
+    \begin{aligned}
+    x ={}& a+b+c+{} \\
+    &d+e+f+g
+    \end{aligned}
+    $$
 
-  $$
-  \begin{alignedat}{2}
-     10&x+ &3&y = 2 \\
-     3&x+&13&y = 4
-  \end{alignedat}
-  $$
+    $$
+    \begin{alignedat}{2}
+       10&x+ &3&y = 2 \\
+       3&x+&13&y = 4
+    \end{alignedat}
+    $$
 
-  ```md
-  $$
-  \begin{aligned}
-  x ={}& a+b+c+{} \\
-  &d+e+f+g
-  \end{aligned}
-  $$
+    ```md
+    $$
+    \begin{aligned}
+    x ={}& a+b+c+{} \\
+    &d+e+f+g
+    \end{aligned}
+    $$
 
-  $$
-  \begin{alignedat}{2}
-     10&x+ &3&y = 2 \\
-     3&x+&13&y = 4
-  \end{alignedat}
-  $$
-  ```
+    $$
+    \begin{alignedat}{2}
+       10&x+ &3&y = 2 \\
+       3&x+&13&y = 4
+    \end{alignedat}
+    $$
+    ```
 
 ### Formula group
 

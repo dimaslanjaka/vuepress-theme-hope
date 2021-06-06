@@ -1,50 +1,49 @@
 <template>
-  <Common :sidebar="false">
-    <main class="page not-found">
-      <h1>404</h1>
+    <Common :sidebar="false">
+        <main class="page not-found">
+            <h1>404</h1>
 
-      <blockquote v-text="getMsg()" />
+            <blockquote v-text="getMsg()" />
 
-      <button class="action-button" @click="back" v-text="i18n.back" />
-      <RouterLink class="action-button" to="/" v-text="i18n.home" />
-    </main>
-  </Common>
+            <button class="action-button" @click="back" v-text="i18n.back" />
+            <RouterLink class="action-button" to="/" v-text="i18n.home" />
+        </main>
+    </Common>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useRouteLocale } from "@vuepress/client";
-import { useThemeLocaleData } from "@vuepress/plugin-theme-data/lib/client";
-import Common from "../components/Common";
-import { getDefaultLocale } from "@mr-hope/vuepress-shared";
+import { computed, defineComponent } from 'vue';
+import { useRouteLocale } from '@vuepress/client';
+import { useThemeLocaleData } from '@vuepress/plugin-theme-data/lib/client';
+import Common from '../components/Common';
+import { getDefaultLocale } from '@mr-hope/vuepress-shared';
 
-import type { HopeThemeLocaleConfigItem } from "@mr-hope/vuepress-shared";
-import type { ThemeHopeOptions } from "../types";
+import type { HopeThemeLocaleConfigItem } from '@mr-hope/vuepress-shared';
+import type { ThemeHopeOptions } from '../types';
 
 export default defineComponent({
-  name: "NotFound",
+    name: 'NotFound',
 
-  components: { Common },
+    components: { Common },
 
-  setup() {
-    const routeLocale = useRouteLocale();
-    const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
+    setup() {
+        const routeLocale = useRouteLocale();
+        const themeLocale = useThemeLocaleData<ThemeHopeOptions>();
 
-    const i18n = computed<HopeThemeLocaleConfigItem["error404"]>(
-      () => themeLocale.value.error404 || getDefaultLocale().error404
-    );
+        const i18n = computed<HopeThemeLocaleConfigItem['error404']>(
+            () => themeLocale.value.error404 || getDefaultLocale().error404
+        );
 
-    const getMsg = (): string =>
-      i18n.value.hint[Math.floor(Math.random() * i18n.value.hint.length)];
+        const getMsg = (): string => i18n.value.hint[Math.floor(Math.random() * i18n.value.hint.length)];
 
-    const back = (): void => window.history.go(-1);
+        const back = (): void => window.history.go(-1);
 
-    return {
-      back,
-      getMsg,
-      i18n,
-    };
-  },
+        return {
+            back,
+            getMsg,
+            i18n,
+        };
+    },
 });
 </script>
 

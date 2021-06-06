@@ -61,11 +61,7 @@ Take our documentation source files as an example:
 <RouterLink to="/guide/">Guide</RouterLink>
 <RouterLink to="/guide/getting-started.html">Getting Started</RouterLink>
 <RouterLink to="/reference/config.html#links">markdown.links</RouterLink>
-<a
-  href="https://github.com"
-  target="_blank"
-  rel="noopener noreferrer"
->GitHub<OutboundLink/></a>
+<a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a>
 ```
 
 **Rendered as**
@@ -150,10 +146,10 @@ You can add an optional language identifier to enable syntax highlighting in you
 
 ````md
 ```ts
-import type { UserConfig } from "@vuepress/cli";
+import type { UserConfig } from '@vuepress/cli';
 
 export const config: UserConfig = {
-  title: "Hello, VuePress",
+    title: 'Hello, VuePress',
 };
 ```
 ````
@@ -161,10 +157,10 @@ export const config: UserConfig = {
 **Output**
 
 ```ts
-import type { UserConfig } from "@vuepress/cli";
+import type { UserConfig } from '@vuepress/cli';
 
 export const config: UserConfig = {
-  title: "Hello, VuePress",
+    title: 'Hello, VuePress',
 };
 ```
 
@@ -231,8 +227,8 @@ You can add `:line-numbers` / `:no-line-numbers` mark in your fenced code blocks
 ````md
 ```ts
 // line-numbers is enabled by default
-const line2 = "This is line 2";
-const line3 = "This is line 3";
+const line2 = 'This is line 2';
+const line3 = 'This is line 3';
 ```
 
 ```ts:no-line-numbers
@@ -246,8 +242,8 @@ const line3 = 'This is line 3'
 
 ```ts
 // line-numbers is enabled by default
-const line2 = "This is line 2";
-const line3 = "This is line 3";
+const line2 = 'This is line 2';
+const line3 = 'This is line 3';
 ```
 
 ```ts:no-line-numbers

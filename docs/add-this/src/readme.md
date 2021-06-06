@@ -6,12 +6,12 @@ heroImage: /logo.svg
 heroText: vuepress-plugin-add-this
 tagline: AddThis plugin for vuepress
 action:
-  - text: Guide 💡
-    link: /guide/
-    type: primary
+    - text: Guide 💡
+      link: /guide/
+      type: primary
 
-  - text: Config 🛠
-    link: /config/
+    - text: Config 🛠
+      link: /config/
 
 footer: MIT Licensed | Copyright © 2019-present Mr.Hope
 copyrightText: false

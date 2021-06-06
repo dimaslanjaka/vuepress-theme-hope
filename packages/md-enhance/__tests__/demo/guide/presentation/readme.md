@@ -9,15 +9,15 @@ Let the Markdown file in your VuePress site support presentation.
 
 ```js {7}
 module.exports = {
-  plugins: [
-    [
-      "md-enhance",
-      {
-        // Enable presentation
-        presentation: true,
-      },
+    plugins: [
+        [
+            'md-enhance',
+            {
+                // Enable presentation
+                presentation: true,
+            },
+        ],
     ],
-  ],
 };
 ```
 

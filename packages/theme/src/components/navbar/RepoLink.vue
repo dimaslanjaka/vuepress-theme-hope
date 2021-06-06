@@ -1,26 +1,26 @@
 <script lang="ts">
-import { defineComponent, h } from "vue";
-import NavLink from "./NavLink.vue";
-import { useNavbarRepo } from "../../composables";
+import { defineComponent, h } from 'vue';
+import NavLink from './NavLink.vue';
+import { useNavbarRepo } from '../../composables';
 
-import type { VNode } from "vue";
+import type { VNode } from 'vue';
 
 export default defineComponent({
-  name: "RepoLink",
+    name: 'RepoLink',
 
-  components: { NavLink },
+    components: { NavLink },
 
-  setup() {
-    const repo = useNavbarRepo();
+    setup() {
+        const repo = useNavbarRepo();
 
-    return (): VNode | null =>
-      repo.value
-        ? // @ts-ignore
-          h(NavLink, {
-            class: "repo-link",
-            item: repo.value,
-          })
-        : null;
-  },
+        return (): VNode | null =>
+            repo.value
+                ? // @ts-ignore
+                  h(NavLink, {
+                      class: 'repo-link',
+                      item: repo.value,
+                  })
+                : null;
+    },
 });
 </script>

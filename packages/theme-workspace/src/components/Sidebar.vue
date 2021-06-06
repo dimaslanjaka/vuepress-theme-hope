@@ -1,60 +1,54 @@
 <template>
-  <aside class="sidebar">
-    <!-- <template v-if="showBlogInfo !== 'none'">
+    <aside class="sidebar">
+        <!-- <template v-if="showBlogInfo !== 'none'">
       <BloggerInfo :class="{ mobile: showBlogInfo === 'mobile' }" />
       <hr />
     </template> -->
 
-    <slot name="top" />
+        <slot name="top" />
 
-    <NavbarLinks />
+        <NavbarLinks />
 
-    <slot name="center" />
+        <slot name="center" />
 
-    <ul class="sidebar-links">
-      <SidebarChild
-        v-for="item in sidebarItems"
-        :key="item.link"
-        :item="item"
-      />
-    </ul>
+        <ul class="sidebar-links">
+            <SidebarChild v-for="item in sidebarItems" :key="item.link" :item="item" />
+        </ul>
 
-    <slot name="bottom" />
-  </aside>
+        <slot name="bottom" />
+    </aside>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
-import { useSidebarItems } from "../composables";
-import { BlogOptions } from "../types";
+import { computed, defineComponent } from 'vue';
+import { useThemeData } from '@vuepress/plugin-theme-data/lib/client';
+import { useSidebarItems } from '../composables';
+import { BlogOptions } from '../types';
 // import BloggerInfo from "./Blog/BloggerInfo.vue";
-import NavbarLinks from "./NavbarLinks.vue";
-import SidebarChild from "./SidebarChild.vue";
+import NavbarLinks from './NavbarLinks.vue';
+import SidebarChild from './SidebarChild.vue';
 
 export default defineComponent({
-  name: "Sidebar",
+    name: 'Sidebar',
 
-  components: {
-    // BloggerInfo,
-    NavbarLinks,
-    SidebarChild,
-  },
+    components: {
+        // BloggerInfo,
+        NavbarLinks,
+        SidebarChild,
+    },
 
-  setup() {
-    const themeData = useThemeData();
-    const sidebarItems = useSidebarItems();
-    const blogConfig = computed<BlogOptions>(() => themeData.value.blog || {});
-    const showBlogInfo = computed<"mobile" | "none" | "always">(
-      () => blogConfig.value.showInSidebar || "none"
-    );
+    setup() {
+        const themeData = useThemeData();
+        const sidebarItems = useSidebarItems();
+        const blogConfig = computed<BlogOptions>(() => themeData.value.blog || {});
+        const showBlogInfo = computed<'mobile' | 'none' | 'always'>(() => blogConfig.value.showInSidebar || 'none');
 
-    return {
-      blogConfig,
-      showBlogInfo,
-      sidebarItems,
-    };
-  },
+        return {
+            blogConfig,
+            showBlogInfo,
+            sidebarItems,
+        };
+    },
 });
 </script>
 

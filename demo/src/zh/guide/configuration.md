@@ -20,13 +20,13 @@ VuePress 站点必要的配置文件是 `.vuepress/config.js`，它应该导出�
 
 ```js
 module.exports = {
-  lang: "zh-CN",
-  title: "你好， VuePress ！",
-  description: "这是我的第一个 VuePress 站点",
+    lang: 'zh-CN',
+    title: '你好， VuePress ！',
+    description: '这是我的第一个 VuePress 站点',
 
-  themeConfig: {
-    logo: "https://vuejs.org/images/logo.png",
-  },
+    themeConfig: {
+        logo: 'https://vuejs.org/images/logo.png',
+    },
 };
 ```
 
@@ -35,16 +35,16 @@ module.exports = {
   <CodeGroupItem title="TS">
 
 ```ts
-import type { UserConfig, DefaultThemeOptions } from "vuepress";
+import type { UserConfig, DefaultThemeOptions } from 'vuepress';
 
 const config: UserConfig<DefaultThemeOptions> = {
-  lang: "zh-CN",
-  title: "你好， VuePress ！",
-  description: "这是我的第一个 VuePress 站点",
+    lang: 'zh-CN',
+    title: '你好， VuePress ！',
+    description: '这是我的第一个 VuePress 站点',
 
-  themeConfig: {
-    logo: "https://vuejs.org/images/logo.png",
-  },
+    themeConfig: {
+        logo: 'https://vuejs.org/images/logo.png',
+    },
 };
 
 export = config;

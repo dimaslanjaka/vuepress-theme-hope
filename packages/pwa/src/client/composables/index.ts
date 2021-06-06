@@ -1,2 +1,2 @@
-export * from "./usePwaEvent";
-export * from "./useSkipWaiting";
+export * from './usePwaEvent';
+export * from './useSkipWaiting';

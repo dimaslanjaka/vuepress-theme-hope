@@ -1,5 +1,5 @@
-import MarkdownIt = require("markdown-it");
-import { mermaid } from "../../src/node/markdown-it";
+import MarkdownIt = require('markdown-it');
+import { mermaid } from '../../src/node/markdown-it';
 
 const demo = `flowchart TB
     c1-->a2
@@ -16,40 +16,38 @@ const demo = `flowchart TB
     three --> two
     two --> c2`;
 
-describe("mermaid", () => {
-  const markdownIt = MarkdownIt({ linkify: true }).use(mermaid);
+describe('mermaid', () => {
+    const markdownIt = MarkdownIt({ linkify: true }).use(mermaid);
 
-  it("Should render ```mermaid", () => {
-    const renderResult = markdownIt.render(`
+    it('Should render ```mermaid', () => {
+        const renderResult = markdownIt.render(`
 \`\`\`mermaid
 ${demo}
 \`\`\`
 `);
 
-    expect(renderResult).toMatch(
-      /<Mermaid id="mermaid.*?" data-code=".*?"><\/Mermaid>/
-    );
-    expect(renderResult).toMatchSnapshot();
-  });
+        expect(renderResult).toMatch(/<Mermaid id="mermaid.*?" data-code=".*?"><\/Mermaid>/);
+        expect(renderResult).toMatchSnapshot();
+    });
 
-  it("Shoud not render", () => {
-    expect(
-      markdownIt.render(`
+    it('Shoud not render', () => {
+        expect(
+            markdownIt.render(`
 ${demo}
 `)
-    ).toMatchSnapshot();
+        ).toMatchSnapshot();
 
-    expect(
-      markdownIt.render(`
+        expect(
+            markdownIt.render(`
 \`\`\`md
 ${demo}
 \`\`\`
 `)
-    ).toMatchSnapshot();
-  });
+        ).toMatchSnapshot();
+    });
 
-  it("Should render ```sequence", () => {
-    const renderResult = markdownIt.render(`
+    it('Should render ```sequence', () => {
+        const renderResult = markdownIt.render(`
 \`\`\`sequence
 Alice ->> Bob: Hello Bob, how are you?
 Bob-->>John: How about you John?
@@ -62,14 +60,12 @@ Alice->John: Yes... John, how are you?
 \`\`\`
 `);
 
-    expect(renderResult).toMatch(
-      /<Mermaid id="mermaid.*?" data-code="sequenceDiagram.*?"><\/Mermaid>/
-    );
-    expect(renderResult).toMatchSnapshot();
-  });
+        expect(renderResult).toMatch(/<Mermaid id="mermaid.*?" data-code="sequenceDiagram.*?"><\/Mermaid>/);
+        expect(renderResult).toMatchSnapshot();
+    });
 
-  it("Should render ```class", () => {
-    const renderResult = markdownIt.render(`
+    it('Should render ```class', () => {
+        const renderResult = markdownIt.render(`
 \`\`\`class
 class Square~Shape~{
     int id
@@ -84,14 +80,12 @@ Square : +getMessages() List~string~
 \`\`\`
 `);
 
-    expect(renderResult).toMatch(
-      /<Mermaid id="mermaid.*?" data-code="classDiagram.*?"><\/Mermaid>/
-    );
-    expect(renderResult).toMatchSnapshot();
-  });
+        expect(renderResult).toMatch(/<Mermaid id="mermaid.*?" data-code="classDiagram.*?"><\/Mermaid>/);
+        expect(renderResult).toMatchSnapshot();
+    });
 
-  it("Should render ```state", () => {
-    const renderResult = markdownIt.render(`
+    it('Should render ```state', () => {
+        const renderResult = markdownIt.render(`
 \`\`\`state
 [*] --> Active
 
@@ -111,14 +105,12 @@ state Active {
 \`\`\`
 `);
 
-    expect(renderResult).toMatch(
-      /<Mermaid id="mermaid.*?" data-code="stateDiagram-v2.*?"><\/Mermaid>/
-    );
-    expect(renderResult).toMatchSnapshot();
-  });
+        expect(renderResult).toMatch(/<Mermaid id="mermaid.*?" data-code="stateDiagram-v2.*?"><\/Mermaid>/);
+        expect(renderResult).toMatchSnapshot();
+    });
 
-  it("Should render ```er", () => {
-    const renderResult = markdownIt.render(`
+    it('Should render ```er', () => {
+        const renderResult = markdownIt.render(`
 \`\`\`er
 CAR ||--o{ NAMED-DRIVER : allows
 CAR {
@@ -135,14 +127,12 @@ PERSON {
 \`\`\`
 `);
 
-    expect(renderResult).toMatch(
-      /<Mermaid id="mermaid.*?" data-code="erDiagram.*?"><\/Mermaid>/
-    );
-    expect(renderResult).toMatchSnapshot();
-  });
+        expect(renderResult).toMatch(/<Mermaid id="mermaid.*?" data-code="erDiagram.*?"><\/Mermaid>/);
+        expect(renderResult).toMatchSnapshot();
+    });
 
-  it("Should render ```journey", () => {
-    const renderResult = markdownIt.render(`
+    it('Should render ```journey', () => {
+        const renderResult = markdownIt.render(`
 \`\`\`journey
 title My working day
 section Go to work
@@ -155,14 +145,12 @@ section Go home
 \`\`\`
 `);
 
-    expect(renderResult).toMatch(
-      /<Mermaid id="mermaid.*?" data-code="journey.*?"><\/Mermaid>/
-    );
-    expect(renderResult).toMatchSnapshot();
-  });
+        expect(renderResult).toMatch(/<Mermaid id="mermaid.*?" data-code="journey.*?"><\/Mermaid>/);
+        expect(renderResult).toMatchSnapshot();
+    });
 
-  it("Should render ```gantt", () => {
-    const renderResult = markdownIt.render(`
+    it('Should render ```gantt', () => {
+        const renderResult = markdownIt.render(`
 \`\`\`gantt
 dateFormat  YYYY-MM-DD
 title       Adding GANTT diagram functionality to mermaid
@@ -195,14 +183,12 @@ Add another diagram to demo page    :48h
 \`\`\`
 `);
 
-    expect(renderResult).toMatch(
-      /<Mermaid id="mermaid.*?" data-code="gantt.*?"><\/Mermaid>/
-    );
-    expect(renderResult).toMatchSnapshot();
-  });
+        expect(renderResult).toMatch(/<Mermaid id="mermaid.*?" data-code="gantt.*?"><\/Mermaid>/);
+        expect(renderResult).toMatchSnapshot();
+    });
 
-  it("Should render ```pie", () => {
-    const renderResult = markdownIt.render(`
+    it('Should render ```pie', () => {
+        const renderResult = markdownIt.render(`
 \`\`\`pie
 title What Voldemort doesn't have?
   "FRIENDS" : 2
@@ -211,9 +197,7 @@ title What Voldemort doesn't have?
 \`\`\`
 `);
 
-    expect(renderResult).toMatch(
-      /<Mermaid id="mermaid.*?" data-code="pie.*?"><\/Mermaid>/
-    );
-    expect(renderResult).toMatchSnapshot();
-  });
+        expect(renderResult).toMatch(/<Mermaid id="mermaid.*?" data-code="pie.*?"><\/Mermaid>/);
+        expect(renderResult).toMatchSnapshot();
+    });
 });

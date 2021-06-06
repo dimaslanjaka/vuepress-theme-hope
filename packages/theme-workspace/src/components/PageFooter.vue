@@ -1,70 +1,57 @@
 <template>
-  <footer v-if="enable" class="footer-wrapper">
-    <MediaLinks v-if="!($frontmatter.home && $frontmatter.blog)" />
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-if="footerContent" class="footer" v-html="footerContent" />
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-if="copyright" class="copyright" v-html="copyright" />
-  </footer>
+    <footer v-if="enable" class="footer-wrapper">
+        <MediaLinks v-if="!($frontmatter.home && $frontmatter.blog)" />
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-if="footerContent" class="footer" v-html="footerContent" />
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-if="copyright" class="copyright" v-html="copyright" />
+    </footer>
 </template>
 
 <script lang="ts">
-import { usePageFrontmatter } from "@vuepress/client";
-import { useThemeData } from "@vuepress/plugin-theme-data/lib/client";
-import { computed, defineComponent } from "vue";
-import { HopeFooterConfig } from "../types";
-import MediaLinks from "./media/MediaLinks.vue";
+import { usePageFrontmatter } from '@vuepress/client';
+import { useThemeData } from '@vuepress/plugin-theme-data/lib/client';
+import { computed, defineComponent } from 'vue';
+import { HopeFooterConfig } from '../types';
+import MediaLinks from './media/MediaLinks.vue';
 
 export default defineComponent({
-  name: "PageFooter",
+    name: 'PageFooter',
 
-  components: { MediaLinks },
+    components: { MediaLinks },
 
-  setup() {
-    const themeData = useThemeData();
-    const pageFrontmatter = usePageFrontmatter();
+    setup() {
+        const themeData = useThemeData();
+        const pageFrontmatter = usePageFrontmatter();
 
-    const footerConfig = computed<HopeFooterConfig>(
-      () => themeData.value.footer || {}
-    );
+        const footerConfig = computed<HopeFooterConfig>(() => themeData.value.footer || {});
 
-    const enable = computed<boolean>(() => {
-      const { copyrightText, footer, medialink } = pageFrontmatter.value;
+        const enable = computed<boolean>(() => {
+            const { copyrightText, footer, medialink } = pageFrontmatter.value;
 
-      return (
-        footer !== false &&
-        Boolean(
-          copyrightText || footer || medialink || footerConfig.value.display
-        )
-      );
-    });
+            return footer !== false && Boolean(copyrightText || footer || medialink || footerConfig.value.display);
+        });
 
-    const footerContent = computed<string | false>(() => {
-      const { footer } = pageFrontmatter.value;
+        const footerContent = computed<string | false>(() => {
+            const { footer } = pageFrontmatter.value;
 
-      return footer === false
-        ? false
-        : typeof footer === "string"
-        ? footer
-        : footerConfig.value.content || "";
-    });
+            return footer === false ? false : typeof footer === 'string' ? footer : footerConfig.value.content || '';
+        });
 
-    const copyright = computed<string | false>(() =>
-      pageFrontmatter.value.copyrightText === false
-        ? false
-        : (pageFrontmatter.value.copyrightText as string) ||
-          footerConfig.value.copyright ||
-          (themeData.value.author
-            ? `Copyright © 2020 ${themeData.value.author}`
-            : "")
-    );
+        const copyright = computed<string | false>(() =>
+            pageFrontmatter.value.copyrightText === false
+                ? false
+                : (pageFrontmatter.value.copyrightText as string) ||
+                  footerConfig.value.copyright ||
+                  (themeData.value.author ? `Copyright © 2020 ${themeData.value.author}` : '')
+        );
 
-    return {
-      copyright,
-      enable,
-      footerContent,
-    };
-  },
+        return {
+            copyright,
+            enable,
+            footerContent,
+        };
+    },
 });
 </script>
 

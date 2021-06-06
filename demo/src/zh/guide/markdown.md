@@ -62,11 +62,7 @@ VuePress 会使用 [markdown-it](https://github.com/markdown-it/markdown-it) 来
 <RouterLink to="/zh/guide/">指南</RouterLink>
 <RouterLink to="/zh/guide/getting-started.html">快速上手</RouterLink>
 <RouterLink to="/zh/reference/config.html#links">markdown.links</RouterLink>
-<a
-  href="https://github.com"
-  target="_blank"
-  rel="noopener noreferrer"
->GitHub<OutboundLink/></a>
+<a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub<OutboundLink/></a>
 ```
 
 **渲染为**
@@ -151,10 +147,10 @@ Prism 支持多种编程语言，你可以前往 [Prism supported languages](htt
 
 ````md
 ```ts
-import type { UserConfig } from "@vuepress/cli";
+import type { UserConfig } from '@vuepress/cli';
 
 export const config: UserConfig = {
-  title: "你好， VuePress",
+    title: '你好， VuePress',
 };
 ```
 ````
@@ -162,10 +158,10 @@ export const config: UserConfig = {
 **输出**
 
 ```ts
-import type { UserConfig } from "@vuepress/cli";
+import type { UserConfig } from '@vuepress/cli';
 
 export const config: UserConfig = {
-  title: "你好， VuePress",
+    title: '你好， VuePress',
 };
 ```
 
@@ -232,8 +228,8 @@ export const config: UserConfig = {
 ````md
 ```ts
 // 行号默认是启用的
-const line2 = "This is line 2";
-const line3 = "This is line 3";
+const line2 = 'This is line 2';
+const line3 = 'This is line 3';
 ```
 
 ```ts:no-line-numbers
@@ -247,8 +243,8 @@ const line3 = 'This is line 3'
 
 ```ts
 // 行号默认是启用的
-const line2 = "This is line 2";
-const line3 = "This is line 3";
+const line2 = 'This is line 2';
+const line3 = 'This is line 3';
 ```
 
 ```ts:no-line-numbers

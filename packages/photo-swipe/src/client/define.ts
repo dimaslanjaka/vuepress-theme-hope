@@ -1,5 +1,5 @@
-import * as PhotoSwipe from "photoswipe";
-import type { PhowoSwipeI18n } from "../shared";
+import * as PhotoSwipe from 'photoswipe';
+import type { PhowoSwipeI18n } from '../shared';
 
 declare const IMAGE_CONTAINER: string;
 declare const IMAGE_SELECTOR: string;

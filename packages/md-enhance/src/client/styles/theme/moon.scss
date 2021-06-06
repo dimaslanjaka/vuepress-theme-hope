@@ -5,9 +5,9 @@
 
 @use "fonts/lato";
 
-@import "template/mixins";
-@import "template/settings";
-@import "template/theme";
+@import 'template/mixins';
+@import 'template/settings';
+@import 'template/theme';
 
 // Solarized colors
 $base03: #002b36;
@@ -36,8 +36,8 @@ $linkColor: $blue;
 $linkColorHover: lighten($linkColor, 20%);
 $selectionBackgroundColor: $magenta;
 
-.reveal[theme="moon"] {
-  @include light-bg-text-color(#222);
+.reveal[theme='moon'] {
+    @include light-bg-text-color(#222);
 }
 
 @include theme("[theme='moon']");

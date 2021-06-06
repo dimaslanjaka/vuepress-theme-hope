@@ -1,71 +1,69 @@
 // import type { Vssue } from "vssue";
-import type { WalineOption } from "@waline/client";
-import type { PageInfoType } from "./pageInfo";
+import type { WalineOption } from '@waline/client';
+import type { PageInfoType } from './pageInfo';
 
 interface BaseCommentOptions {
-  /**
-   * 评论服务
-   *
-   * Comment Service
-   */
-  // type: "waline" | "vssue" | "disable";
-  type: "waline" | "disable";
-  /**
-   * 默认作者
-   *
-   * Default author
-   */
-  author?: string | string[];
-  /**
-   * 是否启用文章信息的弹窗提示
-   *
-   * Whether enable hint popup for pageinfo
-   *
-   * @default true
-   */
-  hint?: boolean;
-  /**
-   * 文章信息配置
-   *
-   * Page Info display configuration
-   *
-   * @see https://vuepress-theme-hope.github.io/comment/zh/config/#pageinfo (zh)
-   * @see https://vuepress-theme-hope.github.io/comment/config/#pageinfo (en)
-   *
-   * @default ['Author', 'PageView', 'Date', 'Category', 'Tag', 'ReadTime']
-   */
-  pageInfo?: PageInfoType[] | false;
-  /**
-   * 是否默认启用评论
-   *
-   * Whether enable comment by default
-   *
-   * @default true
-   */
-  comment?: boolean;
-  /**
-   * 每分钟阅读字数
-   *
-   * Reading speed of words per minute
-   *
-   * @default 300
-   */
-  wordPerminute?: number;
+    /**
+     * 评论服务
+     *
+     * Comment Service
+     */
+    // type: "waline" | "vssue" | "disable";
+    type: 'waline' | 'disable';
+    /**
+     * 默认作者
+     *
+     * Default author
+     */
+    author?: string | string[];
+    /**
+     * 是否启用文章信息的弹窗提示
+     *
+     * Whether enable hint popup for pageinfo
+     *
+     * @default true
+     */
+    hint?: boolean;
+    /**
+     * 文章信息配置
+     *
+     * Page Info display configuration
+     *
+     * @see https://vuepress-theme-hope.github.io/comment/zh/config/#pageinfo (zh)
+     * @see https://vuepress-theme-hope.github.io/comment/config/#pageinfo (en)
+     *
+     * @default ['Author', 'PageView', 'Date', 'Category', 'Tag', 'ReadTime']
+     */
+    pageInfo?: PageInfoType[] | false;
+    /**
+     * 是否默认启用评论
+     *
+     * Whether enable comment by default
+     *
+     * @default true
+     */
+    comment?: boolean;
+    /**
+     * 每分钟阅读字数
+     *
+     * Reading speed of words per minute
+     *
+     * @default 300
+     */
+    wordPerminute?: number;
 }
 
-export interface WalineOptions
-  extends BaseCommentOptions,
-    Omit<WalineOption, "el" | "visitor"> {
-  type: "waline";
+export interface WalineOptions extends BaseCommentOptions, Omit<WalineOption, 'el' | 'visitor'> {
+    type: 'waline';
 
-  /**
-   * 是否启用访问量
-   *
-   * Whether enable page views count by default
-   *
-   * @default true
-   */
-  pageviews?: boolean;
+    /**
+     * 是否启用访问量
+     *
+     * Whether enable page views count by default
+     *
+     * @default true
+     */
+    pageviews?: boolean;
 }
 
 // /** Vssue 配置 */
@@ -181,8 +179,8 @@ export interface WalineOptions
 // }
 
 export interface DisableCommentOptions extends BaseCommentOptions {
-  type: "disable";
-  comment: never;
+    type: 'disable';
+    comment: never;
 }
 
 /**
@@ -191,6 +189,6 @@ export interface DisableCommentOptions extends BaseCommentOptions {
  * Comment options
  */
 export type CommentOptions =
-  | WalineOptions
-  // | VssueOptions
-  | DisableCommentOptions;
+    | WalineOptions
+    // | VssueOptions
+    | DisableCommentOptions;

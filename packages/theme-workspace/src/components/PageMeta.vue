@@ -1,58 +1,51 @@
 <template>
-  <footer class="page-meta">
-    <div v-if="editNavLink" class="meta-item edit-link">
-      <NavLink class="meta-item-label" :item="editNavLink" />
-    </div>
+    <footer class="page-meta">
+        <div v-if="editNavLink" class="meta-item edit-link">
+            <NavLink class="meta-item-label" :item="editNavLink" />
+        </div>
 
-    <div v-if="lastUpdated" class="meta-item last-updated">
-      <span class="meta-item-label">{{ $themeLocale.lastUpdatedText }}: </span>
-      <span class="meta-item-info">{{ lastUpdated }}</span>
-    </div>
+        <div v-if="lastUpdated" class="meta-item last-updated">
+            <span class="meta-item-label">{{ $themeLocale.lastUpdatedText }}: </span>
+            <span class="meta-item-info">{{ lastUpdated }}</span>
+        </div>
 
-    <div
-      v-if="contributors && contributors.length"
-      class="meta-item contributors"
-    >
-      <span class="meta-item-label">{{ $themeLocale.contributorsText }}: </span>
-      <span class="meta-item-info">
-        <template v-for="(contributor, index) in contributors" :key="index">
-          <span class="contributor" :title="`email: ${contributor.email}`">
-            {{ contributor.name }}
-          </span>
-          <template v-if="index !== contributors.length - 1">, </template>
-        </template>
-      </span>
-    </div>
-  </footer>
+        <div v-if="contributors && contributors.length" class="meta-item contributors">
+            <span class="meta-item-label">{{ $themeLocale.contributorsText }}: </span>
+            <span class="meta-item-info">
+                <template v-for="(contributor, index) in contributors" :key="index">
+                    <span class="contributor" :title="`email: ${contributor.email}`">
+                        {{ contributor.name }}
+                    </span>
+                    <template v-if="index !== contributors.length - 1">, </template>
+                </template>
+            </span>
+        </div>
+    </footer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import {
-  useContributors,
-  useEditNavLink,
-  useLastUpdated,
-} from "../composables";
-import NavLink from "./NavLink.vue";
+import { defineComponent } from 'vue';
+import { useContributors, useEditNavLink, useLastUpdated } from '../composables';
+import NavLink from './NavLink.vue';
 
 export default defineComponent({
-  name: "PageMeta",
+    name: 'PageMeta',
 
-  components: {
-    NavLink,
-  },
+    components: {
+        NavLink,
+    },
 
-  setup() {
-    const editNavLink = useEditNavLink();
-    const lastUpdated = useLastUpdated();
-    const contributors = useContributors();
+    setup() {
+        const editNavLink = useEditNavLink();
+        const lastUpdated = useLastUpdated();
+        const contributors = useContributors();
 
-    return {
-      editNavLink,
-      lastUpdated,
-      contributors,
-    };
-  },
+        return {
+            editNavLink,
+            lastUpdated,
+            contributors,
+        };
+    },
 });
 </script>
 

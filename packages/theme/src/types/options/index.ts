@@ -1,7 +1,7 @@
-import type { ThemeConfig } from "@vuepress/core";
+import type { ThemeConfig } from '@vuepress/core';
 
-export * from "./defaultTheme";
+export * from './defaultTheme';
 
 export interface HopeThemeOptions extends ThemeConfig {
-  iconPrefix: string;
+    iconPrefix: string;
 }

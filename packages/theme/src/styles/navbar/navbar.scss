@@ -1,104 +1,104 @@
 @use "@mr-hope/vuepress-palette" as *;
 
 .navbar {
-  position: fixed;
-  z-index: 20;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: $navbarHeight;
-  padding: $navbarVerticalPadding $navbarHorizontalPadding;
-  background: var(--bg-color-blur);
-  box-sizing: border-box;
-  box-shadow: 0 2px 8px var(--card-shadow-color);
-  backdrop-filter: saturate(200%) blur(20px);
-  line-height: $navbarHeight - $navbarVerticalPadding * 2;
-  transition: transform 0.3s ease-in-out;
-
-  @media (max-width: $screenM) {
-    height: $mobileNavbarHeight;
-    padding: $mobileNavbarVerticalPadding $mobileNavbarHorizontalPadding;
-    padding-left: $mobileNavbarHorizontalPadding + 2.4rem;
-    line-height: $mobileNavbarHeight - $mobileNavbarVerticalPadding * 2;
-  }
-
-  .hide-navbar &.can-hide {
-    transform: translateY(-100%);
-  }
-
-  a,
-  span,
-  img {
-    display: inline-block;
-  }
-
-  .home-link:hover .site-name {
-    color: var(--accent-color);
-  }
-
-  .logo {
-    min-width: $navbarHeight - $navbarVerticalPadding * 2;
-    height: $navbarHeight - $navbarVerticalPadding * 2;
-    margin-right: 0.8rem;
-    vertical-align: top;
-
-    @media (max-width: $screenM) {
-      min-width: $mobileNavbarHeight - $mobileNavbarVerticalPadding * 2;
-      height: $mobileNavbarHeight - $mobileNavbarVerticalPadding * 2;
-    }
-
-    &.light {
-      display: block;
-    }
-
-    &.dark {
-      display: none;
-    }
-
-    [dark-theme] & {
-      &.light {
-        display: none;
-      }
-
-      &.dark {
-        display: block;
-      }
-    }
-  }
-
-  .can-hide {
-    @media (max-width: $screenM) {
-      display: none;
-    }
-  }
-
-  .site-name {
-    font-size: 1.5rem;
-    color: var(--text-color);
-    position: relative;
-
-    @media (max-width: $screenM) {
-      width: calc(100vw - 9.4rem);
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  }
-
-  .navbar-links-wrapper {
-    position: absolute;
-    top: $navbarVerticalPadding;
-    right: $navbarHorizontalPadding;
-    display: flex;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $navbarHeight;
+    padding: $navbarVerticalPadding $navbarHorizontalPadding;
+    background: var(--bg-color-blur);
     box-sizing: border-box;
-    padding-left: 1.5rem;
-    font-size: 0.9rem;
-    white-space: nowrap;
+    box-shadow: 0 2px 8px var(--card-shadow-color);
+    backdrop-filter: saturate(200%) blur(20px);
+    line-height: $navbarHeight - $navbarVerticalPadding * 2;
+    transition: transform 0.3s ease-in-out;
 
     @media (max-width: $screenM) {
-      padding-left: 0;
-      top: $mobileNavbarVerticalPadding;
-      right: $mobileNavbarHorizontalPadding;
+        height: $mobileNavbarHeight;
+        padding: $mobileNavbarVerticalPadding $mobileNavbarHorizontalPadding;
+        padding-left: $mobileNavbarHorizontalPadding + 2.4rem;
+        line-height: $mobileNavbarHeight - $mobileNavbarVerticalPadding * 2;
     }
-  }
+
+    .hide-navbar &.can-hide {
+        transform: translateY(-100%);
+    }
+
+    a,
+    span,
+    img {
+        display: inline-block;
+    }
+
+    .home-link:hover .site-name {
+        color: var(--accent-color);
+    }
+
+    .logo {
+        min-width: $navbarHeight - $navbarVerticalPadding * 2;
+        height: $navbarHeight - $navbarVerticalPadding * 2;
+        margin-right: 0.8rem;
+        vertical-align: top;
+
+        @media (max-width: $screenM) {
+            min-width: $mobileNavbarHeight - $mobileNavbarVerticalPadding * 2;
+            height: $mobileNavbarHeight - $mobileNavbarVerticalPadding * 2;
+        }
+
+        &.light {
+            display: block;
+        }
+
+        &.dark {
+            display: none;
+        }
+
+        [dark-theme] & {
+            &.light {
+                display: none;
+            }
+
+            &.dark {
+                display: block;
+            }
+        }
+    }
+
+    .can-hide {
+        @media (max-width: $screenM) {
+            display: none;
+        }
+    }
+
+    .site-name {
+        font-size: 1.5rem;
+        color: var(--text-color);
+        position: relative;
+
+        @media (max-width: $screenM) {
+            width: calc(100vw - 9.4rem);
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .navbar-links-wrapper {
+        position: absolute;
+        top: $navbarVerticalPadding;
+        right: $navbarHorizontalPadding;
+        display: flex;
+        box-sizing: border-box;
+        padding-left: 1.5rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+
+        @media (max-width: $screenM) {
+            padding-left: 0;
+            top: $mobileNavbarVerticalPadding;
+            right: $mobileNavbarHorizontalPadding;
+        }
+    }
 }

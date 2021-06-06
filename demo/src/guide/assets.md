@@ -89,9 +89,9 @@ The path aliases that set in config file are also supported:
 
 ```js
 module.exports = {
-  alias: {
-    "@alias": "/path/to/some/dir",
-  },
+    alias: {
+        '@alias': '/path/to/some/dir',
+    },
 };
 ```
 

@@ -36,9 +36,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -58,9 +58,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -80,9 +80,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -102,9 +102,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -124,9 +124,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -146,9 +146,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -168,9 +168,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -190,9 +190,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -212,9 +212,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -234,9 +234,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -256,9 +256,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 
@@ -278,9 +278,9 @@ A paragraph with some text and a [link](https://mrhope.site)
 
 ```js [2-4|1-5]
 const add = (a, b) => {
-  if (typeof b === "undefined") return a + 1;
+    if (typeof b === 'undefined') return a + 1;
 
-  return a + b;
+    return a + b;
 };
 ```
 

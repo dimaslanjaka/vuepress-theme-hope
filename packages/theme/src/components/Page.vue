@@ -1,30 +1,30 @@
 <template>
-  <main class="page">
-    <slot name="top" />
+    <main class="page">
+        <slot name="top" />
 
-    <div class="theme-default-content">
-      <Content />
-    </div>
+        <div class="theme-default-content">
+            <Content />
+        </div>
 
-    <PageMeta />
+        <PageMeta />
 
-    <PageNav />
+        <PageNav />
 
-    <slot name="bottom" />
-  </main>
+        <slot name="bottom" />
+    </main>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import PageMeta from "./PageMeta.vue";
-import PageNav from "./PageNav.vue";
+import { defineComponent } from 'vue';
+import PageMeta from './PageMeta.vue';
+import PageNav from './PageNav.vue';
 
 export default defineComponent({
-  name: "Page",
+    name: 'Page',
 
-  components: {
-    PageMeta,
-    PageNav,
-  },
+    components: {
+        PageMeta,
+        PageNav,
+    },
 });
 </script>

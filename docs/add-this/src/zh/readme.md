@@ -6,12 +6,12 @@ heroImage: /logo.svg
 heroText: vuepress-plugin-add-this
 tagline: 为 VuePress 提供 addthis 支持
 action:
-  - text: 快速上手 💡
-    link: /zh/guide/
-    type: primary
+    - text: 快速上手 💡
+      link: /zh/guide/
+      type: primary
 
-  - text: 配置 🛠
-    link: /zh/config/
+    - text: 配置 🛠
+      link: /zh/config/
 
 footer: MIT Licensed | Copyright © 2019-present Mr.Hope
 copyrightText: false

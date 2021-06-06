@@ -1,5 +1,5 @@
-declare module "*.scss" {
-  const scssStyles: never;
+declare module '*.scss' {
+    const scssStyles: never;
 
-  export default scssStyles;
+    export default scssStyles;
 }

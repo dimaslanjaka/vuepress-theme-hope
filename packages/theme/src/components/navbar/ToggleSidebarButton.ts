@@ -1,17 +1,17 @@
-import { defineComponent, h } from "vue";
-import type { VNode } from "vue";
+import { defineComponent, h } from 'vue';
+import type { VNode } from 'vue';
 
 export default defineComponent({
-  name: "ToggleSidebarButton",
+    name: 'ToggleSidebarButton',
 
-  emits: ["toggle"],
+    emits: ['toggle'],
 
-  setup(_props, { emit }) {
-    return (): VNode =>
-      h(
-        "button",
-        { class: "toggle-sidebar-button", onClick: () => emit("toggle") },
-        h("span", { class: "icon" })
-      );
-  },
+    setup(_props, { emit }) {
+        return (): VNode =>
+            h(
+                'button',
+                { class: 'toggle-sidebar-button', onClick: () => emit('toggle') },
+                h('span', { class: 'icon' })
+            );
+    },
 });

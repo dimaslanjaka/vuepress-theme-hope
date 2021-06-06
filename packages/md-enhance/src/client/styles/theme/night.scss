@@ -7,23 +7,23 @@
 @use "fonts/montserrat";
 @use "fonts/open-sans";
 
-@import "template/mixins";
-@import "template/settings";
-@import "template/theme";
+@import 'template/mixins';
+@import 'template/settings';
+@import 'template/theme';
 
 $backgroundColor: #111;
 
-$mainFont: "Open Sans", sans-serif;
+$mainFont: 'Open Sans', sans-serif;
 $linkColor: #e7ad52;
 $linkColorHover: lighten($linkColor, 20%);
-$headingFont: "Montserrat", Impact, sans-serif;
+$headingFont: 'Montserrat', Impact, sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: -0.03em;
 $headingTextTransform: none;
 $selectionBackgroundColor: #e7ad52;
 
-.reveal[theme="night"] {
-  @include light-bg-text-color(#222);
+.reveal[theme='night'] {
+    @include light-bg-text-color(#222);
 }
 
 @include theme("[theme='night']");

@@ -1,5 +1,5 @@
-import MarkdownIt = require("markdown-it");
-import { presentation } from "../../src/node/markdown-it";
+import MarkdownIt = require('markdown-it');
+import { presentation } from '../../src/node/markdown-it';
 
 const demo = `
 ## Slide 1
@@ -30,35 +30,35 @@ J(\\theta_0,\\theta_1) = \\sum_{i=0}
 $$
 `;
 
-describe("presentation", () => {
-  const markdownIt = MarkdownIt({ linkify: true }).use(presentation);
+describe('presentation', () => {
+    const markdownIt = MarkdownIt({ linkify: true }).use(presentation);
 
-  it("Should render", () => {
-    const renderResult = markdownIt.render(`
+    it('Should render', () => {
+        const renderResult = markdownIt.render(`
 @slidestart
 ${demo}
 @slideend
 `);
 
-    expect(renderResult).toMatch(
-      /<Presentation id="presentation-.*?" data-code=".*?" theme=".*?"><\/Presentation>/
-    );
-    expect(renderResult).toMatchSnapshot();
-  });
+        expect(renderResult).toMatch(
+            /<Presentation id="presentation-.*?" data-code=".*?" theme=".*?"><\/Presentation>/
+        );
+        expect(renderResult).toMatchSnapshot();
+    });
 
-  it("Shoud not render", () => {
-    expect(
-      markdownIt.render(`
+    it('Shoud not render', () => {
+        expect(
+            markdownIt.render(`
 ${demo}
 `)
-    ).toMatchSnapshot();
+        ).toMatchSnapshot();
 
-    expect(
-      markdownIt.render(`
+        expect(
+            markdownIt.render(`
 @slidestar
 ${demo}
 @slideend
 `)
-    ).toMatchSnapshot();
-  });
+        ).toMatchSnapshot();
+    });
 });

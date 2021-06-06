@@ -11,15 +11,15 @@ Make Markdown files in your VuePress site support markup.
 
 ```js {7}
 module.exports = {
-  plugins: [
-    [
-      "md-enhance",
-      {
-        // open tag
-        mark: true,
-      },
+    plugins: [
+        [
+            'md-enhance',
+            {
+                // open tag
+                mark: true,
+            },
+        ],
     ],
-  ],
 };
 ```
 

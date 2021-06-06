@@ -1,5 +1,5 @@
-import { rollupTypescript } from "../../script/rollup";
+import { rollupTypescript } from '../../script/rollup';
 
-export default rollupTypescript("node/index", {
-  external: ["@vuepress/utils"],
+export default rollupTypescript('node/index', {
+    external: ['@vuepress/utils'],
 });

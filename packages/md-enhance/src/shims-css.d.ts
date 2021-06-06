@@ -1,5 +1,5 @@
-declare module "*.css" {
-  const content: undefined;
+declare module '*.css' {
+    const content: undefined;
 
-  export default content;
+    export default content;
 }

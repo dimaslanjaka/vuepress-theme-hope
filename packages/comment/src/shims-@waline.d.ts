@@ -1,7 +1,7 @@
-declare module "@Waline" {
-  import type { ComponentOptions } from "vue";
+declare module '@Waline' {
+    import type { ComponentOptions } from 'vue';
 
-  const component: ComponentOptions;
+    const component: ComponentOptions;
 
-  export default component;
+    export default component;
 }

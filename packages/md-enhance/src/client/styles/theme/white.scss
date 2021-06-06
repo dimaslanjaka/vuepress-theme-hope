@@ -4,9 +4,9 @@
  * By Hakim El Hattab, http://hakim.se
  */
 
-@import "template/mixins";
-@import "template/settings";
-@import "template/theme";
+@import 'template/mixins';
+@import 'template/settings';
+@import 'template/theme';
 
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: #fff;
@@ -15,8 +15,8 @@ $mainColor: #222;
 $headingColor: #222;
 
 $mainFontSize: 42px;
-$mainFont: "Source Sans Pro", Helvetica, sans-serif;
-$headingFont: "Source Sans Pro", Helvetica, sans-serif;
+$mainFont: 'Source Sans Pro', Helvetica, sans-serif;
+$headingFont: 'Source Sans Pro', Helvetica, sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: uppercase;
@@ -30,12 +30,12 @@ $heading2Size: 1.6em;
 $heading3Size: 1.3em;
 $heading4Size: 1em;
 
-.reveal[theme="white"] {
-  @include dark-bg-text-color(#fff);
+.reveal[theme='white'] {
+    @include dark-bg-text-color(#fff);
 }
 
 @include theme("[theme='white']");
 
 body:not([dark-theme]) {
-  @include theme("[theme='auto']");
+    @include theme("[theme='auto']");
 }

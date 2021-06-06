@@ -1,4 +1,4 @@
-import type { ComponentI18nConfig } from "../shared";
+import type { ComponentI18nConfig } from '../shared';
 
 declare const COMPONENT_I18N: Record<string, ComponentI18nConfig>;
 

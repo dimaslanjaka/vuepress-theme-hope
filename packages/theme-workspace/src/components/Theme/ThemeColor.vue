@@ -1,17 +1,9 @@
 <template>
-  <!-- v-click-outside="clickOutside" -->
-  <button
-    class="color-button"
-    :class="{ select: showMenu }"
-    @click="showMenu = !showMenu"
-  >
-    <svg
-      class="skin-icon"
-      viewBox="0 0 1024 1024"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M224 800c0 9.6 3.2 44.8 6.4 54.4 6.4 48-48 76.8-48 76.8s80 41.6 147.2 0 134.4-134.4
+    <!-- v-click-outside="clickOutside" -->
+    <button class="color-button" :class="{ select: showMenu }" @click="showMenu = !showMenu">
+        <svg class="skin-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M224 800c0 9.6 3.2 44.8 6.4 54.4 6.4 48-48 76.8-48 76.8s80 41.6 147.2 0 134.4-134.4
           38.4-195.2c-22.4-12.8-41.6-19.2-57.6-19.2C259.2 716.8 227.2 761.6 224 800zM560 675.2l-32
           51.2c-51.2 51.2-83.2 32-83.2 32 25.6 67.2 0 112-12.8 128 25.6 6.4 51.2 9.6 80 9.6 54.4 0
           102.4-9.6 150.4-32l0 0c3.2 0 3.2-3.2 3.2-3.2 22.4-16 12.8-35.2
@@ -27,40 +19,40 @@
           86.4c-22.4 19.2-390.4 518.4-390.4 518.4-22.4 28.8-12.8 76.8 22.4 99.2l9.6 6.4c35.2 22.4
           80 12.8 99.2-25.6 0 0 6.4-12.8 9.6-19.2 54.4-105.6 275.2-524.8 288-553.6
           6.4-19.2-3.2-32-19.2-32C777.6 76.8 771.2 80 764.8 86.4z"
-      />
-    </svg>
-    <transition mode="out-in" name="menu-transition">
-      <div v-show="showMenu" class="color-picker-menu">
-        <ThemeOptions />
-      </div>
-    </transition>
-  </button>
+            />
+        </svg>
+        <transition mode="out-in" name="menu-transition">
+            <div v-show="showMenu" class="color-picker-menu">
+                <ThemeOptions />
+            </div>
+        </transition>
+    </button>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from 'vue';
 // import { clickOutsideDirectice } from "../../utils";
-import ThemeOptions from "./ThemeOptions.vue";
+import ThemeOptions from './ThemeOptions.vue';
 
 export default defineComponent({
-  name: "ThemeColor",
+    name: 'ThemeColor',
 
-  // directives: { "click-outside": clickOutsideDirectice },
+    // directives: { "click-outside": clickOutsideDirectice },
 
-  components: { ThemeOptions },
+    components: { ThemeOptions },
 
-  setup() {
-    const showMenu = ref(false);
+    setup() {
+        const showMenu = ref(false);
 
-    const clickOutside = (): void => {
-      showMenu.value = false;
-    };
+        const clickOutside = (): void => {
+            showMenu.value = false;
+        };
 
-    return {
-      clickOutside,
-      showMenu,
-    };
-  },
+        return {
+            clickOutside,
+            showMenu,
+        };
+    },
 });
 </script>
 

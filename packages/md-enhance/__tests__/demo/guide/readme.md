@@ -19,11 +19,11 @@ You can set `themeconfig.mdEnhance.enableAll` to enable all features of the [md-
 
 ```js {3-5}
 module.exports = {
-  themeConfig: {
-    mdEnhance: {
-      enableAll: true,
+    themeConfig: {
+        mdEnhance: {
+            enableAll: true,
+        },
     },
-  },
 };
 ```
 
@@ -126,14 +126,14 @@ $$
 ```
 
 ```js
-document.querySelector("#very").addEventListener("click", () => {
-  alert("Very handsome!");
+document.querySelector('#very').addEventListener('click', () => {
+    alert('Very handsome!');
 });
 ```
 
 ```css
 span {
-  color: red;
+    color: red;
 }
 ```
 

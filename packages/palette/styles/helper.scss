@@ -4,35 +4,33 @@
 @use 'sass:meta';
 
 @function isUpperCase($char) {
-  @return string.to-lower-case($char) != $char;
+    @return string.to-lower-case($char) != $char;
 }
 
 @function isLowerCase($char) {
-  @return string.to-upper-case($char) != $char;
+    @return string.to-upper-case($char) != $char;
 }
 
 @function camelCasetokebab-case($string) {
-  $length: string.length($string);
-  $property: "--";
+    $length: string.length($string);
+    $property: '--';
 
-  @for $i from 1 through $length {
-    $char: string.slice($string, $i, $i);
+    @for $i from 1 through $length {
+        $char: string.slice($string, $i, $i);
 
-    $property: "#{$property}#{if(isUpperCase($char), "-#{string.to-lower-case(
-        $char
-      )}",$char)}";
-  }
+        $property: '#{$property}#{if(isUpperCase($char), '-#{string.to-lower-case($char)}',$char)}';
+    }
 
-  @return $property;
+    @return $property;
 }
 
 @function get-color($variable, $isDark) {
-  @if meta.type-of($variable) == color {
-    @return $variable;
-  } @else if meta.type-of($variable) == list {
-    @return if($isDark, list.nth($variable, 2), list.nth($variable, 1));
-  } @else {
-    @debug "Unexpected variable type #{meta.type-of($variable)}";
-    @return transparent;
-  }
+    @if meta.type-of($variable) == color {
+        @return $variable;
+    } @else if meta.type-of($variable) == list {
+        @return if($isDark, list.nth($variable, 2), list.nth($variable, 1));
+    } @else {
+        @debug 'Unexpected variable type #{meta.type-of($variable)}';
+        @return transparent;
+    }
 }

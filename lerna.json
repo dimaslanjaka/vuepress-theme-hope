@@ -1,17 +1,17 @@
 {
-  "npmClient": "yarn",
-  "useWorkspaces": true,
-  "version": "2.0.0-alpha.0",
-  "command": {
-    "run": {
-      "npmClient": "yarn"
-    },
-    "version": {
-      "allowBranch": ["main", "v1", "v2"],
-      "conventionalCommits": true,
-      "exact": true,
-      "ignoreChanges": ["**/__tests__/**", "**/*.md"],
-      "message": "chore(release): publish %s"
+    "npmClient": "yarn",
+    "useWorkspaces": true,
+    "version": "2.0.0-alpha.0",
+    "command": {
+        "run": {
+            "npmClient": "yarn"
+        },
+        "version": {
+            "allowBranch": ["main", "v1", "v2"],
+            "conventionalCommits": true,
+            "exact": true,
+            "ignoreChanges": ["**/__tests__/**", "**/*.md"],
+            "message": "chore(release): publish %s"
+        }
     }
-  }
 }

@@ -1,4 +1,4 @@
-@import "@vuepress/plugin-palette/palette";
+@import '@vuepress/plugin-palette/palette';
 
 // colors
 $accentColor: #3eaf7c !default;
@@ -26,9 +26,8 @@ $MQMobileNarrow: 419px !default;
 
 // code
 $lineNumbersWrapperWidth: 3.5rem !default;
-$codeLang: "c" "cpp" "cs" "css" "dart" "docker" "fs" "go" "html" "java" "js"
-  "json" "kt" "less" "makefile" "md" "php" "py" "rb" "rs" "sass" "scss" "sh"
-  "styl" "ts" "toml" "vue" "yml" !default;
+$codeLang: 'c' 'cpp' 'cs' 'css' 'dart' 'docker' 'fs' 'go' 'html' 'java' 'js' 'json' 'kt' 'less' 'makefile' 'md' 'php'
+    'py' 'rb' 'rs' 'sass' 'scss' 'sh' 'styl' 'ts' 'toml' 'vue' 'yml' !default;
 
 // other
-$contentClass: ".theme-default-content" !default;
+$contentClass: '.theme-default-content' !default;

@@ -23,15 +23,15 @@ To customize your paragraph alignment.
 
 ```js {7}
 module.exports = {
-  plugins: [
-    [
-      "md-enhance",
-      {
-        // Enable Align
-        align: true,
-      },
+    plugins: [
+        [
+            'md-enhance',
+            {
+                // Enable Align
+                align: true,
+            },
+        ],
     ],
-  ],
 };
 ```
 

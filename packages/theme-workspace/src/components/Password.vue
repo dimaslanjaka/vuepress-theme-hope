@@ -1,50 +1,50 @@
 <template>
-  <div class="password" :class="{ expand: page || isMainPage }">
-    <div class="hint" :class="{ hasTried }">
-      {{ hasTried ? "请输入正确密码" : "请输入密码" }}
+    <div class="password" :class="{ expand: page || isMainPage }">
+        <div class="hint" :class="{ hasTried }">
+            {{ hasTried ? '请输入正确密码' : '请输入密码' }}
+        </div>
+        <div class="input">
+            <input v-model="password" type="password" @keypress.enter="verify" />
+            <button @click="verify">OK</button>
+        </div>
     </div>
-    <div class="input">
-      <input v-model="password" type="password" @keypress.enter="verify" />
-      <button @click="verify">OK</button>
-    </div>
-  </div>
 </template>
 
 <script lang="ts">
-import { usePageFrontmatter } from "@vuepress/client";
-import { computed, defineComponent, nextTick, ref } from "vue";
+import { usePageFrontmatter } from '@vuepress/client';
+import { computed, defineComponent, nextTick, ref } from 'vue';
 
 export default defineComponent({
-  name: "Password",
+    name: 'Password',
 
-  props: {
-    page: { type: Boolean, default: false },
-  },
+    props: {
+        page: { type: Boolean, default: false },
+    },
 
-  emits: ["password-verify"],
+    emits: ['password-verify'],
 
-  setup(_props, { emit }) {
-    const password = ref("");
-    const hasTried = ref(false);
-    const pageFrontmatter = usePageFrontmatter();
+    setup(_props, { emit }) {
+        const password = ref('');
+        const hasTried = ref(false);
+        const pageFrontmatter = usePageFrontmatter();
 
-    const isHome = computed(() => pageFrontmatter.value.home === true);
+        const isHome = computed(() => pageFrontmatter.value.home === true);
 
-    const verify = (): void => {
-      hasTried.value = false;
-      emit("password-verify", password.value);
-      nextTick().then(() => {
-        hasTried.value = true;
-      });
-    };
+        const verify = (): void => {
+            hasTried.value = false;
+            emit('password-verify', password.value);
+            nextTick().then(() => {
+                hasTried.value = true;
+            });
+        };
 
-    return {
-      isHome,
-      hasTried,
-      password,
-      verify,
-    };
-  },
+        return {
+            isHome,
+            hasTried,
+            password,
+            verify,
+        };
+    },
 });
 </script>
 

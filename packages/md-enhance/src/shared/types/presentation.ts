@@ -1,16 +1,8 @@
-import { RevealOptions } from "reveal.js";
+import { RevealOptions } from 'reveal.js';
 
-export type RevealPlugin =
-  | "highlight"
-  | "math"
-  | "search"
-  | "notes"
-  | "zoom"
-  | "anything"
-  | "audio"
-  | "chalkboard";
+export type RevealPlugin = 'highlight' | 'math' | 'search' | 'notes' | 'zoom' | 'anything' | 'audio' | 'chalkboard';
 
 export interface PresentationOptions {
-  plugins?: RevealPlugin[];
-  revealConfig?: Partial<RevealOptions>;
+    plugins?: RevealPlugin[];
+    revealConfig?: Partial<RevealOptions>;
 }

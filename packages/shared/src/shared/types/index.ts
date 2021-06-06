@@ -1,2 +1,2 @@
-export * from "./frontmatter";
-export * from "./themeConfig";
+export * from './frontmatter';
+export * from './themeConfig';

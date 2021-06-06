@@ -11,15 +11,15 @@ Let you insert code demos in your Markdown file.
 
 ```js {7}
 module.exports = {
-  plugins: [
-    [
-      "md-enhance",
-      {
-        // Enable Code Demo
-        demo: true,
-      },
+    plugins: [
+        [
+            'md-enhance',
+            {
+                // Enable Code Demo
+                demo: true,
+            },
+        ],
     ],
-  ],
 };
 ```
 
@@ -39,7 +39,7 @@ You should use the following syntax:
 ```json
 // json block is for config
 {
-  // your config here (optional)
+    // your config here (optional)
 }
 ```
 
@@ -102,11 +102,11 @@ Syntax:
 ```vue
 <!-- ↑ you can also use html-->
 <template>
-  <!-- vue template -->
+    <!-- vue template -->
 </template>
 <script>
 export default {
-  // vue component
+    // vue component
 };
 </script>
 <style>
@@ -130,7 +130,7 @@ Syntax:
 
 ```js
 export default class App extends React.Component {
-  // your react component
+    // your react component
 }
 ```
 
@@ -152,25 +152,19 @@ This plugin is not bundling any librarys, so you must import them by setting `he
 ```js
 // .vuepress/config.js
 module.exports = {
-  head: [
-    // react needs React, ReactDOM and Babel
-    [
-      "script",
-      { src: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" },
+    head: [
+        // react needs React, ReactDOM and Babel
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js' }],
+        [
+            'script',
+            {
+                src: 'https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js',
+            },
+        ],
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js' }],
+        // vue only needs vue
+        ['script', { src: 'https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js' }],
     ],
-    [
-      "script",
-      {
-        src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js",
-      },
-    ],
-    [
-      "script",
-      { src: "https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js" },
-    ],
-    // vue only needs vue
-    ["script", { src: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js" }],
-  ],
 };
 ```
 
@@ -223,14 +217,14 @@ Available CSS languages:
 ```
 
 ```js
-document.querySelector("#very").addEventListener("click", () => {
-  alert("Very handsome!");
+document.querySelector('#very').addEventListener('click', () => {
+    alert('Very handsome!');
 });
 ```
 
 ```css
 span {
-  color: red;
+    color: red;
 }
 ```
 
@@ -245,14 +239,14 @@ span {
 ```
 
 ```js
-document.querySelector("#very").addEventListener("click", () => {
-  alert("Very handsome!");
+document.querySelector('#very').addEventListener('click', () => {
+    alert('Very handsome!');
 });
 ```
 
 ```css
 span {
-  color: red;
+    color: red;
 }
 ```
 
@@ -263,23 +257,23 @@ span {
 
 ```js
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { message: "very handsome" };
-  }
-  render() {
-    return (
-      <div className="box-react">
-        Mr.Hope is <span>{this.state.message}</span>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = { message: 'very handsome' };
+    }
+    render() {
+        return (
+            <div className="box-react">
+                Mr.Hope is <span>{this.state.message}</span>
+            </div>
+        );
+    }
 }
 ```
 
 ```css
 .box-react span {
-  color: red;
+    color: red;
 }
 ```
 
@@ -290,23 +284,23 @@ export default class App extends React.Component {
 
 ```js
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { message: "very handsome" };
-  }
-  render() {
-    return (
-      <div className="box-react">
-        Mr.Hope is <span>{this.state.message}</span>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = { message: 'very handsome' };
+    }
+    render() {
+        return (
+            <div className="box-react">
+                Mr.Hope is <span>{this.state.message}</span>
+            </div>
+        );
+    }
 }
 ```
 
 ```css
 .box-react span {
-  color: red;
+    color: red;
 }
 ```
 
@@ -317,18 +311,18 @@ export default class App extends React.Component {
 
 ```vue
 <template>
-  <div class="box-vue">
-    Mr.Hope is <span>{{ message }}</span>
-  </div>
+    <div class="box-vue">
+        Mr.Hope is <span>{{ message }}</span>
+    </div>
 </template>
 <script>
 export default {
-  data: () => ({ message: "very handsome" }),
+    data: () => ({ message: 'very handsome' }),
 };
 </script>
 <style>
 .box-vue span {
-  color: red;
+    color: red;
 }
 </style>
 ```
@@ -340,18 +334,18 @@ export default {
 
 ```vue
 <template>
-  <div class="box-vue">
-    Mr.Hope is <span>{{ message }}</span>
-  </div>
+    <div class="box-vue">
+        Mr.Hope is <span>{{ message }}</span>
+    </div>
 </template>
 <script>
 export default {
-  data: () => ({ message: "very handsome" }),
+    data: () => ({ message: 'very handsome' }),
 };
 </script>
 <style>
 .box-vue span {
-  color: red;
+    color: red;
 }
 </style>
 ```
@@ -368,18 +362,18 @@ is very handsome.
 ```
 
 ```ts
-const message: string = "Mr.Hope";
+const message: string = 'Mr.Hope';
 
-document.querySelector("h1").innerHTML = message;
+document.querySelector('h1').innerHTML = message;
 ```
 
 ```scss
 h1 {
-  font-style: italic;
+    font-style: italic;
 
-  + p {
-    color: red;
-  }
+    + p {
+        color: red;
+    }
 }
 ```
 
@@ -395,18 +389,18 @@ is very handsome.
 ```
 
 ```ts
-const message: string = "Mr.Hope";
+const message: string = 'Mr.Hope';
 
-document.querySelector("h1").innerHTML = message;
+document.querySelector('h1').innerHTML = message;
 ```
 
 ```scss
 h1 {
-  font-style: italic;
+    font-style: italic;
 
-  + p {
-    color: red;
-  }
+    + p {
+        color: red;
+    }
 }
 ```
 

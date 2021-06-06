@@ -1,34 +1,34 @@
 <template>
-  <main class="page">
-    <slot name="top" />
+    <main class="page">
+        <slot name="top" />
 
-    <PageInfo />
+        <PageInfo />
 
-    <div class="theme-default-content">
-      <Content />
-    </div>
+        <div class="theme-default-content">
+            <Content />
+        </div>
 
-    <PageMeta />
+        <PageMeta />
 
-    <PageNav />
+        <PageNav />
 
-    <Comment />
+        <Comment />
 
-    <slot name="bottom" />
-  </main>
+        <slot name="bottom" />
+    </main>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import PageMeta from "@vuepress/theme-default/lib/client/components/PageMeta.vue";
-import PageNav from "@vuepress/theme-default/lib/client/components/PageNav.vue";
+import { defineComponent } from 'vue';
+import PageMeta from '@vuepress/theme-default/lib/client/components/PageMeta.vue';
+import PageNav from '@vuepress/theme-default/lib/client/components/PageNav.vue';
 
 export default defineComponent({
-  name: "Page",
+    name: 'Page',
 
-  components: {
-    PageMeta,
-    PageNav,
-  },
+    components: {
+        PageMeta,
+        PageNav,
+    },
 });
 </script>

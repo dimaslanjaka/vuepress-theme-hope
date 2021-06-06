@@ -1,49 +1,41 @@
-import { usePageData, useRouteLocale } from "@vuepress/client";
-import { computed, defineComponent, h, inject } from "vue";
-import { WordIcon } from "./icons";
-import { commentOptions, pageInfoI18n } from "../define";
+import { usePageData, useRouteLocale } from '@vuepress/client';
+import { computed, defineComponent, h, inject } from 'vue';
+import { WordIcon } from './icons';
+import { commentOptions, pageInfoI18n } from '../define';
 
-import type {
-  ReadingTime,
-  ReadingTimeI18nConfig,
-} from "@mr-hope/vuepress-plugin-reading-time";
-import type { VNode } from "vue";
+import type { ReadingTime, ReadingTimeI18nConfig } from '@mr-hope/vuepress-plugin-reading-time';
+import type { VNode } from 'vue';
 
 export default defineComponent({
-  name: "ReadTimeInfo",
+    name: 'ReadTimeInfo',
 
-  components: { WordIcon },
+    components: { WordIcon },
 
-  setup() {
-    const page = usePageData<{ readingTime: ReadingTime }>();
-    const routeLocale = useRouteLocale();
+    setup() {
+        const page = usePageData<{ readingTime: ReadingTime }>();
+        const routeLocale = useRouteLocale();
 
-    const word =
-      inject<Record<string, ReadingTimeI18nConfig>>("reading-time-i18n")?.[
-        routeLocale.value
-      ].word || "";
+        const word = inject<Record<string, ReadingTimeI18nConfig>>('reading-time-i18n')?.[routeLocale.value].word || '';
 
-    const words = computed(() =>
-      word.replace("$word", page.value.readingTime.words.toString())
-    );
+        const words = computed(() => word.replace('$word', page.value.readingTime.words.toString()));
 
-    const hint = computed(() => pageInfoI18n[routeLocale.value].words);
+        const hint = computed(() => pageInfoI18n[routeLocale.value].words);
 
-    return (): VNode | null =>
-      words.value
-        ? h(
-            "span",
-            {
-              class: "words-info",
-              ...(commentOptions.hint !== false
-                ? {
-                    ariaLabel: hint.value,
-                    "data-balloon-pos": "down",
-                  }
-                : {}),
-            },
-            [h(WordIcon), h("span", words.value)]
-          )
-        : null;
-  },
+        return (): VNode | null =>
+            words.value
+                ? h(
+                      'span',
+                      {
+                          class: 'words-info',
+                          ...(commentOptions.hint !== false
+                              ? {
+                                    ariaLabel: hint.value,
+                                    'data-balloon-pos': 'down',
+                                }
+                              : {}),
+                      },
+                      [h(WordIcon), h('span', words.value)]
+                  )
+                : null;
+    },
 });

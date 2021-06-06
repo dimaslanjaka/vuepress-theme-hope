@@ -1,7 +1,7 @@
-import type { ContainerPluginOptions } from "@vuepress/plugin-container";
-import type { DefaultThemePluginsOptions, DefaultThemeData } from "../types";
+import type { ContainerPluginOptions } from '@vuepress/plugin-container';
+import type { DefaultThemePluginsOptions, DefaultThemeData } from '../types';
 
-import type { LocaleConfig } from "@vuepress/core";
+import type { LocaleConfig } from '@vuepress/core';
 
 /**
  * Resolve options for @vuepress/plugin-container
@@ -9,31 +9,31 @@ import type { LocaleConfig } from "@vuepress/core";
  * For custom containers default title
  */
 export const resolveContainerPluginOptions = (
-  themePlugins: DefaultThemePluginsOptions,
-  localeOptions: DefaultThemeData,
-  type: "tip" | "warning" | "danger"
+    themePlugins: DefaultThemePluginsOptions,
+    localeOptions: DefaultThemeData,
+    type: 'tip' | 'warning' | 'danger'
 ): ContainerPluginOptions | boolean => {
-  if (themePlugins?.container?.[type] === false) {
-    return false;
-  }
+    if (themePlugins?.container?.[type] === false) {
+        return false;
+    }
 
-  const locales = Object.entries(localeOptions.locales || {}).reduce(
-    (result: LocaleConfig<{ defaultInfo: string }>, [key, value]) => {
-      const defaultInfo = value?.[type];
-      if (defaultInfo) {
-        result[key] = {
-          defaultInfo,
-        };
-      }
-      return result;
-    },
-    {}
-  );
+    const locales = Object.entries(localeOptions.locales || {}).reduce(
+        (result: LocaleConfig<{ defaultInfo: string }>, [key, value]) => {
+            const defaultInfo = value?.[type];
+            if (defaultInfo) {
+                result[key] = {
+                    defaultInfo,
+                };
+            }
+            return result;
+        },
+        {}
+    );
 
-  return {
-    type,
-    locales,
-  };
+    return {
+        type,
+        locales,
+    };
 };
 
 /**
@@ -42,20 +42,18 @@ export const resolveContainerPluginOptions = (
  * For details container
  */
 export const resolveContainerPluginOptionsForDetails = (
-  themePlugins: DefaultThemePluginsOptions
+    themePlugins: DefaultThemePluginsOptions
 ): ContainerPluginOptions | boolean => {
-  if (themePlugins?.container?.details === false) {
-    return false;
-  }
+    if (themePlugins?.container?.details === false) {
+        return false;
+    }
 
-  return {
-    type: "details",
-    before: (info): string =>
-      `<details class="custom-container details">${
-        info ? `<summary>${info}</summary>` : ""
-      }\n`,
-    after: (): string => "</details>\n",
-  };
+    return {
+        type: 'details',
+        before: (info): string =>
+            `<details class="custom-container details">${info ? `<summary>${info}</summary>` : ''}\n`,
+        after: (): string => '</details>\n',
+    };
 };
 
 /**
@@ -64,17 +62,17 @@ export const resolveContainerPluginOptionsForDetails = (
  * For code-group container
  */
 export const resolveContainerPluginOptionsForCodeGroup = (
-  themePlugins: DefaultThemePluginsOptions
+    themePlugins: DefaultThemePluginsOptions
 ): ContainerPluginOptions | boolean => {
-  if (themePlugins?.container?.codeGroup === false) {
-    return false;
-  }
+    if (themePlugins?.container?.codeGroup === false) {
+        return false;
+    }
 
-  return {
-    type: "code-group",
-    before: (): string => `<CodeGroup>\n`,
-    after: (): string => "</CodeGroup>\n",
-  };
+    return {
+        type: 'code-group',
+        before: (): string => `<CodeGroup>\n`,
+        after: (): string => '</CodeGroup>\n',
+    };
 };
 
 /**
@@ -83,15 +81,15 @@ export const resolveContainerPluginOptionsForCodeGroup = (
  * For code-group-item block
  */
 export const resolveContainerPluginOptionsForCodeGroupItem = (
-  themePlugins: DefaultThemePluginsOptions
+    themePlugins: DefaultThemePluginsOptions
 ): ContainerPluginOptions | boolean => {
-  if (themePlugins?.container?.codeGroupItem === false) {
-    return false;
-  }
+    if (themePlugins?.container?.codeGroupItem === false) {
+        return false;
+    }
 
-  return {
-    type: "code-group-item",
-    before: (info): string => `<CodeGroupItem title="${info}">\n`,
-    after: (): string => "</CodeGroupItem>\n",
-  };
+    return {
+        type: 'code-group-item',
+        before: (info): string => `<CodeGroupItem title="${info}">\n`,
+        after: (): string => '</CodeGroupItem>\n',
+    };
 };

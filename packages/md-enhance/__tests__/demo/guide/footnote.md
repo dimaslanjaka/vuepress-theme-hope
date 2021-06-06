@@ -3,8 +3,8 @@ title: Footnote
 icon: footnote
 category: markdown
 tags:
-  - feature
-  - markdown
+    - feature
+    - markdown
 ---
 
 Let the Markdown file in your VuePress site support footnotes.
@@ -15,15 +15,15 @@ Let the Markdown file in your VuePress site support footnotes.
 
 ```js {7}
 module.exports = {
-  plugins: [
-    [
-      "md-enhance",
-      {
-        // Enable Footnote
-        footnote: true,
-      },
+    plugins: [
+        [
+            'md-enhance',
+            {
+                // Enable Footnote
+                footnote: true,
+            },
+        ],
     ],
-  ],
 };
 ```
 

@@ -20,13 +20,13 @@ The essential file for configuring a VuePress site is `.vuepress/config.js`, whi
 
 ```js
 module.exports = {
-  lang: "en-US",
-  title: "Hello, VuePress!",
-  description: "This is my first VuePress site",
+    lang: 'en-US',
+    title: 'Hello, VuePress!',
+    description: 'This is my first VuePress site',
 
-  themeConfig: {
-    logo: "https://vuejs.org/images/logo.png",
-  },
+    themeConfig: {
+        logo: 'https://vuejs.org/images/logo.png',
+    },
 };
 ```
 
@@ -35,16 +35,16 @@ module.exports = {
   <CodeGroupItem title="TS">
 
 ```ts
-import type { UserConfig, DefaultThemeOptions } from "vuepress";
+import type { UserConfig, DefaultThemeOptions } from 'vuepress';
 
 const config: UserConfig<DefaultThemeOptions> = {
-  lang: "en-US",
-  title: "Hello VuePress",
-  description: "Just playing around",
+    lang: 'en-US',
+    title: 'Hello VuePress',
+    description: 'Just playing around',
 
-  themeConfig: {
-    logo: "https://vuejs.org/images/logo.png",
-  },
+    themeConfig: {
+        logo: 'https://vuejs.org/images/logo.png',
+    },
 };
 
 export = config;

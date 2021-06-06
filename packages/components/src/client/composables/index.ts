@@ -1,1 +1,1 @@
-export * from "./getLinks";
+export * from './getLinks';
